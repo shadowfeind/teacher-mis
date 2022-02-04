@@ -1,0 +1,605 @@
+import React, { useEffect, useState } from "react";
+import {
+  Button,
+  makeStyles,
+  Toolbar,
+  Grid,
+  TableBody,
+} from "@material-ui/core";
+import Popup from "../../components/Popup";
+import useCustomTable from "../../customHooks/useCustomTable";
+import CustomContainer from "../../components/CustomContainer";
+import { useDispatch, useSelector } from "react-redux";
+import Notification from "../../components/Notification";
+import ConfirmDialog from "../../components/ConfirmDialog";
+import SelectControl from "../../components/controls/SelectControl";
+import AddIcon from "@material-ui/icons/Add";
+import {
+  DOWNLOAD_ASSIGNMENT_RESET,
+  GET_ALL_ASSIGNMENT_TEACHER_RESET,
+  GET_ALL_OTHER_OPTIONS_FOR_SELECT_RESET,
+  GET_LIST_TEACHER_ASSIGNMENT_RESET,
+  GET_SINGLE_CREATE_TEACHER_ASSIGNMENT_RESET,
+  GET_SINGLE_TO_EDIT_TEACHER_ASSIGNMENT_RESET,
+  GET_TEACHER_ASSIGNMENT_CONTENT_RESET,
+  POST_TEACHER_ASSIGNMENT_RESET,
+  PUT_SINGLE_TO_EDIT_TEACHER_ASSIGNMENT_RESET,
+} from "./AssignmentConstants";
+import {
+  getAllAssignmentTeacherAction,
+  getAllOtherOptionsForSelectAction,
+  getListAssignmentTeacherAction,
+  getSingleCreateTeacherAssignmentAction,
+  getTeacherAssignmentContentAction,
+} from "./AssignmentActions";
+import {
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider,
+} from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
+import AssignmentTableCollapseMain from "./AssignmentTableCollapseMain";
+import AssignmentForm from "./AssignmentForm";
+import AssignmentTableCollapseAll from "./AssignmentTableCollapseAll";
+import AssignmentEditForm from "./AssignmentEditForm";
+
+const useStyles = makeStyles((theme) => ({
+  searchInput: {
+    width: "75%",
+    fontSize: "12px",
+  },
+  button: {
+    position: "absolute",
+    right: "10px",
+  },
+  customInput: {
+    minWidth: "200px",
+  },
+}));
+
+const tableHeader = [
+  { id: "FullName", label: "Full Name" },
+  { id: "RollNo", label: "Roll No" },
+  { id: "Shift", label: "Shift" },
+  { id: "AssignmentName", label: "Assignment Name" },
+  { id: "AssignmentDate", label: "Assignment Date" },
+  { id: "DueDate", label: "DueDate" },
+  { id: "SubmittedDate", label: "Submitted Date" },
+  { id: "FullMarks", label: "FullMarks" },
+  { id: "ObtainedMarks", label: "Obtained Marks" },
+  { id: "Actions", label: "Actions", disableSorting: true },
+];
+
+const Assignment = () => {
+  const [ddlClass, setDdlClass] = useState([]);
+  const [academicYearDdl, setAcademicYearDdl] = useState([]);
+  const [programDdl, setProgramDdl] = useState([]);
+  const [ddlShift, setDdlShift] = useState([]);
+  const [ddlSection, setDdlSection] = useState([]);
+  const [ddlSubject, setDdlSubject] = useState([]);
+  const [programValue, setProgramValue] = useState("");
+  const [classId, setClassId] = useState("");
+  const [acaYear, setAcaYear] = useState("");
+  const [shift, setShift] = useState("");
+  const [section, setSection] = useState("");
+  const [subject, setSubject] = useState("");
+  const [errors, setErrors] = useState({});
+  const [date, setDate] = useState();
+
+  const [tableData, setTableData] = useState([]);
+  const [filterFn, setFilterFn] = useState({
+    fn: (item) => {
+      return item;
+    },
+  });
+
+  const handleSearch = (e) => {
+    setFilterFn({
+      fn: (item) => {
+        if (e.target.value === "") {
+          return item;
+        } else {
+          return item.filter((x) =>
+            x.FullName.toLowerCase().includes(e.target.value)
+          );
+        }
+      },
+    });
+  };
+
+  const dispatch = useDispatch();
+  const classes = useStyles();
+
+  const [openPopup, setOpenPopup] = useState(false);
+  const [openPopup2, setOpenPopup2] = useState(false);
+  const [openPopup3, setOpenPopup3] = useState(false);
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: "",
+    subTitle: "",
+  });
+
+  const test = [{ Key: "", Value: "" }];
+
+  const { allAssignmentTeacherData, error: allAssignmentTeacherDataError } =
+    useSelector((state) => state.getAllAssignmentTeacher);
+
+  const { allOtherOptions, error: allOtherOptionsError } = useSelector(
+    (state) => state.getAllOtherOptionsForAssignmentSelect
+  );
+
+  const { getListTeacherAssignment, error: getListTeacherAssignmentError } =
+    useSelector((state) => state.getListTeacherAssignment);
+
+  const {
+    teacherAssignmentSingleCreate,
+    error: teacherAssignmentSingleCreateError,
+  } = useSelector((state) => state.getSingleCreateTeacherAssignment);
+
+  const { success: postTeacherAssignment, error: postTeacherAssignmentError } =
+    useSelector((state) => state.postTeacherAssignment);
+
+  const { assignmentContent, error: assignmentContentError } = useSelector(
+    (state) => state.getTeacherAssignmentContent
+  );
+
+  const { singleTeacherAssignment, error: singleTeacherAssignmentError } =
+    useSelector((state) => state.getSingleToEditTeacherAssignment);
+
+  const {
+    success: putSingleToEditTeacherAssignmentSuccess,
+    error: putSingleToEditTeacherAssignmentError,
+  } = useSelector((state) => state.putSingleToEditTeacherAssignment);
+
+  const {
+    success: downloadAssignmentSuccess,
+    file: downloadFile,
+    error: downloadAssignmentError,
+  } = useSelector((state) => state.downloadAssignment);
+
+  if (downloadFile) {
+    const blob = new Blob([downloadFile], { type: "octet-stream" });
+    const href = URL.createObjectURL(blob);
+    const a = Object.assign(document.createElement("a"), {
+      href,
+      style: "display:none",
+      download: "mis.jpg",
+    });
+    document.body.appendChild(a);
+    a.click();
+    URL.revokeObjectURL(href);
+    a.remove();
+    dispatch({ type: DOWNLOAD_ASSIGNMENT_RESET });
+  }
+
+  if (allOtherOptionsError) {
+    setNotify({
+      isOpen: true,
+      message: allOtherOptionsError,
+      type: "error",
+    });
+    dispatch({ type: GET_ALL_OTHER_OPTIONS_FOR_SELECT_RESET });
+  }
+  if (downloadAssignmentError) {
+    setNotify({
+      isOpen: true,
+      message: downloadAssignmentError,
+      type: "error",
+    });
+    dispatch({ type: DOWNLOAD_ASSIGNMENT_RESET });
+  }
+  if (putSingleToEditTeacherAssignmentError) {
+    setNotify({
+      isOpen: true,
+      message: putSingleToEditTeacherAssignmentError,
+      type: "error",
+    });
+    dispatch({ type: PUT_SINGLE_TO_EDIT_TEACHER_ASSIGNMENT_RESET });
+  }
+  if (putSingleToEditTeacherAssignmentSuccess) {
+    setNotify({
+      isOpen: true,
+      message: "Successfully Updated",
+      type: "success",
+    });
+    dispatch({ type: PUT_SINGLE_TO_EDIT_TEACHER_ASSIGNMENT_RESET });
+    setOpenPopup3(false);
+    dispatch(
+      getListAssignmentTeacherAction(
+        acaYear,
+        programValue,
+        classId,
+        subject,
+        section,
+        shift,
+        date
+      )
+    );
+  }
+  if (singleTeacherAssignmentError) {
+    setNotify({
+      isOpen: true,
+      message: singleTeacherAssignmentError,
+      type: "error",
+    });
+    dispatch({ type: GET_SINGLE_TO_EDIT_TEACHER_ASSIGNMENT_RESET });
+  }
+  if (teacherAssignmentSingleCreateError) {
+    setNotify({
+      isOpen: true,
+      message: teacherAssignmentSingleCreateError,
+      type: "error",
+    });
+    dispatch({ type: GET_SINGLE_CREATE_TEACHER_ASSIGNMENT_RESET });
+  }
+  if (allAssignmentTeacherDataError) {
+    setNotify({
+      isOpen: true,
+      message: allAssignmentTeacherDataError,
+      type: "error",
+    });
+    dispatch({ type: GET_ALL_ASSIGNMENT_TEACHER_RESET });
+  }
+  if (getListTeacherAssignmentError) {
+    setNotify({
+      isOpen: true,
+      message: getListTeacherAssignmentError,
+      type: "error",
+    });
+    dispatch({ type: GET_LIST_TEACHER_ASSIGNMENT_RESET });
+  }
+  if (postTeacherAssignmentError) {
+    setNotify({
+      isOpen: true,
+      message: postTeacherAssignmentError,
+      type: "error",
+    });
+    dispatch({ type: POST_TEACHER_ASSIGNMENT_RESET });
+  }
+  if (postTeacherAssignment) {
+    setNotify({
+      isOpen: true,
+      message: "Successfully Created",
+      type: "success",
+    });
+    dispatch({ type: POST_TEACHER_ASSIGNMENT_RESET });
+    setOpenPopup(false);
+    dispatch(
+      getListAssignmentTeacherAction(
+        acaYear,
+        programValue,
+        classId,
+        subject,
+        section,
+        shift,
+        date
+      )
+    );
+  }
+  if (assignmentContentError) {
+    setNotify({
+      isOpen: true,
+      message: assignmentContentError,
+      type: "error",
+    });
+    dispatch({ type: GET_TEACHER_ASSIGNMENT_CONTENT_RESET });
+  }
+
+  useEffect(() => {
+    if (!allAssignmentTeacherData) {
+      dispatch(getAllAssignmentTeacherAction());
+    }
+
+    if (allAssignmentTeacherData) {
+      setDdlSubject(
+        allAssignmentTeacherData.searchFilterModel.ddlSubjectForTeacher
+      );
+      setProgramDdl(
+        allAssignmentTeacherData.searchFilterModel.ddlFacultyProgramLink
+      );
+      setDdlClass(allAssignmentTeacherData.searchFilterModel.ddlLevelPrimitive);
+      setAcademicYearDdl(
+        allAssignmentTeacherData.searchFilterModel.ddlAcademicYear
+      );
+      setDdlShift(allAssignmentTeacherData.searchFilterModel.ddlAcademicShift);
+      setDdlSection(allAssignmentTeacherData.searchFilterModel.ddlSection);
+      setDate(
+        allAssignmentTeacherData.searchFilterModel.StartDate.slice(0, 10)
+      );
+    }
+  }, [allAssignmentTeacherData, dispatch]);
+
+  useEffect(() => {
+    if (getListTeacherAssignment) {
+      setTableData([
+        ...getListTeacherAssignment.dbTeacherAssignmentLstBySection,
+      ]);
+    }
+  }, [getListTeacherAssignment]);
+
+  const {
+    TableContainer,
+    TblHead,
+    TblPagination,
+    tableDataAfterPagingAndSorting,
+  } = useCustomTable(tableData, tableHeader, filterFn);
+
+  const validate = () => {
+    let temp = {};
+    temp.acaYear = !acaYear ? "This feild is required" : "";
+    temp.programValue = !programValue ? "This feild is required" : "";
+    temp.classId = !classId ? "This feild is required" : "";
+    temp.shift = !shift ? "This feild is required" : "";
+    temp.section = !section ? "This feild is required" : "";
+    temp.subject = !subject ? "This feild is required" : "";
+
+    setErrors({ ...temp });
+    return Object.values(temp).every((x) => x === "");
+  };
+  const handleSearchAssignment = () => {
+    if (validate()) {
+      dispatch(
+        getListAssignmentTeacherAction(
+          acaYear,
+          programValue,
+          classId,
+          subject,
+          section,
+          shift,
+          date
+        )
+      );
+    }
+  };
+
+  const handleCreate = () => {
+    if (validate()) {
+      dispatch(
+        getSingleCreateTeacherAssignmentAction(
+          acaYear,
+          programValue,
+          classId,
+          section,
+          shift,
+          subject,
+          date
+        )
+      );
+      setOpenPopup(true);
+    }
+  };
+
+  const allHandler = () => {
+    if (validate()) {
+      dispatch(
+        getTeacherAssignmentContentAction(
+          acaYear,
+          programValue,
+          classId,
+          section,
+          shift,
+          subject
+        )
+      );
+      setOpenPopup2(true);
+    }
+  };
+
+  const handleSubjectChange = (value) => {
+    setSubject(value);
+    dispatch(
+      getAllOtherOptionsForSelectAction(
+        allAssignmentTeacherData.modelDb.IDHREmployee,
+        value
+      )
+    );
+  };
+
+  useEffect(() => {
+    if (allOtherOptions) {
+      setAcaYear(
+        allOtherOptions.year.length > 0 ? allOtherOptions.year[0].Key : ""
+      );
+      setProgramValue(
+        allOtherOptions.program.length > 0 ? allOtherOptions.program[0].Key : ""
+      );
+      setClassId(
+        allOtherOptions.classId.length > 0 ? allOtherOptions.classId[0].Key : ""
+      );
+      setSection(
+        allOtherOptions.section.length > 0 ? allOtherOptions.section[0].Key : ""
+      );
+      setShift(
+        allOtherOptions.shift.length > 0 ? allOtherOptions.shift[0].Key : ""
+      );
+    }
+  }, [allOtherOptions]);
+
+  return (
+    <>
+      <CustomContainer>
+        <Toolbar>
+          <Grid container style={{ fontSize: "12px" }}>
+            <Grid item xs={3}>
+              <SelectControl
+                name="Sujbect"
+                label="Subject Name"
+                value={subject}
+                onChange={(e) => handleSubjectChange(e.target.value)}
+                options={ddlSubject ? ddlSubject : test}
+                errors={errors.subject}
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <SelectControl
+                name="Academic Year"
+                label="Academic Year"
+                value={acaYear}
+                onChange={(e) => setAcaYear(e.target.value)}
+                options={academicYearDdl ? academicYearDdl : test}
+                errors={errors.acaYear}
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <SelectControl
+                name="Program/Faculty"
+                label="Program/Faculty"
+                value={programValue}
+                onChange={(e) => setProgramValue(e.target.value)}
+                options={programDdl ? programDdl : test}
+                errors={errors.programValue}
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <SelectControl
+                name="Classes"
+                label="Classes"
+                value={classId}
+                onChange={(e) => setClassId(e.target.value)}
+                options={ddlClass ? ddlClass : test}
+                errors={errors.classId}
+              />
+            </Grid>
+
+            <Grid item xs={3}>
+              <div style={{ height: "10px" }}></div>
+              <SelectControl
+                name="Section"
+                label="Section"
+                value={section}
+                onChange={(e) => setSection(e.target.value)}
+                options={ddlSection ? ddlSection : test}
+                errors={errors.section}
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <div style={{ height: "10px" }}></div>
+              <SelectControl
+                name="Shift"
+                label="Shift"
+                value={shift}
+                onChange={(e) => setShift(e.target.value)}
+                options={ddlShift ? ddlShift : test}
+                errors={errors.shift}
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <div style={{ height: "10px" }}></div>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="inline"
+                  inputVariant="outlined"
+                  format="dd-MM-yyyy"
+                  name="CurrentYear"
+                  label="Current Year"
+                  value={date}
+                  onChange={(e) => {
+                    const newDate = new Date(e);
+                    setDate(newDate.toLocaleDateString());
+                  }}
+                />
+              </MuiPickersUtilsProvider>
+            </Grid>
+            <Grid item xs={3}>
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                style={{ margin: "10px 0 0 10px" }}
+                onClick={handleCreate}
+              >
+                CREATE
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                style={{ margin: "10px 0 0 10px" }}
+                onClick={handleSearchAssignment}
+              >
+                SEARCH
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                style={{ margin: "10px 0 0 10px" }}
+                onClick={allHandler}
+              >
+                ALL
+              </Button>
+              <div style={{ height: "10px" }}></div>
+            </Grid>
+          </Grid>
+        </Toolbar>
+        <TableContainer className={classes.table}>
+          <TblHead />
+
+          <TableBody>
+            {tableDataAfterPagingAndSorting().map((item) => (
+              <AssignmentTableCollapseMain
+                key={item.$id}
+                item={item}
+                setOpenPopup3={setOpenPopup3}
+              />
+            ))}
+          </TableBody>
+        </TableContainer>
+        <TblPagination />
+      </CustomContainer>
+      <Popup
+        openPopup={openPopup}
+        setOpenPopup={setOpenPopup}
+        title="Create Assignment"
+      >
+        <AssignmentForm
+          students={
+            teacherAssignmentSingleCreate &&
+            teacherAssignmentSingleCreate.dbModelLstForStudentSection
+          }
+          formDatas={
+            teacherAssignmentSingleCreate &&
+            teacherAssignmentSingleCreate.dbTeacherAssignmentModel
+          }
+        />
+      </Popup>
+      <Popup
+        openPopup={openPopup2}
+        setOpenPopup={setOpenPopup2}
+        title="All Assignment"
+      >
+        <AssignmentTableCollapseAll
+          allAssignment={
+            assignmentContent && assignmentContent.AssignmentContentLst
+          }
+          setOpenPopup2={setOpenPopup2}
+        />
+      </Popup>
+      <Popup
+        openPopup={openPopup3}
+        setOpenPopup={setOpenPopup3}
+        title="Edit Assignment"
+      >
+        <AssignmentEditForm
+          singleAssignment={
+            singleTeacherAssignment &&
+            singleTeacherAssignment.dbTeacherAssignmentModel
+          }
+          setOpenPop3={setOpenPopup3}
+        />
+      </Popup>
+      <Notification notify={notify} setNotify={setNotify} />
+      <ConfirmDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+      />
+    </>
+  );
+};
+
+export default Assignment;
