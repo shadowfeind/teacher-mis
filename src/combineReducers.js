@@ -133,6 +133,7 @@ import {
   postTeacherAssignmentReducer,
   putSingleToEditTeacherAssignmentReducer,
 } from "./examination/assignment/AssignmentReducers";
+import { getBulkExamMarkApprovalSearchDataReducer, getExamMarkApprovalInitialDataReducer, getExamMarkApprovalScheduleHeaderReducer, getExamMarkApprovalSearchDataReducer, postBulkExamMarkApprovalReducer } from "./examination/examMarkApprovalTeacher/examMarkApproval/ExamMarkApprovalReducers";
 
 export const reducers = combineReducers({
   getAllAcademicStudentExamdata: getAllAcademicStudentExamdataReducer,
@@ -238,4 +239,10 @@ export const reducers = combineReducers({
   putSingleToEditTeacherAssignment: putSingleToEditTeacherAssignmentReducer,
   downloadAssignment: downloadAssignmentReducer,
   //assignment end
+   //ExamMarkApproval(Teacher)
+   getExamMarkApprovalInitialData : getExamMarkApprovalInitialDataReducer,
+   getExamMarkApprovalSearchData : getExamMarkApprovalSearchDataReducer,
+   getExamMarkApprovalScheduleHeader : getExamMarkApprovalScheduleHeaderReducer,
+   getBulkExamMarkApprovalSearchData : getBulkExamMarkApprovalSearchDataReducer,
+   postBulkExamMarkApproval : postBulkExamMarkApprovalReducer,
 });

@@ -32,6 +32,9 @@ const ExamSchedule = lazy(() =>
 const ExamMarkEntry = lazy(() =>
   import("./examination/examMarkEntry/ExamMarkEntry")
 );
+const ExamMarkApprovalTeacher = lazy(() =>
+  import("./examination/examMarkApprovalTeacher/ExamMarkApprovalTeacher")
+);
 
 const theme = createTheme({
   palette: {
@@ -70,6 +73,7 @@ const App = () => {
             <Route path={"/syllabus"} component={Syllabus} />
             <Route path={"/old-questions"} component={OldQuestions} />
             <Route path={"/attendance"} component={Attendance} />
+            <Route path={"/exam-mark-approval"} component={ExamMarkApprovalTeacher} />
             <Route path={"/assignment"} component={Assignment} />
             <Route
               exact
