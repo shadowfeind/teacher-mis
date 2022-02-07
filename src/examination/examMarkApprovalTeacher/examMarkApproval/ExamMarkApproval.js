@@ -203,10 +203,10 @@ const ExamMarkApproval = () => {
       // setDdlEvent(
       //   examMarkApprovalInitialDatas.searchFilterModel.ddlEvent
       // );
-      // setDdlSchedule
-      // (
-      //   examMarkApprovalInitialDatas.searchFilterModel.ddlSchedule
-      // );
+      setDdlSchedule
+      (
+        examMarkApprovalInitialDatas.searchFilterModel.ddlSchedule
+      );
     }
   }, [examMarkApprovalInitialDatas, dispatch]);
 
