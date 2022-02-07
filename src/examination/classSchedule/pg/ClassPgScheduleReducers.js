@@ -47,32 +47,32 @@ export const getListClassScheduleReducer = (state = {}, action) => {
   }
 };
 
-export const getEditClassScheduleReducer = (state = {}, action) => {
-  switch (action.type) {
-    case GET_EDIT_CLASS_SCHEDULE_REQUEST:
-      return { loading: true };
-    case GET_EDIT_CLASS_SCHEDULE_SUCCESS:
-      return { loading: false, editClassSchedule: action.payload };
-    case GET_EDIT_CLASS_SCHEDULE_FAIL:
-      return { loading: false, error: action.payload };
-    case GET_EDIT_CLASS_SCHEDULE_RESET:
-      return {};
-    default:
-      return state;
-  }
-};
+// export const getEditClassScheduleReducer = (state = {}, action) => {
+//   switch (action.type) {
+//     case GET_EDIT_CLASS_SCHEDULE_REQUEST:
+//       return { loading: true };
+//     case GET_EDIT_CLASS_SCHEDULE_SUCCESS:
+//       return { loading: false, editClassSchedule: action.payload };
+//     case GET_EDIT_CLASS_SCHEDULE_FAIL:
+//       return { loading: false, error: action.payload };
+//     case GET_EDIT_CLASS_SCHEDULE_RESET:
+//       return {};
+//     default:
+//       return state;
+//   }
+// };
 
-export const putClassScheduleReducer = (state = {}, action) => {
-  switch (action.type) {
-    case PUT_CLASS_SCHEDULE_REQUEST:
-      return { loading: true };
-    case PUT_CLASS_SCHEDULE_SUCCESS:
-      return { loading: false, success: true };
-    case PUT_CLASS_SCHEDULE_FAIL:
-      return { loading: false, error: action.payload };
-    case PUT_CLASS_SCHEDULE_RESET:
-      return {};
-    default:
-      return state;
-  }
-};
+// export const putClassScheduleReducer = (state = {}, action) => {
+//   switch (action.type) {
+//     case PUT_CLASS_SCHEDULE_REQUEST:
+//       return { loading: true };
+//     case PUT_CLASS_SCHEDULE_SUCCESS:
+//       return { loading: false, success: true };
+//     case PUT_CLASS_SCHEDULE_FAIL:
+//       return { loading: false, error: action.payload };
+//     case PUT_CLASS_SCHEDULE_RESET:
+//       return {};
+//     default:
+//       return state;
+//   }
+// };

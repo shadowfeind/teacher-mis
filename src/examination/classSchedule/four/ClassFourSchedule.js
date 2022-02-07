@@ -40,41 +40,41 @@ const ClassFourSchedule = () => {
 
   const { allClassScheduleList, error: allClassScheduleListError } =
     useSelector((state) => state.getListClassSchedule);
-  const { editClassSchedule, error: editClassScheduleError } = useSelector(
-    (state) => state.getEditClassSchedule
-  );
-  const { success: putClassScheduleSuccess, error: putClassScheduleError } =
-    useSelector((state) => state.putClassSchedule);
+  // const { editClassSchedule, error: editClassScheduleError } = useSelector(
+  //   (state) => state.getEditClassSchedule
+  // );
+  // const { success: putClassScheduleSuccess, error: putClassScheduleError } =
+  //   useSelector((state) => state.putClassSchedule);
 
-  if (putClassScheduleError) {
-    setNotify({
-      isOpen: true,
-      message: putClassScheduleError,
-      type: "error",
-    });
-    dispatch({ type: PUT_CLASS_SCHEDULE_RESET });
-  }
+  // if (putClassScheduleError) {
+  //   setNotify({
+  //     isOpen: true,
+  //     message: putClassScheduleError,
+  //     type: "error",
+  //   });
+  //   dispatch({ type: PUT_CLASS_SCHEDULE_RESET });
+  // }
 
-  if (putClassScheduleSuccess) {
-    setNotify({
-      isOpen: true,
-      message: "Successfully Update",
-      type: "success",
-    });
-    setOpenPopup(false);
-    dispatch({ type: PUT_CLASS_SCHEDULE_RESET });
+  // if (putClassScheduleSuccess) {
+  //   setNotify({
+  //     isOpen: true,
+  //     message: "Successfully Update",
+  //     type: "success",
+  //   });
+  //   setOpenPopup(false);
+  //   dispatch({ type: PUT_CLASS_SCHEDULE_RESET });
 
-    dispatch(getAllPgClassScheuleAction());
-  }
+  //   dispatch(getAllPgClassScheuleAction());
+  // }
 
-  if (editClassScheduleError) {
-    setNotify({
-      isOpen: true,
-      message: editClassScheduleError,
-      type: "error",
-    });
-    dispatch({ type: GET_EDIT_CLASS_SCHEDULE_RESET });
-  }
+  // if (editClassScheduleError) {
+  //   setNotify({
+  //     isOpen: true,
+  //     message: editClassScheduleError,
+  //     type: "error",
+  //   });
+  //   dispatch({ type: GET_EDIT_CLASS_SCHEDULE_RESET });
+  // }
   if (allClassScheduleListError) {
     setNotify({
       isOpen: true,
@@ -93,21 +93,21 @@ const ClassFourSchedule = () => {
     }
   }, [allClassScheduleList]);
 
-  const editHandler = () => {
-    if (allClassScheduleList) {
-      dispatch(
-        getEditClassScheuleAction(
-          allClassScheduleList.dbModelLst[0].Id,
-          allClassScheduleList.searchFilterModel.company
-        )
-      );
-      setOpenPopup(true);
-    }
-  };
+  // const editHandler = () => {
+  //   if (allClassScheduleList) {
+  //     dispatch(
+  //       getEditClassScheuleAction(
+  //         allClassScheduleList.dbModelLst[0].Id,
+  //         allClassScheduleList.searchFilterModel.company
+  //       )
+  //     );
+  //     setOpenPopup(true);
+  //   }
+  // };
   return(
     <>
       <CustomContainer>
-        <Toolbar>
+        {/* <Toolbar>
           {allClassScheduleList && (
             <Button
               variant="contained"
@@ -118,10 +118,10 @@ const ClassFourSchedule = () => {
               EDIT{" "}
             </Button>
           )}
-        </Toolbar>
+        </Toolbar> */}
         {allClassScheduleList && <iframe src={url} width="100%" height="700" />}
       </CustomContainer>
-      <Popup
+      {/* <Popup
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
         title="Edit Form"
@@ -130,7 +130,7 @@ const ClassFourSchedule = () => {
           schedule={editClassSchedule && editClassSchedule}
           setOpenPopup={setOpenPopup}
         />
-      </Popup>
+      </Popup> */}
       <Notification notify={notify} setNotify={setNotify} />
       <ConfirmDialog
         confirmDialog={confirmDialog}

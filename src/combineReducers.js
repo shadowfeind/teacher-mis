@@ -250,7 +250,6 @@ export const reducers = combineReducers({
    //class schedule reducers starts
   getAllPgClassSchedule: getAllPgClassScheduleReducer,
   getListClassSchedule: getListClassScheduleReducer,
-  getEditClassSchedule: getEditClassScheduleReducer,
-  putClassSchedule: putClassScheduleReducer,
+
   //class schedule reducers ends
 });
