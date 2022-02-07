@@ -134,6 +134,7 @@ import {
   putSingleToEditTeacherAssignmentReducer,
 } from "./examination/assignment/AssignmentReducers";
 import { getBulkExamMarkApprovalSearchDataReducer, getExamMarkApprovalInitialDataReducer, getExamMarkApprovalScheduleHeaderReducer, getExamMarkApprovalSearchDataReducer, postBulkExamMarkApprovalReducer } from "./examination/examMarkApprovalTeacher/examMarkApproval/ExamMarkApprovalReducers";
+import { getAllPgClassScheduleReducer, getEditClassScheduleReducer, getListClassScheduleReducer, putClassScheduleReducer } from "./examination/classSchedule/pg/ClassPgScheduleReducers";
 
 export const reducers = combineReducers({
   getAllAcademicStudentExamdata: getAllAcademicStudentExamdataReducer,
@@ -245,4 +246,11 @@ export const reducers = combineReducers({
    getExamMarkApprovalScheduleHeader : getExamMarkApprovalScheduleHeaderReducer,
    getBulkExamMarkApprovalSearchData : getBulkExamMarkApprovalSearchDataReducer,
    postBulkExamMarkApproval : postBulkExamMarkApprovalReducer,
+
+   //class schedule reducers starts
+  getAllPgClassSchedule: getAllPgClassScheduleReducer,
+  getListClassSchedule: getListClassScheduleReducer,
+  getEditClassSchedule: getEditClassScheduleReducer,
+  putClassSchedule: putClassScheduleReducer,
+  //class schedule reducers ends
 });
