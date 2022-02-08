@@ -162,18 +162,22 @@ const Assignment = () => {
   } = useSelector((state) => state.downloadAssignment);
 
   if (downloadFile) {
-    const blob = new Blob([downloadFile], { type: "octet-stream" });
-    const href = URL.createObjectURL(blob);
-    const a = Object.assign(document.createElement("a"), {
-      href,
-      style: "display:none",
-      download: "mis.jpg",
-    });
-    document.body.appendChild(a);
-    a.click();
-    URL.revokeObjectURL(href);
-    a.remove();
-    dispatch({ type: DOWNLOAD_ASSIGNMENT_RESET });
+    // const blob = new Blob([downloadFile], { type: "application/octet-stream" });
+    var blob = new Blob([downloadFile]);
+    var url = window.URL.createObjectURL(blob);
+    debugger;
+    window.open(url, "_blank");
+    // const href = URL.createObjectURL(blob);
+    // const a = Object.assign(document.createElement("a"), {
+    //   href,
+    //   style: "display:none",
+    //   download: "mis.jpg",
+    // });
+    // document.body.appendChild(a);
+    // a.click();
+    // URL.revokeObjectURL(href);
+    // a.remove();
+    // dispatch({ type: DOWNLOAD_ASSIGNMENT_RESET });
   }
 
   if (allOtherOptionsError) {
