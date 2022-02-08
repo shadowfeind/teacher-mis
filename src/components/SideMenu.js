@@ -108,10 +108,24 @@ const SideMenu = () => {
           &nbsp;&nbsp;&nbsp; Resources
         </Typography>
       </NavLink>
+      <NavLink to={"/class-schedule"} activeStyle={isActive}>
+        <Typography variant="h6">
+          {" "}
+          <PeopleOutline fontSize="small" />
+          &nbsp;&nbsp;&nbsp; Class Schedule
+        </Typography>
+      </NavLink>
       <NavLink to={"/assignment"} activeStyle={isActive}>
         <Typography variant="h6">
           <PostAdd fontSize="small" />
           &nbsp;&nbsp;&nbsp; Assignment
+        </Typography>
+      </NavLink>
+      <NavLink to={"/exam-mark-approval"} activeStyle={isActive}>
+        <Typography variant="h6">
+          {" "}
+          <Accessible fontSize="small" />
+          &nbsp;&nbsp;&nbsp; Exam Mark Approval
         </Typography>
       </NavLink>
       <NavLink to={"/syllabus"} activeStyle={isActive}>

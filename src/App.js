@@ -29,8 +29,14 @@ const ExamDivision = lazy(() =>
 const ExamSchedule = lazy(() =>
   import("./examination/examSchedule/ExamSchedule")
 );
+const ClassSchedule = lazy(() =>
+  import("./examination/classSchedule/ClassSchedule")
+);
 const ExamMarkEntry = lazy(() =>
   import("./examination/examMarkEntry/ExamMarkEntry")
+);
+const ExamMarkApprovalTeacher = lazy(() =>
+  import("./examination/examMarkApprovalTeacher/ExamMarkApprovalTeacher")
 );
 
 const theme = createTheme({
@@ -68,8 +74,10 @@ const App = () => {
             <Route path={"/quick-links"} component={QuickLinks} />
             <Route path={"/resources"} component={Resources} />
             <Route path={"/syllabus"} component={Syllabus} />
+            <Route path={"/class-schedule"} component={ClassSchedule} />
             <Route path={"/old-questions"} component={OldQuestions} />
             <Route path={"/attendance"} component={Attendance} />
+            <Route path={"/exam-mark-approval"} component={ExamMarkApprovalTeacher} />
             <Route path={"/assignment"} component={Assignment} />
             <Route
               exact
