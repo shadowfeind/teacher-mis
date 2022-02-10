@@ -7,19 +7,14 @@ import CustomContainer from "../../../components/CustomContainer";
 import { Button, Toolbar } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Popup from "../../../components/Popup";
-import {
-  GET_EDIT_CLASS_SCHEDULE_RESET,
-  GET_LIST_CLASS_SCHEDULE_RESET,
-  PUT_CLASS_SCHEDULE_RESET,
-} from "../pg/ClassPgScheduleConstants";
-import {
-  getAllPgClassScheuleAction,
-  getEditClassScheuleAction,
-  getListClassScheuleAction,
-} from "../pg/ClassPgScheduleActions";
-import ClassPgScheduleForm from "../pg/ClassPgScheduleForm";
 
-const ClassNurserySchedule = () => {
+import {
+  GET_ALL_SYLLABUS_RESET,
+  GET_LIST_SYLLABUS_RESET,
+} from "../syllabusPg/SyllabusConstants";
+import { getListSyllabusAction } from "../syllabusPg/SyllabusActions";
+
+const SyllabusTwo = () => {
   const [url, setUrl] = useState("");
   const [openPopup, setOpenPopup] = useState(false);
 
@@ -35,38 +30,40 @@ const ClassNurserySchedule = () => {
   });
   const dispatch = useDispatch();
 
-  const { allClassScheduleList, error: allClassScheduleListError } =
-    useSelector((state) => state.getListClassSchedule);
  
-  if (allClassScheduleListError) {
+  const { listSyllabus, error: listSyllabusError } = useSelector(
+    (state) => state.getListSyllabus
+  );
+
+
+  if (listSyllabusError) {
     setNotify({
       isOpen: true,
-      message: allClassScheduleListError,
+      message: listSyllabusError,
       type: "error",
     });
-    dispatch({ type: GET_LIST_CLASS_SCHEDULE_RESET });
+    dispatch({ type: GET_LIST_SYLLABUS_RESET });
   }
 
   useEffect(() => {
-    
-      dispatch(getListClassScheuleAction(2));
-  
+    if (listSyllabus) {
+      setUrl(`${API_URL}${listSyllabus.FullPath}`);
+    }
+  }, [listSyllabus]);
+
+  useEffect(() => {
+    dispatch(getListSyllabusAction(6));
   }, []);
 
   useEffect(() => {
-    if (allClassScheduleList) {
-      setUrl(`${API_URL}${allClassScheduleList.FullPath}`);
-    }
-  }, [allClassScheduleList]);
+    dispatch({ type: "GET_LINK", payload: "/syllabus" });
+  }, [dispatch]);
 
-  
   return (
     <>
       <CustomContainer>
-        
-        {allClassScheduleList && <iframe src={url} width="100%" height="700" />}
+        {listSyllabus && <iframe src={url} width="100%" height="700" />}
       </CustomContainer>
-     
       <Notification notify={notify} setNotify={setNotify} />
       <ConfirmDialog
         confirmDialog={confirmDialog}
@@ -76,4 +73,4 @@ const ClassNurserySchedule = () => {
   );
 };
 
-export default ClassNurserySchedule;
+export default SyllabusTwo;

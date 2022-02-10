@@ -8,18 +8,12 @@ import { Button, Toolbar } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Popup from "../../../components/Popup";
 import {
-  GET_EDIT_CLASS_SCHEDULE_RESET,
-  GET_LIST_CLASS_SCHEDULE_RESET,
-  PUT_CLASS_SCHEDULE_RESET,
-} from "../pg/ClassPgScheduleConstants";
-import {
-  getAllPgClassScheuleAction,
-  getEditClassScheuleAction,
-  getListClassScheuleAction,
-} from "../pg/ClassPgScheduleActions";
-import ClassPgScheduleForm from "../pg/ClassPgScheduleForm";
+  GET_ALL_SYLLABUS_RESET,
+  GET_LIST_SYLLABUS_RESET,
+} from "./SyllabusConstants";
+import { getAllSyllabusAction, getListSyllabusAction } from "./SyllabusActions";
 
-const ClassNurserySchedule = () => {
+const Syllabus = () => {
   const [url, setUrl] = useState("");
   const [openPopup, setOpenPopup] = useState(false);
 
@@ -35,38 +29,55 @@ const ClassNurserySchedule = () => {
   });
   const dispatch = useDispatch();
 
-  const { allClassScheduleList, error: allClassScheduleListError } =
-    useSelector((state) => state.getListClassSchedule);
- 
-  if (allClassScheduleListError) {
+  const { allSyllabus, error: allSyllabusError } = useSelector(
+    (state) => state.getAllSyllabus
+  );
+  const { listSyllabus, error: listSyllabusError } = useSelector(
+    (state) => state.getListSyllabus
+  );
+
+  if (allSyllabusError) {
     setNotify({
       isOpen: true,
-      message: allClassScheduleListError,
+      message: allSyllabusError,
       type: "error",
     });
-    dispatch({ type: GET_LIST_CLASS_SCHEDULE_RESET });
+    dispatch({ type: GET_ALL_SYLLABUS_RESET });
+  }
+
+  if (listSyllabusError) {
+    setNotify({
+      isOpen: true,
+      message: listSyllabusError,
+      type: "error",
+    });
+    dispatch({ type: GET_LIST_SYLLABUS_RESET });
   }
 
   useEffect(() => {
-    
-      dispatch(getListClassScheuleAction(2));
-  
-  }, []);
+    if (!allSyllabus) {
+      dispatch(getAllSyllabusAction());
+    }
+    if (allSyllabus) {
+      dispatch(getListSyllabusAction(allSyllabus.dbModelLst[0].Id));
+    }
+  }, [allSyllabus]);
 
   useEffect(() => {
-    if (allClassScheduleList) {
-      setUrl(`${API_URL}${allClassScheduleList.FullPath}`);
+    if (listSyllabus) {
+      setUrl(`${API_URL}${listSyllabus.FullPath}`);
     }
-  }, [allClassScheduleList]);
+  }, [listSyllabus]);
 
-  
+  useEffect(() => {
+    dispatch({ type: "GET_LINK", payload: "/syllabus" });
+  }, [dispatch]);
+
   return (
     <>
       <CustomContainer>
-        
-        {allClassScheduleList && <iframe src={url} width="100%" height="700" />}
+        {listSyllabus && <iframe src={url} width="100%" height="700" />}
       </CustomContainer>
-     
       <Notification notify={notify} setNotify={setNotify} />
       <ConfirmDialog
         confirmDialog={confirmDialog}
@@ -76,4 +87,4 @@ const ClassNurserySchedule = () => {
   );
 };
 
-export default ClassNurserySchedule;
+export default Syllabus;
