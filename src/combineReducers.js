@@ -135,7 +135,7 @@ import {
 } from "./examination/assignment/AssignmentReducers";
 import { getBulkExamMarkApprovalSearchDataReducer, getExamMarkApprovalInitialDataReducer, getExamMarkApprovalScheduleHeaderReducer, getExamMarkApprovalSearchDataReducer, postBulkExamMarkApprovalReducer } from "./examination/examMarkApprovalTeacher/examMarkApproval/ExamMarkApprovalReducers";
 import { getAllPgClassScheduleReducer, getListClassScheduleReducer, putClassScheduleReducer } from "./examination/classSchedule/pg/ClassPgScheduleReducers";
-import { getAllOldQuestionsTeacherReducer, getListOldQuestionsTeacherReducer, getSubjectOldQuestionsReducer} from "./examination/oldQuestions/OldQuestionsReducers";
+import { downloadOldQuestionsReducer, getAllOldQuestionsTeacherReducer, getListOldQuestionsTeacherReducer, getSubjectOldQuestionsReducer} from "./examination/oldQuestions/OldQuestionsReducers";
 export const reducers = combineReducers({
   getAllAcademicStudentExamdata: getAllAcademicStudentExamdataReducer,
   getEvent: getEventReducer,
@@ -256,4 +256,5 @@ export const reducers = combineReducers({
   getAllOldQuestionsTeacher : getAllOldQuestionsTeacherReducer,
   getListOldQuestionsTeacher : getListOldQuestionsTeacherReducer,
   getSubjectOldQuestions : getSubjectOldQuestionsReducer,
+  downloadOldQuestions : downloadOldQuestionsReducer,
 });

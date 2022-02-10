@@ -196,7 +196,7 @@ export const downloadAssignmentReducer = (state = {}, action) => {
     case DOWNLOAD_ASSIGNMENT_REQUEST:
       return { loading: true };
     case DOWNLOAD_ASSIGNMENT_SUCCESS:
-      return { loading: false, success: true, file: action.payload };
+      return { loading: false, success: true };
     case DOWNLOAD_ASSIGNMENT_FAIL:
       return { loading: false, error: action.payload };
     case DOWNLOAD_ASSIGNMENT_RESET:

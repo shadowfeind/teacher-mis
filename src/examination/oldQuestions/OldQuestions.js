@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Notification from "../../components/Notification";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import SelectControl from "../../components/controls/SelectControl";
-import { GET_ALL_OLD_QUESTIONS_TEACHER_RESET } from "./OldQuestionsConstants";
+import { DOWNLOAD_OLD_QUESTIONS_RESET, GET_ALL_OLD_QUESTIONS_TEACHER_RESET } from "./OldQuestionsConstants";
 import { getAllOldQuestionsTeacherAction, getListOldQuestionsTeacherAction, getSubjectOldQuestionsAction } from "./OldQuestionsActions";
 import OldQuestionsTeacherTableCollapse from "./OldQuestionsTableCollapse";
 
@@ -99,6 +99,19 @@ const OldQuestions = () => {
     (state) => state.getListOldQuestionsTeacher
   );
 
+  const {
+    success: downloadOldQuestionsSuccess,
+    file: downloadFile,
+    error: downloadOldQuestionsError,
+  } = useSelector((state) => state.downloadOldQuestions);
+
+  if (downloadFile) {
+    var blob = new Blob([downloadFile]);
+    var url = window.URL.createObjectURL(blob);
+    debugger;
+    window.open(url, "_blank");
+  }
+
   if (oldQuestionsTeacherError) {
     setNotify({
       isOpen: true,
@@ -106,6 +119,15 @@ const OldQuestions = () => {
       type: "error",
     });
     dispatch({ type: GET_ALL_OLD_QUESTIONS_TEACHER_RESET });
+  }
+
+  if (downloadOldQuestionsError) {
+    setNotify({
+      isOpen: true,
+      message: downloadOldQuestionsError,
+      type: "error",
+    });
+    dispatch({ type: DOWNLOAD_OLD_QUESTIONS_RESET });
   }
 
   if (subjectOldQuestionsError) {
