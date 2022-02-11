@@ -16,7 +16,7 @@ const Dashboard = lazy(() => import("./examination/dashboard/Dashboard"));
 const Pid = lazy(() => import("./examination/pid/Pid"));
 const QuickLinks = lazy(() => import("./examination/quickLinks/QuickLinks"));
 const Resources = lazy(() => import("./examination/resources/Resources"));
-const Syllabus = lazy(() => import("./examination/syllabus/Syllabus"));
+const Syllabus = lazy(() => import("./examination/syllabus/syllabusMain"));
 const OldQuestions = lazy(() =>
   import("./examination/oldQuestions/OldQuestions")
 );

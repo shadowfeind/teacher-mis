@@ -304,27 +304,12 @@ export const downloadAssignmentAction = (id) => async (dispatch) => {
   try {
     dispatch({ type: DOWNLOAD_ASSIGNMENT_REQUEST });
 
-    // const tokenConfigTest = {
-    //   headers: {
-    //     dataType: "binary",
-    //     processData: false,
-    //     responseType: "arraybuffer",
-    //     Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiMzY1ZWVkNi1iOThlLTRkYmItYWQyZi03MjE0ZGQyM2NiY2QiLCJJRFVzZXIiOiIxNDAwOSIsIklEUm9sZSI6IjUiLCJNYXJrQXNBZG1pbiI6IkZhbHNlIiwiSURIUkJyYW5jaCI6IjEiLCJJRERlcGFydG1lbnQiOiIxIiwiY29tcGFueSI6IjIiLCJJc1RlbXBvcmFyeVNlc3Npb25FbmFibGVkIjoiRmFsc2UiLCJJc05ld2x5QWRlZCI6IkZhbHNlIiwiSXNEZXBhcnRtZW50SGVhZCI6IkZhbHNlIiwiUmVtZW1iZXJNZSI6IkZhbHNlIiwiRnVsbE5hbWUiOiJTdXJlc2ggQ2xhc3MgT25lIiwicGlkUmVmRm9yRWRpdCI6ImNsYXNzb25lIiwiZXhwIjoxNjQ0MjE3OTQ3LCJpc3MiOiJodHRwOi8vbXlzaXRlLmNvbSIsImF1ZCI6Imh0dHA6Ly9teXNpdGUuY29tIn0.7NaAjqe3aPA9z83rrrkajV_E9-JAkqtT3Ru9JgFibMI`,
-    //   },
-    // };
-    // debugger;
-    // const { data } = await axios.get(
-    //   `${API_URL}/api/TeacherAssignment/DownloadTEacherAssignmentDoc/${id}`
-    //   tokenConfig
-    //   tokenConfigTest
-    // );
-
     const test = `${API_URL}/api/TeacherAssignment/DownloadTEacherAssignmentDoc/${id}`;
 
     window.open(test, "_blank");
     dispatch({
       type: DOWNLOAD_ASSIGNMENT_SUCCESS,
-      payload: data,
+      
     });
   } catch (error) {
     dispatch({

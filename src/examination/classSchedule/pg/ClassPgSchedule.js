@@ -55,33 +55,7 @@ const ClassPgSchedule = () => {
     });
     dispatch({ type: GET_ALL_PG_CLASS_SCHEDULE_RESET });
   }
-  // if (putClassScheduleError) {
-  //   setNotify({
-  //     isOpen: true,
-  //     message: putClassScheduleError,
-  //     type: "error",
-  //   });
-  //   dispatch({ type: PUT_CLASS_SCHEDULE_RESET });
-  // }
-  // if (putClassScheduleSuccess) {
-  //   setNotify({
-  //     isOpen: true,
-  //     message: "Successfully Update",
-  //     type: "success",
-  //   });
-  //   setOpenPopup(false);
-  //   dispatch({ type: PUT_CLASS_SCHEDULE_RESET });
-  //   // dispatch(getListClassScheuleAction(pgClassSchedule.dbModelLst[0].Id));
-  //   dispatch(getAllPgClassScheuleAction());
-  // }
-  // if (editClassScheduleError) {
-  //   setNotify({
-  //     isOpen: true,
-  //     message: editClassScheduleError,
-  //     type: "error",
-  //   });
-  //   dispatch({ type: GET_EDIT_CLASS_SCHEDULE_RESET });
-  // }
+  
   if (allClassScheduleListError) {
     setNotify({
       isOpen: true,
