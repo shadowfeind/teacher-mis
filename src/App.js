@@ -10,6 +10,9 @@ import {
 } from "@material-ui/core";
 import { HashRouter as Router, Link, Route, Switch } from "react-router-dom";
 
+const VideoConference = lazy(() =>
+  import("./examination/videoConference/VideoConference")
+);
 const Assignment = lazy(() => import("./examination/assignment/Assignment"));
 const Attendance = lazy(() => import("./examination/attendance/Attendance"));
 const Dashboard = lazy(() => import("./examination/dashboard/Dashboard"));
@@ -77,8 +80,12 @@ const App = () => {
             <Route path={"/class-schedule"} component={ClassSchedule} />
             <Route path={"/old-questions"} component={OldQuestions} />
             <Route path={"/attendance"} component={Attendance} />
-            <Route path={"/exam-mark-approval"} component={ExamMarkApprovalTeacher} />
+            <Route
+              path={"/exam-mark-approval"}
+              component={ExamMarkApprovalTeacher}
+            />
             <Route path={"/assignment"} component={Assignment} />
+            <Route path={"/video-conference"} component={VideoConference} />
             <Route
               exact
               path={"/academic-grading"}
