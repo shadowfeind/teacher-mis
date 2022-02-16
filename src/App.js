@@ -75,7 +75,7 @@ const App = () => {
             <Route path={"/exam-mark-entry"} component={ExamMarkEntry} />
             <Route path={"/pid"} component={Pid} />
             <Route path={"/quick-links"} component={QuickLinks} />
-            <Route path={"/resources"} component={Resources} />
+            <Route path={"/resources/:id?"} component={Resources} />
             <Route path={"/syllabus"} component={Syllabus} />
             <Route path={"/class-schedule"} component={ClassSchedule} />
             <Route path={"/old-questions"} component={OldQuestions} />
@@ -84,7 +84,7 @@ const App = () => {
               path={"/exam-mark-approval"}
               component={ExamMarkApprovalTeacher}
             />
-            <Route path={"/assignment"} component={Assignment} />
+            <Route path={"/assignment/:id?"} component={Assignment} />
             <Route path={"/video-conference"} component={VideoConference} />
             <Route
               exact
