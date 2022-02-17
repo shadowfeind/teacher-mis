@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  InputAdornment,
-  makeStyles,
-  TableBody,
-  Toolbar,
-} from "@material-ui/core";
-import useCustomTable from "../../../customHooks/useCustomTable";
-import InputControl from "../../../components/controls/InputControl";
-import { Search } from "@material-ui/icons";
-import AddIcon from "@material-ui/icons/Add";
-import Popup from "../../../components/Popup";
+import { Button, makeStyles } from "@material-ui/core";
 import CustomContainer from "../../../components/CustomContainer";
 import { useDispatch, useSelector } from "react-redux";
 import Notification from "../../../components/Notification";
-import { GET_ALL_UPLOADPHOTO_RESET } from "./UploadPhotoConstants";
-import { getAllUploadPhotoAction } from "./UploadPhotoActions";
+import {
+  GET_ALL_UPLOADPHOTO_RESET,
+  UPLOADPHOTO_RESET,
+} from "./UploadPhotoConstants";
+import {
+  getAllUploadPhotoAction,
+  uploadPhotoActionAction,
+} from "./UploadPhotoActions";
+import { API_URL } from "../../../constants";
+import UploadPhotoForm from "./UploadPhotoForm";
 
 const useStyles = makeStyles((theme) => ({
   searchInput: {
@@ -28,53 +25,65 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const tableHeader = [
-  { id: "NewsHead", label: "News Head" },
-  { id: "NewsDescription", label: "News Description" },
-  { id: "IsActive", label: "IsActive" },
-  { id: "Created_On", label: "Created On" },
-  { id: "Updated_On", label: "Updated On" },
-  { id: "actions", label: "Actions", disableSorting: true },
-];
-
 const UploadPhoto = () => {
-  const [tableData, setTableData] = useState([]);
-      const [filterFn, setFilterFn] = useState({
-          fn: (item) => {
-              return item;
-          },
-      });
-      const [openPopup, setOpenPopup] = useState(false);
-      const [notify, setNotify] = useState({
-          isOpen: false,
-          message: "",
-          type: "",
-      });
-  
-      const classes = useStyles();
-  
-      const dispatch = useDispatch();
-  
-      const { getAllUploadPhoto, error } = useSelector((state) => state.getAllUploadPhoto);
-      if (error) {
-        setNotify({
-            isOpen: true,
-            message: error,
-            type: "error",
-        });
-        dispatch({ type: GET_ALL_UPLOADPHOTO_RESET });
+  const [url, setUrl] = useState("");
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
+
+  const classes = useStyles();
+
+  const dispatch = useDispatch();
+
+  const { allUploadPhoto, allUploadPhotoError } = useSelector(
+    (state) => state.getAllUploadPhoto
+  );
+  const { success: uploadPhotoSuccess, error: uploadPhotoError } = useSelector(
+    (state) => state.uploadPhoto
+  );
+  if (allUploadPhotoError) {
+    setNotify({
+      isOpen: true,
+      message: allUploadPhotoError,
+      type: "error",
+    });
+    dispatch({ type: GET_ALL_UPLOADPHOTO_RESET });
+  }
+  if (uploadPhotoSuccess) {
+    setNotify({
+      isOpen: true,
+      message: "Successfully Uploaded",
+      type: "success",
+    });
+    dispatch({ type: UPLOADPHOTO_RESET });
+    dispatch(getAllUploadPhotoAction());
+  }
+  if (uploadPhotoError) {
+    setNotify({
+      isOpen: true,
+      message: "Image Required",
+      type: "error",
+    });
+    dispatch({ type: UPLOADPHOTO_RESET });
+  }
+
+  useEffect(() => {
+    dispatch({ type: "GET_LINK", payload: "/" });
+    if (!allUploadPhoto) {
+      dispatch(getAllUploadPhotoAction());
     }
-  
-    useEffect(() => {
-      dispatch({ type: "GET_LINK", payload: "/" });
-      if (!getAllUploadPhoto) {
-          dispatch(getAllUploadPhotoAction());
-      }
-      if (getAllUploadPhoto) {
-          setTableData(getAllUploadPhoto.hrUploadPhotoModelLst);
-      }
-  }, [dispatch, getAllUploadPhoto]);
-  return <div>upload Photo</div>;
+  }, [dispatch, allUploadPhoto]);
+
+  return (
+    <CustomContainer>
+      upload Photo
+      <br />
+      <UploadPhotoForm uploadPhoto={allUploadPhoto && allUploadPhoto} />
+      <Notification notify={notify} setNotify={setNotify} />
+    </CustomContainer>
+  );
 };
 
 export default UploadPhoto;

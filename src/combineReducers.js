@@ -99,7 +99,7 @@ import {
   trainingCreateReducer,
   updateSingleTrainingReducer,
 } from "./examination/pid/training/TrainingReducers";
-import { getAllUploadPhoto } from "./examination/pid/uploadPhoto/UploadPhotoReducers";
+import { getAllUploadPhoto, getAllUploadPhotoReducer, uploadPhotoReducer } from "./examination/pid/uploadPhoto/UploadPhotoReducers";
 import {
   getAllOtherOptionsForSelectReducer,
   getAllStudentMonthlyPresentSheetReducer,
@@ -230,7 +230,8 @@ export const reducers = combineReducers({
   createSingleTraining: createSingleTrainingReducer,
   trainingCreate: trainingCreateReducer,
   //PID UploadPhoto
-  getAllUploadPhoto: getAllUploadPhoto,
+  getAllUploadPhoto: getAllUploadPhotoReducer,
+  uploadPhoto : uploadPhotoReducer,
   //attendance start
   getAllStudentMonthlyPresentSheet: getAllStudentMonthlyPresentSheetReducer,
   getAllOtherOptionsForSelect: getAllOtherOptionsForSelectReducer,
