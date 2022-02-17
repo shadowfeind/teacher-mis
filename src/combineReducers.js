@@ -155,8 +155,12 @@ import {
   getAllSyllabusReducer,
   getListSyllabusReducer,
 } from "./examination/syllabus/syllabusPg/SyllabusReducers";
-import { getDashboardContentReducer } from "./examination/dashboard/DashboardReducers";
+import {
+  getDashboardContentReducer,
+  getHeaderContentReducer,
+} from "./examination/dashboard/DashboardReducers";
 export const reducers = combineReducers({
+  getHeaderContent: getHeaderContentReducer,
   getDashboardContent: getDashboardContentReducer,
   getAllAcademicStudentExamdata: getAllAcademicStudentExamdataReducer,
   getEvent: getEventReducer,
