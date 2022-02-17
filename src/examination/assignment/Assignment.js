@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { unstable_batchedUpdates } from "react-dom";
 import {
   Button,
   makeStyles,
@@ -70,6 +72,7 @@ const tableHeader = [
 ];
 
 const Assignment = () => {
+  const { id: subjectIdFromDashboard } = useParams();
   const [ddlClass, setDdlClass] = useState([]);
   const [academicYearDdl, setAcademicYearDdl] = useState([]);
   const [programDdl, setProgramDdl] = useState([]);
@@ -235,14 +238,14 @@ const Assignment = () => {
     });
     dispatch({ type: GET_ALL_ASSIGNMENT_TEACHER_RESET });
   }
-  if (getListTeacherAssignmentError) {
-    setNotify({
-      isOpen: true,
-      message: getListTeacherAssignmentError,
-      type: "error",
-    });
-    dispatch({ type: GET_LIST_TEACHER_ASSIGNMENT_RESET });
-  }
+  // if (getListTeacherAssignmentError) {
+  //   setNotify({
+  //     isOpen: true,
+  //     message: getListTeacherAssignmentError,
+  //     type: "error",
+  //   });
+  //   dispatch({ type: GET_LIST_TEACHER_ASSIGNMENT_RESET });
+  // }
   if (postTeacherAssignmentError) {
     setNotify({
       isOpen: true,
@@ -286,21 +289,36 @@ const Assignment = () => {
     }
 
     if (allAssignmentTeacherData) {
-      setDdlSubject(
-        allAssignmentTeacherData.searchFilterModel.ddlSubjectForTeacher
-      );
-      setProgramDdl(
-        allAssignmentTeacherData.searchFilterModel.ddlFacultyProgramLink
-      );
-      setDdlClass(allAssignmentTeacherData.searchFilterModel.ddlLevelPrimitive);
-      setAcademicYearDdl(
-        allAssignmentTeacherData.searchFilterModel.ddlAcademicYear
-      );
-      setDdlShift(allAssignmentTeacherData.searchFilterModel.ddlAcademicShift);
-      setDdlSection(allAssignmentTeacherData.searchFilterModel.ddlSection);
-      setDate(
-        allAssignmentTeacherData.searchFilterModel.StartDate.slice(0, 10)
-      );
+      unstable_batchedUpdates(() => {
+        setDdlSubject(
+          allAssignmentTeacherData.searchFilterModel.ddlSubjectForTeacher
+        );
+        setProgramDdl(
+          allAssignmentTeacherData.searchFilterModel.ddlFacultyProgramLink
+        );
+        setDdlClass(
+          allAssignmentTeacherData.searchFilterModel.ddlLevelPrimitive
+        );
+        setAcademicYearDdl(
+          allAssignmentTeacherData.searchFilterModel.ddlAcademicYear
+        );
+        setDdlShift(
+          allAssignmentTeacherData.searchFilterModel.ddlAcademicShift
+        );
+        setDdlSection(allAssignmentTeacherData.searchFilterModel.ddlSection);
+        setDate(
+          allAssignmentTeacherData.searchFilterModel.StartDate.slice(0, 10)
+        );
+      });
+      if (subjectIdFromDashboard) {
+        setSubject(subjectIdFromDashboard);
+        dispatch(
+          getAllOtherOptionsForSelectAction(
+            allAssignmentTeacherData.modelDb.IDHREmployee,
+            subjectIdFromDashboard
+          )
+        );
+      }
     }
   }, [allAssignmentTeacherData, dispatch]);
 
@@ -406,6 +424,24 @@ const Assignment = () => {
       );
       setShift(
         allOtherOptions.shift.length > 0 ? allOtherOptions.shift[0].Key : ""
+      );
+
+      dispatch(
+        getListAssignmentTeacherAction(
+          allOtherOptions.year.length > 0 ? allOtherOptions.year[0].Key : "",
+          allOtherOptions.program.length > 0
+            ? allOtherOptions.program[0].Key
+            : "",
+          allOtherOptions.classId.length > 0
+            ? allOtherOptions.classId[0].Key
+            : "",
+          subject,
+          allOtherOptions.section.length > 0
+            ? allOtherOptions.section[0].Key
+            : "",
+          allOtherOptions.shift.length > 0 ? allOtherOptions.shift[0].Key : "",
+          date
+        )
       );
     }
   }, [allOtherOptions]);

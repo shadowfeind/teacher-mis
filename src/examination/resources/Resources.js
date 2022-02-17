@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { unstable_batchedUpdates } from "react-dom";
 import {
   Button,
   makeStyles,
@@ -57,6 +59,7 @@ const tableHeader = [
 ];
 
 const Resources = () => {
+  const { id: subjectIdFromDashboard } = useParams();
   const [ddlClass, setDdlClass] = useState([]);
   const [academicYearDdl, setAcademicYearDdl] = useState([]);
   const [programDdl, setProgramDdl] = useState([]);
@@ -140,14 +143,14 @@ const Resources = () => {
     });
     dispatch({ type: GET_ALL_RESOURCES_INITIAL_DATA_RESET });
   }
-  if (allResourcesError) {
-    setNotify({
-      isOpen: true,
-      message: allResourcesError,
-      type: "error",
-    });
-    dispatch({ type: GET_ALL_RESOURCES_LIST_RESET });
-  }
+  // if (allResourcesError) {
+  //   setNotify({
+  //     isOpen: true,
+  //     message: allResourcesError,
+  //     type: "error",
+  //   });
+  //   dispatch({ type: GET_ALL_RESOURCES_LIST_RESET });
+  // }
   if (allOtherResourcesOptionsError) {
     setNotify({
       isOpen: true,
@@ -197,12 +200,23 @@ const Resources = () => {
       dispatch(getAllInitialResourcesDataAction());
     }
     if (allInitialData) {
-      setDdlSubject(allInitialData.searchFilterModel.ddlSubjectForTeacher);
-      setDdlClass(allInitialData.searchFilterModel.ddlLevelPrimitive);
-      setAcademicYearDdl(allInitialData.searchFilterModel.ddlAcademicYear);
-      setDdlShift(allInitialData.searchFilterModel.ddlAcademicShift);
-      setDdlSection(allInitialData.searchFilterModel.ddlSection);
-      setProgramDdl(allInitialData.searchFilterModel.ddlFacultyProgramLink);
+      unstable_batchedUpdates(() => {
+        setDdlSubject(allInitialData.searchFilterModel.ddlSubjectForTeacher);
+        setDdlClass(allInitialData.searchFilterModel.ddlLevelPrimitive);
+        setAcademicYearDdl(allInitialData.searchFilterModel.ddlAcademicYear);
+        setDdlShift(allInitialData.searchFilterModel.ddlAcademicShift);
+        setDdlSection(allInitialData.searchFilterModel.ddlSection);
+        setProgramDdl(allInitialData.searchFilterModel.ddlFacultyProgramLink);
+      });
+      if (subjectIdFromDashboard) {
+        setSubject(subjectIdFromDashboard);
+        dispatch(
+          getAllOtherOptionsForResourcesSelectAction(
+            allInitialData.modelDb.IDHREmployee,
+            subjectIdFromDashboard
+          )
+        );
+      }
     }
   }, [allInitialData, dispatch]);
 
@@ -237,6 +251,26 @@ const Resources = () => {
         allOtherResourcesOptions.shift.length > 0
           ? allOtherResourcesOptions.shift[0].Key
           : ""
+      );
+      dispatch(
+        getAllResourcesListAction(
+          subject,
+          allOtherResourcesOptions.year.length > 0
+            ? allOtherResourcesOptions.year[0].Key
+            : "",
+          allOtherResourcesOptions.program.length > 0
+            ? allOtherResourcesOptions.program[0].Key
+            : "",
+          allOtherResourcesOptions.classId.length > 0
+            ? allOtherResourcesOptions.classId[0].Key
+            : "",
+          allOtherResourcesOptions.section.length > 0
+            ? allOtherResourcesOptions.section[0].Key
+            : "",
+          allOtherResourcesOptions.shift.length > 0
+            ? allOtherResourcesOptions.shift[0].Key
+            : ""
+        )
       );
     }
   }, [allOtherResourcesOptions]);

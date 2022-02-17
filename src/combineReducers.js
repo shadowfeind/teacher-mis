@@ -99,7 +99,7 @@ import {
   trainingCreateReducer,
   updateSingleTrainingReducer,
 } from "./examination/pid/training/TrainingReducers";
-import { getAllUploadPhoto } from "./examination/pid/uploadPhoto/UploadPhotoReducers";
+import { getAllUploadPhoto, getAllUploadPhotoReducer, uploadPhotoReducer } from "./examination/pid/uploadPhoto/UploadPhotoReducers";
 import {
   getAllOtherOptionsForSelectReducer,
   getAllStudentMonthlyPresentSheetReducer,
@@ -133,11 +133,35 @@ import {
   postTeacherAssignmentReducer,
   putSingleToEditTeacherAssignmentReducer,
 } from "./examination/assignment/AssignmentReducers";
-import { getBulkExamMarkApprovalSearchDataReducer, getExamMarkApprovalInitialDataReducer, getExamMarkApprovalScheduleHeaderReducer, getExamMarkApprovalSearchDataReducer, postBulkExamMarkApprovalReducer } from "./examination/examMarkApprovalTeacher/examMarkApproval/ExamMarkApprovalReducers";
-import { getAllPgClassScheduleReducer, getListClassScheduleReducer, putClassScheduleReducer } from "./examination/classSchedule/pg/ClassPgScheduleReducers";
-import { downloadOldQuestionsReducer, getAllOldQuestionsTeacherReducer, getListOldQuestionsTeacherReducer, getSubjectOldQuestionsReducer} from "./examination/oldQuestions/OldQuestionsReducers";
-import { getAllSyllabusReducer, getListSyllabusReducer } from "./examination/syllabus/syllabusPg/SyllabusReducers";
+import {
+  getBulkExamMarkApprovalSearchDataReducer,
+  getExamMarkApprovalInitialDataReducer,
+  getExamMarkApprovalScheduleHeaderReducer,
+  getExamMarkApprovalSearchDataReducer,
+  postBulkExamMarkApprovalReducer,
+} from "./examination/examMarkApprovalTeacher/examMarkApproval/ExamMarkApprovalReducers";
+import {
+  getAllPgClassScheduleReducer,
+  getListClassScheduleReducer,
+  putClassScheduleReducer,
+} from "./examination/classSchedule/pg/ClassPgScheduleReducers";
+import {
+  downloadOldQuestionsReducer,
+  getAllOldQuestionsTeacherReducer,
+  getListOldQuestionsTeacherReducer,
+  getSubjectOldQuestionsReducer,
+} from "./examination/oldQuestions/OldQuestionsReducers";
+import {
+  getAllSyllabusReducer,
+  getListSyllabusReducer,
+} from "./examination/syllabus/syllabusPg/SyllabusReducers";
+import {
+  getDashboardContentReducer,
+  getHeaderContentReducer,
+} from "./examination/dashboard/DashboardReducers";
 export const reducers = combineReducers({
+  getHeaderContent: getHeaderContentReducer,
+  getDashboardContent: getDashboardContentReducer,
   getAllAcademicStudentExamdata: getAllAcademicStudentExamdataReducer,
   getEvent: getEventReducer,
   getEventSchedule: getEventScheduleReducer,
@@ -206,7 +230,8 @@ export const reducers = combineReducers({
   createSingleTraining: createSingleTrainingReducer,
   trainingCreate: trainingCreateReducer,
   //PID UploadPhoto
-  getAllUploadPhoto: getAllUploadPhoto,
+  getAllUploadPhoto: getAllUploadPhotoReducer,
+  uploadPhoto : uploadPhotoReducer,
   //attendance start
   getAllStudentMonthlyPresentSheet: getAllStudentMonthlyPresentSheetReducer,
   getAllOtherOptionsForSelect: getAllOtherOptionsForSelectReducer,
@@ -241,24 +266,24 @@ export const reducers = combineReducers({
   putSingleToEditTeacherAssignment: putSingleToEditTeacherAssignmentReducer,
   downloadAssignment: downloadAssignmentReducer,
   //assignment end
-   //ExamMarkApproval(Teacher)
-   getExamMarkApprovalInitialData : getExamMarkApprovalInitialDataReducer,
-   getExamMarkApprovalSearchData : getExamMarkApprovalSearchDataReducer,
-   getExamMarkApprovalScheduleHeader : getExamMarkApprovalScheduleHeaderReducer,
-   getBulkExamMarkApprovalSearchData : getBulkExamMarkApprovalSearchDataReducer,
-   postBulkExamMarkApproval : postBulkExamMarkApprovalReducer,
+  //ExamMarkApproval(Teacher)
+  getExamMarkApprovalInitialData: getExamMarkApprovalInitialDataReducer,
+  getExamMarkApprovalSearchData: getExamMarkApprovalSearchDataReducer,
+  getExamMarkApprovalScheduleHeader: getExamMarkApprovalScheduleHeaderReducer,
+  getBulkExamMarkApprovalSearchData: getBulkExamMarkApprovalSearchDataReducer,
+  postBulkExamMarkApproval: postBulkExamMarkApprovalReducer,
 
-   //class schedule reducers starts
+  //class schedule reducers starts
   getAllPgClassSchedule: getAllPgClassScheduleReducer,
   getListClassSchedule: getListClassScheduleReducer,
 
   //class schedule reducers ends
   //OldQuestion reducers starts
-  getAllOldQuestionsTeacher : getAllOldQuestionsTeacherReducer,
-  getListOldQuestionsTeacher : getListOldQuestionsTeacherReducer,
-  getSubjectOldQuestions : getSubjectOldQuestionsReducer,
-  downloadOldQuestions : downloadOldQuestionsReducer,
+  getAllOldQuestionsTeacher: getAllOldQuestionsTeacherReducer,
+  getListOldQuestionsTeacher: getListOldQuestionsTeacherReducer,
+  getSubjectOldQuestions: getSubjectOldQuestionsReducer,
+  downloadOldQuestions: downloadOldQuestionsReducer,
   //Syllabus Teacher
-  getAllSyllabus : getAllSyllabusReducer,
-  getListSyllabus : getListSyllabusReducer,
+  getAllSyllabus: getAllSyllabusReducer,
+  getListSyllabus: getListSyllabusReducer,
 });

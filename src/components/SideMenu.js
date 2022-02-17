@@ -141,6 +141,13 @@ const SideMenu = () => {
           &nbsp;&nbsp;&nbsp; Old Questions
         </Typography>
       </NavLink>
+      <NavLink to={"/video-conference"} activeStyle={isActive}>
+        <Typography variant="h6">
+          {" "}
+          <Accessible fontSize="small" />
+          &nbsp;&nbsp;&nbsp; Video Conference
+        </Typography>
+      </NavLink>
     </div>
   );
 };

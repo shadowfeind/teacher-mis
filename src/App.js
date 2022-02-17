@@ -8,8 +8,14 @@ import {
   makeStyles,
   ThemeProvider,
 } from "@material-ui/core";
-import { HashRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
+const PageNotFound = lazy(() =>
+  import("./examination/pageNotFound/PageNotFound")
+);
+const VideoConference = lazy(() =>
+  import("./examination/videoConference/VideoConference")
+);
 const Assignment = lazy(() => import("./examination/assignment/Assignment"));
 const Attendance = lazy(() => import("./examination/attendance/Attendance"));
 const Dashboard = lazy(() => import("./examination/dashboard/Dashboard"));
@@ -67,24 +73,31 @@ const App = () => {
         <div className={classes.appMain}>
           <Header />
           <Suspense fallback={<div></div>}>
-            <Route path={"/exam-division"} component={ExamDivision} />
-            <Route path={"/exam-schedule"} component={ExamSchedule} />
-            <Route path={"/exam-mark-entry"} component={ExamMarkEntry} />
-            <Route path={"/pid"} component={Pid} />
-            <Route path={"/quick-links"} component={QuickLinks} />
-            <Route path={"/resources"} component={Resources} />
-            <Route path={"/syllabus"} component={Syllabus} />
-            <Route path={"/class-schedule"} component={ClassSchedule} />
-            <Route path={"/old-questions"} component={OldQuestions} />
-            <Route path={"/attendance"} component={Attendance} />
-            <Route path={"/exam-mark-approval"} component={ExamMarkApprovalTeacher} />
-            <Route path={"/assignment"} component={Assignment} />
-            <Route
-              exact
-              path={"/academic-grading"}
-              component={AcademicGrading}
-            />
-            <Route exact path={"/"} component={Dashboard} />
+            <Switch>
+              <Route path={"/exam-division"} component={ExamDivision} />
+              <Route path={"/exam-schedule"} component={ExamSchedule} />
+              <Route path={"/exam-mark-entry"} component={ExamMarkEntry} />
+              <Route path={"/pid"} component={Pid} />
+              <Route path={"/quick-links"} component={QuickLinks} />
+              <Route path={"/resources/:id?"} component={Resources} />
+              <Route path={"/syllabus"} component={Syllabus} />
+              <Route path={"/class-schedule"} component={ClassSchedule} />
+              <Route path={"/old-questions"} component={OldQuestions} />
+              <Route path={"/attendance"} component={Attendance} />
+              <Route
+                path={"/exam-mark-approval"}
+                component={ExamMarkApprovalTeacher}
+              />
+              <Route path={"/assignment/:id?"} component={Assignment} />
+              <Route path={"/video-conference"} component={VideoConference} />
+              <Route
+                exact
+                path={"/academic-grading"}
+                component={AcademicGrading}
+              />
+              <Route exact path={"/"} component={Dashboard} />
+              <Route path="*" component={PageNotFound} />
+            </Switch>
           </Suspense>
         </div>
         <CssBaseline />
