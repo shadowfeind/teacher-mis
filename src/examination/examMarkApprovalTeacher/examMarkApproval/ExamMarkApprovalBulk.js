@@ -40,7 +40,7 @@ const StyledTableCell = withStyles((theme) => ({
     },
   });
 
-  const ExamMarkApprovalBulk = ({ bulkData, statusData, search }) => {
+  const ExamMarkApprovalBulk = ({ bulkData, statusData, search, setOpenPopup }) => {
     const [bulk, setBulk] = useState([]);
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -186,7 +186,7 @@ const StyledTableCell = withStyles((theme) => ({
               <Button
                 variant="contained"
                 color="secondary"
-                // onClick={() => setOpenPopup(false)}
+                onClick={() => setOpenPopup(false)}
                 style={{ margin: "10px 0 0 10px" }}
               >
                 CANCEL

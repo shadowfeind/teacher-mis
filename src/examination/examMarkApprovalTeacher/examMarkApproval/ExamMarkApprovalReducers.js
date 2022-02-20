@@ -1,8 +1,16 @@
 import {
+  GET_ACTIVE_SUBJECT_FAIL,
+  GET_ACTIVE_SUBJECT_REQUEST,
+    GET_ACTIVE_SUBJECT_RESET,
+    GET_ACTIVE_SUBJECT_SUCCESS,
     GET_ALL_EXAM_MARK_APPROVAL_SEARCHDATA_FAIL,
     GET_ALL_EXAM_MARK_APPROVAL_SEARCHDATA_REQUEST,
     GET_ALL_EXAM_MARK_APPROVAL_SEARCHDATA_RESET,
   GET_ALL_EXAM_MARK_APPROVAL_SEARCHDATA_SUCCESS,
+  GET_ALL_OTHER_OPTIONS_FOR_SELECT_TEACHER_FAIL,
+  GET_ALL_OTHER_OPTIONS_FOR_SELECT_TEACHER_REQUEST,
+  GET_ALL_OTHER_OPTIONS_FOR_SELECT_TEACHER_RESET,
+  GET_ALL_OTHER_OPTIONS_FOR_SELECT_TEACHER_SUCCESS,
   GET_BULK_EXAM_MARK_APPROVAL_FAIL,
   GET_BULK_EXAM_MARK_APPROVAL_REQUEST,
   GET_BULK_EXAM_MARK_APPROVAL_RESET,
@@ -96,3 +104,38 @@ export const getExamMarkApprovalSearchDataReducer = (state = {}, action) => {
     }
   };
   
+  export const getAllOtherOptionsForSelectTeacherReducer = (state = {}, action) => {
+    switch (action.type) {
+      case GET_ALL_OTHER_OPTIONS_FOR_SELECT_TEACHER_REQUEST:
+        return { loading: true };
+      case GET_ALL_OTHER_OPTIONS_FOR_SELECT_TEACHER_SUCCESS:
+        return {
+          loading: false,
+          allOtherOptions: action.payload,
+        };
+      case GET_ALL_OTHER_OPTIONS_FOR_SELECT_TEACHER_FAIL:
+        return { loading: false, error: action.payload };
+      case GET_ALL_OTHER_OPTIONS_FOR_SELECT_TEACHER_RESET:
+        return {};
+      default:
+        return state;
+    }
+  };
+  
+  export const getActiveSubjectReducer = (state = {}, action) => {
+    switch (action.type) {
+      case GET_ACTIVE_SUBJECT_REQUEST:
+        return { loading: true };
+      case GET_ACTIVE_SUBJECT_SUCCESS:
+        return {
+          loading: false,
+         activeSubject: action.payload,
+        };
+      case GET_ACTIVE_SUBJECT_FAIL:
+        return { loading: false, error: action.payload };
+      case GET_ACTIVE_SUBJECT_RESET:
+        return {};
+      default:
+        return state;
+    }
+  };

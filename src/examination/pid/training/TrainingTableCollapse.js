@@ -33,8 +33,8 @@ const useStyles = makeStyles({
         <TableRow>
           <TableCell>{item.TrainingTitle}</TableCell>
           <TableCell>{item.TrainingType}</TableCell>
-          <TableCell>{item.FromDate}</TableCell>
-          <TableCell>{item.ToDate}</TableCell>
+          <TableCell>{item.FromDate.slice(0,10)}</TableCell>
+          <TableCell>{item.ToDate.slice(0,10)}</TableCell>
           <TableCell>{item.Venue}</TableCell>
           <TableCell>
             <Button

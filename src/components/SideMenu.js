@@ -74,13 +74,13 @@ const SideMenu = () => {
           &nbsp;&nbsp;&nbsp; Exam Division
         </Typography>
       </NavLink>
-      <NavLink to={"/exam-schedule"} activeStyle={isActive}>
+      {/* <NavLink to={"/exam-schedule"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
           <PeopleOutline fontSize="small" />
           &nbsp;&nbsp;&nbsp; Exam Schedule
         </Typography>
-      </NavLink>
+      </NavLink> */}
 
       <NavLink to={"/attendance"} activeStyle={isActive}>
         <Typography variant="h6">

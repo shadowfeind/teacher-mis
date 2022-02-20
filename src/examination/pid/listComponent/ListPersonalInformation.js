@@ -36,7 +36,7 @@ const ListPersonalInformation = ({list})=>{
         <Grid  md={6}>
           <List >
             <ListItem>
-              <strong>Date Of Joining</strong>: {list.DOJ}
+              <strong>Date Of Joining</strong>: {list.DOJ.slice(0,10)}
             </ListItem>
             <ListItem>
               <strong>First Name</strong>: {list.FirstName}
@@ -54,7 +54,7 @@ const ListPersonalInformation = ({list})=>{
               <strong>Is Married</strong>: {list.Married}
             </ListItem>
             <ListItem>
-              <strong>Date Of Birth</strong>: {list.DOB}
+              <strong>Date Of Birth</strong>: {list.DOB.slice(0,10)}
             </ListItem>
             <ListItem>
               <strong>Blood Group</strong>: {list.BloodGroup}

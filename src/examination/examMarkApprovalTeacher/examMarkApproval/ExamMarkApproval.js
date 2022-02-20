@@ -8,6 +8,8 @@ import {
   Grid,
 } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
+import { useParams } from "react-router-dom";
+import { unstable_batchedUpdates } from "react-dom";
 import useCustomTable from "../../../customHooks/useCustomTable";
 import InputControl from "../../../components/controls/InputControl";
 import Popup from "../../../components/Popup";
@@ -16,10 +18,19 @@ import { useDispatch, useSelector } from "react-redux";
 import Notification from "../../../components/Notification";
 import ConfirmDialog from "../../../components/ConfirmDialog";
 import SelectControl from "../../../components/controls/SelectControl";
-import { getBulkExamMarkApprovalSearchDataAction, getExamMarkApprovalScheduleHeaderAction, getExamMarkApprovalSearchDataAction, getInitialExamMarkApprovalDataAction } from "./ExamMarkAprrovalActions";
-import {getEventAction} from "../../examMarkEntry/ExamMarkEntryActions";
-import {GET_EVENT_RESET} from "../../examMarkEntry/ExamMarkEntryConstants";
 import {
+  getActiveSubjectAction,
+  getAllOtherOptionsForSelectTeacherAction,
+  getBulkExamMarkApprovalSearchDataAction,
+  getExamMarkApprovalScheduleHeaderAction,
+  getExamMarkApprovalSearchDataAction,
+  getInitialExamMarkApprovalDataAction,
+} from "./ExamMarkAprrovalActions";
+import { getEventAction } from "../../examMarkEntry/ExamMarkEntryActions";
+import { GET_EVENT_RESET } from "../../examMarkEntry/ExamMarkEntryConstants";
+import {
+  GET_ACTIVE_SUBJECT_RESET,
+  GET_ALL_OTHER_OPTIONS_FOR_SELECT_TEACHER_RESET,
   GET_EXAM_MARK_APPROVAL_INITIAL_DATA_RESET,
   GET_EXAM_MARK_APPROVAL_SCHEULE_HEADER_RESET,
   POST_BULK_EXAM_MARK_APPROVAL_RESET,
@@ -63,13 +74,13 @@ const ExamMarkApproval = () => {
   const [ddlSection, setDdlSection] = useState([]);
   const [ddlEvent, setDdlEvent] = useState([]);
   const [ddlSchedule, setDdlSchedule] = useState([]);
-  const [programValue, setProgramValue] = useState();
-  const [classId, setClassId] = useState();
-  const [acaYear, setAcaYear] = useState();
-  const [shift, setShift] = useState();
-  const [section, setSection] = useState();
-  const [event, setEvent] = useState();
-  const [schedule, setSchedule] = useState();
+  const [programValue, setProgramValue] = useState("");
+  const [classId, setClassId] = useState("");
+  const [acaYear, setAcaYear] = useState("");
+  const [shift, setShift] = useState("");
+  const [section, setSection] = useState("");
+  const [event, setEvent] = useState("");
+  const [schedule, setSchedule] = useState("");
   const [errors, setErrors] = useState([]);
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -106,25 +117,27 @@ const ExamMarkApproval = () => {
           return item;
         } else {
           return item.filter((x) =>
-            x.EventName.toLowerCase().includes(e.target.value)
+            x.FullName.toLowerCase().includes(e.target.value)
           );
         }
       },
     });
   };
 
-  const { examMarkApprovalInitialDatas, error} = useSelector(
+  const { examMarkApprovalInitialDatas, error } = useSelector(
     (state) => state.getExamMarkApprovalInitialData
   );
 
-  const { allEvents, success: getEventSuccess } = useSelector(
-    (state) => state.getEvent
+  const { allOtherOptions, error: allOtherOptionsError } = useSelector(
+    (state) => state.getAllOtherOptionsForSelectTeacher
   );
 
   const { scheduleHeader, error: scheduleHeaderError } = useSelector(
     (state) => state.getExamMarkApprovalScheduleHeader
   );
-
+  const { activeSubject, success: activeSubjectSuccess } = useSelector(
+    (state) => state.getActiveSubject
+  );
   const { searchData } = useSelector(
     (state) => state.getExamMarkApprovalSearchData
   );
@@ -137,11 +150,6 @@ const ExamMarkApproval = () => {
     success: postBulkExamMarkApprovalSuccess,
     error: postBulkExamMarkApprovalError,
   } = useSelector((state) => state.postBulkExamMarkApproval);
-  
-  if (getEventSuccess) {
-    setDdlEvent(allEvents);
-    dispatch({ type: GET_EVENT_RESET });
-  }
 
   if (error) {
     setNotify({
@@ -151,6 +159,11 @@ const ExamMarkApproval = () => {
     });
     dispatch({ type: GET_EXAM_MARK_APPROVAL_INITIAL_DATA_RESET });
     setOpenPopup(false);
+  }
+
+  if (activeSubjectSuccess) {
+    setDdlEvent(activeSubject);
+    dispatch({ type: GET_ACTIVE_SUBJECT_RESET });
   }
   if (scheduleHeader) {
     setDdlSchedule(scheduleHeader);
@@ -171,6 +184,17 @@ const ExamMarkApproval = () => {
       message: "Succesfully Edited",
       type: "success",
     });
+    dispatch(
+      getExamMarkApprovalSearchDataAction(
+        acaYear,
+        programValue,
+        classId,
+        section,
+        shift,
+        event,
+        schedule
+      )
+    );
     dispatch({ type: POST_BULK_EXAM_MARK_APPROVAL_RESET });
     setOpenPopup(false);
   }
@@ -184,77 +208,117 @@ const ExamMarkApproval = () => {
     setOpenPopup(false);
   }
 
+  if (allOtherOptionsError) {
+    setNotify({
+      isOpen: true,
+      message: allOtherOptionsError,
+      type: "error",
+    });
+    dispatch({ type: GET_ALL_OTHER_OPTIONS_FOR_SELECT_TEACHER_RESET });
+  }
+
   useEffect(() => {
     if (!examMarkApprovalInitialDatas) {
       dispatch(getInitialExamMarkApprovalDataAction());
     }
     if (examMarkApprovalInitialDatas) {
-      setAcademicYearDdl(
-        examMarkApprovalInitialDatas.searchFilterModel.ddlAcademicYear
-      );
-      setProgramDdl(
-        examMarkApprovalInitialDatas.searchFilterModel.ddlFacultyProgramLink
-      );
-      setDdlClass(examMarkApprovalInitialDatas.searchFilterModel.ddlClass);
-      setDdlShift(
-        examMarkApprovalInitialDatas.searchFilterModel.ddlAcademicShift
-      );
-      setDdlSection(examMarkApprovalInitialDatas.searchFilterModel.ddlSection);
-      // setDdlEvent(
-      //   examMarkApprovalInitialDatas.searchFilterModel.ddlEvent
-      // );
-      setDdlSchedule
-      (
-        examMarkApprovalInitialDatas.searchFilterModel.ddlSchedule
-      );
+      unstable_batchedUpdates(() => {
+        setDdlSchedule(
+          examMarkApprovalInitialDatas.searchFilterModel.ddlSubjectForTeacher
+        );
+        setAcademicYearDdl(
+          examMarkApprovalInitialDatas.searchFilterModel.ddlAcademicYear
+        );
+        setProgramDdl(
+          examMarkApprovalInitialDatas.searchFilterModel.ddlFacultyProgramLink
+        );
+        setDdlClass(
+          examMarkApprovalInitialDatas.searchFilterModel.ddlLevelPrimitive
+        );
+        setDdlSection(
+          examMarkApprovalInitialDatas.searchFilterModel.ddlSection
+        );
+        setDdlShift(
+          examMarkApprovalInitialDatas.searchFilterModel.ddlAcademicShift
+        );
+        // setDdlEvent(
+        //   examMarkApprovalInitialDatas.searchFilterModel.ddlAcademicYearPrimitive
+        // );
+      });
     }
   }, [examMarkApprovalInitialDatas, dispatch]);
 
-  useEffect(() => {
-    if (searchData) {
-      setTableData(searchData.dbModelLst);
-    }
-  }, [searchData]);
+  const subjectHandler = (value) => {
+    setSchedule(value);
+    dispatch(
+      getAllOtherOptionsForSelectTeacherAction(
+        examMarkApprovalInitialDatas.modelDb.IDHREmployee,
+        value
+      )
+    );
+  };
 
-  const handleProgramValue =(value=>{
-    setProgramValue(value);
-    if ((acaYear, classId, shift)) {
+  useEffect(() => {
+    if (allOtherOptions) {
+      unstable_batchedUpdates(() => {
+        setAcaYear(
+          allOtherOptions.year.length > 0 ? allOtherOptions.year[0].Key : ""
+        );
+        setProgramValue(
+          allOtherOptions.program.length > 0
+            ? allOtherOptions.program[0].Key
+            : ""
+        );
+        setClassId(
+          allOtherOptions.classId.length > 0
+            ? allOtherOptions.classId[0].Key
+            : ""
+        );
+        setSection(
+          allOtherOptions.section.length > 0
+            ? allOtherOptions.section[0].Key
+            : ""
+        );
+        setShift(
+          allOtherOptions.shift.length > 0 ? allOtherOptions.shift[0].Key : ""
+        );
+      });
+
       dispatch(
-        getExamMarkApprovalScheduleHeaderAction(
-          value,
-          acaYear,
-          classId,
-          shift
+        getActiveSubjectAction(
+          allOtherOptions.year[0].Key,
+          allOtherOptions.program[0].Key,
+          allOtherOptions.classId[0].Key
         )
       );
     }
-  })
-
-  const handleYearChange = (value) => {
-    setAcaYear(value);
-    if (classId) {
-      dispatch(getEventAction(value, programValue, classId));
+  }, [allOtherOptions, dispatch]);
+  useEffect(() => {
+    if (activeSubject) {
+      setDdlEvent([...activeSubject]);
     }
-  };
+  }, [activeSubject]);
 
-  const handleClassIdChange = (value) => {
-    setClassId(value);
-    dispatch(getEventAction(acaYear, programValue, value));
-  };
-  
+  useEffect(() => {
+    if (searchData) {
+      setTableData(searchData.dbModelLsts);
+    }
+  }, [searchData]);
+
   const validate = () => {
     let temp = {};
+    temp.schedule = !schedule ? "This feild is required" : "";
     temp.acaYear = !acaYear ? "This feild is required" : "";
     temp.programValue = !programValue ? "This feild is required" : "";
     temp.classId = !classId ? "This feild is required" : "";
     temp.shift1 = !shift ? "This feild is required" : "";
     temp.section = !section ? "This feild is required" : "";
     temp.event = !event ? "This feild is required" : "";
-    temp.schedule = !schedule ? "This feild is required" : "";
 
     setErrors({ ...temp });
     return Object.values(temp).every((x) => x === "");
   };
+
 
   const handleExamApprovalSearch = () => {
     if (validate()) {
@@ -289,30 +353,27 @@ const ExamMarkApproval = () => {
     }
   };
 
-  const eventHandler = (value) => {
-    setEvent(value);
-    dispatch(
-      getExamMarkApprovalScheduleHeaderAction(
-        acaYear,
-        programValue,
-        classId,
-        shift,
-        section,
-        value
-      )
-    );
-  };
   return (
     <>
       <CustomContainer>
         <Toolbar>
           <Grid container style={{ fontSize: "12px" }}>
+            <Grid item xs={6}>
+              <SelectControl
+                name="ExamScheduleHeader"
+                label="Subject"
+                value={schedule}
+                onChange={(e) => subjectHandler(e.target.value)}
+                options={ddlSchedule ? ddlSchedule : test}
+                errors={errors.schedule}
+              />
+            </Grid>
             <Grid item xs={3}>
               <SelectControl
                 name="AcademicYear"
                 label="Academic Year"
                 value={acaYear}
-                onChange={(e) => handleYearChange(e.target.value)}
+                onChange={(e) => setAcaYear(e.target.value)}
                 options={academicYearDdl}
                 errors={errors.acaYear}
               />
@@ -322,24 +383,24 @@ const ExamMarkApproval = () => {
                 name="Program/Faculty"
                 label="Program/Faculty"
                 value={programValue}
-                onChange={(e) => handleProgramValue(e.target.value)}
+                onChange={(e) => setProgramValue(e.target.value)}
                 options={programDdl}
                 errors={errors.programValue}
-
               />
             </Grid>
             <Grid item xs={3}>
+              <div style={{ height: "10px" }}></div>
               <SelectControl
                 name="Classes"
                 label="Classes"
                 value={classId}
-                onChange={(e) => handleClassIdChange(e.target.value)}
+                onChange={(e) => setClassId(e.target.value)}
                 options={ddlClass}
                 errors={errors.classId}
-
               />
             </Grid>
             <Grid item xs={3}>
+              <div style={{ height: "10px" }}></div>
               <SelectControl
                 name="Shift"
                 label="Shift"
@@ -347,7 +408,6 @@ const ExamMarkApproval = () => {
                 onChange={(e) => setShift(e.target.value)}
                 options={ddlShift}
                 errors={errors.shift1}
-
               />
             </Grid>
             <Grid item xs={3}>
@@ -359,7 +419,6 @@ const ExamMarkApproval = () => {
                 onChange={(e) => setSection(e.target.value)}
                 options={ddlSection}
                 errors={errors.section}
-
               />
             </Grid>
             <Grid item xs={3}>
@@ -368,22 +427,9 @@ const ExamMarkApproval = () => {
                 name="EventName"
                 label="Event Name"
                 value={event}
-                onChange={(e) => eventHandler(e.target.value)}
+                onChange={(e) => setEvent(e.target.value)}
                 options={ddlEvent ? ddlEvent : test}
                 errors={errors.event}
-
-              />
-            </Grid>
-            <Grid item xs={3}>
-              <div style={{ height: "10px" }}></div>
-              <SelectControl
-                name="ExamScheduleHeader"
-                label="Exam Schedule Header"
-                value={schedule}
-                onChange={(e) => setSchedule(e.target.value)}
-                options={ddlSchedule ? ddlSchedule : test}
-                errors={errors.schedule}
-
               />
             </Grid>
 
@@ -430,7 +476,11 @@ const ExamMarkApproval = () => {
 
             <TableBody>
               {tableDataAfterPagingAndSorting().map((item) => (
-                <ExamMarkApprovalTableCollapse item={item} key={item.$id} />
+                <ExamMarkApprovalTableCollapse
+                  item={item}
+                  key={item.$id}
+                 
+                />
               ))}
             </TableBody>
           </TableContainer>

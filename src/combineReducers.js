@@ -134,6 +134,8 @@ import {
   putSingleToEditTeacherAssignmentReducer,
 } from "./examination/assignment/AssignmentReducers";
 import {
+  getActiveSubjectReducer,
+  getAllOtherOptionsForSelectTeacherReducer,
   getBulkExamMarkApprovalSearchDataReducer,
   getExamMarkApprovalInitialDataReducer,
   getExamMarkApprovalScheduleHeaderReducer,
@@ -272,6 +274,8 @@ export const reducers = combineReducers({
   getExamMarkApprovalScheduleHeader: getExamMarkApprovalScheduleHeaderReducer,
   getBulkExamMarkApprovalSearchData: getBulkExamMarkApprovalSearchDataReducer,
   postBulkExamMarkApproval: postBulkExamMarkApprovalReducer,
+  getAllOtherOptionsForSelectTeacher : getAllOtherOptionsForSelectTeacherReducer,
+  getActiveSubject : getActiveSubjectReducer,
 
   //class schedule reducers starts
   getAllPgClassSchedule: getAllPgClassScheduleReducer,
