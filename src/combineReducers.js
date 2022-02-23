@@ -124,6 +124,7 @@ import {
 } from "./examination/resources/ResourcesReducers";
 import {
   downloadAssignmentReducer,
+  downloadSubmittedAssignmentReducer,
   getAllAssignmentTeacherReducer,
   getAllOtherOptionsForAssignmentSelectReducer,
   getListTeacherAssignmentReducer,
@@ -267,6 +268,7 @@ export const reducers = combineReducers({
   getSingleToEditTeacherAssignment: getSingleToEditTeacherAssignmentReducer,
   putSingleToEditTeacherAssignment: putSingleToEditTeacherAssignmentReducer,
   downloadAssignment: downloadAssignmentReducer,
+  downloadSubmittedAssignment : downloadSubmittedAssignmentReducer,
   //assignment end
   //ExamMarkApproval(Teacher)
   getExamMarkApprovalInitialData: getExamMarkApprovalInitialDataReducer,

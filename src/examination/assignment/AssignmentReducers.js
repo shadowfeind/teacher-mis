@@ -3,6 +3,10 @@ import {
   DOWNLOAD_ASSIGNMENT_REQUEST,
   DOWNLOAD_ASSIGNMENT_RESET,
   DOWNLOAD_ASSIGNMENT_SUCCESS,
+  DOWNLOAD_SUBMITTED_ASSIGNMENT_FAIL,
+  DOWNLOAD_SUBMITTED_ASSIGNMENT_REQUEST,
+  DOWNLOAD_SUBMITTED_ASSIGNMENT_RESET,
+  DOWNLOAD_SUBMITTED_ASSIGNMENT_SUCCESS,
   GET_ALL_ASSIGNMENT_TEACHER_FAIL,
   GET_ALL_ASSIGNMENT_TEACHER_REQUEST,
   GET_ALL_ASSIGNMENT_TEACHER_RESET,
@@ -200,6 +204,22 @@ export const downloadAssignmentReducer = (state = {}, action) => {
     case DOWNLOAD_ASSIGNMENT_FAIL:
       return { loading: false, error: action.payload };
     case DOWNLOAD_ASSIGNMENT_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+
+export const downloadSubmittedAssignmentReducer = (state = {}, action) => {
+  switch (action.type) {
+    case DOWNLOAD_SUBMITTED_ASSIGNMENT_REQUEST:
+      return { loading: true };
+    case DOWNLOAD_SUBMITTED_ASSIGNMENT_SUCCESS:
+      return { loading: false, success: true };
+    case DOWNLOAD_SUBMITTED_ASSIGNMENT_FAIL:
+      return { loading: false, error: action.payload };
+    case DOWNLOAD_SUBMITTED_ASSIGNMENT_RESET:
       return {};
     default:
       return state;

@@ -18,6 +18,7 @@ import SelectControl from "../../components/controls/SelectControl";
 import AddIcon from "@material-ui/icons/Add";
 import {
   DOWNLOAD_ASSIGNMENT_RESET,
+  DOWNLOAD_SUBMITTED_ASSIGNMENT_RESET,
   GET_ALL_ASSIGNMENT_TEACHER_RESET,
   GET_ALL_OTHER_OPTIONS_FOR_SELECT_RESET,
   GET_LIST_TEACHER_ASSIGNMENT_RESET,
@@ -68,6 +69,8 @@ const tableHeader = [
   { id: "SubmittedDate", label: "Submitted Date" },
   { id: "FullMarks", label: "FullMarks" },
   { id: "ObtainedMarks", label: "Obtained Marks" },
+  { id: "DocumentSubmitted", label: "Submitted Files" },
+  { id: "DocumentName", label: "Assignment" },
   { id: "Actions", label: "Actions", disableSorting: true },
 ];
 
@@ -164,8 +167,20 @@ const Assignment = () => {
     error: downloadAssignmentError,
   } = useSelector((state) => state.downloadAssignment);
 
+  const {
+    success: downloadSubmittedAssignmentSuccess,
+    file: downloadSubmittedFile,
+    error: downloadSubmittedAssignmentError,
+  } = useSelector((state) => state.downloadSubmittedAssignment);
+
   if (downloadFile) {
     var blob = new Blob([downloadFile]);
+    var url = window.URL.createObjectURL(blob);
+    window.open(url, "_blank");
+  }
+
+  if (downloadSubmittedFile) {
+    var blob = new Blob([downloadSubmittedFile]);
     var url = window.URL.createObjectURL(blob);
     window.open(url, "_blank");
   }
@@ -185,6 +200,15 @@ const Assignment = () => {
       type: "error",
     });
     dispatch({ type: DOWNLOAD_ASSIGNMENT_RESET });
+  }
+
+  if (downloadSubmittedAssignmentError) {
+    setNotify({
+      isOpen: true,
+      message: downloadSubmittedAssignmentError,
+      type: "error",
+    });
+    dispatch({ type: DOWNLOAD_SUBMITTED_ASSIGNMENT_RESET });
   }
   if (putSingleToEditTeacherAssignmentError) {
     setNotify({

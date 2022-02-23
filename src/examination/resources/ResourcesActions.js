@@ -162,16 +162,15 @@ export const postResourceAction =
   (image, resource, searchFilterModel, model) => async (dispatch) => {
     try {
       dispatch({ type: POST_RESOURCES_REQUEST });
-
+debugger;
       let formData = new FormData();
       formData.append("ImageUploaded", image);
-
       const { data } = await axios.post(
         `${API_URL}/api/CourseDeliveryPlanTeacher/FileUpload`,
         formData,
         tokenConfig
       );
-
+debugger;
       const {
         IDTeacher,
         IDYearFacultyLink,
