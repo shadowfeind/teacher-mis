@@ -112,7 +112,7 @@ const SideMenu = () => {
         <Typography variant="h6">
           {" "}
           <PeopleOutline fontSize="small" />
-          &nbsp;&nbsp;&nbsp; Class Schedule
+          &nbsp;&nbsp;&nbsp; Class Routine
         </Typography>
       </NavLink>
       <NavLink to={"/assignment"} activeStyle={isActive}>
