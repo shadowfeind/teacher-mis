@@ -32,8 +32,8 @@ const useStyles = makeStyles({
         <TableRow>
           <TableCell>{item.Post}</TableCell>
           <TableCell>{item.Organization}</TableCell>
-          <TableCell>{item.FromDate}</TableCell>
-          <TableCell>{item.ToDate}</TableCell>
+          <TableCell>{item.FromDate.slice(0,10)}</TableCell>
+          <TableCell>{item.ToDate.slice(0,10)}</TableCell>
           <TableCell>{item.IsActive}</TableCell>
           <TableCell>
             <Button

@@ -24,12 +24,13 @@ const SelectControl = ({
       <InputLabel>{label}</InputLabel>
       <Select label={label} name={name} value={value} onChange={onChange}>
         {/* <MenuItem value="">None</MenuItem> */}
-        {options &&
-          options.map((item) => (
-            <MenuItem value={item.Key} key={item.Key}>
-              {item.Value}
-            </MenuItem>
-          ))}
+
+        {options?.map((item) => (
+          <MenuItem value={item.Key} key={item.Key}>
+            {item.Value}
+          </MenuItem>
+        ))}
+
       </Select>
       {errors && <FormHelperText>{errors}</FormHelperText>}
     </FormControl>

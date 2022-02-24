@@ -124,6 +124,7 @@ import {
 } from "./examination/resources/ResourcesReducers";
 import {
   downloadAssignmentReducer,
+  downloadSubmittedAssignmentReducer,
   getAllAssignmentTeacherReducer,
   getAllOtherOptionsForAssignmentSelectReducer,
   getListTeacherAssignmentReducer,
@@ -134,6 +135,8 @@ import {
   putSingleToEditTeacherAssignmentReducer,
 } from "./examination/assignment/AssignmentReducers";
 import {
+  getActiveSubjectReducer,
+  getAllOtherOptionsForSelectTeacherReducer,
   getBulkExamMarkApprovalSearchDataReducer,
   getExamMarkApprovalInitialDataReducer,
   getExamMarkApprovalScheduleHeaderReducer,
@@ -265,6 +268,7 @@ export const reducers = combineReducers({
   getSingleToEditTeacherAssignment: getSingleToEditTeacherAssignmentReducer,
   putSingleToEditTeacherAssignment: putSingleToEditTeacherAssignmentReducer,
   downloadAssignment: downloadAssignmentReducer,
+  downloadSubmittedAssignment : downloadSubmittedAssignmentReducer,
   //assignment end
   //ExamMarkApproval(Teacher)
   getExamMarkApprovalInitialData: getExamMarkApprovalInitialDataReducer,
@@ -272,6 +276,8 @@ export const reducers = combineReducers({
   getExamMarkApprovalScheduleHeader: getExamMarkApprovalScheduleHeaderReducer,
   getBulkExamMarkApprovalSearchData: getBulkExamMarkApprovalSearchDataReducer,
   postBulkExamMarkApproval: postBulkExamMarkApprovalReducer,
+  getAllOtherOptionsForSelectTeacher : getAllOtherOptionsForSelectTeacherReducer,
+  getActiveSubject : getActiveSubjectReducer,
 
   //class schedule reducers starts
   getAllPgClassSchedule: getAllPgClassScheduleReducer,

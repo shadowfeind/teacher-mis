@@ -4,6 +4,9 @@ import {
   DOWNLOAD_ASSIGNMENT_FAIL,
   DOWNLOAD_ASSIGNMENT_REQUEST,
   DOWNLOAD_ASSIGNMENT_SUCCESS,
+  DOWNLOAD_SUBMITTED_ASSIGNMENT_FAIL,
+  DOWNLOAD_SUBMITTED_ASSIGNMENT_REQUEST,
+  DOWNLOAD_SUBMITTED_ASSIGNMENT_SUCCESS,
   GET_ALL_ASSIGNMENT_TEACHER_FAIL,
   GET_ALL_ASSIGNMENT_TEACHER_REQUEST,
   GET_ALL_ASSIGNMENT_TEACHER_SUCCESS,
@@ -318,3 +321,23 @@ export const downloadAssignmentAction = (id) => async (dispatch) => {
     });
   }
 };
+
+export const downloadSubmittedAssignmentAction = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: DOWNLOAD_SUBMITTED_ASSIGNMENT_REQUEST });
+
+    const test = `${API_URL}/api/TeacherAssignment/DownloadSubmittedDoc/${id}`;
+
+    window.open(test, "_blank");
+    dispatch({
+      type: DOWNLOAD_SUBMITTED_ASSIGNMENT_SUCCESS,
+      
+    });
+  } catch (error) {
+    dispatch({
+      type: DOWNLOAD_SUBMITTED_ASSIGNMENT_FAIL,
+      payload: error.message ? error.message : error.Message,
+    });
+  }
+};
+

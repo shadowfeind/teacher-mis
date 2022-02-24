@@ -1,7 +1,20 @@
-import React from "react";
-import { TableRow, TableCell } from "@material-ui/core";
+import React,{useState} from "react";
+import { TableRow,Button, TableCell, makeStyles } from "@material-ui/core";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 
-const ExamMarkApprovalTableCollapse = ({ item }) => {
+const useStyles = makeStyles({
+  button: {
+    marginRight: "1px",
+    padding: "5px",
+    minWidth: "10px",
+    fontSize: "12px",
+  },
+});
+
+const ExamMarkApprovalTableCollapse = ({ item
+  }) => {
+    const classes = useStyles();
     return (
       <>
         <TableRow>
@@ -14,24 +27,6 @@ const ExamMarkApprovalTableCollapse = ({ item }) => {
           <TableCell>{item.Division}</TableCell>
           <TableCell>{item.UpdatedOn}</TableCell>
           <TableCell>{item.Status}</TableCell>
-          <TableCell>
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          onClick={() => updateCollegeHandler(item.IDAcademicStudentExamData)}
-        >
-          <EditIcon style={{ fontSize: 12 }} />
-        </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          className={classes.button}
-          onClick={() => deleteCollegeHandler(item.IDAcademicStudentExamData)}
-        >
-          <DeleteIcon style={{ fontSize: 12 }} />
-        </Button>
-      </TableCell>
         </TableRow>
       </>
     );
