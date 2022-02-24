@@ -107,15 +107,18 @@ const Header = () => {
   const { headerContent, error: headerContentError } = useSelector(
     (state) => state.getHeaderContent
   );
-  // const { success: uploadPhotoSuccess } = useSelector(
-  //   (state) => state.uploadPhoto
-  // );
+  const { success: uploadPhotoSuccess } = useSelector(
+    (state) => state.uploadPhoto
+  );
 
   useEffect(() => {
     if (!headerContent) {
       dispatch(getHeaderContentAction());
     }
-  }, [headerContent, dispatch]);
+    if (uploadPhotoSuccess) {
+      dispatch(getHeaderContentAction());
+    }
+  }, [headerContent, dispatch, uploadPhotoSuccess]);
   if (headerContentError) {
     dispatch({ type: GET_HEADER_CONTENT_RESET });
     setNotify({
