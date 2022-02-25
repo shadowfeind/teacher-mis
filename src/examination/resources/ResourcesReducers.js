@@ -1,4 +1,8 @@
 import {
+  DOWNLOAD_RESOURCES_FAIL,
+  DOWNLOAD_RESOURCES_REQUEST,
+  DOWNLOAD_RESOURCES_RESET,
+  DOWNLOAD_RESOURCES_SUCCESS,
   GET_ALL_INITIAL_DATA_FROM_SUBJECT_FAIL,
   GET_ALL_INITIAL_DATA_FROM_SUBJECT_REQUEST,
   GET_ALL_INITIAL_DATA_FROM_SUBJECT_RESET,
@@ -135,3 +139,22 @@ export const postResourceReducer = (state = {}, action) => {
       return state;
   }
 };
+
+export const downloadResourceReducer = (state = {}, action) => {
+  switch (action.type) {
+    case DOWNLOAD_RESOURCES_REQUEST:
+      return { loading: true };
+    case DOWNLOAD_RESOURCES_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+      };
+    case DOWNLOAD_RESOURCES_FAIL:
+      return { loading: false, error: action.payload };
+    case DOWNLOAD_RESOURCES_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+

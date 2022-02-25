@@ -42,25 +42,34 @@ const AssignmentTableCollapseMain = ({ item, setOpenPopup3 }) => {
         <TableCell>{item.AssignmentName}</TableCell>
         <TableCell>{item.AssignmentDate?.slice(0, 10)}</TableCell>
         <TableCell>{item.DueDate?.slice(0, 10)}</TableCell>
-        <TableCell>{item.SubmittedDate}</TableCell>
+        <TableCell>{item.SubmittedDate?.slice(0, 10)}</TableCell>
         <TableCell>{item.TotalMark}</TableCell>
         <TableCell>{item.ObtainedMarks}</TableCell>
-        <TableCell> <Button
-            variant="contained"
-            color="default"
-            className={classes.button}
-            onClick={() => downloadSubmittedHandler(item.IDAssignment)}
-          >
-            <CloudDownloadIcon style={{ fontSize: 12 }} />
-          </Button></TableCell>
-        <TableCell> <Button
-            variant="contained"
-            color="default"
+        <TableCell>
+          {" "}
+          <Button
+            variant="outlined"
+            color="secondary"
             className={classes.button}
             onClick={() => downloadHandler(item.IDAssignment)}
           >
             <CloudDownloadIcon style={{ fontSize: 12 }} />
-          </Button></TableCell>
+          </Button>
+        </TableCell>
+        <TableCell>
+          {" "}
+          {item.DocumentSubmitted !== null && (
+            <Button
+              variant="outlined"
+              color= "primary"
+              className={classes.button}
+              onClick={() => downloadSubmittedHandler(item.IDAssignment)}
+            >
+              <CloudDownloadIcon style={{ fontSize: 12 }} />
+            </Button>
+          )}
+        </TableCell>
+      
         <TableCell>
           <Button
             variant="contained"

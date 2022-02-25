@@ -46,17 +46,25 @@ const StyledTableCell = withStyles((theme) => ({
     const dispatch = useDispatch();
   
     const onChangeHandler = (subject, value, name, index) => {
-      setBulk((prev) => {
-        const newReassoc = {
-          ...subject,
-          [name]: Number(value),
-        };
+      
+      let showValue =
+        name === "ObtainedMark" ? subject.FullMark : subject.FullMarkPractical;
+      
+      if ((value <= showValue) & (value >= 0)) {
+        setBulk((prev) => {
+          const newReassoc = {
+            ...subject,
+            [name]: Number(value),
+          };
   
-        let newArray = [...prev];
-        newArray[index] = newReassoc;
+          let newArray = [...prev];
+          newArray[index] = newReassoc;
   
-        return [...newArray];
-      });
+          return [...newArray];
+        });
+      } else {
+        alert(`${name} must be equal or less than ${showValue}`);
+      }
     };
   
     const formCheckSubmitHandler = () => {
@@ -89,25 +97,67 @@ const StyledTableCell = withStyles((theme) => ({
               </TableRow>
             </TableHead>
             <TableBody>
-              {bulk &&
-                bulk.map((subject, index) => (
-                  <StyledTableRow key={subject.IDHREmployee}>
-                    <StyledTableCell component="th" scope="row">
-                      {subject.RollNo}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {subject.FullName}
-                    </StyledTableCell>
-  
-                    <StyledTableCell align="right">
-                      <TextField
-                        id={`theory_${subject.IDHREmployee}`}
-                        name="ObtainedMark"
-                        defaultValue={subject.ObtainedMark}
-                        type="number"
-                        label="Obtained Mark"
-                        variant="outlined"
-                        inputProps={{ tabIndex: "1" }}
+            {bulk &&
+              bulk.map((subject, index) => (
+                <StyledTableRow key={subject.IDHREmployee}>
+                  <StyledTableCell component="th" scope="row">
+                    {subject.RollNo}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {subject.FullName}
+                  </StyledTableCell>
+
+                  <StyledTableCell align="right">
+                    <TextField
+                      id={`theory_${subject.IDHREmployee}`}
+                      name="ObtainedMark"
+                      value={subject.ObtainedMark}
+                      type="number"
+                      label="Obtained Mark"
+                      variant="outlined"
+                      inputProps={{ tabIndex: "1" }}
+                      onChange={(e) =>
+                        onChangeHandler(
+                          subject,
+                          e.target.value,
+                          e.target.name,
+                          index
+                        )
+                      }
+                    />
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    <TextField
+                      id={`practical_${subject.IDHREmployee}`}
+                      value={subject.ObtainedMarkPractical}
+                      name="ObtainedMarkPractical"
+                      type="number"
+                      label="Obtained Practical Mark"
+                      variant="outlined"
+                      inputProps={{ tabIndex: "2" }}
+                      onChange={(e) =>
+                        onChangeHandler(
+                          subject,
+                          e.target.value,
+                          e.target.name,
+                          index
+                        )
+                      }
+                    />
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    <FormControl
+                      variant="filled"
+                      className={classes.formControl}
+                    >
+                      <InputLabel htmlFor="filled-age-native-simple">
+                        Status
+                      </InputLabel>
+                      <Select
+                        native
+                        defaultValue={subject.StudentExamStatus}
+                        name="StudentExamStatus"
+                        id={`status_${subject.IDHREmployee}`}
                         onChange={(e) =>
                           onChangeHandler(
                             subject,
@@ -116,64 +166,25 @@ const StyledTableCell = withStyles((theme) => ({
                             index
                           )
                         }
-                      />
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      <TextField
-                        id={`practical_${subject.IDHREmployee}`}
-                        defaultValue={subject.ObtainedMarkPractical}
-                        name="ObtainedMarkPractical"
-                        type="number"
-                        label="Obtained Practical Mark"
-                        variant="outlined"
-                        inputProps={{ tabIndex: "2" }}
-                        onChange={(e) =>
-                          onChangeHandler(
-                            subject,
-                            e.target.value,
-                            e.target.name,
-                            index
-                          )
-                        }
-                      />
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      <FormControl
-                        variant="filled"
-                        className={classes.formControl}
                       >
-                        <InputLabel htmlFor="filled-age-native-simple">
-                          Status
-                        </InputLabel>
-                        <Select
-                          native
-                          defaultValue={subject.StudentExamStatus}
-                          name="StudentExamStatus"
-                          id={`status_${subject.IDHREmployee}`}
-                          onChange={(e) =>
-                            onChangeHandler(
-                              subject,
-                              e.target.value,
-                              e.target.name,
-                              index
-                            )
-                          }
-                        >
-                          {statusData.map((section) => (
-                            <option value={section.Key}>{section.Value}</option>
+                        {statusData &&
+                          statusData.map((section) => (
+                            <option key={section.Value} value={section.Key}>
+                              {section.Value}
+                            </option>
                           ))}
-                        </Select>
-                      </FormControl>
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {subject.FullMark}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {subject.FullMarkPractical}
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
-            </TableBody>
+                      </Select>
+                    </FormControl>
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {subject.FullMark}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {subject.FullMarkPractical}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+          </TableBody>
             <div
               style={{
                 display: "flex",

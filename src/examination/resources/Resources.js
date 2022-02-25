@@ -19,6 +19,7 @@ import useCustomTable from "../../customHooks/useCustomTable";
 import InputControl from "../../components/controls/InputControl";
 import Popup from "../../components/Popup";
 import {
+  DOWNLOAD_RESOURCES_RESET,
   GET_ALL_OTHER_OPTIONS_FOR_RESOURCES_SELECT_RESET,
   GET_ALL_RESOURCES_INITIAL_DATA_RESET,
   GET_ALL_RESOURCES_LIST_RESET,
@@ -50,12 +51,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const tableHeader = [
-  { id: "File", label: "File", disableSorting: true },
   { id: "CourseName", label: "Resource Name" },
   { id: "CourseDescription", label: "Resource Description" },
   { id: "FirstName", label: "Posted By" },
   { id: "Created_On", label: "Effective From" },
   { id: "IsActive", label: "IsActive" },
+  { id: "File", label: "Download", disableSorting: true },
 ];
 
 const Resources = () => {
@@ -135,6 +136,19 @@ const Resources = () => {
   const { success: postResourceSuccess, error: postResourceError } =
     useSelector((state) => state.postResource);
 
+  const {
+      success: downloadResourcesSuccess,
+      file: downloadFile,
+      error: downloadResourcesError,
+    } = useSelector((state) => state.downloadResource);
+
+
+    if(downloadFile){
+      var blob = new Blob([downloadFile]);
+      var url = window.URL.createObjectURL(blob);
+      window.open(url,"_blank");
+    }
+
   if (allInitialDataError) {
     setNotify({
       isOpen: true,
@@ -142,6 +156,15 @@ const Resources = () => {
       type: "error",
     });
     dispatch({ type: GET_ALL_RESOURCES_INITIAL_DATA_RESET });
+  }
+
+  if(downloadResourcesError){
+    setNotify({
+      isOpen: true,
+      message: downloadResourcesError,
+      type: "error",
+    });
+    dispatch({type: DOWNLOAD_RESOURCES_RESET});
   }
   // if (allResourcesError) {
   //   setNotify({

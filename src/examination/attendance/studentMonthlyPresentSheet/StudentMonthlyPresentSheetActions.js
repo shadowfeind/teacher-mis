@@ -22,6 +22,9 @@ import {
   GET_SUBJECT_OPTIONS_FOR_SELECT_FAIL,
   GET_SUBJECT_OPTIONS_FOR_SELECT_REQUEST,
   GET_SUBJECT_OPTIONS_FOR_SELECT_SUCCESS,
+  POST_LIST_STUDENT_PRESENT_FAIL,
+  POST_LIST_STUDENT_PRESENT_REQUEST,
+  POST_LIST_STUDENT_PRESENT_SUCCESS,
 } from "./StudentMonthlyPresentSheetConstants";
 
 export const getAllStudentPresentSheetDataAction = () => async (dispatch) => {
@@ -175,15 +178,15 @@ export const getListStudentPresentAction =
 
 export const getListForUpdateStudentPresentAction =
   (
+    currentDate,
+    npYear,
+    npMonth,
     year,
     program,
     classId,
     subject,
     section,
-    shift,
-    npYear,
-    npMonth,
-    currentDate
+    shift
   ) =>
   async (dispatch) => {
     try {
