@@ -1,6 +1,9 @@
 import axios from "axios";
 import { API_URL, tokenConfig } from "../../constants";
 import {
+  DOWNLOAD_RESOURCES_FAIL,
+  DOWNLOAD_RESOURCES_REQUEST,
+  DOWNLOAD_RESOURCES_SUCCESS,
   GET_ALL_INITIAL_DATA_FROM_SUBJECT_FAIL,
   GET_ALL_INITIAL_DATA_FROM_SUBJECT_REQUEST,
   GET_ALL_INITIAL_DATA_FROM_SUBJECT_SUCCESS,
@@ -162,7 +165,7 @@ export const postResourceAction =
   (image, resource, searchFilterModel, model) => async (dispatch) => {
     try {
       dispatch({ type: POST_RESOURCES_REQUEST });
-debugger;
+
       let formData = new FormData();
       formData.append("ImageUploaded", image);
       const { data } = await axios.post(
@@ -170,7 +173,7 @@ debugger;
         formData,
         tokenConfig
       );
-debugger;
+
       const {
         IDTeacher,
         IDYearFacultyLink,
@@ -212,6 +215,25 @@ debugger;
     } catch (error) {
       dispatch({
         type: POST_RESOURCES_FAIL,
+        payload: error.message ? error.message : error.Message,
+      });
+    }
+  };
+
+  export const downloadResourceAction = (id) => async (dispatch) => {
+    try {
+      dispatch({ type: DOWNLOAD_RESOURCES_REQUEST });
+  
+      const test = `${API_URL}/api/CourseDeliveryPlanTeacher/DownloadDoc/${id}`;
+  
+      window.open(test, "_blank");
+      dispatch({
+        type: DOWNLOAD_RESOURCES_SUCCESS,
+        
+      });
+    } catch (error) {
+      dispatch({
+        type: DOWNLOAD_RESOURCES_FAIL,
         payload: error.message ? error.message : error.Message,
       });
     }

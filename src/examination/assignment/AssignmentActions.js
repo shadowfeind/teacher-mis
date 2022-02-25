@@ -188,6 +188,8 @@ export const postTeacherAssignmentAction =
       let formData = new FormData();
       formData.append("ImageUploaded", image);
 
+      console.log(assignment)
+
       const { data } = await axios.post(
         `${API_URL}/api/TeacherAssignment/FileUpload`,
         formData,
@@ -203,7 +205,7 @@ export const postTeacherAssignmentAction =
           dbTeacherAssignmentModel: newData,
           dbModelLstForStudentSection: students,
         });
-
+console.log(jsonData);
         await axios.post(
           `${API_URL}/api/TeacherAssignment/Post`,
           jsonData,
@@ -281,7 +283,7 @@ export const putSingleToEditTeacherAssignmentAction =
       const jsonData = JSON.stringify({
         dbTeacherAssignmentModel: editData,
       });
-
+console.log(jsonData);
       const { data } = await axios.put(
         `${API_URL}/api/TeacherAssignment/PutTeacherAssignment`,
         jsonData,

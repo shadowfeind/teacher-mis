@@ -101,7 +101,7 @@ const AssignmentForm = ({ students, formDatas }) => {
 
     temp.TotalMark = !fieldValues.TotalMark ? "This feild is required" : "";
 
-    // temp.image = !fieldValues.image ? "This feild is required" : "";
+    temp.image = !image ? "This feild is required" : "";
 
     temp.DueDate =
       fieldValues.DueDate == null || fieldValues.DueDate == ""
@@ -259,7 +259,7 @@ const AssignmentForm = ({ students, formDatas }) => {
               // value={values.ClassLocation}
               onChange={(e) => handleImage(e)}
               type="file"
-              // errors={errors.image}
+              errors={errors.image}
             />
             <img src={imgSrc} height={200} width={200} />
           </Grid>

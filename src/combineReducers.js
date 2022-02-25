@@ -115,6 +115,7 @@ import {
   getListTotalStudentAttendanceReducer,
 } from "./examination/attendance/totalStudentAttendance/TotalStudentAttendanceReducers";
 import {
+  downloadResourceReducer,
   getAllInitialDataFromSubjectReducer,
   getAllInitialResourcesDataReducer,
   getAllOtherOptionsForResourcesSelectReducer,
@@ -255,6 +256,7 @@ export const reducers = combineReducers({
   getAllResourcesList: getAllResourcesListReducer,
   getCreateResource: getCreateResourceReducer,
   postResource: postResourceReducer,
+  downloadResource : downloadResourceReducer,
   //resources end
   //assignment start
   getAllAssignmentTeacher: getAllAssignmentTeacherReducer,

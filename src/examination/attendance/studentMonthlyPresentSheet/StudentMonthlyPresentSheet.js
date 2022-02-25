@@ -14,6 +14,7 @@ import {
   GET_LIST_FOR_UPDATE_STUDENT_PRESENT_RESET,
   GET_LIST_STUDENT_PRESENT_RESET,
   GET_SUBJECT_OPTIONS_FOR_SELECT_RESET,
+  POST_LIST_STUDENT_PRESENT_RESET,
 } from "./StudentMonthlyPresentSheetConstants";
 import {
   getAllOtherOptionsForSelectAction,
@@ -280,15 +281,15 @@ const StudentMonthlyPresentSheet = () => {
     if (validate()) {
       dispatch(
         getListForUpdateStudentPresentAction(
+          date,
+          nepYear,
+          nepMonth,
           acaYear,
           programValue,
           classId,
           subject,
           section,
-          shift,
-          nepYear,
-          nepMonth,
-          date
+          shift
         )
       );
       dispatch(getListForPresentStudentAction(date, programValue, subject));
