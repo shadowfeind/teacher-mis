@@ -155,8 +155,6 @@ const AssignmentForm = ({ students, formDatas }) => {
     } else {
       setSelectedStudents((prev) => [...prev, obj]);
     }
-    console.log(checked);
-    console.log(obj.IDHREmployee);
   };
 
   const handleImage = (event) => {
@@ -266,7 +264,7 @@ const AssignmentForm = ({ students, formDatas }) => {
           <Grid item xs={6}>
             <InputControl
               name="TotalMark"
-              label="Full Marks"
+              label="Full Marks*"
               type="number"
               value={values.TotalMark}
               onChange={handleInputChange}
@@ -274,7 +272,7 @@ const AssignmentForm = ({ students, formDatas }) => {
             />
             <DatePickerControl
               name="DueDate"
-              label="DueDate"
+              label="DueDate*"
               value={values.DueDate}
               onChange={handleInputChange}
               errors={errors.DueDate}
