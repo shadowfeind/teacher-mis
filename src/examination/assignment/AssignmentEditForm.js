@@ -84,16 +84,16 @@ const AssignmentEditForm = ({ singleAssignment, setOpenPop3 }) => {
       ? "This feild is required"
       : "";
 
-      temp.image = !image ? "This Field is Required" : "";
+    temp.image = !image ? "This Field is Required" : "";
 
     setErrors({ ...temp });
     return Object.values(temp).every((x) => x === "");
   };
 
-  const handleImage = (event)=>{
+  const handleImage = (event) => {
     let imageFile = event.target.files[0];
     const reader = new FileReader();
-    reader.onload=(x)=>{
+    reader.onload = (x) => {
       setImgSrc(x.target.result);
     };
     reader.readAsDataURL(imageFile);
@@ -103,7 +103,7 @@ const AssignmentEditForm = ({ singleAssignment, setOpenPop3 }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      dispatch(putSingleToEditTeacherAssignmentAction(values));
+      dispatch(putSingleToEditTeacherAssignmentAction(image, values));
     }
   };
 
@@ -200,13 +200,13 @@ const AssignmentEditForm = ({ singleAssignment, setOpenPop3 }) => {
               onChange={handleInputChange}
             />
             <InputControl
-            name="ImageUploaded"
-            label="Select File"
-            onChange={(e)=> handleImage(e)}
-            type="file"
-            errors={errors.image}
+              name="ImageUploaded"
+              label="Select File"
+              onChange={(e) => handleImage(e)}
+              type="file"
+              errors={errors.image}
             />
-            <img src={imgSrc} height={200} width={200}/>
+            <img src={imgSrc} height={200} width={200} />
           </Grid>
         </Grid>
         <div

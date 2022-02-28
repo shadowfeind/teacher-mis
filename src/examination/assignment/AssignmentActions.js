@@ -188,7 +188,7 @@ export const postTeacherAssignmentAction =
       let formData = new FormData();
       formData.append("ImageUploaded", image);
 
-      console.log(assignment)
+      console.log(assignment);
 
       const { data } = await axios.post(
         `${API_URL}/api/TeacherAssignment/FileUpload`,
@@ -283,28 +283,34 @@ export const putSingleToEditTeacherAssignmentAction =
       let formData = new FormData();
       formData.append("ImageUploaded", image);
 
-      const {data} = await axios.post(
+      const { data } = await axios.post(
         `${API_URL}/api/TeacherAssignment/FileUpload`,
         formData,
         tokenConfig
       );
-debugger;
-      if(data){
+
+      if (data) {
+        const newDate = singleAssignment.AssignmentDate.toISOString().slice(
+          0,
+          10
+        );
         const newData = {
           ...singleAssignment,
           DocumentName: data,
+          AssignmentDate: newDate,
         };
-      
-      const jsonData = JSON.stringify({
-        dbTeacherAssignmentModel: newData,
-      });
 
-      const { data } = await axios.put(
-        `${API_URL}/api/TeacherAssignment/PutTeacherAssignment`,
-        jsonData,
-        tokenConfig
-      );
-      debugger;
+        const jsonData = JSON.stringify({
+          dbTeacherAssignmentModel: newData,
+        });
+
+        console.log(jsonData);
+
+        const { data } = await axios.put(
+          `${API_URL}/api/TeacherAssignment/PutTeacherAssignment`,
+          jsonData,
+          tokenConfig
+        );
       }
       dispatch({
         type: PUT_SINGLE_TO_EDIT_TEACHER_ASSIGNMENT_SUCCESS,
@@ -330,7 +336,6 @@ export const downloadAssignmentAction = (id) => async (dispatch) => {
     window.open(test, "_blank");
     dispatch({
       type: DOWNLOAD_ASSIGNMENT_SUCCESS,
-      
     });
   } catch (error) {
     dispatch({
@@ -349,7 +354,6 @@ export const downloadSubmittedAssignmentAction = (id) => async (dispatch) => {
     window.open(test, "_blank");
     dispatch({
       type: DOWNLOAD_SUBMITTED_ASSIGNMENT_SUCCESS,
-      
     });
   } catch (error) {
     dispatch({
@@ -358,4 +362,3 @@ export const downloadSubmittedAssignmentAction = (id) => async (dispatch) => {
     });
   }
 };
-
