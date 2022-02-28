@@ -205,7 +205,7 @@ export const postTeacherAssignmentAction =
           dbTeacherAssignmentModel: newData,
           dbModelLstForStudentSection: students,
         });
-console.log(jsonData);
+
         await axios.post(
           `${API_URL}/api/TeacherAssignment/Post`,
           jsonData,
@@ -276,20 +276,36 @@ export const getSingleToEditTeacherAssignmentAction =
   };
 
 export const putSingleToEditTeacherAssignmentAction =
-  (editData) => async (dispatch) => {
+  (image, singleAssignment) => async (dispatch) => {
     try {
       dispatch({ type: PUT_SINGLE_TO_EDIT_TEACHER_ASSIGNMENT_REQUEST });
 
+      let formData = new FormData();
+      formData.append("ImageUploaded", image);
+
+      const {data} = await axios.post(
+        `${API_URL}/api/TeacherAssignment/FileUpload`,
+        formData,
+        tokenConfig
+      );
+debugger;
+      if(data){
+        const newData = {
+          ...singleAssignment,
+          DocumentName: data,
+        };
+      
       const jsonData = JSON.stringify({
-        dbTeacherAssignmentModel: editData,
+        dbTeacherAssignmentModel: newData,
       });
-console.log(jsonData);
+
       const { data } = await axios.put(
         `${API_URL}/api/TeacherAssignment/PutTeacherAssignment`,
         jsonData,
         tokenConfig
       );
-
+      debugger;
+      }
       dispatch({
         type: PUT_SINGLE_TO_EDIT_TEACHER_ASSIGNMENT_SUCCESS,
         payload: data,
