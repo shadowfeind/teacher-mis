@@ -84,8 +84,6 @@ const AssignmentEditForm = ({ singleAssignment, setOpenPop3 }) => {
       ? "This feild is required"
       : "";
 
-    temp.image = !image ? "This Field is Required" : "";
-
     setErrors({ ...temp });
     return Object.values(temp).every((x) => x === "");
   };
@@ -179,7 +177,7 @@ const AssignmentEditForm = ({ singleAssignment, setOpenPop3 }) => {
             />
             <DatePickerControl
               name="DueDate"
-              label="DueDate*"
+              label="DueDate"
               value={values.DueDate}
               onChange={handleInputChange}
               errors={errors.DueDate}
@@ -204,7 +202,6 @@ const AssignmentEditForm = ({ singleAssignment, setOpenPop3 }) => {
               label="Select File"
               onChange={(e) => handleImage(e)}
               type="file"
-              errors={errors.image}
             />
             <img src={imgSrc} height={200} width={200} />
           </Grid>
