@@ -27,7 +27,7 @@ const useStyles = makeStyles({
       <TableCell>{item.OldQuestionName}</TableCell>
       <TableCell>{item.OldQuestionDescription}</TableCell>
       <TableCell>{item.FirstName} {item.LastName}</TableCell>
-      <TableCell>{item.Created_On}</TableCell>
+      <TableCell>{item.Created_On?.slice(0,10)}</TableCell>
       <TableCell>{item.IsActive ? "active" : "notactive"}</TableCell>
       <TableCell>
           <Button
