@@ -49,7 +49,6 @@ const tableHeader = [
   { id: "Comment", label: "Comment" },
   { id: "Created_On", label: "Created_On" },
   { id: "Updated_On", label: "Updated_On" },
-  { id: "Actions", label: "Actions", disableSorting: true },
 ];
 
 const ExamDivision = () => {
@@ -141,19 +140,19 @@ const ExamDivision = () => {
     dispatch({ type: UPDATE_SINGLE_EXAM_DIVISION_RESET });
   }
 
-  const updateCollegeHandler = (
-    IDAcademicExamDivision,
-    IDFacultyProgramLink
-  ) => {
-    dispatch(
-      getSingleExamDivisionEditAction(
-        IDAcademicExamDivision,
-        IDFacultyProgramLink
-      )
-    );
-    setOpenPopup(true);
-  };
-  const deleteCollegeHandler = () => {};
+  // const updateCollegeHandler = (
+  //   IDAcademicExamDivision,
+  //   IDFacultyProgramLink
+  // ) => {
+  //   dispatch(
+  //     getSingleExamDivisionEditAction(
+  //       IDAcademicExamDivision,
+  //       IDFacultyProgramLink
+  //     )
+  //   );
+  //   setOpenPopup(true);
+  // };
+  // const deleteCollegeHandler = () => {};
 
   useEffect(() => {
     if (!examDivision) {
@@ -185,10 +184,10 @@ const ExamDivision = () => {
     });
   };
 
-  const addHandler = () => {
-    dispatch({ type: GET_SINGLE_EXAM_DIVISION_EDIT_RESET });
-    setOpenPopup(true);
-  };
+  // const addHandler = () => {
+  //   dispatch({ type: GET_SINGLE_EXAM_DIVISION_EDIT_RESET });
+  //   setOpenPopup(true);
+  // };
 
   return (
     <>
@@ -206,15 +205,6 @@ const ExamDivision = () => {
             }}
             onChange={handleSearch}
           />
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<AddIcon />}
-            className={classes.button}
-            onClick={addHandler}
-          >
-            CREATE{" "}
-          </Button>
         </Toolbar>
         <TableContainer className={classes.table}>
           <TblHead />
@@ -224,23 +214,13 @@ const ExamDivision = () => {
               <ExamDivisionTableCollapse
                 key={item.$id}
                 item={item}
-                updateCollegeHandler={updateCollegeHandler}
-                deleteCollegeHandler={deleteCollegeHandler}
+                // updateCollegeHandler={updateCollegeHandler}
+                // deleteCollegeHandler={deleteCollegeHandler}
               />
             ))}
           </TableBody>
         </TableContainer>
         <TblPagination />
-        <Popup
-          openPopup={openPopup}
-          setOpenPopup={setOpenPopup}
-          title="Exam Division Form"
-        >
-          <ExamDivisionForm
-            examDivision={singleExamDivision && singleExamDivision.dbModel}
-            setOpenPopup={setOpenPopup}
-          />
-        </Popup>
       </CustomContainer>
       <Notification notify={notify} setNotify={setNotify} />
       <ConfirmDialog

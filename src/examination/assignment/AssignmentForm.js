@@ -77,7 +77,7 @@ const useStyles = makeStyles({
   },
 });
 
-const AssignmentForm = ({ students, formDatas }) => {
+const AssignmentForm = ({ students, formDatas,setOpenPopup }) => {
   const [checked, setChecked] = useState(false);
   const [image, setImage] = useState(null);
   const [imgSrc, setImgSrc] = useState(null);
@@ -174,6 +174,8 @@ const AssignmentForm = ({ students, formDatas }) => {
       dispatch(postTeacherAssignmentAction(image, values, selectedStudents));
     }
   };
+  const symbolsArr = ["e", "E", "+", "-", "."];
+
   return (
     <>
       <TableContainer component={Paper}>
@@ -265,6 +267,7 @@ const AssignmentForm = ({ students, formDatas }) => {
             <InputControl
               name="TotalMark"
               label="Full Marks*"
+              onKeyDown={(e) => symbolsArr.includes(e.key) && e.preventDefault()}
               type="number"
               value={values.TotalMark}
               onChange={handleInputChange}

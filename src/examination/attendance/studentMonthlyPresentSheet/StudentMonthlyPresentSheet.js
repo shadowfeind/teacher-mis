@@ -104,10 +104,12 @@ const StudentMonthlyPresentSheet = () => {
 
   const {
     getListForUpdateStudentPresent,
+    success: getListForUpdateStudentPresentSuccess,
     error: getListForUpdateStudentPresentError,
   } = useSelector((state) => state.getListForUpdateStudentPresent);
 
-  const { presentStudent, error: presentStudentError } = useSelector(
+  const { presentStudent, 
+    success:presentStudentSuccess, error: presentStudentError } = useSelector(
     (state) => state.getListForPresentStudent
   );
 
@@ -339,6 +341,12 @@ const StudentMonthlyPresentSheet = () => {
       );
     }
   }, [allOtherOptions]);
+
+  useEffect(()=>{
+    if(getListForUpdateStudentPresentSuccess){
+      setOpenPopup(true);
+    }
+  },[getListForUpdateStudentPresentSuccess])
 
   return (
     <>

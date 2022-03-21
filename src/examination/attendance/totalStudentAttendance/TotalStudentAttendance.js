@@ -128,6 +128,7 @@ const TotalStudentAttendance = () => {
 
   const {
     listTotalStudentAttendanceData,
+    success:listTotalStudentAttendanceDataSuccess,
     error: listTotalStudentAttendanceDataError,
   } = useSelector((state) => state.getListTotalStudentAttendance);
 

@@ -81,6 +81,9 @@ const StyledTableCell = withStyles((theme) => ({
         setBulk(bulkData);
       }
     }, [bulkData]);
+
+    const symbolsArr = ["e", "E", "+", "-", "."];
+
     return (
       <>
         <TableContainer component={Paper}>
@@ -112,6 +115,7 @@ const StyledTableCell = withStyles((theme) => ({
                       id={`theory_${subject.IDHREmployee}`}
                       name="ObtainedMark"
                       value={subject.ObtainedMark}
+                      onKeyDown={(e) => symbolsArr.includes(e.key) && e.preventDefault()}
                       type="number"
                       label="Obtained Mark"
                       variant="outlined"
@@ -131,6 +135,7 @@ const StyledTableCell = withStyles((theme) => ({
                       id={`practical_${subject.IDHREmployee}`}
                       value={subject.ObtainedMarkPractical}
                       name="ObtainedMarkPractical"
+                      onKeyDown={(e) => symbolsArr.includes(e.key) && e.preventDefault()}
                       type="number"
                       label="Obtained Practical Mark"
                       variant="outlined"

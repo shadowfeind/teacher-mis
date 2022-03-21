@@ -31,6 +31,7 @@ import { GET_EVENT_RESET } from "../../examMarkEntry/ExamMarkEntryConstants";
 import {
   GET_ACTIVE_SUBJECT_RESET,
   GET_ALL_OTHER_OPTIONS_FOR_SELECT_TEACHER_RESET,
+  GET_BULK_EXAM_MARK_APPROVAL_RESET,
   GET_EXAM_MARK_APPROVAL_INITIAL_DATA_RESET,
   GET_EXAM_MARK_APPROVAL_SCHEULE_HEADER_RESET,
   POST_BULK_EXAM_MARK_APPROVAL_RESET,
@@ -142,7 +143,7 @@ const ExamMarkApproval = () => {
     (state) => state.getExamMarkApprovalSearchData
   );
 
-  const { bulkData } = useSelector(
+  const { bulkData ,success:bulkDataSuccess} = useSelector(
     (state) => state.getBulkExamMarkApprovalSearchData
   );
 
@@ -353,6 +354,12 @@ const ExamMarkApproval = () => {
     }
   };
 
+  // useEffect(()=>{
+  //   if(bulkDataSuccess){
+  //     setOpenPopup(true);
+  //   }
+  // },[bulkDataSuccess])
+
   return (
     <>
       <CustomContainer>
@@ -499,6 +506,7 @@ const ExamMarkApproval = () => {
           }
           search={bulkData && bulkData.searchFilterModel}
           bulkData={bulkData && bulkData.dbModelLsts}
+          setOpenPopup={setOpenPopup}
         />
       </Popup>
       <Notification notify={notify} setNotify={setNotify} />

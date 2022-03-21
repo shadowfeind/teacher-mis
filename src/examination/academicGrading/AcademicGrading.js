@@ -49,7 +49,6 @@ const tableHeader = [
   { id: "GradeComment", label: "Comment" },
   { id: "Created_On", label: "Created_On" },
   { id: "Updated_On", label: "Updated_On" },
-  { id: "actions", label: "Actions", disableSorting: true },
 ];
 
 const AcademicGrading = () => {
@@ -155,12 +154,12 @@ const AcademicGrading = () => {
     });
   }
 
-  const updateCollegeHandler = (IDFacultyGradingSystem) => {
-    dispatch(getSingleAcademicGradingforEditAction(IDFacultyGradingSystem));
-    setOpenPopup(true);
-  };
+  // const updateCollegeHandler = (IDFacultyGradingSystem) => {
+  //   dispatch(getSingleAcademicGradingforEditAction(IDFacultyGradingSystem));
+  //   setOpenPopup(true);
+  // };
 
-  const deleteCollegeHandler = (IDFacultyGradingSystem) => {};
+  // const deleteCollegeHandler = (IDFacultyGradingSystem) => {};
 
   useEffect(() => {
     if (!academicGrading) {
@@ -192,11 +191,11 @@ const AcademicGrading = () => {
     });
   };
 
-  const addHandler = () => {
-    dispatch({ type: GET_SINGLE_ACADEMIC_GRADING_EDIT_RESET });
-    //dispatch(getSingleAcademicGradingAction());
-    setOpenPopup(true);
-  };
+  // const addHandler = () => {
+  //   dispatch({ type: GET_SINGLE_ACADEMIC_GRADING_EDIT_RESET });
+  //   //dispatch(getSingleAcademicGradingAction());
+  //   setOpenPopup(true);
+  // };
   return (
     <>
       <CustomContainer>
@@ -213,15 +212,6 @@ const AcademicGrading = () => {
             }}
             onChange={handleSearch}
           />
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<AddIcon />}
-            className={classes.button}
-            onClick={addHandler}
-          >
-            Add{" "}
-          </Button>
         </Toolbar>
         <TableContainer className={classes.table}>
           <TblHead />
@@ -231,27 +221,14 @@ const AcademicGrading = () => {
               <AcademicGradingTableCollapse
                 key={item.$id}
                 item={item}
-                updateCollegeHandler={updateCollegeHandler}
-                deleteCollegeHandler={deleteCollegeHandler}
+                // updateCollegeHandler={updateCollegeHandler}
+                // deleteCollegeHandler={deleteCollegeHandler}
               />
             ))}
           </TableBody>
         </TableContainer>
         <TblPagination />
       </CustomContainer>
-      <Popup
-        openPopup={openPopup}
-        setOpenPopup={setOpenPopup}
-        title="Academic Grading"
-      >
-        <AcademicGradingForm
-          academicGradingEdit={
-            singleAcademicGrading && singleAcademicGrading.dbModel
-          }
-          setOpenPopup={setOpenPopup}
-        />
-      </Popup>
-
       <Notification notify={notify} setNotify={setNotify} />
       <ConfirmDialog
         confirmDialog={confirmDialog}
