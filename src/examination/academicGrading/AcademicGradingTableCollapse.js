@@ -36,24 +36,6 @@ const AcademicGradingTableCollapse = ({
       <TableCell>{item.GradeComment}</TableCell>
       <TableCell>{item.Created_On.slice(0,10)}</TableCell>
       <TableCell>{item.Updated_On.slice(0,10)}</TableCell>
-      <TableCell>
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          onClick={() => updateCollegeHandler(item.IDFacultyGradingSystem)}
-        >
-          <EditIcon style={{ fontSize: 12 }} />
-        </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          className={classes.button}
-          onClick={() => deleteCollegeHandler(item.IDFacultyGradingSystem)}
-        >
-          <DeleteIcon style={{ fontSize: 12 }} />
-        </Button>
-      </TableCell>
     </TableRow>
   );
 };

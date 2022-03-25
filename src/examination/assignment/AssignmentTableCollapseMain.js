@@ -79,13 +79,13 @@ const AssignmentTableCollapseMain = ({ item, setOpenPopup3 }) => {
           >
             <EditIcon style={{ fontSize: 12 }} />
           </Button>
-          <Button
+          {/* <Button
             variant="contained"
             color="secondary"
             className={classes.button}
           >
             <DeleteIcon style={{ fontSize: 12 }} />
-          </Button>
+          </Button> */}
         </TableCell>
       </TableRow>
     </>

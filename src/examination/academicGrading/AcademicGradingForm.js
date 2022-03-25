@@ -49,23 +49,23 @@ const AcademicGradingForm = ({ academicGradingEdit, setOpenPopup }) => {
   const { values, setValues, handleInputChange, errors, setErrors } =
     useForm(initialFormValues);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
 
-    if (validate()) {
-      if (values.IDFacultyGradingSystem === 0) {
-        dispatch(createAcademicGradingAction(values));
-      } else {
-        dispatch(updateSingleAcademicGradingAction(values));
-      }
-    }
-  };
+  //   if (validate()) {
+  //     if (values.IDFacultyGradingSystem === 0) {
+  //       dispatch(createAcademicGradingAction(values));
+  //     } else {
+  //       dispatch(updateSingleAcademicGradingAction(values));
+  //     }
+  //   }
+  // };
 
-  useEffect(() => {
-    if (academicGradingEdit) {
-      setValues({ ...academicGradingEdit });
-    }
-  }, [academicGradingEdit]);
+  // useEffect(() => {
+  //   if (academicGradingEdit) {
+  //     setValues({ ...academicGradingEdit });
+  //   }
+  // }, [academicGradingEdit]);
 
   return (
     <Form onSubmit={handleSubmit}>

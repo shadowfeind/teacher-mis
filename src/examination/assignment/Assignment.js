@@ -617,6 +617,7 @@ const Assignment = () => {
             teacherAssignmentSingleCreate &&
             teacherAssignmentSingleCreate.dbTeacherAssignmentModel
           }
+          setOpenPopup={setOpenPopup}
         />
       </Popup>
       <Popup

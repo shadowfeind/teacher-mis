@@ -44,6 +44,9 @@ const ExamMarkEntry = lazy(() =>
 const ExamMarkApprovalTeacher = lazy(() =>
   import("./examination/examMarkApprovalTeacher/ExamMarkApprovalTeacher")
 );
+const Notification = lazy(() =>
+  import("./examination/notification/Notification")
+);
 
 const theme = createTheme({
   palette: {
@@ -94,6 +97,11 @@ const App = () => {
                 exact
                 path={"/academic-grading"}
                 component={AcademicGrading}
+              />
+              <Route
+                exact
+                path={"/notification"}
+                component={Notification}
               />
               <Route exact path={"/"} component={Dashboard} />
               <Route path="*" component={PageNotFound} />

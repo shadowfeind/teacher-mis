@@ -31,6 +31,7 @@ import { GET_EVENT_RESET } from "../../examMarkEntry/ExamMarkEntryConstants";
 import {
   GET_ACTIVE_SUBJECT_RESET,
   GET_ALL_OTHER_OPTIONS_FOR_SELECT_TEACHER_RESET,
+  GET_BULK_EXAM_MARK_APPROVAL_RESET,
   GET_EXAM_MARK_APPROVAL_INITIAL_DATA_RESET,
   GET_EXAM_MARK_APPROVAL_SCHEULE_HEADER_RESET,
   POST_BULK_EXAM_MARK_APPROVAL_RESET,
@@ -142,7 +143,7 @@ const ExamMarkApproval = () => {
     (state) => state.getExamMarkApprovalSearchData
   );
 
-  const { bulkData } = useSelector(
+  const { bulkData ,success:bulkDataSuccess} = useSelector(
     (state) => state.getBulkExamMarkApprovalSearchData
   );
 
@@ -262,33 +263,33 @@ const ExamMarkApproval = () => {
     if (allOtherOptions) {
       unstable_batchedUpdates(() => {
         setAcaYear(
-          allOtherOptions.year.length > 0 ? allOtherOptions.year[0].Key : ""
+          allOtherOptions.year.length > 0 ? allOtherOptions.year[0]?.Key : ""
         );
         setProgramValue(
           allOtherOptions.program.length > 0
-            ? allOtherOptions.program[0].Key
+            ? allOtherOptions.program[0]?.Key
             : ""
         );
         setClassId(
           allOtherOptions.classId.length > 0
-            ? allOtherOptions.classId[0].Key
+            ? allOtherOptions.classId[0]?.Key
             : ""
         );
         setSection(
           allOtherOptions.section.length > 0
-            ? allOtherOptions.section[0].Key
+            ? allOtherOptions.section[0]?.Key
             : ""
         );
         setShift(
-          allOtherOptions.shift.length > 0 ? allOtherOptions.shift[0].Key : ""
+          allOtherOptions.shift.length > 0 ? allOtherOptions.shift[0]?.Key : ""
         );
       });
 
       dispatch(
         getActiveSubjectAction(
-          allOtherOptions.year[0].Key,
-          allOtherOptions.program[0].Key,
-          allOtherOptions.classId[0].Key
+          allOtherOptions.year[0]?.Key,
+          allOtherOptions.program[0]?.Key,
+          allOtherOptions.classId[0]?.Key
         )
       );
     }
@@ -352,6 +353,12 @@ const ExamMarkApproval = () => {
       setOpenPopup(true);
     }
   };
+
+  // useEffect(()=>{
+  //   if(bulkDataSuccess){
+  //     setOpenPopup(true);
+  //   }
+  // },[bulkDataSuccess])
 
   return (
     <>
@@ -499,6 +506,7 @@ const ExamMarkApproval = () => {
           }
           search={bulkData && bulkData.searchFilterModel}
           bulkData={bulkData && bulkData.dbModelLsts}
+          setOpenPopup={setOpenPopup}
         />
       </Popup>
       <Notification notify={notify} setNotify={setNotify} />

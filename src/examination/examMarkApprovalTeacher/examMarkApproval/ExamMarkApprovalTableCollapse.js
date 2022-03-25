@@ -24,8 +24,8 @@ const ExamMarkApprovalTableCollapse = ({ item
           <TableCell>{item.FullMarkPractical}</TableCell>
           <TableCell>{item.ObtainedMark}</TableCell>
           <TableCell>{item.ObtainedMarkPractical}</TableCell>
-          <TableCell>{item.Division}</TableCell>
-          <TableCell>{item.UpdatedOn}</TableCell>
+          <TableCell>{item.SecuredDivision}</TableCell>
+          <TableCell>{item.Updated_On?.slice(0,10)}</TableCell>
           <TableCell>{item.Status}</TableCell>
         </TableRow>
       </>

@@ -164,7 +164,7 @@ const AssignmentEditForm = ({ singleAssignment, setOpenPop3 }) => {
             <InputControl
               disabled
               name="TotalMark"
-              label="Full Marks*"
+              label="Full Marks"
               value={values.TotalMark}
               variant="filled"
             />
@@ -180,7 +180,7 @@ const AssignmentEditForm = ({ singleAssignment, setOpenPop3 }) => {
               label="DueDate"
               value={values.DueDate}
               onChange={handleInputChange}
-              errors={errors.DueDate}
+    
             />
             <InputControl
               name="MarksObtained"
@@ -198,10 +198,10 @@ const AssignmentEditForm = ({ singleAssignment, setOpenPop3 }) => {
               onChange={handleInputChange}
             />
             <InputControl
-              name="ImageUploaded"
-              label="Select File"
-              onChange={(e) => handleImage(e)}
-              type="file"
+            name="ImageUploaded"
+            label="Select File"
+            onChange={(e)=> handleImage(e)}
+            type="file"
             />
             <img src={imgSrc} height={200} width={200} />
           </Grid>

@@ -40,18 +40,6 @@ const ContactAddressForm =({contactAddress, setOpenPopup})=>{
       ? "This feild is required"
       : "";
 
-      temp.TemporaryAddressLine1 = !fieldValues.TemporaryAddressLine1
-      ? "This feild is required"
-      : fieldValues.TemporaryAddressLine1.length > 20
-      ? "Must be less than 20 characters"
-      : !fieldValues.TemporaryAddressLine1.trim()
-      ? "This feild is required"
-      : "";
-
-      temp.TemporaryAddressZone = !fieldValues.TemporaryAddressZone
-      ? "This feild is required"
-      : "";
-
       temp.PermanentAddressDistrict = !fieldValues.PermanentAddressDistrict
       ? "This feild is required"
       : fieldValues.PermanentAddressDistrict.length > 20
@@ -60,43 +48,12 @@ const ContactAddressForm =({contactAddress, setOpenPopup})=>{
       ? "This feild is required"
       : "";
 
-      temp.TemporaryAddressDistrict = !fieldValues.TemporaryAddressDistrict
-      ? "This feild is required"
-      : fieldValues.TemporaryAddressDistrict.length > 20
-      ? "Must be less than 20 characters"
-      : !fieldValues.TemporaryAddressDistrict.trim()
-      ? "This feild is required"
-      : "";
 
       temp.PermanentAddressCountry = !fieldValues.PermanentAddressCountry
       ? "This feild is required"
       : fieldValues.PermanentAddressCountry.length > 20
       ? "Must be less than 20 characters"
       : !fieldValues.PermanentAddressCountry.trim()
-      ? "This feild is required"
-      : "";
-
-      temp.TemporaryAddressCountry = !fieldValues.TemporaryAddressCountry
-      ? "This feild is required"
-      : fieldValues.TemporaryAddressCountry.length > 20
-      ? "Must be less than 20 characters"
-      : !fieldValues.TemporaryAddressCountry.trim()
-      ? "This feild is required"
-      : "";
-
-      temp.TemporaryTownVillage = !fieldValues.TemporaryTownVillage
-      ? "This feild is required"
-      : fieldValues.TemporaryTownVillage.length > 20
-      ? "Must be less than 20 characters"
-      : !fieldValues.TemporaryTownVillage.trim()
-      ? "This feild is required"
-      : "";
-
-      temp.TemporaryWardNo = !fieldValues.TemporaryWardNo
-      ? "This feild is required"
-      : fieldValues.TemporaryWardNo.length > 20
-      ? "Must be less than 20 characters"
-      : !fieldValues.TemporaryWardNo.trim()
       ? "This feild is required"
       : "";
 
@@ -165,7 +122,7 @@ const ContactAddressForm =({contactAddress, setOpenPopup})=>{
           value={values.TemporaryAddressZone}
           options={contactAddress ? contactAddress.ddlAddressZone: test}
           onChange={handleInputChange}
-          errors={errors.TemporaryAddressZone}
+  
         />
          <SelectControl
           name="PermanentAddressDistrict"
@@ -181,7 +138,7 @@ const ContactAddressForm =({contactAddress, setOpenPopup})=>{
           value={values.TemporaryAddressDistrict}
           options={contactAddress ? contactAddress.ddlAddressDistrict: test}
           onChange={handleInputChange}
-          errors={errors.TemporaryAddressDistrict}
+     
         />
          </Grid>
         <Grid item xs={6}>
@@ -199,21 +156,21 @@ const ContactAddressForm =({contactAddress, setOpenPopup})=>{
           value={values.TemporaryAddressCountry}
           options={contactAddress ? contactAddress.ddlAddressCountry: test}
           onChange={handleInputChange}
-          errors={errors.TemporaryAddressCountry}
+        
         />
         <InputControl
           name="TemporaryTownVillage"
           label="Temporary Town/Village"
           value={values.TemporaryTownVillage}
           onChange={handleInputChange}
-          errors={errors.TemporaryTownVillage}
+        
         />
         <InputControl
           name="TemporaryWardNo"
           label="Temporary Ward No"
           value={values.TemporaryWardNo}
           onChange={handleInputChange}
-          errors={errors.TemporaryWardNo}
+       
         />
         <InputControl
           name="PermanentTownVillage"

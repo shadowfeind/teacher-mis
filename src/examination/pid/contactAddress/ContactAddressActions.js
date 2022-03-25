@@ -35,7 +35,7 @@ export const getSingleContactAddressAction = () => async (dispatch) => {
     dispatch({ type: GET_SINGLE_CONTACTADDRESS_REQUEST });
 
     const { data } = await axios.get(
-      `${API_URL}/api/GetSingleEdit`,
+      `${API_URL}/api/PID_Address/GetSingleEdit`,
       tokenConfig
     );
 

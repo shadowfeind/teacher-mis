@@ -51,8 +51,8 @@ const tableHeader = [
   { id: "Total", label: "Total Attendance" },
   { id: "FullName", label: "FullName" },
   { id: "RollNo", label: "RollNo" },
-  { id: "MobileNumber", label: "Created On" },
-  { id: "EmailID", label: "Updated On" },
+  { id: "MobileNumber", label: "Mobile Number" },
+  { id: "EmailID", label: "Email ID" },
 ];
 
 const TotalStudentAttendance = () => {
@@ -128,6 +128,7 @@ const TotalStudentAttendance = () => {
 
   const {
     listTotalStudentAttendanceData,
+    success:listTotalStudentAttendanceDataSuccess,
     error: listTotalStudentAttendanceDataError,
   } = useSelector((state) => state.getListTotalStudentAttendance);
 
