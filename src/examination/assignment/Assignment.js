@@ -11,6 +11,7 @@ import {
 import Popup from "../../components/Popup";
 import useCustomTable from "../../customHooks/useCustomTable";
 import CustomContainer from "../../components/CustomContainer";
+import LoadingComp from "../../components/LoadingComp";
 import { useDispatch, useSelector } from "react-redux";
 import Notification from "../../components/Notification";
 import ConfirmDialog from "../../components/ConfirmDialog";
@@ -138,7 +139,7 @@ const Assignment = () => {
     (state) => state.getAllOtherOptionsForAssignmentSelect
   );
 
-  const { getListTeacherAssignment, error: getListTeacherAssignmentError } =
+  const { getListTeacherAssignment,loading, error: getListTeacherAssignmentError } =
     useSelector((state) => state.getListTeacherAssignment);
 
   const {
@@ -153,7 +154,7 @@ const Assignment = () => {
     (state) => state.getTeacherAssignmentContent
   );
 
-  const { singleTeacherAssignment, error: singleTeacherAssignmentError } =
+  const { singleTeacherAssignment,loading:loadingEdit, error: singleTeacherAssignmentError } =
     useSelector((state) => state.getSingleToEditTeacherAssignment);
 
   const {
@@ -588,6 +589,10 @@ const Assignment = () => {
             </Grid>
           </Grid>
         </Toolbar>
+        {loading ? (
+          <LoadingComp />
+        ) : (
+          <>
         <TableContainer className={classes.table}>
           <TblHead />
 
@@ -602,12 +607,18 @@ const Assignment = () => {
           </TableBody>
         </TableContainer>
         <TblPagination />
+        </>
+        )}
       </CustomContainer>
       <Popup
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
         title="Create Assignment"
       >
+      {loadingEdit ? (
+          <LoadingComp />
+        ) : (
+          <>
         <AssignmentForm
           students={
             teacherAssignmentSingleCreate &&
@@ -619,6 +630,8 @@ const Assignment = () => {
           }
           setOpenPopup={setOpenPopup}
         />
+        </>
+        )}
       </Popup>
       <Popup
         openPopup={openPopup2}

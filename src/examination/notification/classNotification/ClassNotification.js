@@ -10,6 +10,7 @@ import {
 import useCustomTable from "../../../customHooks/useCustomTable";
 import InputControl from "../../../components/controls/InputControl";
 import { Search } from "@material-ui/icons";
+import LoadingComp from "../../../components/LoadingComp";
 import Popup from "../../../components/Popup";
 import CustomContainer from "../../../components/CustomContainer";
 import SelectControl from "../../../components/controls/SelectControl";
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
   const tableHeader = [
-    { id: "FullName", label: "Full Name" },
+    { id: "FullName", label: "Sender Name" },
     { id: "Messages", label: "Messages" },
     { id: "PostedDate", label: "Posted Date" },
   ];

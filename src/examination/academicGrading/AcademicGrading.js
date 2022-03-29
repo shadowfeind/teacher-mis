@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import useCustomTable from "../../customHooks/useCustomTable";
 import InputControl from "../../components/controls/InputControl";
+import LoadingComp from "../../components/LoadingComp";
 import { Search } from "@material-ui/icons";
 import AddIcon from "@material-ui/icons/Add";
 import Popup from "../../components/Popup";
@@ -47,8 +48,6 @@ const tableHeader = [
   { id: "LetterGrade", label: "Grade" },
   { id: "HonorPoint", label: "Honor Point" },
   { id: "GradeComment", label: "Comment" },
-  { id: "Created_On", label: "Created_On" },
-  { id: "Updated_On", label: "Updated_On" },
 ];
 
 const AcademicGrading = () => {
@@ -74,7 +73,7 @@ const AcademicGrading = () => {
 
   const dispatch = useDispatch();
 
-  const { academicGrading, error } = useSelector(
+  const { academicGrading,loading, error } = useSelector(
     (state) => state.academicGrading
   );
 
@@ -213,6 +212,10 @@ const AcademicGrading = () => {
             onChange={handleSearch}
           />
         </Toolbar>
+        {loading ? (
+          <LoadingComp />
+        ) : (
+          <>
         <TableContainer className={classes.table}>
           <TblHead />
 
@@ -228,6 +231,8 @@ const AcademicGrading = () => {
           </TableBody>
         </TableContainer>
         <TblPagination />
+        </>
+        )}
       </CustomContainer>
       <Notification notify={notify} setNotify={setNotify} />
       <ConfirmDialog

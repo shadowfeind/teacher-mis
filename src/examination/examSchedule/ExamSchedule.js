@@ -11,6 +11,7 @@ import { Search } from "@material-ui/icons";
 import useCustomTable from "../../customHooks/useCustomTable";
 import InputControl from "../../components/controls/InputControl";
 import Popup from "../../components/Popup";
+import LoadingComp from "../../components/LoadingComp";
 import CustomContainer from "../../components/CustomContainer";
 import { useDispatch, useSelector } from "react-redux";
 import Notification from "../../components/Notification";
@@ -115,7 +116,7 @@ const ExamSchedule = () => {
     (state) => state.getEvent
   );
 
-  const { examScheduleList } = useSelector(
+  const { examScheduleList,loading } = useSelector(
     (state) => state.getExamScheduleList
   );
 
@@ -257,6 +258,10 @@ const ExamSchedule = () => {
             onChange={handleSearch}
           />
         </Toolbar>
+        {loading ? (
+          <LoadingComp />
+        ) : (
+          <>
         {examScheduleList && (
           <TableContainer className={classes.table}>
             <TblHead />
@@ -270,6 +275,8 @@ const ExamSchedule = () => {
         )}
 
         {examScheduleList && <TblPagination />}
+        </>
+        )}
       </CustomContainer>
       <Popup
         openPopup={openPopup}

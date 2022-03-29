@@ -125,7 +125,7 @@ const SideMenu = () => {
         <Typography variant="h6">
           {" "}
           <Accessible fontSize="small" />
-          &nbsp;&nbsp;&nbsp; Exam Mark Approval
+          &nbsp;&nbsp;&nbsp; Exam Mark Entry
         </Typography>
       </NavLink>
       <NavLink to={"/syllabus"} activeStyle={isActive}>

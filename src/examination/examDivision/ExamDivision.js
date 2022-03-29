@@ -9,6 +9,7 @@ import {
 import useCustomTable from "../../customHooks/useCustomTable";
 import InputControl from "../../components/controls/InputControl";
 import { Search } from "@material-ui/icons";
+import LoadingComp from "../../components/LoadingComp";
 import AddIcon from "@material-ui/icons/Add";
 import Popup from "../../components/Popup";
 import CustomContainer from "../../components/CustomContainer";
@@ -74,7 +75,7 @@ const ExamDivision = () => {
 
   const dispatch = useDispatch();
 
-  const { examDivision, error } = useSelector(
+  const { examDivision,loading, error } = useSelector(
     (state) => state.getAllExamDivision
   );
   // const { examDivision: singleExamDivision, error: singleExamDivisionError } = useSelector((state) => state.getSingleExamDivision);
@@ -206,6 +207,10 @@ const ExamDivision = () => {
             onChange={handleSearch}
           />
         </Toolbar>
+        {loading ? (
+          <LoadingComp />
+        ) : (
+          <>
         <TableContainer className={classes.table}>
           <TblHead />
 
@@ -221,6 +226,8 @@ const ExamDivision = () => {
           </TableBody>
         </TableContainer>
         <TblPagination />
+        </>
+        )}
       </CustomContainer>
       <Notification notify={notify} setNotify={setNotify} />
       <ConfirmDialog
