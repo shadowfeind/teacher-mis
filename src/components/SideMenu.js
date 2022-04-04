@@ -153,6 +153,14 @@ const SideMenu = () => {
           {" "}
           <Accessible fontSize="small" />
           &nbsp;&nbsp;&nbsp; Announcement
+          </Typography>
+      </NavLink>
+      <NavLink to={"/holiday"} activeStyle={isActive}>
+        <Typography variant="h6">
+          {" "}
+          <Accessible fontSize="small" />
+          &nbsp;&nbsp;&nbsp; Holiday
+
         </Typography>
       </NavLink>
       <NavLink to={"/video-conference"} activeStyle={isActive}>
