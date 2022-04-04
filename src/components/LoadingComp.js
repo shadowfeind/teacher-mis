@@ -1,14 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { CircularProgress, LinearProgress } from "@material-ui/core";
-import {
-  ClipLoader,
-  BarLoader,
-  BeatLoader,
-  BounceLoader,
-  CircleLoader,
-  ClimbingBoxLoader,
-} from "react-spinners";
+
 
 const useStyles = makeStyles((theme) => ({
   loading: {
