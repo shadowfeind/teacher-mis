@@ -3,6 +3,7 @@ import { Button, makeStyles, Toolbar, Grid } from "@material-ui/core";
 import Popup from "../../../components/Popup";
 import CustomContainer from "../../../components/CustomContainer";
 import { useDispatch, useSelector } from "react-redux";
+import LoadingComp from "../../../components/LoadingComp";
 import Notification from "../../../components/Notification";
 import ConfirmDialog from "../../../components/ConfirmDialog";
 import SelectControl from "../../../components/controls/SelectControl";
@@ -99,11 +100,12 @@ const StudentMonthlyPresentSheet = () => {
     (state) => state.getEnglishDate
   );
 
-  const { getListStudentPresent, error: getListStudentPresentError } =
+  const { getListStudentPresent,loading, error: getListStudentPresentError } =
     useSelector((state) => state.getListStudentPresent);
 
   const {
     getListForUpdateStudentPresent,
+    loading:loadingUpdate,
     success: getListForUpdateStudentPresentSuccess,
     error: getListForUpdateStudentPresentError,
   } = useSelector((state) => state.getListForUpdateStudentPresent);
@@ -479,10 +481,16 @@ const StudentMonthlyPresentSheet = () => {
             </Grid>
           </Grid>
         </Toolbar>
+        {loading ? (
+          <LoadingComp />
+        ) : (
+          <>
         {getListStudentPresent && (
           <StudentMonthlyPresentSheetTableCollapse
             students={getListStudentPresent && getListStudentPresent}
           />
+        )}
+        </>
         )}
       </CustomContainer>
       <Popup
@@ -490,12 +498,18 @@ const StudentMonthlyPresentSheet = () => {
         setOpenPopup={setOpenPopup}
         title="Bulk Edit"
       >
+      {loadingUpdate ? (
+          <LoadingComp />
+        ) : (
+          <>
         <StudentMonthlyPresentSheetUpdateForm
           students={
             getListForUpdateStudentPresent && getListForUpdateStudentPresent
           }
           presentStudent={presentStudent && presentStudent}
         />
+        </>
+        )}
       </Popup>
       <Notification notify={notify} setNotify={setNotify} />
       <ConfirmDialog

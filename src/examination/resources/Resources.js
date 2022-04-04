@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import CustomContainer from "../../components/CustomContainer";
 import { useDispatch, useSelector } from "react-redux";
+import LoadingComp from "../../components/LoadingComp";
 import Notification from "../../components/Notification";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import SelectControl from "../../components/controls/SelectControl";
@@ -124,7 +125,7 @@ const Resources = () => {
   const { allInitialData, error: allInitialDataError } = useSelector(
     (state) => state.getAllInitialResourcesData
   );
-  const { allResources, error: allResourcesError } = useSelector(
+  const { allResources,loading, error: allResourcesError } = useSelector(
     (state) => state.getAllResourcesList
   );
   const { allOtherResourcesOptions, error: allOtherResourcesOptionsError } =
@@ -459,6 +460,10 @@ const Resources = () => {
             onChange={handleSearch}
           />
         </Toolbar>
+        {loading ? (
+          <LoadingComp />
+        ) : (
+          <>
         {allResources && (
           <TableContainer className={classes.table}>
             <TblHead />
@@ -471,6 +476,8 @@ const Resources = () => {
           </TableContainer>
         )}
         {allResources && <TblPagination />}
+        </>
+        )}
       </CustomContainer>
       <Popup
         openPopup={openPopup}

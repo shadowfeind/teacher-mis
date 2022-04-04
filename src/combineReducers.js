@@ -167,11 +167,11 @@ import {
   getDashboardContentReducer,
   getHeaderContentReducer,
 } from "./examination/dashboard/DashboardReducers";
-import {
-  getAllNotificationTeacherReducer,
-  getListNotificationTeacherReducer,
-} from "./examination/notification/classNotification/ClassNotificationReducer";
+
+import { getAllNotificationTeacherReducer, getListNotificationTeacherReducer } from "./examination/notification/classNotification/ClassNotificationReducer";
+import { getAllTeacherAnnouncement } from "./examination/announcementTeacher/AnnouncementReducers";
 import { getAllHoliday } from "./examination/holiday/HolidayReducers";
+
 export const reducers = combineReducers({
   getHeaderContent: getHeaderContentReducer,
   getDashboardContent: getDashboardContentReducer,
@@ -306,6 +306,8 @@ export const reducers = combineReducers({
   getAllSyllabus: getAllSyllabusReducer,
   getListSyllabus: getListSyllabusReducer,
   //Class Notification Teacher:
-  getAllNotificationTeacher: getAllNotificationTeacherReducer,
-  getListNotificationTeacher: getListNotificationTeacherReducer,
+  getAllNotificationTeacher : getAllNotificationTeacherReducer,
+  getListNotificationTeacher : getListNotificationTeacherReducer,
+  //Announcement Teacher:
+  getAllTeacherAnnouncement : getAllTeacherAnnouncement,
 });

@@ -10,6 +10,7 @@ import {
 import CustomContainer from "../../../components/CustomContainer";
 import { useDispatch, useSelector } from "react-redux";
 import Notification from "../../../components/Notification";
+import LoadingComp from "../../../components/LoadingComp";
 import ConfirmDialog from "../../../components/ConfirmDialog";
 import SelectControl from "../../../components/controls/SelectControl";
 import { Search } from "@material-ui/icons";
@@ -128,6 +129,7 @@ const TotalStudentAttendance = () => {
 
   const {
     listTotalStudentAttendanceData,
+    loading,
     success:listTotalStudentAttendanceDataSuccess,
     error: listTotalStudentAttendanceDataError,
   } = useSelector((state) => state.getListTotalStudentAttendance);
@@ -379,6 +381,10 @@ const TotalStudentAttendance = () => {
             onChange={handleSearch}
           />
         </Toolbar>
+        {loading ? (
+          <LoadingComp />
+        ) : (
+          <>
         {listTotalStudentAttendanceData && (
           <TableContainer className={classes.table}>
             <TblHead />
@@ -398,6 +404,8 @@ const TotalStudentAttendance = () => {
           </TableContainer>
         )}
         {listTotalStudentAttendanceData && <TblPagination />}
+        </>
+        )}
       </CustomContainer>
       <Notification notify={notify} setNotify={setNotify} />
       <ConfirmDialog

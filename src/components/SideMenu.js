@@ -125,7 +125,7 @@ const SideMenu = () => {
         <Typography variant="h6">
           {" "}
           <Accessible fontSize="small" />
-          &nbsp;&nbsp;&nbsp; Exam Mark Approval
+          &nbsp;&nbsp;&nbsp; Exam Mark Entry
         </Typography>
       </NavLink>
       <NavLink to={"/syllabus"} activeStyle={isActive}>
@@ -148,11 +148,19 @@ const SideMenu = () => {
           &nbsp;&nbsp;&nbsp; Notification
         </Typography>
       </NavLink>
+      <NavLink to={"/announcement"} activeStyle={isActive}>
+        <Typography variant="h6">
+          {" "}
+          <Accessible fontSize="small" />
+          &nbsp;&nbsp;&nbsp; Announcement
+          </Typography>
+      </NavLink>
       <NavLink to={"/holiday"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
           <Accessible fontSize="small" />
           &nbsp;&nbsp;&nbsp; Holiday
+
         </Typography>
       </NavLink>
       <NavLink to={"/video-conference"} activeStyle={isActive}>

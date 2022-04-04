@@ -10,6 +10,7 @@ import {
 import { Search } from "@material-ui/icons";
 import { useParams } from "react-router-dom";
 import { unstable_batchedUpdates } from "react-dom";
+import LoadingComp from "../../../components/LoadingComp";
 import useCustomTable from "../../../customHooks/useCustomTable";
 import InputControl from "../../../components/controls/InputControl";
 import Popup from "../../../components/Popup";
@@ -139,11 +140,11 @@ const ExamMarkApproval = () => {
   const { activeSubject, success: activeSubjectSuccess } = useSelector(
     (state) => state.getActiveSubject
   );
-  const { searchData } = useSelector(
+  const { searchData,loading } = useSelector(
     (state) => state.getExamMarkApprovalSearchData
   );
 
-  const { bulkData ,success:bulkDataSuccess} = useSelector(
+  const { bulkData ,loading:loadingBulk,success:bulkDataSuccess} = useSelector(
     (state) => state.getBulkExamMarkApprovalSearchData
   );
 
@@ -477,6 +478,10 @@ const ExamMarkApproval = () => {
             onChange={handleSearch}
           />
         </Toolbar>
+        {loading ? (
+          <LoadingComp />
+        ) : (
+          <>
         {searchData && (
           <TableContainer className={classes.table}>
             <TblHead />
@@ -494,12 +499,18 @@ const ExamMarkApproval = () => {
         )}
 
         {searchData && <TblPagination />}
+        </>
+        )}
       </CustomContainer>
       <Popup
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
         title="Bulk Edit"
       >
+      {loadingBulk ? (
+          <LoadingComp />
+        ) : (
+          <>
         <ExamMarkApprovalBulk
           statusData={
             bulkData && bulkData.searchFilterModel.ddlStudentExamStatus
@@ -508,6 +519,8 @@ const ExamMarkApproval = () => {
           bulkData={bulkData && bulkData.dbModelLsts}
           setOpenPopup={setOpenPopup}
         />
+        </>
+        )}
       </Popup>
       <Notification notify={notify} setNotify={setNotify} />
       <ConfirmDialog
