@@ -47,6 +47,9 @@ const ExamMarkApprovalTeacher = lazy(() =>
 const Notification = lazy(() =>
   import("./examination/notification/Notification")
 );
+const Announcement = lazy(() =>
+  import("./examination/announcementTeacher/Announcement")
+);
 
 const theme = createTheme({
   palette: {
@@ -87,6 +90,7 @@ const App = () => {
               <Route path={"/class-schedule"} component={ClassSchedule} />
               <Route path={"/old-questions"} component={OldQuestions} />
               <Route path={"/attendance"} component={Attendance} />
+              <Route path={"/announcement"} component={Announcement} />
               <Route
                 path={"/exam-mark-approval"}
                 component={ExamMarkApprovalTeacher}

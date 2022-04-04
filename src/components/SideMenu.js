@@ -148,6 +148,13 @@ const SideMenu = () => {
           &nbsp;&nbsp;&nbsp; Notification
         </Typography>
       </NavLink>
+      <NavLink to={"/announcement"} activeStyle={isActive}>
+        <Typography variant="h6">
+          {" "}
+          <Accessible fontSize="small" />
+          &nbsp;&nbsp;&nbsp; Announcement
+        </Typography>
+      </NavLink>
       <NavLink to={"/video-conference"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}

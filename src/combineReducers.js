@@ -164,6 +164,7 @@ import {
   getHeaderContentReducer,
 } from "./examination/dashboard/DashboardReducers";
 import { getAllNotificationTeacherReducer, getListNotificationTeacherReducer } from "./examination/notification/classNotification/ClassNotificationReducer";
+import { getAllTeacherAnnouncement } from "./examination/announcementTeacher/AnnouncementReducers";
 export const reducers = combineReducers({
   getHeaderContent: getHeaderContentReducer,
   getDashboardContent: getDashboardContentReducer,
@@ -298,4 +299,6 @@ export const reducers = combineReducers({
   //Class Notification Teacher:
   getAllNotificationTeacher : getAllNotificationTeacherReducer,
   getListNotificationTeacher : getListNotificationTeacherReducer,
+  //Announcement Teacher:
+  getAllTeacherAnnouncement : getAllTeacherAnnouncement,
 });
