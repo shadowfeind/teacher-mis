@@ -228,24 +228,6 @@ const ExamMarkApproval = () => {
         setDdlSchedule(
           examMarkApprovalInitialDatas.searchFilterModel.ddlSubjectForTeacher
         );
-        setAcademicYearDdl(
-          examMarkApprovalInitialDatas.searchFilterModel.ddlAcademicYear
-        );
-        setProgramDdl(
-          examMarkApprovalInitialDatas.searchFilterModel.ddlFacultyProgramLink
-        );
-        setDdlClass(
-          examMarkApprovalInitialDatas.searchFilterModel.ddlLevelPrimitive
-        );
-        setDdlSection(
-          examMarkApprovalInitialDatas.searchFilterModel.ddlSection
-        );
-        setDdlShift(
-          examMarkApprovalInitialDatas.searchFilterModel.ddlAcademicShift
-        );
-        // setDdlEvent(
-        //   examMarkApprovalInitialDatas.searchFilterModel.ddlAcademicYearPrimitive
-        // );
       });
     }
   }, [examMarkApprovalInitialDatas, dispatch]);
@@ -263,36 +245,39 @@ const ExamMarkApproval = () => {
   useEffect(() => {
     if (allOtherOptions) {
       unstable_batchedUpdates(() => {
+        setAcademicYearDdl(allOtherOptions.year && allOtherOptions.year)
         setAcaYear(
           allOtherOptions.year.length > 0 ? allOtherOptions.year[0]?.Key : ""
         );
+        setProgramDdl(allOtherOptions.program && allOtherOptions.program)
         setProgramValue(
           allOtherOptions.program.length > 0
             ? allOtherOptions.program[0]?.Key
             : ""
         );
+        setDdlClass(allOtherOptions.classId && allOtherOptions.classId)
         setClassId(
           allOtherOptions.classId.length > 0
             ? allOtherOptions.classId[0]?.Key
             : ""
         );
+        setDdlSection(allOtherOptions.section && allOtherOptions.section)
         setSection(
           allOtherOptions.section.length > 0
             ? allOtherOptions.section[0]?.Key
             : ""
         );
+        setDdlShift(
+          allOtherOptions.shift && allOtherOptions.shift
+        )
         setShift(
           allOtherOptions.shift.length > 0 ? allOtherOptions.shift[0]?.Key : ""
         );
+        setDdlEvent(allOtherOptions.event && allOtherOptions.event)
+        setEvent(
+          allOtherOptions.event.length > 0 ? allOtherOptions.event[0]?.Key : ""
+        );
       });
-
-      dispatch(
-        getActiveSubjectAction(
-          allOtherOptions.year[0]?.Key,
-          allOtherOptions.program[0]?.Key,
-          allOtherOptions.classId[0]?.Key
-        )
-      );
     }
   }, [allOtherOptions, dispatch]);
   useEffect(() => {

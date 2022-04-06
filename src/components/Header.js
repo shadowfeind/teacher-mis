@@ -11,12 +11,13 @@ import {
   Toolbar,
 } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
+import { API_URL } from "../constants";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { GET_HEADER_CONTENT_RESET } from "../examination/dashboard/DashboardConstants";
 import Notification from "./Notification";
 import { getHeaderContentAction } from "../examination/dashboard/DashboardActions";
-import { API_URL } from "../constants";
+import { UPLOADPHOTO_RESET } from "../examination/pid/uploadPhoto/UploadPhotoConstants";
 
 const useStyles = makeStyles({
   root: {
@@ -111,14 +112,16 @@ const Header = () => {
     (state) => state.uploadPhoto
   );
 
+  if (uploadPhotoSuccess) {
+    dispatch({ type: UPLOADPHOTO_RESET });
+    dispatch(getHeaderContentAction());
+  }
+
   useEffect(() => {
     if (!headerContent) {
       dispatch(getHeaderContentAction());
     }
-    if (uploadPhotoSuccess) {
-      dispatch(getHeaderContentAction());
-    }
-  }, [headerContent, dispatch, uploadPhotoSuccess]);
+  }, [headerContent, dispatch]);
   if (headerContentError) {
     dispatch({ type: GET_HEADER_CONTENT_RESET });
     setNotify({
@@ -133,6 +136,13 @@ const Header = () => {
       <AppBar position="static" className={classes.root}>
         <Toolbar>
           <Grid container alignItems="center">
+          <Grid item> <span
+                        style={{
+                          fontSize: "14px",
+                          fontWeight: "bold",
+                          paddingRight: "10px",
+                        }}
+                      >TEACHER DASHBOARD</span></Grid>
             <Grid item></Grid>
             <Grid item sm></Grid>
             <Grid item>

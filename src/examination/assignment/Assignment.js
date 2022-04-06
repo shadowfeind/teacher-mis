@@ -491,7 +491,7 @@ const Assignment = () => {
                 name="Academic Year"
                 label="Academic Year"
                 value={acaYear}
-                onChange={(e) => setAcaYear(e.target.value)}
+                onChange={null}
                 options={academicYearDdl ? academicYearDdl : test}
                 errors={errors.acaYear}
               />

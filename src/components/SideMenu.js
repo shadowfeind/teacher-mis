@@ -1,6 +1,8 @@
-import { makeStyles, Typography } from "@material-ui/core";
-import React from "react";
+import {Grid, makeStyles, Typography } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { API_URL } from "../constants";
 import {
   School,
   Accessible,
@@ -12,6 +14,8 @@ import {
   PostAdd,
   RecordVoiceOver,
 } from "@material-ui/icons";
+import { getHeaderContentAction } from "../examination/dashboard/DashboardActions";
+import { GET_HEADER_CONTENT_RESET } from "../examination/dashboard/DashboardConstants";
 
 const useStyles = makeStyles({
   sideMenu: {
@@ -40,6 +44,29 @@ const useStyles = makeStyles({
 
 const SideMenu = () => {
   const classes = useStyles();
+
+
+  const dispatch = useDispatch();
+
+
+  const { headerContent, error: headerContentError } = useSelector(
+    (state) => state.getHeaderContent
+  );
+
+
+  useEffect(() => {
+    if (!headerContent) {
+      dispatch(getHeaderContentAction());
+    }
+  }, [headerContent, dispatch]);
+  if (headerContentError) {
+    dispatch({ type: GET_HEADER_CONTENT_RESET });
+    setNotify({
+      isOpen: true,
+      message: headerContentError,
+      type: "error",
+    });
+  }
   const isActive = {
     color: "#253053",
     backgroundColor: "rgba(255, 255, 255, 0.3)",
@@ -51,7 +78,15 @@ const SideMenu = () => {
         variant="h5"
         style={{ color: "#fff", textAlign: "center", padding: " 17px 0" }}
       >
-        TEACHER MIS
+      <Grid item style={{ alignSelf: "center" }}>
+                {headerContent && (
+                  <img
+                    src={`${API_URL}${headerContent.FullPathSchoolLogo}`}
+                    height="50px"
+                  />
+                )}
+              </Grid>
+        {/* TEACHER MIS */}
       </Typography>
       <NavLink to={"/"} exact={true} activeStyle={isActive}>
         <Typography variant="h6">

@@ -94,7 +94,7 @@ const StudentMonthlyPresentSheetUpdateForm = ({ students }) => {
               <StyledTableCell>Mobile</StyledTableCell>
               <StyledTableCell>Email</StyledTableCell>
 
-              <StyledTableCell>
+              <StyledTableCell align="right">
                 <label>Select All</label>
                 <Checkbox checked={checked} onChange={handleAllSelectChange} />
               </StyledTableCell>
@@ -118,7 +118,7 @@ const StudentMonthlyPresentSheetUpdateForm = ({ students }) => {
                     <StyledTableCell component="th" scope="row">
                       {s.EmailID}
                     </StyledTableCell>
-                    <StyledTableCell component="th" scope="row">
+                    <StyledTableCell component="th" scope="row" align="right">
                       <Checkbox
                         checked={s?.IsPresent || false}
                         name="IsPresent"
