@@ -178,12 +178,18 @@ export const getExamMarkApprovalScheduleHeaderAction =
         tokenConfig
       );
 
+      const event = await axios.get(
+        `${API_URL}/api/ApproveAcademicStudentExamDataTeacher/GetActiveAcademicYearCalendar?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
+        tokenConfig
+      );
+
       const data = {
         year: year.data,
         program: program.data,
         classId: classId.data,
         section: section.data,
         shift: shift.data,
+        event: event.data,
       };
 
       dispatch({
@@ -198,25 +204,25 @@ export const getExamMarkApprovalScheduleHeaderAction =
     }
   };
 
-  export const getActiveSubjectAction =
-  (year, program, classId) => async (dispatch) => {
-    try {
-      dispatch({ type: GET_ACTIVE_SUBJECT_REQUEST });
+  // export const getActiveSubjectAction =
+  // (subject, id) => async (dispatch) => {
+  //   try {
+  //     dispatch({ type: GET_ACTIVE_SUBJECT_REQUEST });
 
-      const { data } = await axios.get(
-        `${API_URL}/api/ApproveAcademicStudentExamDataTeacher/GetActiveAcademicYearCalendar?idAcademicYear=${year}&idFacultyProgramLink=${program}&level=${classId}`,
-        tokenConfig
-      );
+  //     const { data } = await axios.get(
+  //       `${API_URL}/api/ApproveAcademicStudentExamDataTeacher/GetActiveAcademicYearCalendar?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
+  //       tokenConfig
+  //     );
 
-      dispatch({
-        type: GET_ACTIVE_SUBJECT_SUCCESS,
-        payload: data,
-      });
-    } catch (error) {
-      dispatch({
-        type: GET_ACTIVE_SUBJECT_FAIL,
-        payload: error.message ? error.message : error.Message,
-      });
-    }
-  };
+  //     dispatch({
+  //       type: GET_ACTIVE_SUBJECT_SUCCESS,
+  //       payload: data,
+  //     });
+  //   } catch (error) {
+  //     dispatch({
+  //       type: GET_ACTIVE_SUBJECT_FAIL,
+  //       payload: error.message ? error.message : error.Message,
+  //     });
+  //   }
+  // };
 

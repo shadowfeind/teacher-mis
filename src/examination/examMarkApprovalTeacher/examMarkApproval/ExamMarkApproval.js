@@ -228,23 +228,23 @@ const ExamMarkApproval = () => {
         setDdlSchedule(
           examMarkApprovalInitialDatas.searchFilterModel.ddlSubjectForTeacher
         );
-        setAcademicYearDdl(
-          examMarkApprovalInitialDatas.searchFilterModel.ddlAcademicYear
-        );
-        setProgramDdl(
-          examMarkApprovalInitialDatas.searchFilterModel.ddlFacultyProgramLink
-        );
-        setDdlClass(
-          examMarkApprovalInitialDatas.searchFilterModel.ddlLevelPrimitive
-        );
-        setDdlSection(
-          examMarkApprovalInitialDatas.searchFilterModel.ddlSection
-        );
-        setDdlShift(
-          examMarkApprovalInitialDatas.searchFilterModel.ddlAcademicShift
-        );
+        // setAcademicYearDdl(
+        //   examMarkApprovalInitialDatas.searchFilterModel.ddlAcademicYear
+        // );
+        // setProgramDdl(
+        //   examMarkApprovalInitialDatas.searchFilterModel.ddlFacultyProgramLink
+        // );
+        // setDdlClass(
+        //   examMarkApprovalInitialDatas.searchFilterModel.ddlLevelPrimitive
+        // );
+        // setDdlSection(
+        //   examMarkApprovalInitialDatas.searchFilterModel.ddlSection
+        // );
+        // setDdlShift(
+        //   examMarkApprovalInitialDatas.searchFilterModel.ddlAcademicShift
+        // );
         // setDdlEvent(
-        //   examMarkApprovalInitialDatas.searchFilterModel.ddlAcademicYearPrimitive
+        //   examMarkApprovalInitialDatas.searchFilterModel.ddlAcademicYearCalendar
         // );
       });
     }
@@ -284,15 +284,18 @@ const ExamMarkApproval = () => {
         setShift(
           allOtherOptions.shift.length > 0 ? allOtherOptions.shift[0]?.Key : ""
         );
+        setEvent(
+          allOtherOptions.event.length > 0 ? allOtherOptions.event[0]?.Key : ""
+        );
       });
 
-      dispatch(
-        getActiveSubjectAction(
-          allOtherOptions.year[0]?.Key,
-          allOtherOptions.program[0]?.Key,
-          allOtherOptions.classId[0]?.Key
-        )
-      );
+      // dispatch(
+      //   getActiveSubjectAction(
+      //     allOtherOptions.year[0]?.Key,
+      //     allOtherOptions.program[0]?.Key,
+      //     allOtherOptions.classId[0]?.Key
+      //   )
+      // );
     }
   }, [allOtherOptions, dispatch]);
   useEffect(() => {
