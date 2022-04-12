@@ -56,8 +56,8 @@ const tableHeader = [
   { id: "CourseDescription", label: "Resource Description" },
   { id: "FirstName", label: "Posted By" },
   { id: "Created_On", label: "Effective From" },
-  { id: "IsActive", label: "IsActive" },
   { id: "File", label: "Download", disableSorting: true },
+  { id: "IsActive", label: "IsActive" },
 ];
 
 const Resources = () => {
@@ -392,7 +392,7 @@ const Resources = () => {
               <div style={{ height: "10px" }}></div>
               <SelectControl
                 name="Classes"
-                label="Classes"
+                label="Class"
                 value={classId}
                 onChange={(e) => setClassId(e.target.value)}
                 options={ddlClass ? ddlClass : test}

@@ -2,7 +2,7 @@
 // export const API_URL = "http://103.90.86.151:100";
 // export const API_URL = "http://192.168.1.85:88";
 
-export const API_URL = "http://vidyacube.com";
+export const API_URL = "https://vidyacube.com";
 
 export const USER_SESSION = sessionStorage.getItem("blueberrytoken");
 

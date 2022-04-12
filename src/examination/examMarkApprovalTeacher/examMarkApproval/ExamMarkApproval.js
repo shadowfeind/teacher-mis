@@ -385,7 +385,7 @@ const ExamMarkApproval = () => {
               <div style={{ height: "10px" }}></div>
               <SelectControl
                 name="Classes"
-                label="Classes"
+                label="Class"
                 value={classId}
                 onChange={(e) => setClassId(e.target.value)}
                 options={ddlClass}

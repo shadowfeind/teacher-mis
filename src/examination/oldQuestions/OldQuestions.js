@@ -38,7 +38,7 @@ const tableHeader = [
   { id: "PostedBy", label: "Posted By" },
   { id: "PostedDate", label: "Posted Date" },
   { id: "IsActive", label: "IsActive" },
-  { id: "actions", label: "Actions", disableSorting: true },
+  { id: "actions", label: "Donload", disableSorting: true },
 ];
 
 const OldQuestions = () => {

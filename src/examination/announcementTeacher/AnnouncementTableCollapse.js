@@ -31,9 +31,9 @@ const useStyles = makeStyles({
 <TableRow>
       <TableCell>{item.NewsHeading}</TableCell>
       <TableCell>{item.NewsDescription}</TableCell>
-      <TableCell>{item.IsActive ? "Active" : "InActive"}</TableCell>
       <TableCell>{item.Created_On.slice(0, 10)}</TableCell>
       <TableCell>{item.Updated_On.slice(0, 10)}</TableCell>
+      <TableCell>{item.IsActive ? "Active" : "InActive"}</TableCell>
       </TableRow>
             </>
         )

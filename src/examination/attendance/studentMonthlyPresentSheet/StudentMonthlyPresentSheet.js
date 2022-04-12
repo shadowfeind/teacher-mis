@@ -506,7 +506,8 @@ const StudentMonthlyPresentSheet = () => {
           students={
             getListForUpdateStudentPresent && getListForUpdateStudentPresent
           }
-          presentStudent={presentStudent && presentStudent}
+          presentStudent={presentStudent && presentStudent} 
+          setOpenPopup={setOpenPopup}
         />
         </>
         )}

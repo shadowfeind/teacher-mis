@@ -239,7 +239,7 @@ const ExamMarkEntry = () => {
             <Grid item xs={3}>
               <SelectControl
                 name="Classes"
-                label="Classes"
+                label="Class"
                 value={classId}
                 onChange={(e) => handleClassIdChange(e.target.value)}
                 options={ddlClass}

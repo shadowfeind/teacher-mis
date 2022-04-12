@@ -59,14 +59,14 @@ const SideMenu = () => {
       dispatch(getHeaderContentAction());
     }
   }, [headerContent, dispatch]);
-  if (headerContentError) {
-    dispatch({ type: GET_HEADER_CONTENT_RESET });
-    setNotify({
-      isOpen: true,
-      message: headerContentError,
-      type: "error",
-    });
-  }
+  // if (headerContentError) {
+  //   dispatch({ type: GET_HEADER_CONTENT_RESET });
+  //   setNotify({
+  //     isOpen: true,
+  //     message: headerContentError,
+  //     type: "error",
+  //   });
+  // }
   const isActive = {
     color: "#253053",
     backgroundColor: "rgba(255, 255, 255, 0.3)",
