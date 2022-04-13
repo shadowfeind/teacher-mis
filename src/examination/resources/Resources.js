@@ -220,9 +220,6 @@ const Resources = () => {
   }
 
   useEffect(() => {
-    if (!allInitialData) {
-      dispatch(getAllInitialResourcesDataAction());
-    }
     if (allInitialData) {
       unstable_batchedUpdates(() => {
         setDdlSubject(allInitialData.searchFilterModel.ddlSubjectForTeacher);
@@ -243,6 +240,11 @@ const Resources = () => {
       }
     }
   }, [allInitialData, dispatch]);
+
+  useEffect(()=>{
+    dispatch({type:GET_ALL_RESOURCES_LIST_RESET})
+    dispatch(getAllInitialResourcesDataAction());
+  },[])
 
   useEffect(() => {
     if (allResources) {

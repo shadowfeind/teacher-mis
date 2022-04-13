@@ -130,13 +130,13 @@ const SideMenu = () => {
           &nbsp;&nbsp;&nbsp; Pid
         </Typography>
       </NavLink>
-      <NavLink to={"/quick-links"} activeStyle={isActive}>
+      {/* <NavLink to={"/quick-links"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
           <Face fontSize="small" />
           &nbsp;&nbsp;&nbsp; Quick Links
         </Typography>
-      </NavLink>
+      </NavLink> */}
       <NavLink to={"/resources"} activeStyle={isActive}>
         <Typography variant="h6">
           <PostAdd fontSize="small" />
