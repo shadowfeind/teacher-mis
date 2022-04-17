@@ -131,18 +131,29 @@ const Header = () => {
     });
   }
 
+  const handleLogout = () => {
+    dispatch({ type: GET_HEADER_CONTENT_RESET });
+    sessionStorage.removeItem("blueberrytoken");
+    window.location.href = "https://vidyacube.com/";
+  };
+
   return (
     <div>
       <AppBar position="static" className={classes.root}>
         <Toolbar>
           <Grid container alignItems="center">
-          <Grid item> <span
-                        style={{
-                          fontSize: "14px",
-                          fontWeight: "bold",
-                          paddingRight: "10px",
-                        }}
-                      >TEACHER DASHBOARD</span></Grid>
+            <Grid item>
+              {" "}
+              <span
+                style={{
+                  fontSize: "14px",
+                  fontWeight: "bold",
+                  paddingRight: "10px",
+                }}
+              >
+                TEACHER DASHBOARD
+              </span>
+            </Grid>
             <Grid item></Grid>
             <Grid item sm></Grid>
             <Grid item>
@@ -211,7 +222,7 @@ const Header = () => {
                             </h3>
                           </div>
                           <h4 onClick={handleProfileClick}>Profile</h4>
-                          <h4>Logout</h4>
+                          <h4 onClick={handleLogout}>Logout</h4>
                         </div>
                       )}
                     </div>

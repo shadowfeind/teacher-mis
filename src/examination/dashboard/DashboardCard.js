@@ -7,13 +7,11 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import ImportContactsIcon from "@material-ui/icons/ImportContacts";
-import PhoneIphoneIcon from "@material-ui/icons/PhoneIphone";
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
-import SettingsIcon from "@material-ui/icons/Settings";
-import EmailIcon from '@material-ui/icons/Email';
+import EmailIcon from "@material-ui/icons/Email";
 import AssignmentIcon from "@material-ui/icons/Assignment";
+import { Link } from "react-router-dom";
 
 export const DashboardCard = ({ subject }) => {
   const useStyles = makeStyles((theme) => ({
@@ -22,6 +20,13 @@ export const DashboardCard = ({ subject }) => {
       borderRadius: "10px",
       boxShadow: "5px 5px 5px #d3d3d3",
       margin: "10px",
+      "& a": {
+        textDecoration: "none",
+      },
+      "& h5": {
+        fontSize: "12px",
+        fontWeight: "lighter",
+      },
     },
     CardContent: {
       marginBottom: "-25px",
@@ -40,12 +45,7 @@ export const DashboardCard = ({ subject }) => {
   }));
   const classes = useStyles();
   const history = useHistory();
-  const handleAssignmentHandler = (id) => {
-    history.push(`/assignment/${id}`);
-  };
-  const handleResouceHandler = (id) => {
-    history.push(`/resources/${id}`);
-  };
+
   return subject ? (
     <Card className={classes.root}>
       <CardMedia
@@ -60,11 +60,7 @@ export const DashboardCard = ({ subject }) => {
           component="h4"
           className={classes.topHeading}
         >
-          {subject.Value}{" "}
-          <span style={{ textAlign: "right", fontSize: "12px", color: "#666" }}>
-            {" "}
-            Credit 4
-          </span>
+          {subject.Value}
         </Typography>
 
         <Typography variant="body2" color="textSecondary" component="h6">
@@ -76,16 +72,22 @@ export const DashboardCard = ({ subject }) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <IconButton aria-label="add to favorites">
-          <AssignmentIcon
-            onClick={() => handleAssignmentHandler(subject.Key)}
-          />
-        </IconButton>
+        <Link to={`/assignment/${subject.Key}`}>
+          <IconButton aria-label="add to favorites">
+            <AssignmentIcon style={{ fontSize: "16px" }} />
+            <h5>Assignment</h5>
+          </IconButton>
+        </Link>
+
+        <Link to={`/resources/${subject.Key}`}>
+          <IconButton aria-label="share">
+            <ImportContactsIcon style={{ fontSize: "16px" }} />
+            <h5>Resources</h5>
+          </IconButton>
+        </Link>
         <IconButton aria-label="share">
-          <ImportContactsIcon onClick={() => handleResouceHandler(subject.Key)} />
-        </IconButton>
-        <IconButton aria-label="share">
-          <NotificationsActiveIcon />
+          <NotificationsActiveIcon style={{ fontSize: "16px" }} />
+          <h5></h5>
         </IconButton>
       </CardActions>
     </Card>
