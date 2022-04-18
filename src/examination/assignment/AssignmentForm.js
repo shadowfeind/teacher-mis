@@ -77,7 +77,7 @@ const useStyles = makeStyles({
   },
 });
 
-const AssignmentForm = ({ students, formDatas,setOpenPopup }) => {
+const AssignmentForm = ({ students, formDatas, setOpenPopup }) => {
   const [checked, setChecked] = useState(false);
   const [image, setImage] = useState(null);
   const [imgSrc, setImgSrc] = useState(null);
@@ -255,7 +255,6 @@ const AssignmentForm = ({ students, formDatas,setOpenPopup }) => {
             />
             <InputControl
               name="ImageUploaded"
-              label="Select File"
               // value={values.ClassLocation}
               onChange={(e) => handleImage(e)}
               type="file"
@@ -267,7 +266,9 @@ const AssignmentForm = ({ students, formDatas,setOpenPopup }) => {
             <InputControl
               name="TotalMark"
               label="Full Marks*"
-              onKeyDown={(e) => symbolsArr.includes(e.key) && e.preventDefault()}
+              onKeyDown={(e) =>
+                symbolsArr.includes(e.key) && e.preventDefault()
+              }
               type="number"
               value={values.TotalMark}
               onChange={handleInputChange}

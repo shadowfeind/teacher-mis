@@ -45,9 +45,7 @@ const ResourcesForm = ({ setOpenPopup, searchFilterModel, dbModel }) => {
       ? "This feild is required"
       : "";
 
-      temp.image = !image
-      ? "This feild is required"
-      :"";
+    temp.image = !image ? "This feild is required" : "";
     setErrors({ ...temp });
     return Object.values(temp).every((x) => x === "");
   };
@@ -67,10 +65,10 @@ const ResourcesForm = ({ setOpenPopup, searchFilterModel, dbModel }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(validate()){
-    dispatch(postResourceAction(image, values, searchFilterModel, dbModel));
+    if (validate()) {
+      dispatch(postResourceAction(image, values, searchFilterModel, dbModel));
+    }
   };
-};
   return (
     <Form onSubmit={handleSubmit}>
       <Grid container style={{ fontSize: "12px" }}>
@@ -82,13 +80,14 @@ const ResourcesForm = ({ setOpenPopup, searchFilterModel, dbModel }) => {
             onChange={handleInputChange}
             errors={errors.CourseName}
           />
+
           <InputControl
             name="ImageUploaded"
-            label="Select File"
             onChange={(e) => handleImage(e)}
             type="file"
             errors={errors.image}
           />
+
           <img src={imgSrc} height={200} width={200} />
         </Grid>
         <Grid item xs={6}>
