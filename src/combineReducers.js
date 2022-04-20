@@ -171,6 +171,7 @@ import {
 import { getAllNotificationTeacherReducer, getListNotificationTeacherReducer } from "./examination/notification/classNotification/ClassNotificationReducer";
 import { getAllTeacherAnnouncement } from "./examination/announcementTeacher/AnnouncementReducers";
 import { getAllHoliday } from "./examination/holiday/HolidayReducers";
+import { deleteLeaveRequestReducer, downloadLeaveRequestReducer, getAllLeaveRequestReducer, getListLeaveRequestReducer, getSingleCreateLeaveRequestReducer, getSingleDeleteLeaveRequestReducer, getSingleEditLeaveRequestReducer, getSingleEditSentLeaveRequestReducer, postLeaveRequestReducer, putLeaveRequestReducer } from "./examination/leaveRequest/LeaveRequestReducers";
 
 export const reducers = combineReducers({
   getHeaderContent: getHeaderContentReducer,
@@ -310,4 +311,16 @@ export const reducers = combineReducers({
   getListNotificationTeacher : getListNotificationTeacherReducer,
   //Announcement Teacher:
   getAllTeacherAnnouncement : getAllTeacherAnnouncement,
+
+  //Leave Request Reducers:
+  getAllLeaveRequest : getAllLeaveRequestReducer,
+  getListLeaveRequest : getListLeaveRequestReducer,
+  getSingleCreateLeaveRequest : getSingleCreateLeaveRequestReducer,
+  getSingleEditLeaveRequest : getSingleEditLeaveRequestReducer,
+  postLeaveRequest : postLeaveRequestReducer,
+  putLeaveRequest : putLeaveRequestReducer,
+  getSingleDeleteLeaveRequest : getSingleDeleteLeaveRequestReducer,
+  deleteLeaveRequest : deleteLeaveRequestReducer,
+  downloadLeaveRequest : downloadLeaveRequestReducer,
+  getSingleEditSentLeaveRequest : getSingleEditSentLeaveRequestReducer,
 });

@@ -140,7 +140,7 @@ const SideMenu = () => {
       <NavLink to={"/resources"} activeStyle={isActive}>
         <Typography variant="h6">
           <PostAdd fontSize="small" />
-          &nbsp;&nbsp;&nbsp; Resources
+          &nbsp;&nbsp;&nbsp; Reading Material
         </Typography>
       </NavLink>
       <NavLink to={"/class-schedule"} activeStyle={isActive}>
@@ -153,14 +153,14 @@ const SideMenu = () => {
       <NavLink to={"/assignment"} activeStyle={isActive}>
         <Typography variant="h6">
           <PostAdd fontSize="small" />
-          &nbsp;&nbsp;&nbsp; Assignment
+          &nbsp;&nbsp;&nbsp; Assignment / Homeworks
         </Typography>
       </NavLink>
       <NavLink to={"/exam-mark-approval"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
           <Accessible fontSize="small" />
-          &nbsp;&nbsp;&nbsp; Exam Mark Entry
+          &nbsp;&nbsp;&nbsp; Exam Mark Entry / Update
         </Typography>
       </NavLink>
       <NavLink to={"/syllabus"} activeStyle={isActive}>
@@ -196,6 +196,13 @@ const SideMenu = () => {
           <Accessible fontSize="small" />
           &nbsp;&nbsp;&nbsp; Holiday
 
+        </Typography>
+      </NavLink>
+      <NavLink to={"/leave-request"} activeStyle={isActive}>
+        <Typography variant="h6">
+          {" "}
+          <PostAdd fontSize="small" />
+          &nbsp;&nbsp;&nbsp; Leave Request
         </Typography>
       </NavLink>
       <NavLink to={"/video-conference"} activeStyle={isActive}>
