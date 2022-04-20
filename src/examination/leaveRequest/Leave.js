@@ -155,7 +155,7 @@ const Leave = () => {
                     color: "#fff",
                   }}
                 >
-                  Leave Approve
+                  Leave Approve (Inbox)
                 </h4>{" "}
                 {/* </div> */}
               </div>
@@ -178,7 +178,7 @@ const Leave = () => {
                   }}
                   onClick={() => setLeave("request")}
                 >
-                  Leave Requests
+                  Leave Requests (Sent)
                 </h4>{" "}
                 <h4
                   className={classes.button}
