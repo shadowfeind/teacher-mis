@@ -72,7 +72,7 @@ function TabPanel(props) {
           >
             <Tab
               style={{ fontSize: "11px", color: "#fff" }}
-              label="Exam Mark Approval"
+              label="Exam Mark Entry"
               {...a11yProps(0)}
             />
           </Tabs>

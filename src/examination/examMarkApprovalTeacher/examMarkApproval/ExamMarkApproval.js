@@ -31,6 +31,7 @@ import { getEventAction } from "../../examMarkEntry/ExamMarkEntryActions";
 import { GET_EVENT_RESET } from "../../examMarkEntry/ExamMarkEntryConstants";
 import {
   GET_ACTIVE_SUBJECT_RESET,
+  GET_ALL_EXAM_MARK_APPROVAL_SEARCHDATA_RESET,
   GET_ALL_OTHER_OPTIONS_FOR_SELECT_TEACHER_RESET,
   GET_BULK_EXAM_MARK_APPROVAL_RESET,
   GET_EXAM_MARK_APPROVAL_INITIAL_DATA_RESET,
@@ -220,9 +221,6 @@ const ExamMarkApproval = () => {
   }
 
   useEffect(() => {
-    if (!examMarkApprovalInitialDatas) {
-      dispatch(getInitialExamMarkApprovalDataAction());
-    }
     if (examMarkApprovalInitialDatas) {
       unstable_batchedUpdates(() => {
         setDdlSchedule(
@@ -231,6 +229,11 @@ const ExamMarkApproval = () => {
       });
     }
   }, [examMarkApprovalInitialDatas, dispatch]);
+
+  useEffect(()=>{
+    dispatch({type:GET_ALL_EXAM_MARK_APPROVAL_SEARCHDATA_RESET})
+    dispatch(getInitialExamMarkApprovalDataAction());
+  },[])
 
   const subjectHandler = (value) => {
     setSchedule(value);
@@ -385,7 +388,7 @@ const ExamMarkApproval = () => {
               <div style={{ height: "10px" }}></div>
               <SelectControl
                 name="Classes"
-                label="Classes"
+                label="Class"
                 value={classId}
                 onChange={(e) => setClassId(e.target.value)}
                 options={ddlClass}

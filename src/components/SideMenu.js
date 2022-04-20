@@ -59,14 +59,14 @@ const SideMenu = () => {
       dispatch(getHeaderContentAction());
     }
   }, [headerContent, dispatch]);
-  if (headerContentError) {
-    dispatch({ type: GET_HEADER_CONTENT_RESET });
-    setNotify({
-      isOpen: true,
-      message: headerContentError,
-      type: "error",
-    });
-  }
+  // if (headerContentError) {
+  //   dispatch({ type: GET_HEADER_CONTENT_RESET });
+  //   setNotify({
+  //     isOpen: true,
+  //     message: headerContentError,
+  //     type: "error",
+  //   });
+  // }
   const isActive = {
     color: "#253053",
     backgroundColor: "rgba(255, 255, 255, 0.3)",
@@ -130,17 +130,17 @@ const SideMenu = () => {
           &nbsp;&nbsp;&nbsp; Pid
         </Typography>
       </NavLink>
-      <NavLink to={"/quick-links"} activeStyle={isActive}>
+      {/* <NavLink to={"/quick-links"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
           <Face fontSize="small" />
           &nbsp;&nbsp;&nbsp; Quick Links
         </Typography>
-      </NavLink>
+      </NavLink> */}
       <NavLink to={"/resources"} activeStyle={isActive}>
         <Typography variant="h6">
           <PostAdd fontSize="small" />
-          &nbsp;&nbsp;&nbsp; Resources
+          &nbsp;&nbsp;&nbsp; Reading Material
         </Typography>
       </NavLink>
       <NavLink to={"/class-schedule"} activeStyle={isActive}>
@@ -153,14 +153,14 @@ const SideMenu = () => {
       <NavLink to={"/assignment"} activeStyle={isActive}>
         <Typography variant="h6">
           <PostAdd fontSize="small" />
-          &nbsp;&nbsp;&nbsp; Assignment
+          &nbsp;&nbsp;&nbsp; Assignment / Homeworks
         </Typography>
       </NavLink>
       <NavLink to={"/exam-mark-approval"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
           <Accessible fontSize="small" />
-          &nbsp;&nbsp;&nbsp; Exam Mark Entry
+          &nbsp;&nbsp;&nbsp; Exam Mark Entry / Update
         </Typography>
       </NavLink>
       <NavLink to={"/syllabus"} activeStyle={isActive}>
@@ -196,6 +196,13 @@ const SideMenu = () => {
           <Accessible fontSize="small" />
           &nbsp;&nbsp;&nbsp; Holiday
 
+        </Typography>
+      </NavLink>
+      <NavLink to={"/leave-request"} activeStyle={isActive}>
+        <Typography variant="h6">
+          {" "}
+          <PostAdd fontSize="small" />
+          &nbsp;&nbsp;&nbsp; Leave Request
         </Typography>
       </NavLink>
       <NavLink to={"/video-conference"} activeStyle={isActive}>

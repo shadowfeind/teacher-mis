@@ -24,6 +24,7 @@ const Pid = lazy(() => import("./examination/pid/Pid"));
 const QuickLinks = lazy(() => import("./examination/quickLinks/QuickLinks"));
 const Resources = lazy(() => import("./examination/resources/Resources"));
 const Syllabus = lazy(() => import("./examination/syllabus/syllabusMain"));
+const LeaveRequest = lazy(() => import("./examination/leaveRequest/Leave"));
 const OldQuestions = lazy(() =>
   import("./examination/oldQuestions/OldQuestions")
 );
@@ -103,6 +104,7 @@ const App = () => {
                 path={"/academic-grading"}
                 component={AcademicGrading}
               />
+              <Route exact path={"/leave-request"} component={LeaveRequest} />
               <Route exact path={"/notification"} component={Notification} />
               <Route exact path={"/holiday"} component={Holiday} />
               <Route exact path={"/"} component={Dashboard} />

@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Notification from "../../components/Notification";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import SelectControl from "../../components/controls/SelectControl";
-import { DOWNLOAD_OLD_QUESTIONS_RESET, GET_ALL_OLD_QUESTIONS_TEACHER_RESET } from "./OldQuestionsConstants";
+import { DOWNLOAD_OLD_QUESTIONS_RESET, GET_ALL_OLD_QUESTIONS_TEACHER_RESET, GET_LIST_OLD_QUESTIONS_TEACHER_RESET } from "./OldQuestionsConstants";
 import { getAllOldQuestionsTeacherAction, getListOldQuestionsTeacherAction, getSubjectOldQuestionsAction } from "./OldQuestionsActions";
 import OldQuestionsTeacherTableCollapse from "./OldQuestionsTableCollapse";
 
@@ -38,7 +38,7 @@ const tableHeader = [
   { id: "PostedBy", label: "Posted By" },
   { id: "PostedDate", label: "Posted Date" },
   { id: "IsActive", label: "IsActive" },
-  { id: "actions", label: "Actions", disableSorting: true },
+  { id: "actions", label: "Donload", disableSorting: true },
 ];
 
 const OldQuestions = () => {
@@ -141,13 +141,15 @@ const OldQuestions = () => {
   }
 
   useEffect(() => {
-    if (!oldQuestionsTeacher) {
-      dispatch(getAllOldQuestionsTeacherAction());
-    }
     if (oldQuestionsTeacher) {
       setDdlClass(oldQuestionsTeacher.searchFilterModel.ddlClass);
     }
   }, [dispatch, oldQuestionsTeacher]);
+
+  useEffect(()=>{
+    dispatch({type:GET_LIST_OLD_QUESTIONS_TEACHER_RESET});
+    dispatch(getAllOldQuestionsTeacherAction());
+  },[])
 
   useEffect(() => {
     if (listOldQuestionsTeacher) {

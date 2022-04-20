@@ -309,10 +309,6 @@ const Assignment = () => {
   }
 
   useEffect(() => {
-    if (!allAssignmentTeacherData) {
-      dispatch(getAllAssignmentTeacherAction());
-    }
-
     if (allAssignmentTeacherData) {
       unstable_batchedUpdates(() => {
         setDdlSubject(
@@ -346,6 +342,11 @@ const Assignment = () => {
       }
     }
   }, [allAssignmentTeacherData, dispatch]);
+
+  useEffect(()=>{
+    dispatch({type: GET_LIST_TEACHER_ASSIGNMENT_RESET})
+    dispatch(getAllAssignmentTeacherAction());
+  },[])
 
   useEffect(() => {
     if (getListTeacherAssignment) {
@@ -509,7 +510,7 @@ const Assignment = () => {
             <Grid item xs={3}>
               <SelectControl
                 name="Classes"
-                label="Classes"
+                label="Class"
                 value={classId}
                 onChange={(e) => setClassId(e.target.value)}
                 options={ddlClass ? ddlClass : test}
@@ -593,6 +594,7 @@ const Assignment = () => {
           <LoadingComp />
         ) : (
           <>
+          {getListTeacherAssignment && (
         <TableContainer className={classes.table}>
           <TblHead />
 
@@ -606,7 +608,8 @@ const Assignment = () => {
             ))}
           </TableBody>
         </TableContainer>
-        <TblPagination />
+          )}
+        { getListTeacherAssignment && <TblPagination />}
         </>
         )}
       </CustomContainer>

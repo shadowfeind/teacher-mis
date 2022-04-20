@@ -56,8 +56,8 @@ const tableHeader = [
   { id: "CourseDescription", label: "Resource Description" },
   { id: "FirstName", label: "Posted By" },
   { id: "Created_On", label: "Effective From" },
-  { id: "IsActive", label: "IsActive" },
   { id: "File", label: "Download", disableSorting: true },
+  { id: "IsActive", label: "IsActive" },
 ];
 
 const Resources = () => {
@@ -220,9 +220,6 @@ const Resources = () => {
   }
 
   useEffect(() => {
-    if (!allInitialData) {
-      dispatch(getAllInitialResourcesDataAction());
-    }
     if (allInitialData) {
       unstable_batchedUpdates(() => {
         setDdlSubject(allInitialData.searchFilterModel.ddlSubjectForTeacher);
@@ -243,6 +240,11 @@ const Resources = () => {
       }
     }
   }, [allInitialData, dispatch]);
+
+  useEffect(()=>{
+    dispatch({type:GET_ALL_RESOURCES_LIST_RESET})
+    dispatch(getAllInitialResourcesDataAction());
+  },[])
 
   useEffect(() => {
     if (allResources) {
@@ -392,7 +394,7 @@ const Resources = () => {
               <div style={{ height: "10px" }}></div>
               <SelectControl
                 name="Classes"
-                label="Classes"
+                label="Class"
                 value={classId}
                 onChange={(e) => setClassId(e.target.value)}
                 options={ddlClass ? ddlClass : test}
