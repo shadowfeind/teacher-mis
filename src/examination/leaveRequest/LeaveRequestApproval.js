@@ -19,7 +19,9 @@ import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 import {
   DOWNLOAD_DOC_LEAVE_REQUESTS_RESET,
   GET_LIST_LEAVE_REQUESTS_RESET,
+  GET_SINGLE_TO_CREATE_LEAVE_REQUESTS_RESET,
   GET_SINGLE_TO_EDIT_LEAVE_REQUESTS_RESET,
+  PUT_LEAVE_REQUESTS_RESET,
 } from "./LeaveRequestConstants";
 import {
   downloadLeaveRequestAction,
@@ -27,6 +29,7 @@ import {
   getSingleEditSentLeaveRequestAction,
 } from "./LeaveRequestActions";
 import LeaveRequestForm from "./LeaveRequestForm";
+import LeaveRequestSentForm from "./LeaveRequestSentForm";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -104,6 +107,9 @@ const LeaveRequestApproval = () => {
   const { singleEditSentLeaveRequest, error: singleEditSentLeaveRequestError } =
     useSelector((state) => state.getSingleEditSentLeaveRequest);
 
+    const { success: putLeaveRequestSuccess, error: putLeaveRequestError } =
+    useSelector((state) => state.putLeaveRequest);
+
   const {
     //   success: downloadDocSuccess,
     //   file: downloadFile,
@@ -128,6 +134,26 @@ const LeaveRequestApproval = () => {
     dispatch({ type: DOWNLOAD_DOC_LEAVE_REQUESTS_RESET });
   }
 
+  if (putLeaveRequestError) {
+    setNotify({
+      isOpen: true,
+      message: putLeaveRequestError,
+      type: "error",
+    });
+    dispatch({ type: PUT_LEAVE_REQUESTS_RESET });
+  }
+
+  if (putLeaveRequestSuccess) {
+    dispatch(getListLeaveRequestAction());
+    setNotify({
+      isOpen: true,
+      message: "Leave Request Edited Succesfully",
+      type: "success",
+    });
+    setApprovalPopUp(false);
+    dispatch({ type: PUT_LEAVE_REQUESTS_RESET });
+  }
+
   if (listLeaveRequestError) {
     setNotify({
       isOpen: true,
@@ -139,6 +165,7 @@ const LeaveRequestApproval = () => {
 
   const updateCollegeHandler = (id) => {
     dispatch(getSingleEditSentLeaveRequestAction(id));
+    dispatch({type:GET_SINGLE_TO_CREATE_LEAVE_REQUESTS_RESET})
     setApprovalPopUp(true);
   };
 
@@ -202,7 +229,7 @@ const LeaveRequestApproval = () => {
         setOpenPopup={setApprovalPopUp}
         title="Leave Request Form"
       >
-        <LeaveRequestForm
+        <LeaveRequestSentForm
           leaveRequestEditApproval={
             singleEditSentLeaveRequest && singleEditSentLeaveRequest
           }
