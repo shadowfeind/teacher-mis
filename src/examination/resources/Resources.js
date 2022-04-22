@@ -56,8 +56,9 @@ const tableHeader = [
   { id: "CourseDescription", label: "Resource Description" },
   { id: "FirstName", label: "Posted By" },
   { id: "Created_On", label: "Effective From" },
-  { id: "File", label: "Download", disableSorting: true },
   { id: "IsActive", label: "IsActive" },
+  { id: "File", label: "Download", disableSorting: true },
+  
 ];
 
 const Resources = () => {
