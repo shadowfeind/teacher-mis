@@ -28,6 +28,7 @@ const downloadHandler = (id) => {
       <TableCell>{item.CourseDescription}</TableCell>
       <TableCell>{item.FirstName} {item.MiddleName} {item.LastName}</TableCell>
       <TableCell>{item.Created_On.slice(0, 10)}</TableCell>
+      <TableCell>{item.IsActive ? "Active" : "InActive"}</TableCell>
       <TableCell>
       <Button
             variant="contained"
@@ -38,7 +39,6 @@ const downloadHandler = (id) => {
             <CloudDownloadIcon style={{ fontSize: 12 }} />
             </Button>
       </TableCell>
-      <TableCell>{item.IsActive ? "Active" : "InActive"}</TableCell>
     </TableRow>
   );
 };
