@@ -56,8 +56,9 @@ const tableHeader = [
   { id: "CourseDescription", label: "Resource Description" },
   { id: "FirstName", label: "Posted By" },
   { id: "Created_On", label: "Effective From" },
-  { id: "File", label: "Download", disableSorting: true },
   { id: "IsActive", label: "IsActive" },
+  { id: "File", label: "Download", disableSorting: true },
+  
 ];
 
 const Resources = () => {
@@ -360,7 +361,7 @@ const Resources = () => {
       <CustomContainer>
         <Toolbar>
           <Grid container style={{ fontSize: "12px" }}>
-            <Grid item xs={6}>
+            <Grid item xs={3}>
               <SelectControl
                 name="Sujbect"
                 label="Subject Name"
@@ -380,7 +381,7 @@ const Resources = () => {
                 errors={errors.acaYear}
               />
             </Grid>
-            <Grid item xs={3}>
+            {/* <Grid item xs={3}>
               <SelectControl
                 name="Program/Faculty"
                 label="Program/Faculty"
@@ -389,8 +390,8 @@ const Resources = () => {
                 options={programDdl ? programDdl : test}
                 errors={errors.programValue}
               />
-            </Grid>
-            <Grid item xs={3}>
+            </Grid> */}
+            {/* <Grid item xs={3}>
               <div style={{ height: "10px" }}></div>
               <SelectControl
                 name="Classes"
@@ -400,9 +401,8 @@ const Resources = () => {
                 options={ddlClass ? ddlClass : test}
                 errors={errors.classId}
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={3}>
-              <div style={{ height: "10px" }}></div>
               <SelectControl
                 name="Shift"
                 label="Shift"
@@ -413,7 +413,6 @@ const Resources = () => {
               />
             </Grid>
             <Grid item xs={3}>
-              <div style={{ height: "10px" }}></div>
               <SelectControl
                 name="Section"
                 label="Section"

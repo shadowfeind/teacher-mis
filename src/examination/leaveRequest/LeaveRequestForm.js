@@ -89,11 +89,11 @@ const LeaveRequestForm = ({
     }
   }, [leaveRequestEdit]);
 
-  useEffect(() => {
-    if (leaveRequestEditApproval) {
-      setValues({ ...leaveRequestEditApproval.dbModel });
-    }
-  }, [leaveRequestEditApproval]);
+  // useEffect(() => {
+  //   if (leaveRequestEditApproval) {
+  //     setValues({ ...leaveRequestEditApproval.dbModel });
+  //   }
+  // }, [leaveRequestEditApproval]);
 
   const gender = [{ Key: "", Value: "" }];
 
@@ -111,8 +111,6 @@ const LeaveRequestForm = ({
                 ? leaveRequestEdit.ddlTeacher
                 : leaveRequestCreate
                 ? leaveRequestCreate.ddlTeacher
-                :leaveRequestEditApproval 
-                ? leaveRequestEditApproval.ddlTeacher
                 : gender
             }
             errors={errors.ReceiverID}
@@ -151,8 +149,6 @@ const LeaveRequestForm = ({
                 ? leaveRequestEdit.ddlIsActive
                 : leaveRequestCreate
                 ? leaveRequestCreate.ddlIsActive
-                :leaveRequestEditApproval 
-                ? leaveRequestEditApproval.ddlIsActive
                 : gender
             }
           />
@@ -169,9 +165,6 @@ const LeaveRequestForm = ({
               imgSrc
                 ? imgSrc
                 : leaveRequestEdit && `${API_URL}${leaveRequestEdit.FullPath}`
-                & imgSrc
-                ? imgSrc
-                : leaveRequestEditApproval && `${API_URL}${leaveRequestEditApproval.FullPath}`
             }
             height={200}
             width={200}
@@ -195,8 +188,6 @@ const LeaveRequestForm = ({
                 ? leaveRequestEdit.ddlStatus
                 : leaveRequestCreate
                 ? leaveRequestCreate.ddlStatus
-                :leaveRequestEditApproval 
-                ? leaveRequestEditApproval.ddlStatus
                 : gender
             }
           />

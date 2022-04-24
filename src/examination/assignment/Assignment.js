@@ -487,7 +487,7 @@ const Assignment = () => {
                 errors={errors.subject}
               />
             </Grid>
-            <Grid item xs={3}>
+         <Grid item xs={3}>
               <SelectControl
                 name="Academic Year"
                 label="Academic Year"
@@ -497,7 +497,7 @@ const Assignment = () => {
                 errors={errors.acaYear}
               />
             </Grid>
-            <Grid item xs={3}>
+               {/* <Grid item xs={3}>
               <SelectControl
                 name="Program/Faculty"
                 label="Program/Faculty"
@@ -516,10 +516,9 @@ const Assignment = () => {
                 options={ddlClass ? ddlClass : test}
                 errors={errors.classId}
               />
-            </Grid>
+            </Grid> */}
 
             <Grid item xs={3}>
-              <div style={{ height: "10px" }}></div>
               <SelectControl
                 name="Section"
                 label="Section"
@@ -530,7 +529,6 @@ const Assignment = () => {
               />
             </Grid>
             <Grid item xs={3}>
-              <div style={{ height: "10px" }}></div>
               <SelectControl
                 name="Shift"
                 label="Shift"
@@ -541,7 +539,7 @@ const Assignment = () => {
               />
             </Grid>
             <Grid item xs={3}>
-              <div style={{ height: "10px" }}></div>
+            <div style={{ height: "10px" }}></div>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
                   disableToolbar
@@ -559,6 +557,7 @@ const Assignment = () => {
               </MuiPickersUtilsProvider>
             </Grid>
             <Grid item xs={3}>
+            <div style={{ height: "10px" }}></div>
               <Button
                 variant="contained"
                 color="primary"
