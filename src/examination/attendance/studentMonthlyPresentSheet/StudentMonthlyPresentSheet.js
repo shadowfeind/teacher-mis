@@ -377,7 +377,7 @@ const StudentMonthlyPresentSheet = () => {
                 errors={errors.acaYear}
               />
             </Grid>
-            <Grid item xs={3}>
+            {/* <Grid item xs={3}>
               <SelectControl
                 name="Program/Faculty"
                 label="Program/Faculty"
@@ -396,10 +396,10 @@ const StudentMonthlyPresentSheet = () => {
                 options={ddlClass ? ddlClass : test}
                 errors={errors.classId}
               />
-            </Grid>
+            </Grid> */}
 
             <Grid item xs={3}>
-              <div style={{ height: "10px" }}></div>
+              
               <SelectControl
                 name="Section"
                 label="Section"
@@ -410,7 +410,7 @@ const StudentMonthlyPresentSheet = () => {
               />
             </Grid>
             <Grid item xs={3}>
-              <div style={{ height: "10px" }}></div>
+              
               <SelectControl
                 name="Shift"
                 label="Shift"
@@ -462,6 +462,7 @@ const StudentMonthlyPresentSheet = () => {
               </MuiPickersUtilsProvider>
             </Grid>
             <Grid item xs={3}>
+            <div style={{ height: "10px" }}></div>
               <Button
                 variant="contained"
                 color="primary"

@@ -267,7 +267,7 @@ const TotalStudentAttendance = () => {
                 errors={errors.acaYear}
               />
             </Grid>
-            <Grid item xs={3}>
+            {/* <Grid item xs={3}>
               <SelectControl
                 name="Program/Faculty"
                 label="Program/Faculty"
@@ -286,7 +286,7 @@ const TotalStudentAttendance = () => {
                 options={ddlClass ? ddlClass : test}
                 errors={errors.classId}
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={3}>
               <SelectControl
                 name="Shift"
@@ -298,7 +298,7 @@ const TotalStudentAttendance = () => {
               />
             </Grid>
             <Grid item xs={3}>
-              <div style={{ height: "10px" }}></div>
+             
               <SelectControl
                 name="Section"
                 label="Section"
@@ -309,7 +309,7 @@ const TotalStudentAttendance = () => {
               />
             </Grid>
             <Grid item xs={3}>
-              <div style={{ height: "10px" }}></div>
+              
               <SelectControl
                 name="Sujbect"
                 label="Subject Name"
@@ -357,6 +357,7 @@ const TotalStudentAttendance = () => {
               </MuiPickersUtilsProvider>
             </Grid>
             <Grid item xs={3}>
+            <div style={{ height: "10px" }}></div>
               <Button
                 variant="contained"
                 color="primary"
@@ -370,7 +371,8 @@ const TotalStudentAttendance = () => {
             </Grid>
           </Grid>
         </Toolbar>
-        <Toolbar>
+        <div style={{ height: "10px" }}></div>
+        <Toolbar>        
           <InputControl
             className={classes.searchInput}
             label="Search Student"

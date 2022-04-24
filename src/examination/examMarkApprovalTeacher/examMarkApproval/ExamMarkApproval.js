@@ -364,7 +364,7 @@ const ExamMarkApproval = () => {
                 errors={errors.schedule}
               />
             </Grid>
-            <Grid item xs={3}>
+           <Grid item xs={3}>
               <SelectControl
                 name="AcademicYear"
                 label="Academic Year"
@@ -374,7 +374,7 @@ const ExamMarkApproval = () => {
                 errors={errors.acaYear}
               />
             </Grid>
-            <Grid item xs={3}>
+             {/* <Grid item xs={3}>
               <SelectControl
                 name="Program/Faculty"
                 label="Program/Faculty"
@@ -394,9 +394,9 @@ const ExamMarkApproval = () => {
                 options={ddlClass}
                 errors={errors.classId}
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={3}>
-              <div style={{ height: "10px" }}></div>
+              
               <SelectControl
                 name="Shift"
                 label="Shift"
@@ -407,7 +407,7 @@ const ExamMarkApproval = () => {
               />
             </Grid>
             <Grid item xs={3}>
-              <div style={{ height: "10px" }}></div>
+            <div style={{ height: "10px" }}></div>
               <SelectControl
                 name="Section"
                 label="Section"
@@ -430,6 +430,7 @@ const ExamMarkApproval = () => {
             </Grid>
 
             <Grid item xs={3}>
+            <div style={{ height: "10px" }}></div>
               <Button
                 variant="contained"
                 color="primary"
