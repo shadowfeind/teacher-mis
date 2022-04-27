@@ -108,7 +108,7 @@ const LeaveRequestDeleteForm = ({ leaveRequestDelete, setOpenPopUp }) => {
             value={values.ToDate}
             onChange={handleInputChange}
           />
-          <SelectControl
+          <InputControl
             disabled
             name="Status"
             label="Status"
