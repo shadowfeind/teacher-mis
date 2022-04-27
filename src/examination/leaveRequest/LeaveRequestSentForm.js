@@ -87,8 +87,9 @@ const LeaveRequestSentForm = ({
       <Grid container style={{ fontSize: "12px" }}>
         <Grid item xs={6}>
           <SelectControl
+          disabled
             name="ReceiverID"
-            label="ReceiverID"
+            label="Receiver Name"
             value={values.ReceiverID}
             onChange={null}
             options={

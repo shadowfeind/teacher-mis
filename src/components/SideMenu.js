@@ -3,17 +3,22 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { API_URL } from "../constants";
-import {
-  School,
-  Accessible,
-  PeopleOutline,
-  ChromeReaderMode,
-  Face,
-  Assessment,
-  Settings,
-  PostAdd,
-  RecordVoiceOver,
-} from "@material-ui/icons";
+import VideocamIcon from '@material-ui/icons/Videocam';
+import ReportProblemIcon from '@material-ui/icons/ReportProblem';
+import EventBusyIcon from '@material-ui/icons/EventBusy';
+import AnnouncementIcon from '@material-ui/icons/Announcement';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import DescriptionIcon from '@material-ui/icons/Description';
+import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import BookIcon from '@material-ui/icons/Book';
+import DvrRoundedIcon from '@material-ui/icons/DvrRounded';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import HowToRegRoundedIcon from '@material-ui/icons/HowToRegRounded';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import { getHeaderContentAction } from "../examination/dashboard/DashboardActions";
 import { GET_HEADER_CONTENT_RESET } from "../examination/dashboard/DashboardConstants";
 
@@ -91,21 +96,21 @@ const SideMenu = () => {
       <NavLink to={"/"} exact={true} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
-          <ChromeReaderMode fontSize="small" />
+          <DashboardIcon fontSize="small" />
           &nbsp;&nbsp;&nbsp; DashBoard
         </Typography>
       </NavLink>
       <NavLink to={"/academic-grading"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
-          <School fontSize="small" />
+          <TrendingUpIcon fontSize="small" />
           &nbsp;&nbsp;&nbsp; Academic Grading
         </Typography>
       </NavLink>
       <NavLink to={"/exam-division"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
-          <Accessible fontSize="small" />
+          <DvrRoundedIcon fontSize="small" />
           &nbsp;&nbsp;&nbsp; Exam Division
         </Typography>
       </NavLink>
@@ -119,15 +124,15 @@ const SideMenu = () => {
 
       <NavLink to={"/attendance"} activeStyle={isActive}>
         <Typography variant="h6">
-          <Assessment fontSize="small" />
+          <HowToRegRoundedIcon fontSize="small" />
           &nbsp;&nbsp;&nbsp; Attendance
         </Typography>
       </NavLink>
       <NavLink to={"/pid"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
-          <Settings fontSize="small" />
-          &nbsp;&nbsp;&nbsp; Pid
+          <AccountCircleIcon fontSize="small" />
+          &nbsp;&nbsp;&nbsp; User Profile
         </Typography>
       </NavLink>
       {/* <NavLink to={"/quick-links"} activeStyle={isActive}>
@@ -139,61 +144,61 @@ const SideMenu = () => {
       </NavLink> */}
       <NavLink to={"/resources"} activeStyle={isActive}>
         <Typography variant="h6">
-          <PostAdd fontSize="small" />
+          <BookIcon fontSize="small" />
           &nbsp;&nbsp;&nbsp; Reading Material
         </Typography>
       </NavLink>
       <NavLink to={"/class-schedule"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
-          <PeopleOutline fontSize="small" />
+          <CalendarTodayIcon fontSize="small" />
           &nbsp;&nbsp;&nbsp; Class Routine
         </Typography>
       </NavLink>
       <NavLink to={"/assignment"} activeStyle={isActive}>
         <Typography variant="h6">
-          <PostAdd fontSize="small" />
+          <AssignmentTurnedInIcon fontSize="small" />
           &nbsp;&nbsp;&nbsp; Assignment / Homeworks
         </Typography>
       </NavLink>
       <NavLink to={"/exam-mark-approval"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
-          <Accessible fontSize="small" />
+          <SystemUpdateAltIcon fontSize="small" />
           &nbsp;&nbsp;&nbsp; Exam Mark Entry / Update
         </Typography>
       </NavLink>
       <NavLink to={"/syllabus"} activeStyle={isActive}>
         <Typography variant="h6">
-          <RecordVoiceOver fontSize="small" />
+          <DescriptionIcon fontSize="small" />
           &nbsp;&nbsp;&nbsp; Syllabus
         </Typography>
       </NavLink>
       <NavLink to={"/old-questions"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
-          <Accessible fontSize="small" />
+          <MenuBookIcon fontSize="small" />
           &nbsp;&nbsp;&nbsp; Old Questions
         </Typography>
       </NavLink>
       <NavLink to={"/notification"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
-          <Accessible fontSize="small" />
+          <NotificationsIcon fontSize="small" />
           &nbsp;&nbsp;&nbsp; Notification
         </Typography>
       </NavLink>
       <NavLink to={"/announcement"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
-          <Accessible fontSize="small" />
+          <AnnouncementIcon fontSize="small" />
           &nbsp;&nbsp;&nbsp; Announcement
           </Typography>
       </NavLink>
       <NavLink to={"/holiday"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
-          <Accessible fontSize="small" />
+          <EventBusyIcon fontSize="small" />
           &nbsp;&nbsp;&nbsp; Holiday
 
         </Typography>
@@ -201,14 +206,14 @@ const SideMenu = () => {
       <NavLink to={"/leave-request"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
-          <PostAdd fontSize="small" />
+          <ReportProblemIcon fontSize="small" />
           &nbsp;&nbsp;&nbsp; Leave Request
         </Typography>
       </NavLink>
       <NavLink to={"/video-conference"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
-          <Accessible fontSize="small" />
+          <VideocamIcon fontSize="small" />
           &nbsp;&nbsp;&nbsp; Video Conference
         </Typography>
       </NavLink>
