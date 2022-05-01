@@ -107,7 +107,7 @@ const LeaveRequestApproval = () => {
   const { singleEditSentLeaveRequest, error: singleEditSentLeaveRequestError } =
     useSelector((state) => state.getSingleEditSentLeaveRequest);
 
-    const { success: putLeaveRequestSuccess, error: putLeaveRequestError } =
+  const { success: putLeaveRequestSuccess, error: putLeaveRequestError } =
     useSelector((state) => state.putLeaveRequest);
 
   const {
@@ -165,7 +165,7 @@ const LeaveRequestApproval = () => {
 
   const updateCollegeHandler = (id) => {
     dispatch(getSingleEditSentLeaveRequestAction(id));
-    dispatch({type:GET_SINGLE_TO_CREATE_LEAVE_REQUESTS_RESET})
+    dispatch({ type: GET_SINGLE_TO_CREATE_LEAVE_REQUESTS_RESET });
     setApprovalPopUp(true);
   };
 
@@ -193,7 +193,7 @@ const LeaveRequestApproval = () => {
                 {s.FirsName} {s.MiddleName} {s.LastName}
               </StyledTableCell>
               <StyledTableCell align="left">
-                {s.LeaveDecription?.slice(0,20)}
+                {s.LeaveDecription?.slice(0, 20)}
               </StyledTableCell>
               <StyledTableCell align="left">
                 {s.FromDate?.slice(0, 10)} /<div>{s.ToDate?.slice(0, 10)}</div>
@@ -209,14 +209,14 @@ const LeaveRequestApproval = () => {
                   <EditIcon style={{ fontSize: 12 }} />
                 </Button>{" "}
                 {s.DocumentName !== null && (
-                <Button
-                  variant="contained"
-                  color="default"
-                  className={classes.button}
-                  onClick={() => downloadHandler(s.IDLeaveRequest)}
-                >
-                  <CloudDownloadIcon style={{ fontSize: 12 }} />
-                </Button>
+                  <Button
+                    variant="contained"
+                    color="default"
+                    className={classes.button}
+                    onClick={() => downloadHandler(s.IDLeaveRequest)}
+                  >
+                    <CloudDownloadIcon style={{ fontSize: 12 }} />
+                  </Button>
                 )}
               </StyledTableCell>
             </StyledTableRow>
@@ -233,9 +233,6 @@ const LeaveRequestApproval = () => {
           leaveRequestEditApproval={
             singleEditSentLeaveRequest && singleEditSentLeaveRequest
           }
-          // leaveRequestCreate={
-          //   singleCreateLeaveRequest && singleCreateLeaveRequest
-          // }
           setOpenPopUp={setApprovalPopUp}
         />
       </Popup>

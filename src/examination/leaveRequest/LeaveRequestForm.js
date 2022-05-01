@@ -60,7 +60,13 @@ const LeaveRequestForm = ({
 
     if (validate()) {
       if (values.IDLeaveRequest === 0) {
-        dispatch(postLeaveRequestAction(values, image));
+        dispatch(
+          postLeaveRequestAction(
+            values,
+            image,
+            leaveRequestCreate.SchoolShortName
+          )
+        );
       } else {
         dispatch(putLeaveRequestAction(values, image));
       }
@@ -179,7 +185,7 @@ const LeaveRequestForm = ({
             errors={errors.ToDate}
           />
           <InputControl
-          disabled
+            disabled
             name="Status"
             label="Status"
             value={values.Status}
