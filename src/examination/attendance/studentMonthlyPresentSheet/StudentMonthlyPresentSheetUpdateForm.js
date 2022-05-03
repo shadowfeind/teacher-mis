@@ -82,7 +82,8 @@ const StudentMonthlyPresentSheetUpdateForm = ({ students, setOpenPopup }) => {
       postStudentPresentListAction(
         stuAttendance,
         students.searchFilterModel,
-        students.SchoolShortName
+        students.SchoolShortName,
+        students.SubjectName
       )
     );
   };

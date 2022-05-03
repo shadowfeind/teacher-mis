@@ -232,7 +232,8 @@ export const getListForPresentStudentAction =
   };
 
 export const postStudentPresentListAction =
-  (attendance, searchFilterModel, SchoolShortName) => async (dispatch) => {
+  (attendance, searchFilterModel, SchoolShortName, subject) =>
+  async (dispatch) => {
     try {
       dispatch({ type: POST_LIST_STUDENT_PRESENT_REQUEST });
 
@@ -245,7 +246,7 @@ export const postStudentPresentListAction =
           registration_ids: [...absentStudentFcm],
           collapse_key: "type_a",
           notification: {
-            body: `${attendance.FullName} is absent today`,
+            body: `Absent today in ${subject}`,
             title: SchoolShortName,
           },
         };
