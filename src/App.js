@@ -106,7 +106,7 @@ const App = () => {
               />
               <Route exact path={"/leave-request"} component={LeaveRequest} />
               <Route exact path={"/notification"} component={Notification} />
-              <Route exact path={"/holiday"} component={Holiday} />
+              <Route exact path={"/academic-calendar"} component={Holiday} />
               <Route exact path={"/"} component={Dashboard} />
               <Route path="*" component={PageNotFound} />
             </Switch>
