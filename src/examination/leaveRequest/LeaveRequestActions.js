@@ -1,6 +1,42 @@
 import axios from "axios";
-import { API_URL, axiosInstance, tokenConfig } from "../../constants";
-import { DELETE_LEAVE_REQUESTS_FAIL, DELETE_LEAVE_REQUESTS_REQUEST, DELETE_LEAVE_REQUESTS_SUCCESS, DOWNLOAD_DOC_LEAVE_REQUESTS_FAIL, DOWNLOAD_DOC_LEAVE_REQUESTS_REQUEST, DOWNLOAD_DOC_LEAVE_REQUESTS_SUCCESS, GET_ALL_LEAVE_REQUESTS_FAIL, GET_ALL_LEAVE_REQUESTS_REQUEST, GET_ALL_LEAVE_REQUESTS_SUCCESS, GET_LIST_LEAVE_REQUESTS_FAIL, GET_LIST_LEAVE_REQUESTS_REQUEST, GET_LIST_LEAVE_REQUESTS_SUCCESS, GET_SINGLE_TO_CREATE_LEAVE_REQUESTS_FAIL, GET_SINGLE_TO_CREATE_LEAVE_REQUESTS_REQUEST, GET_SINGLE_TO_CREATE_LEAVE_REQUESTS_SUCCESS, GET_SINGLE_TO_DELETE_LEAVE_REQUESTS_FAIL, GET_SINGLE_TO_DELETE_LEAVE_REQUESTS_REQUEST, GET_SINGLE_TO_DELETE_LEAVE_REQUESTS_SUCCESS, GET_SINGLE_TO_EDIT_LEAVE_REQUESTS_FAIL, GET_SINGLE_TO_EDIT_LEAVE_REQUESTS_REQUEST, GET_SINGLE_TO_EDIT_LEAVE_REQUESTS_SUCCESS, GET_SINGLE_TO_EDIT_SENT_LEAVE_REQUESTS_FAIL, GET_SINGLE_TO_EDIT_SENT_LEAVE_REQUESTS_REQUEST, GET_SINGLE_TO_EDIT_SENT_LEAVE_REQUESTS_SUCCESS, POST_LEAVE_REQUESTS_FAIL, POST_LEAVE_REQUESTS_REQUEST, POST_LEAVE_REQUESTS_SUCCESS, PUT_LEAVE_REQUESTS_FAIL, PUT_LEAVE_REQUESTS_REQUEST, PUT_LEAVE_REQUESTS_SUCCESS } from "./LeaveRequestConstants";
+import {
+  API_URL,
+  axiosInstance,
+  tokenConfig,
+  tokenHeader,
+} from "../../constants";
+import {
+  DELETE_LEAVE_REQUESTS_FAIL,
+  DELETE_LEAVE_REQUESTS_REQUEST,
+  DELETE_LEAVE_REQUESTS_SUCCESS,
+  DOWNLOAD_DOC_LEAVE_REQUESTS_FAIL,
+  DOWNLOAD_DOC_LEAVE_REQUESTS_REQUEST,
+  DOWNLOAD_DOC_LEAVE_REQUESTS_SUCCESS,
+  GET_ALL_LEAVE_REQUESTS_FAIL,
+  GET_ALL_LEAVE_REQUESTS_REQUEST,
+  GET_ALL_LEAVE_REQUESTS_SUCCESS,
+  GET_LIST_LEAVE_REQUESTS_FAIL,
+  GET_LIST_LEAVE_REQUESTS_REQUEST,
+  GET_LIST_LEAVE_REQUESTS_SUCCESS,
+  GET_SINGLE_TO_CREATE_LEAVE_REQUESTS_FAIL,
+  GET_SINGLE_TO_CREATE_LEAVE_REQUESTS_REQUEST,
+  GET_SINGLE_TO_CREATE_LEAVE_REQUESTS_SUCCESS,
+  GET_SINGLE_TO_DELETE_LEAVE_REQUESTS_FAIL,
+  GET_SINGLE_TO_DELETE_LEAVE_REQUESTS_REQUEST,
+  GET_SINGLE_TO_DELETE_LEAVE_REQUESTS_SUCCESS,
+  GET_SINGLE_TO_EDIT_LEAVE_REQUESTS_FAIL,
+  GET_SINGLE_TO_EDIT_LEAVE_REQUESTS_REQUEST,
+  GET_SINGLE_TO_EDIT_LEAVE_REQUESTS_SUCCESS,
+  GET_SINGLE_TO_EDIT_SENT_LEAVE_REQUESTS_FAIL,
+  GET_SINGLE_TO_EDIT_SENT_LEAVE_REQUESTS_REQUEST,
+  GET_SINGLE_TO_EDIT_SENT_LEAVE_REQUESTS_SUCCESS,
+  POST_LEAVE_REQUESTS_FAIL,
+  POST_LEAVE_REQUESTS_REQUEST,
+  POST_LEAVE_REQUESTS_SUCCESS,
+  PUT_LEAVE_REQUESTS_FAIL,
+  PUT_LEAVE_REQUESTS_REQUEST,
+  PUT_LEAVE_REQUESTS_SUCCESS,
+} from "./LeaveRequestConstants";
 
 export const getAllLeaveRequestAction = () => async (dispatch) => {
   try {
@@ -85,9 +121,31 @@ export const getSingleEditLeaveRequestAction = (id) => async (dispatch) => {
 };
 
 export const postLeaveRequestAction =
-  (leaveRequestPost, image) => async (dispatch) => {
+  (leaveRequestPost, image, SchoolShortName) => async (dispatch) => {
     try {
       dispatch({ type: POST_LEAVE_REQUESTS_REQUEST });
+
+      const { data } = await axios.get(
+        `${API_URL}/api/LeaveRequest/GetFCMToken/${leaveRequestPost.ReceiverID}`,
+        tokenConfig
+      );
+      if (data) {
+        const fcmBody = {
+          registration_ids: [data.Message],
+          collapse_key: "type_a",
+          notification: {
+            body: leaveRequestPost.LeaveDecription?.slice(0, 25),
+            title: SchoolShortName,
+          },
+        };
+        const fbody = JSON.stringify(fcmBody);
+
+        await axios.post(
+          "https://fcm.googleapis.com/fcm/send",
+          fbody,
+          tokenHeader
+        );
+      }
 
       if (image) {
         let formData = new FormData();
@@ -162,6 +220,51 @@ export const putLeaveRequestAction =
           tokenConfig
         );
       }
+      dispatch({ type: PUT_LEAVE_REQUESTS_SUCCESS });
+    } catch (error) {
+      dispatch({
+        type: PUT_LEAVE_REQUESTS_FAIL,
+        payload: error.message ? error.message : error.Message,
+      });
+    }
+  };
+
+export const putLeaveRequestApproveAction =
+  (leaveRequest, SchoolShortName) => async (dispatch) => {
+    try {
+      dispatch({ type: PUT_LEAVE_REQUESTS_REQUEST });
+
+      const { data } = await axios.get(
+        `${API_URL}/api/LeaveRequest/GetFCMToken/${leaveRequest.SenderID}`,
+        tokenConfig
+      );
+      if (data) {
+        const fcmBody = {
+          registration_ids: [data.Message],
+          collapse_key: "type_a",
+          notification: {
+            body: `Your leave request has been ${leaveRequest.Status}`,
+            title: SchoolShortName,
+          },
+        };
+        const fbody = JSON.stringify(fcmBody);
+
+        await axios.post(
+          "https://fcm.googleapis.com/fcm/send",
+          fbody,
+          tokenHeader
+        );
+      }
+
+      const newData = { ...leaveRequest };
+      const jsonData = JSON.stringify({ dbModel: newData });
+
+      await axios.put(
+        `${API_URL}/api/LeaveRequest/PutLeaveRequest`,
+        jsonData,
+        tokenConfig
+      );
+
       dispatch({ type: PUT_LEAVE_REQUESTS_SUCCESS });
     } catch (error) {
       dispatch({

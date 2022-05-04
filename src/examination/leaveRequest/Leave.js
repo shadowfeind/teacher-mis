@@ -144,7 +144,7 @@ const Leave = () => {
     <>
       <div className={classes.dashboardContainer}>
         <Grid container>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <Card className={classes.cardStyle}>
               <div>
                 <h4
@@ -164,11 +164,9 @@ const Leave = () => {
               <LeaveRequestApproval />
             </Card>
           </Grid>
-        </Grid>
-        <Grid container>
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             {/* ) : ( */}
-            <Card className={classes.cardStyle} >
+            <Card className={classes.cardStyle}>
               <div>
                 <h4
                   className={classes.leaveHeading}

@@ -10,6 +10,7 @@ import { API_URL } from "../../constants";
 import {
   postLeaveRequestAction,
   putLeaveRequestAction,
+  putLeaveRequestApproveAction,
 } from "./LeaveRequestActions";
 
 const initialFormValues = {
@@ -27,12 +28,7 @@ const initialFormValues = {
   Updated_On: "2022-04-16T08:14:34.805Z",
 };
 
-const LeaveRequestSentForm = ({
-
-  leaveRequestEditApproval,
-
-  setOpenPopUp,
-}) => {
+const LeaveRequestSentForm = ({ leaveRequestEditApproval, setOpenPopUp }) => {
   const dispatch = useDispatch();
   const [image, setImage] = useState("");
   const [imgSrc, setImgSrc] = useState("");
@@ -59,7 +55,12 @@ const LeaveRequestSentForm = ({
     e.preventDefault();
 
     if (validate()) {
-        dispatch(putLeaveRequestAction(values, image));
+      dispatch(
+        putLeaveRequestApproveAction(
+          values,
+          leaveRequestEditApproval.SchoolShortName
+        )
+      );
     }
   };
 
@@ -73,7 +74,6 @@ const LeaveRequestSentForm = ({
     setImage(event.target.files[0]);
   };
 
-
   useEffect(() => {
     if (leaveRequestEditApproval) {
       setValues({ ...leaveRequestEditApproval.dbModel });
@@ -85,24 +85,24 @@ const LeaveRequestSentForm = ({
   return (
     <Form onSubmit={handleSubmit}>
       <Grid container style={{ fontSize: "12px" }}>
-        <Grid item xs={6}>
+        {/* <Grid item xs={6}>
           <SelectControl
-          disabled
+            disabled
             name="ReceiverID"
             label="Receiver Name"
             value={values.ReceiverID}
             onChange={null}
             options={
-              leaveRequestEditApproval 
+              leaveRequestEditApproval
                 ? leaveRequestEditApproval.ddlTeacher
                 : gender
             }
             errors={errors.ReceiverID}
           />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12}>
           <InputControl
-          disabled
+            disabled
             name="LeaveDecription"
             label="Leave Decription*"
             onFocus={(e) => {
@@ -117,7 +117,7 @@ const LeaveRequestSentForm = ({
         </Grid>
         <Grid item xs={6}>
           <DatePickerControl
-          disabled
+            disabled
             name="FromDate"
             label="FromDate*"
             value={values.FromDate}
@@ -126,19 +126,19 @@ const LeaveRequestSentForm = ({
           />
 
           <SelectControl
-          disabled
+            disabled
             name="IsActive"
             label="IsActive"
             value={values.IsActive}
             onChange={null}
             options={
-              leaveRequestEditApproval 
+              leaveRequestEditApproval
                 ? leaveRequestEditApproval.ddlIsActive
                 : gender
             }
           />
           <InputControl
-          disabled
+            disabled
             name="ImageUploaded"
             // label="Select Profile Photo"
             // value={values.ClassLocation}
@@ -148,9 +148,10 @@ const LeaveRequestSentForm = ({
           />
           <img
             src={
-               imgSrc
+              imgSrc
                 ? imgSrc
-                : leaveRequestEditApproval && `${API_URL}${leaveRequestEditApproval.FullPath}`
+                : leaveRequestEditApproval &&
+                  `${API_URL}${leaveRequestEditApproval.FullPath}`
             }
             height={200}
             width={200}
@@ -158,7 +159,7 @@ const LeaveRequestSentForm = ({
         </Grid>
         <Grid item xs={4}>
           <DatePickerControl
-          disabled
+            disabled
             name="ToDate"
             label="ToDate*"
             value={values.ToDate}
@@ -171,7 +172,7 @@ const LeaveRequestSentForm = ({
             value={values.Status}
             onChange={handleInputChange}
             options={
-              leaveRequestEditApproval 
+              leaveRequestEditApproval
                 ? leaveRequestEditApproval.ddlStatus
                 : gender
             }

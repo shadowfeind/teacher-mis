@@ -1,24 +1,24 @@
-import {Grid, makeStyles, Typography } from "@material-ui/core";
+import { Grid, makeStyles, Typography } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { API_URL } from "../constants";
-import VideocamIcon from '@material-ui/icons/Videocam';
-import ReportProblemIcon from '@material-ui/icons/ReportProblem';
-import EventBusyIcon from '@material-ui/icons/EventBusy';
-import AnnouncementIcon from '@material-ui/icons/Announcement';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MenuBookIcon from '@material-ui/icons/MenuBook';
-import DescriptionIcon from '@material-ui/icons/Description';
-import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
-import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
-import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import BookIcon from '@material-ui/icons/Book';
-import DvrRoundedIcon from '@material-ui/icons/DvrRounded';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import HowToRegRoundedIcon from '@material-ui/icons/HowToRegRounded';
-import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+import VideocamIcon from "@material-ui/icons/Videocam";
+import ReportProblemIcon from "@material-ui/icons/ReportProblem";
+import EventBusyIcon from "@material-ui/icons/EventBusy";
+import AnnouncementIcon from "@material-ui/icons/Announcement";
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import MenuBookIcon from "@material-ui/icons/MenuBook";
+import DescriptionIcon from "@material-ui/icons/Description";
+import SystemUpdateAltIcon from "@material-ui/icons/SystemUpdateAlt";
+import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
+import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
+import BookIcon from "@material-ui/icons/Book";
+import DvrRoundedIcon from "@material-ui/icons/DvrRounded";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import HowToRegRoundedIcon from "@material-ui/icons/HowToRegRounded";
+import TrendingUpIcon from "@material-ui/icons/TrendingUp";
 import { getHeaderContentAction } from "../examination/dashboard/DashboardActions";
 import { GET_HEADER_CONTENT_RESET } from "../examination/dashboard/DashboardConstants";
 
@@ -50,14 +50,11 @@ const useStyles = makeStyles({
 const SideMenu = () => {
   const classes = useStyles();
 
-
   const dispatch = useDispatch();
-
 
   const { headerContent, error: headerContentError } = useSelector(
     (state) => state.getHeaderContent
   );
-
 
   useEffect(() => {
     if (!headerContent) {
@@ -83,14 +80,14 @@ const SideMenu = () => {
         variant="h5"
         style={{ color: "#fff", textAlign: "center", padding: " 17px 0" }}
       >
-      <Grid item style={{ alignSelf: "center" }}>
-                {headerContent && (
-                  <img
-                    src={`${API_URL}${headerContent.FullPathSchoolLogo}`}
-                    height="50px"
-                  />
-                )}
-              </Grid>
+        <Grid item style={{ alignSelf: "center" }}>
+          {headerContent && (
+            <img
+              src={`${API_URL}${headerContent.FullPathSchoolLogo}`}
+              height="50px"
+            />
+          )}
+        </Grid>
         {/* TEACHER MIS */}
       </Typography>
       <NavLink to={"/"} exact={true} activeStyle={isActive}>
@@ -193,14 +190,13 @@ const SideMenu = () => {
           {" "}
           <AnnouncementIcon fontSize="small" />
           &nbsp;&nbsp;&nbsp; Announcement
-          </Typography>
+        </Typography>
       </NavLink>
-      <NavLink to={"/holiday"} activeStyle={isActive}>
+      <NavLink to={"/academic-calendar"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
           <EventBusyIcon fontSize="small" />
-          &nbsp;&nbsp;&nbsp; Holiday
-
+          &nbsp;&nbsp;&nbsp; Academic Calendar
         </Typography>
       </NavLink>
       <NavLink to={"/leave-request"} activeStyle={isActive}>
