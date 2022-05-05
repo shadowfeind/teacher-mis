@@ -233,7 +233,7 @@ const LeaveRequestApproval = () => {
           leaveRequestEditApproval={
             singleEditSentLeaveRequest && singleEditSentLeaveRequest
           }
-          setOpenPopUp={setApprovalPopUp}
+          setApprovalPopUp={setApprovalPopUp}
         />
       </Popup>
       <Notification notify={notify} setNotify={setNotify} />

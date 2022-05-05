@@ -68,7 +68,8 @@ const LeaveRequestForm = ({
           )
         );
       } else {
-        dispatch(putLeaveRequestAction(values, image));
+        dispatch(putLeaveRequestAction(values, image,leaveRequestEdit.SchoolShortName));
+        setOpenPopUp(false);
       }
     }
   };
@@ -95,11 +96,6 @@ const LeaveRequestForm = ({
     }
   }, [leaveRequestEdit]);
 
-  // useEffect(() => {
-  //   if (leaveRequestEditApproval) {
-  //     setValues({ ...leaveRequestEditApproval.dbModel });
-  //   }
-  // }, [leaveRequestEditApproval]);
 
   const gender = [{ Key: "", Value: "" }];
 
