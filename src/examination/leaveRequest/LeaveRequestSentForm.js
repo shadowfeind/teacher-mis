@@ -28,7 +28,7 @@ const initialFormValues = {
   Updated_On: "2022-04-16T08:14:34.805Z",
 };
 
-const LeaveRequestSentForm = ({ leaveRequestEditApproval, setOpenPopUp }) => {
+const LeaveRequestSentForm = ({ leaveRequestEditApproval, setApprovalPopUp }) => {
   const dispatch = useDispatch();
   const [image, setImage] = useState("");
   const [imgSrc, setImgSrc] = useState("");
@@ -191,7 +191,7 @@ const LeaveRequestSentForm = ({ leaveRequestEditApproval, setOpenPopUp }) => {
         <Button
           variant="contained"
           color="secondary"
-          onClick={() => setOpenPopUp(false)}
+          onClick={() => setApprovalPopUp(false)}
           style={{ margin: "10px 0 0 10px" }}
         >
           CANCEL

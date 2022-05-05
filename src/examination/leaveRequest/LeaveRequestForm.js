@@ -95,11 +95,6 @@ const LeaveRequestForm = ({
     }
   }, [leaveRequestEdit]);
 
-  // useEffect(() => {
-  //   if (leaveRequestEditApproval) {
-  //     setValues({ ...leaveRequestEditApproval.dbModel });
-  //   }
-  // }, [leaveRequestEditApproval]);
 
   const gender = [{ Key: "", Value: "" }];
 
