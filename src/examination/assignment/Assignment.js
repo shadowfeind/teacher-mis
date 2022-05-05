@@ -139,8 +139,11 @@ const Assignment = () => {
     (state) => state.getAllOtherOptionsForAssignmentSelect
   );
 
-  const { getListTeacherAssignment,loading, error: getListTeacherAssignmentError } =
-    useSelector((state) => state.getListTeacherAssignment);
+  const {
+    getListTeacherAssignment,
+    loading,
+    error: getListTeacherAssignmentError,
+  } = useSelector((state) => state.getListTeacherAssignment);
 
   const {
     teacherAssignmentSingleCreate,
@@ -154,8 +157,11 @@ const Assignment = () => {
     (state) => state.getTeacherAssignmentContent
   );
 
-  const { singleTeacherAssignment,loading:loadingEdit, error: singleTeacherAssignmentError } =
-    useSelector((state) => state.getSingleToEditTeacherAssignment);
+  const {
+    singleTeacherAssignment,
+    loading: loadingEdit,
+    error: singleTeacherAssignmentError,
+  } = useSelector((state) => state.getSingleToEditTeacherAssignment);
 
   const {
     success: putSingleToEditTeacherAssignmentSuccess,
@@ -343,10 +349,10 @@ const Assignment = () => {
     }
   }, [allAssignmentTeacherData, dispatch]);
 
-  useEffect(()=>{
-    dispatch({type: GET_LIST_TEACHER_ASSIGNMENT_RESET})
+  useEffect(() => {
+    dispatch({ type: GET_LIST_TEACHER_ASSIGNMENT_RESET });
     dispatch(getAllAssignmentTeacherAction());
-  },[])
+  }, []);
 
   useEffect(() => {
     if (getListTeacherAssignment) {
@@ -487,7 +493,7 @@ const Assignment = () => {
                 errors={errors.subject}
               />
             </Grid>
-         <Grid item xs={3}>
+            <Grid item xs={3}>
               <SelectControl
                 name="Academic Year"
                 label="Academic Year"
@@ -497,7 +503,7 @@ const Assignment = () => {
                 errors={errors.acaYear}
               />
             </Grid>
-               {/* <Grid item xs={3}>
+            {/* <Grid item xs={3}>
               <SelectControl
                 name="Program/Faculty"
                 label="Program/Faculty"
@@ -539,7 +545,7 @@ const Assignment = () => {
               />
             </Grid>
             <Grid item xs={3}>
-            <div style={{ height: "10px" }}></div>
+              <div style={{ height: "10px" }}></div>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
                   disableToolbar
@@ -557,7 +563,7 @@ const Assignment = () => {
               </MuiPickersUtilsProvider>
             </Grid>
             <Grid item xs={3}>
-            <div style={{ height: "10px" }}></div>
+              <div style={{ height: "10px" }}></div>
               <Button
                 variant="contained"
                 color="primary"
@@ -593,23 +599,23 @@ const Assignment = () => {
           <LoadingComp />
         ) : (
           <>
-          {getListTeacherAssignment && (
-        <TableContainer className={classes.table}>
-          <TblHead />
+            {getListTeacherAssignment && (
+              <TableContainer className={classes.table}>
+                <TblHead />
 
-          <TableBody>
-            {tableDataAfterPagingAndSorting().map((item) => (
-              <AssignmentTableCollapseMain
-                key={item.$id}
-                item={item}
-                setOpenPopup3={setOpenPopup3}
-              />
-            ))}
-          </TableBody>
-        </TableContainer>
-          )}
-        { getListTeacherAssignment && <TblPagination />}
-        </>
+                <TableBody>
+                  {tableDataAfterPagingAndSorting().map((item) => (
+                    <AssignmentTableCollapseMain
+                      key={item.$id}
+                      item={item}
+                      setOpenPopup3={setOpenPopup3}
+                    />
+                  ))}
+                </TableBody>
+              </TableContainer>
+            )}
+            {getListTeacherAssignment && <TblPagination />}
+          </>
         )}
       </CustomContainer>
       <Popup
@@ -617,22 +623,22 @@ const Assignment = () => {
         setOpenPopup={setOpenPopup}
         title="Create Assignment"
       >
-      {loadingEdit ? (
+        {loadingEdit ? (
           <LoadingComp />
         ) : (
           <>
-        <AssignmentForm
-          students={
-            teacherAssignmentSingleCreate &&
-            teacherAssignmentSingleCreate.dbModelLstForStudentSection
-          }
-          formDatas={
-            teacherAssignmentSingleCreate &&
-            teacherAssignmentSingleCreate.dbTeacherAssignmentModel
-          }
-          setOpenPopup={setOpenPopup}
-        />
-        </>
+            <AssignmentForm
+              students={
+                teacherAssignmentSingleCreate &&
+                teacherAssignmentSingleCreate.dbModelLstForStudentSection
+              }
+              formDatas={
+                teacherAssignmentSingleCreate &&
+                teacherAssignmentSingleCreate.dbTeacherAssignmentModel
+              }
+              setOpenPopup={setOpenPopup}
+            />
+          </>
         )}
       </Popup>
       <Popup
@@ -656,6 +662,9 @@ const Assignment = () => {
           singleAssignment={
             singleTeacherAssignment &&
             singleTeacherAssignment.dbTeacherAssignmentModel
+          }
+          assignmentImage={
+            singleTeacherAssignment && singleTeacherAssignment.FullPath
           }
           setOpenPop3={setOpenPopup3}
         />

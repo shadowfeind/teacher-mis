@@ -50,7 +50,11 @@ const useStyles = makeStyles({
   },
 });
 
-const AssignmentEditForm = ({ singleAssignment, setOpenPop3 }) => {
+const AssignmentEditForm = ({
+  singleAssignment,
+  setOpenPop3,
+  assignmentImage,
+}) => {
   const [image, setImage] = useState(null);
   const [imgSrc, setImgSrc] = useState(null);
 
@@ -181,7 +185,6 @@ const AssignmentEditForm = ({ singleAssignment, setOpenPop3 }) => {
               label="DueDate"
               value={values.DueDate}
               onChange={handleInputChange}
-    
             />
             <InputControl
               name="MarksObtained"
@@ -199,20 +202,20 @@ const AssignmentEditForm = ({ singleAssignment, setOpenPop3 }) => {
               onChange={handleInputChange}
             />
             <InputControl
-            name="ImageUploaded"
-            label="Select File"
-            onChange={(e)=> handleImage(e)}
-            type="file"
+              name="ImageUploaded"
+              label="Select File"
+              onChange={(e) => handleImage(e)}
+              type="file"
             />
-             <img
-            src={
-              imgSrc
-                ? imgSrc
-                : singleAssignment && `${API_URL}${singleAssignment.FullPath}`
-            }
-            height={200}
-            width={200}
-          />
+            <img
+              src={
+                imgSrc
+                  ? imgSrc
+                  : assignmentImage && `${API_URL}${assignmentImage}`
+              }
+              height={200}
+              width={200}
+            />
           </Grid>
         </Grid>
         <div

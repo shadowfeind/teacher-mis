@@ -280,51 +280,46 @@ export const putSingleToEditTeacherAssignmentAction =
     try {
       dispatch({ type: PUT_SINGLE_TO_EDIT_TEACHER_ASSIGNMENT_REQUEST });
 
-      if(image){
-      let formData = new FormData();
-      formData.append("ImageUploaded", image);
+      if (image) {
+        let formData = new FormData();
+        formData.append("ImageUploaded", image);
 
-      const { data } = await axios.post(
-        `${API_URL}/api/TeacherAssignment/FileUpload`,
-        formData,
-        tokenConfig
-      );
-
-      if (data) {
-
-        const newDate = singleAssignment.AssignmentDate?.slice(
-          0,
-          10
+        const { data: imageData } = await axios.post(
+          `${API_URL}/api/TeacherAssignment/FileUpload`,
+          formData,
+          tokenConfig
         );
+        //renaming data as it was undefined when consoled
 
-        const newData = {
-          ...singleAssignment,
-          DocumentName: data,
-          AssignmentDate: newDate,
-        };
+        if (imageData !== undefined) {
+          debugger;
+          const jsonData = JSON.stringify({
+            dbTeacherAssignmentModel: {
+              ...singleAssignment,
+              DocumentName: imageData,
+            },
+          });
+          console.log(data);
+          debugger;
+          console.log(jsonData);
+          debugger;
 
+          const { data } = await axios.put(
+            `${API_URL}/api/TeacherAssignment/PutTeacherAssignment`,
+            jsonData,
+            tokenConfig
+          );
+        }
+      } else {
         const jsonData = JSON.stringify({
-          dbTeacherAssignmentModel: newData,
+          dbTeacherAssignmentModel: singleAssignment,
         });
-
-        console.log(jsonData);
-
-        const { data } = await axios.put(
+        await axios.put(
           `${API_URL}/api/TeacherAssignment/PutTeacherAssignment`,
           jsonData,
           tokenConfig
         );
       }
-    }else{
-      const jsonData = JSON.stringify({
-        dbTeacherAssignmentModel: singleAssignment,
-      });
-     await axios.put(
-        `${API_URL}/api/TeacherAssignment/PutTeacherAssignment`,
-        jsonData,
-        tokenConfig
-      );
-    }
       dispatch({
         type: PUT_SINGLE_TO_EDIT_TEACHER_ASSIGNMENT_SUCCESS,
       });
