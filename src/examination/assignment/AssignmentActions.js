@@ -173,8 +173,8 @@ export const getSingleCreateTeacherAssignmentAction =
       dispatch({
         type: GET_SINGLE_CREATE_TEACHER_ASSIGNMENT_FAIL,
         payload:
-          error.message && error.response.data.message
-            ? error.response.data.message
+          error.Message && error.response.data.Message
+            ? error.response.data.Message
             : error.message,
       });
     }
@@ -243,8 +243,8 @@ export const getTeacherAssignmentContentAction =
       dispatch({
         type: GET_TEACHER_ASSIGNMENT_CONTENT_FAIL,
         payload:
-          error.message && error.response.data.message
-            ? error.response.data.message
+          error.Message && error.response.data.Message
+            ? error.response.data.Message
             : error.message,
       });
     }
@@ -268,8 +268,8 @@ export const getSingleToEditTeacherAssignmentAction =
       dispatch({
         type: GET_SINGLE_TO_EDIT_TEACHER_ASSIGNMENT_FAIL,
         payload:
-          error.message && error.response.data.message
-            ? error.response.data.message
+          error.Message && error.response.data.Message
+            ? error.response.data.Message
             : error.message,
       });
     }
@@ -280,6 +280,7 @@ export const putSingleToEditTeacherAssignmentAction =
     try {
       dispatch({ type: PUT_SINGLE_TO_EDIT_TEACHER_ASSIGNMENT_REQUEST });
 
+      if(image){
       let formData = new FormData();
       formData.append("ImageUploaded", image);
 
@@ -290,10 +291,12 @@ export const putSingleToEditTeacherAssignmentAction =
       );
 
       if (data) {
-        const newDate = singleAssignment.AssignmentDate.toISOString().slice(
+
+        const newDate = singleAssignment.AssignmentDate?.slice(
           0,
           10
         );
+
         const newData = {
           ...singleAssignment,
           DocumentName: data,
@@ -312,16 +315,25 @@ export const putSingleToEditTeacherAssignmentAction =
           tokenConfig
         );
       }
+    }else{
+      const jsonData = JSON.stringify({
+        dbTeacherAssignmentModel: singleAssignment,
+      });
+     await axios.put(
+        `${API_URL}/api/TeacherAssignment/PutTeacherAssignment`,
+        jsonData,
+        tokenConfig
+      );
+    }
       dispatch({
         type: PUT_SINGLE_TO_EDIT_TEACHER_ASSIGNMENT_SUCCESS,
-        payload: data,
       });
     } catch (error) {
       dispatch({
         type: PUT_SINGLE_TO_EDIT_TEACHER_ASSIGNMENT_FAIL,
         payload:
-          error.message && error.response.data.message
-            ? error.response.data.message
+          error.Message && error.response.data.Message
+            ? error.response.data.Message
             : error.message,
       });
     }

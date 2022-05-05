@@ -17,6 +17,8 @@ import InputControl from "../../components/controls/InputControl";
 import { useForm, Form } from "../../customHooks/useForm";
 import DatePickerControl from "../../components/controls/DatePickerControl";
 import { postTeacherAssignmentAction } from "./AssignmentActions";
+import { API_URL } from "../../constants";
+
 
 const initialFormValues = {
   IDAssignment: 0,
@@ -260,7 +262,15 @@ const AssignmentForm = ({ students, formDatas, setOpenPopup }) => {
               type="file"
               errors={errors.image}
             />
-            <img src={imgSrc} height={200} width={200} />
+             <img
+            src={
+              imgSrc
+                ? imgSrc
+                : formDatas && `${API_URL}${formDatas.FullPath}`
+            }
+            height={200}
+            width={200}
+          />
           </Grid>
           <Grid item xs={6}>
             <InputControl
