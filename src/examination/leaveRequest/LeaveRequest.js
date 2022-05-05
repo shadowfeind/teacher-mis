@@ -332,7 +332,7 @@ const LeaveRequest = () => {
           leaveRequestDelete={
             singleDeleteLeaveRequest && singleDeleteLeaveRequest
           }
-          setOpenPopUp={setOpenDeletePopup}
+          setOpenPopup={setOpenDeletePopup}
         />
       </Popup>
       <Notification notify={notify} setNotify={setNotify} />

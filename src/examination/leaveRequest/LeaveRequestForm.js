@@ -68,7 +68,8 @@ const LeaveRequestForm = ({
           )
         );
       } else {
-        dispatch(putLeaveRequestAction(values, image));
+        dispatch(putLeaveRequestAction(values, image,leaveRequestEdit.SchoolShortName));
+        setOpenPopUp(false);
       }
     }
   };
