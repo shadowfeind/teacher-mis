@@ -63,13 +63,13 @@ export const DashboardCard = ({ subject }) => {
           {subject.Value}
         </Typography>
 
-        <Typography variant="body2" color="textSecondary" component="h6">
+        {/* <Typography variant="body2" color="textSecondary" component="h6">
           Suresh M. Sanu
           <IconButton aria-label="add to favorites">
             <EmailIcon />
           </IconButton>
           SureshMandarSanu@gmail.com
-        </Typography>
+        </Typography> */}
       </CardContent>
       <CardActions>
         <Link to={`/assignment/${subject.Key}`}>

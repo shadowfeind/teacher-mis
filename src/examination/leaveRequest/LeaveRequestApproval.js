@@ -198,7 +198,18 @@ const LeaveRequestApproval = () => {
               <StyledTableCell align="left">
                 {s.FromDate?.slice(0, 10)} /<div>{s.ToDate?.slice(0, 10)}</div>
               </StyledTableCell>
-              <StyledTableCell align="left">{s.Status}</StyledTableCell>
+              <StyledTableCell
+                align="left"
+                style={
+                  s.Status === "PENDING"
+                    ? { color: "blue" }
+                    : s.Status === "APPROVED"
+                    ? { color: "green" }
+                    : { color: "red" }
+                }
+              >
+                {s.Status}
+              </StyledTableCell>
               <StyledTableCell align="left">
                 <Button
                   variant="contained"
