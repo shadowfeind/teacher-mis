@@ -12,8 +12,9 @@ import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import EmailIcon from "@material-ui/icons/Email";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import { Link } from "react-router-dom";
+import { Badge } from "@material-ui/core";
 
-export const DashboardCard = ({ subject }) => {
+export const DashboardCard = ({ subject, subCount }) => {
   const useStyles = makeStyles((theme) => ({
     root: {
       maxWidth: 345,
@@ -42,9 +43,24 @@ export const DashboardCard = ({ subject }) => {
       paddingBottom: "3px",
       marginBottom: "-10px",
     },
+    badge: {
+      minWidth: "15px",
+      minHeight: "15px",
+      color: "white",
+      fontSize: "12px",
+      bottom: "10px",
+      position: "absolute",
+      backgroundColor: "red",
+      borderRadius: "50%",
+    },
   }));
   const classes = useStyles();
   const history = useHistory();
+
+  const currentSubCount = subCount.find(
+    (x) => x.IDAcademicFacultySubjectLink === subject.Key
+  );
+  console.log(currentSubCount);
 
   return subject ? (
     <Card className={classes.root}>
@@ -75,7 +91,13 @@ export const DashboardCard = ({ subject }) => {
         <Link to={`/assignment/${subject.Key}`}>
           <IconButton aria-label="add to favorites">
             <AssignmentIcon style={{ fontSize: "16px" }} />
-            <h5>Assignment</h5>
+
+            <h5 style={{ position: "relative" }}>
+              Assignment{" "}
+              <span className={classes.badge}>
+                {currentSubCount && currentSubCount?.totalAssignmentcount}
+              </span>
+            </h5>
           </IconButton>
         </Link>
 

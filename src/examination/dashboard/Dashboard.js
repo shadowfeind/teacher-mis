@@ -57,7 +57,13 @@ const Dashboard = () => {
           {dashboardContent &&
             dashboardContent.searchFilterModel.ddlSubjectForTeacher.map((s) => (
               <Grid key={s.id} item xs={3} className={classes.gridStyle}>
-                <DashboardCard subject={s} />
+                <DashboardCard
+                  subject={s}
+                  subCount={
+                    dashboardContent.searchFilterModel
+                      .totalAssignmentByTeacherAccordingToSubject
+                  }
+                />
               </Grid>
             ))}
         </Grid>
