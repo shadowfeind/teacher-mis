@@ -48,8 +48,8 @@ const tableHeader = [
   { id: "EndRange", label: "End Range" },
   { id: "Division", label: "Division" },
   { id: "Comment", label: "Comment" },
-  { id: "Created_On", label: "Created_On" },
-  { id: "Updated_On", label: "Updated_On" },
+  // { id: "Created_On", label: "Created_On" },
+  // { id: "Updated_On", label: "Updated_On" },
 ];
 
 const ExamDivision = () => {

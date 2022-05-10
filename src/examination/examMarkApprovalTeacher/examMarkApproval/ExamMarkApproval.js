@@ -141,13 +141,15 @@ const ExamMarkApproval = () => {
   const { activeSubject, success: activeSubjectSuccess } = useSelector(
     (state) => state.getActiveSubject
   );
-  const { searchData,loading } = useSelector(
+  const { searchData, loading } = useSelector(
     (state) => state.getExamMarkApprovalSearchData
   );
 
-  const { bulkData ,loading:loadingBulk,success:bulkDataSuccess} = useSelector(
-    (state) => state.getBulkExamMarkApprovalSearchData
-  );
+  const {
+    bulkData,
+    loading: loadingBulk,
+    success: bulkDataSuccess,
+  } = useSelector((state) => state.getBulkExamMarkApprovalSearchData);
 
   const {
     success: postBulkExamMarkApprovalSuccess,
@@ -230,10 +232,10 @@ const ExamMarkApproval = () => {
     }
   }, [examMarkApprovalInitialDatas, dispatch]);
 
-  useEffect(()=>{
-    dispatch({type:GET_ALL_EXAM_MARK_APPROVAL_SEARCHDATA_RESET})
+  useEffect(() => {
+    dispatch({ type: GET_ALL_EXAM_MARK_APPROVAL_SEARCHDATA_RESET });
     dispatch(getInitialExamMarkApprovalDataAction());
-  },[])
+  }, []);
 
   const subjectHandler = (value) => {
     setSchedule(value);
@@ -248,35 +250,33 @@ const ExamMarkApproval = () => {
   useEffect(() => {
     if (allOtherOptions) {
       unstable_batchedUpdates(() => {
-        setAcademicYearDdl(allOtherOptions.year && allOtherOptions.year)
+        setAcademicYearDdl(allOtherOptions.year && allOtherOptions.year);
         setAcaYear(
           allOtherOptions.year.length > 0 ? allOtherOptions.year[0]?.Key : ""
         );
-        setProgramDdl(allOtherOptions.program && allOtherOptions.program)
+        setProgramDdl(allOtherOptions.program && allOtherOptions.program);
         setProgramValue(
           allOtherOptions.program.length > 0
             ? allOtherOptions.program[0]?.Key
             : ""
         );
-        setDdlClass(allOtherOptions.classId && allOtherOptions.classId)
+        setDdlClass(allOtherOptions.classId && allOtherOptions.classId);
         setClassId(
           allOtherOptions.classId.length > 0
             ? allOtherOptions.classId[0]?.Key
             : ""
         );
-        setDdlSection(allOtherOptions.section && allOtherOptions.section)
+        setDdlSection(allOtherOptions.section && allOtherOptions.section);
         setSection(
           allOtherOptions.section.length > 0
             ? allOtherOptions.section[0]?.Key
             : ""
         );
-        setDdlShift(
-          allOtherOptions.shift && allOtherOptions.shift
-        )
+        setDdlShift(allOtherOptions.shift && allOtherOptions.shift);
         setShift(
           allOtherOptions.shift.length > 0 ? allOtherOptions.shift[0]?.Key : ""
         );
-        setDdlEvent(allOtherOptions.event && allOtherOptions.event)
+        setDdlEvent(allOtherOptions.event && allOtherOptions.event);
         setEvent(
           allOtherOptions.event.length > 0 ? allOtherOptions.event[0]?.Key : ""
         );
@@ -308,7 +308,6 @@ const ExamMarkApproval = () => {
     setErrors({ ...temp });
     return Object.values(temp).every((x) => x === "");
   };
-
 
   const handleExamApprovalSearch = () => {
     if (validate()) {
@@ -364,7 +363,7 @@ const ExamMarkApproval = () => {
                 errors={errors.schedule}
               />
             </Grid>
-           <Grid item xs={3}>
+            <Grid item xs={3}>
               <SelectControl
                 name="AcademicYear"
                 label="Academic Year"
@@ -374,7 +373,7 @@ const ExamMarkApproval = () => {
                 errors={errors.acaYear}
               />
             </Grid>
-             {/* <Grid item xs={3}>
+            {/* <Grid item xs={3}>
               <SelectControl
                 name="Program/Faculty"
                 label="Program/Faculty"
@@ -395,7 +394,7 @@ const ExamMarkApproval = () => {
                 errors={errors.classId}
               />
             </Grid> */}
-            <Grid item xs={3}>
+            {/* <Grid item xs={3}>
               
               <SelectControl
                 name="Shift"
@@ -405,8 +404,8 @@ const ExamMarkApproval = () => {
                 options={ddlShift}
                 errors={errors.shift1}
               />
-            </Grid>
-            <Grid item xs={3}>
+            </Grid> */}
+            {/* <Grid item xs={3}>
             <div style={{ height: "10px" }}></div>
               <SelectControl
                 name="Section"
@@ -416,9 +415,8 @@ const ExamMarkApproval = () => {
                 options={ddlSection}
                 errors={errors.section}
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={3}>
-              <div style={{ height: "10px" }}></div>
               <SelectControl
                 name="EventName"
                 label="Event Name"
@@ -430,7 +428,7 @@ const ExamMarkApproval = () => {
             </Grid>
 
             <Grid item xs={3}>
-            <div style={{ height: "10px" }}></div>
+              <div style={{ height: "10px" }}></div>
               <Button
                 variant="contained"
                 color="primary"
@@ -471,24 +469,20 @@ const ExamMarkApproval = () => {
           <LoadingComp />
         ) : (
           <>
-        {searchData && (
-          <TableContainer className={classes.table}>
-            <TblHead />
+            {searchData && (
+              <TableContainer className={classes.table}>
+                <TblHead />
 
-            <TableBody>
-              {tableDataAfterPagingAndSorting().map((item) => (
-                <ExamMarkApprovalTableCollapse
-                  item={item}
-                  key={item.$id}
-                 
-                />
-              ))}
-            </TableBody>
-          </TableContainer>
-        )}
+                <TableBody>
+                  {tableDataAfterPagingAndSorting().map((item) => (
+                    <ExamMarkApprovalTableCollapse item={item} key={item.$id} />
+                  ))}
+                </TableBody>
+              </TableContainer>
+            )}
 
-        {searchData && <TblPagination />}
-        </>
+            {searchData && <TblPagination />}
+          </>
         )}
       </CustomContainer>
       <Popup
@@ -496,19 +490,19 @@ const ExamMarkApproval = () => {
         setOpenPopup={setOpenPopup}
         title="Bulk Edit"
       >
-      {loadingBulk ? (
+        {loadingBulk ? (
           <LoadingComp />
         ) : (
           <>
-        <ExamMarkApprovalBulk
-          statusData={
-            bulkData && bulkData.searchFilterModel.ddlStudentExamStatus
-          }
-          search={bulkData && bulkData.searchFilterModel}
-          bulkData={bulkData && bulkData.dbModelLsts}
-          setOpenPopup={setOpenPopup}
-        />
-        </>
+            <ExamMarkApprovalBulk
+              statusData={
+                bulkData && bulkData.searchFilterModel.ddlStudentExamStatus
+              }
+              search={bulkData && bulkData.searchFilterModel}
+              bulkData={bulkData && bulkData.dbModelLsts}
+              setOpenPopup={setOpenPopup}
+            />
+          </>
         )}
       </Popup>
       <Notification notify={notify} setNotify={setNotify} />

@@ -200,17 +200,19 @@ const PersonalInformation = () => {
  
     <CustomContainer>
     <MainContainer>
-    <Box></Box>
-    <ImageContainer><Image src={`${API_URL}${headerContent.FullPath}`} />
-    <Upload><CameraEnhanceIcon style={{'width':"30px"}}/></Upload>
-    </ImageContainer><Button variant="contained"
-    style={{float: 'right'}}
+    <h1 style={{textAlign: "center"}}>Account Details</h1>
+    <Line></Line>
+    <br/>
+    {/* <Box></Box> */}
+    <Image src={`${API_URL}${headerContent.FullPath}`} /><br/>
+    <br/>
+    {/* <Upload><CameraEnhanceIcon style={{'width':"30px"}}/></Upload> */}
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Button variant="outlined"
+    // style={{float: 'bottom'}}
      color="default"
-        startIcon={<Edit />}
         className={classes.button}>Edit Profile</Button><br/>&nbsp;
     <User><H2>Suresh Class One </H2></User>
     <User>suresh@gmail.com</User><br/>
-  <Line></Line>
   <About style={{'width':"40%"}}><User><H2>About</H2></User><br/>
   <Center>
             <LocationOnIcon />&nbsp; <span>Lives at </span> &nbsp; Baneshwor, Kathmandu

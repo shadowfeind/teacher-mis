@@ -293,7 +293,7 @@ const AssignmentForm = ({ students, formDatas, setOpenPopup }) => {
             />
             <InputControl
               name="AssignmentSummary"
-              label="Assignment Summery"
+              label="Assignment Summary"
               value={values.AssignmentSummary}
               onChange={handleInputChange}
               errors={errors.AssignmentSummary}

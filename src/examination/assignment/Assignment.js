@@ -524,7 +524,7 @@ const Assignment = () => {
               />
             </Grid> */}
 
-            <Grid item xs={3}>
+            {/* <Grid item xs={3}>
               <SelectControl
                 name="Section"
                 label="Section"
@@ -543,9 +543,8 @@ const Assignment = () => {
                 options={ddlShift ? ddlShift : test}
                 errors={errors.shift}
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={3}>
-              <div style={{ height: "10px" }}></div>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
                   disableToolbar
@@ -563,7 +562,6 @@ const Assignment = () => {
               </MuiPickersUtilsProvider>
             </Grid>
             <Grid item xs={3}>
-              <div style={{ height: "10px" }}></div>
               <Button
                 variant="contained"
                 color="primary"

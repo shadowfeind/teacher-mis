@@ -100,20 +100,24 @@ const StudentMonthlyPresentSheet = () => {
     (state) => state.getEnglishDate
   );
 
-  const { getListStudentPresent,loading, error: getListStudentPresentError } =
-    useSelector((state) => state.getListStudentPresent);
+  const {
+    getListStudentPresent,
+    loading,
+    error: getListStudentPresentError,
+  } = useSelector((state) => state.getListStudentPresent);
 
   const {
     getListForUpdateStudentPresent,
-    loading:loadingUpdate,
+    loading: loadingUpdate,
     success: getListForUpdateStudentPresentSuccess,
     error: getListForUpdateStudentPresentError,
   } = useSelector((state) => state.getListForUpdateStudentPresent);
 
-  const { presentStudent, 
-    success:presentStudentSuccess, error: presentStudentError } = useSelector(
-    (state) => state.getListForPresentStudent
-  );
+  const {
+    presentStudent,
+    success: presentStudentSuccess,
+    error: presentStudentError,
+  } = useSelector((state) => state.getListForPresentStudent);
 
   const {
     success: postListStudentPresentSuccess,
@@ -238,10 +242,10 @@ const StudentMonthlyPresentSheet = () => {
     }
   }, [allStudentMonthlyPresentSheetData, dispatch]);
 
-  useEffect(()=>{
-    dispatch({type:GET_LIST_STUDENT_PRESENT_RESET})
+  useEffect(() => {
+    dispatch({ type: GET_LIST_STUDENT_PRESENT_RESET });
     dispatch(getAllStudentPresentSheetDataAction());
-  },[])
+  }, []);
 
   // useEffect(() => {
   //   if (subjectOptions) {
@@ -346,11 +350,11 @@ const StudentMonthlyPresentSheet = () => {
     }
   }, [allOtherOptions]);
 
-  useEffect(()=>{
-    if(getListForUpdateStudentPresentSuccess){
+  useEffect(() => {
+    if (getListForUpdateStudentPresentSuccess) {
       setOpenPopup(true);
     }
-  },[getListForUpdateStudentPresentSuccess])
+  }, [getListForUpdateStudentPresentSuccess]);
 
   return (
     <>
@@ -398,7 +402,7 @@ const StudentMonthlyPresentSheet = () => {
               />
             </Grid> */}
 
-            <Grid item xs={3}>
+            {/* <Grid item xs={3}>
               
               <SelectControl
                 name="Section"
@@ -408,8 +412,8 @@ const StudentMonthlyPresentSheet = () => {
                 options={ddlSection ? ddlSection : test}
                 errors={errors.section}
               />
-            </Grid>
-            <Grid item xs={3}>
+            </Grid> */}
+            {/* <Grid item xs={3}>
               
               <SelectControl
                 name="Shift"
@@ -419,9 +423,8 @@ const StudentMonthlyPresentSheet = () => {
                 options={ddlShift ? ddlShift : test}
                 errors={errors.shift}
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={3}>
-              <div style={{ height: "10px" }}></div>
               <SelectControl
                 name="NepaliMonth"
                 label="Nepali Month"
@@ -432,7 +435,6 @@ const StudentMonthlyPresentSheet = () => {
               />
             </Grid>
             <Grid item xs={3}>
-              <div style={{ height: "10px" }}></div>
               <SelectControl
                 name="NepaliYear"
                 label="Nepali Year"
@@ -442,9 +444,9 @@ const StudentMonthlyPresentSheet = () => {
                 errors={errors.nepYear}
               />
             </Grid>
+
             <Grid item xs={3}>
               <div style={{ height: "10px" }}></div>
-
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
                   disableToolbar
@@ -462,7 +464,6 @@ const StudentMonthlyPresentSheet = () => {
               </MuiPickersUtilsProvider>
             </Grid>
             <Grid item xs={3}>
-            <div style={{ height: "10px" }}></div>
               <Button
                 variant="contained"
                 color="primary"
@@ -488,12 +489,12 @@ const StudentMonthlyPresentSheet = () => {
           <LoadingComp />
         ) : (
           <>
-        {getListStudentPresent && (
-          <StudentMonthlyPresentSheetTableCollapse
-            students={getListStudentPresent && getListStudentPresent}
-          />
-        )}
-        </>
+            {getListStudentPresent && (
+              <StudentMonthlyPresentSheetTableCollapse
+                students={getListStudentPresent && getListStudentPresent}
+              />
+            )}
+          </>
         )}
       </CustomContainer>
       <Popup
@@ -501,18 +502,18 @@ const StudentMonthlyPresentSheet = () => {
         setOpenPopup={setOpenPopup}
         title="Bulk Edit"
       >
-      {loadingUpdate ? (
+        {loadingUpdate ? (
           <LoadingComp />
         ) : (
           <>
-        <StudentMonthlyPresentSheetUpdateForm
-          students={
-            getListForUpdateStudentPresent && getListForUpdateStudentPresent
-          }
-          presentStudent={presentStudent && presentStudent} 
-          setOpenPopup={setOpenPopup}
-        />
-        </>
+            <StudentMonthlyPresentSheetUpdateForm
+              students={
+                getListForUpdateStudentPresent && getListForUpdateStudentPresent
+              }
+              presentStudent={presentStudent && presentStudent}
+              setOpenPopup={setOpenPopup}
+            />
+          </>
         )}
       </Popup>
       <Notification notify={notify} setNotify={setNotify} />
