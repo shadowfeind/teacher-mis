@@ -1,5 +1,5 @@
-import axios from "axios";
-import { API_URL, tokenConfig } from "../../../constants";
+
+import { API_URL, axiosInstance, tokenConfig } from "../../../constants";
 import {
   GET_ALL_PG_CLASS_SCHEDULE_FAIL,
   GET_ALL_PG_CLASS_SCHEDULE_REQUEST,
@@ -19,9 +19,9 @@ export const getAllPgClassScheuleAction = () => async (dispatch) => {
   try {
     dispatch({ type: GET_ALL_PG_CLASS_SCHEDULE_REQUEST });
 
-    const { data } = await axios.get(
+    const { data } = await axiosInstance.get(
       `${API_URL}/api/ClassSchedulePG/GetAllClassSchedulePG`,
-      tokenConfig
+      tokenConfig()
     );
 
     dispatch({
@@ -40,9 +40,9 @@ export const getListClassScheuleAction = (id) => async (dispatch) => {
   try {
     dispatch({ type: GET_LIST_CLASS_SCHEDULE_REQUEST });
 
-    const { data } = await axios.get(
+    const { data } = await axiosInstance.get(
       `${API_URL}/api/ClassSchedulePG/GetListClassSchedulePG/${id}?searchKey=1`,
-      tokenConfig
+      tokenConfig()
     );
 
     dispatch({
@@ -63,7 +63,7 @@ export const getListClassScheuleAction = (id) => async (dispatch) => {
 
 //     const { data } = await axios.get(
 //       `${API_URL}/api/ClassSchedulePG/GetSingleEditClassSchedulePG/${id}?company=${company}&searchKey=1`,
-//       tokenConfig
+//       tokenConfig()
 //     );
 
 //     dispatch({
@@ -89,7 +89,7 @@ export const getListClassScheuleAction = (id) => async (dispatch) => {
 //       const { data } = await axios.post(
 //         `${API_URL}/api/ClassSchedulePG/FileUpload`,
 //         formData,
-//         tokenConfig
+//         tokenConfig()
 //       );
 
 //       if (data) {
@@ -103,7 +103,7 @@ export const getListClassScheuleAction = (id) => async (dispatch) => {
 //         await axios.put(
 //           `${API_URL}/api/ClassSchedulePG/PutClassSchedulePG`,
 //           jsonData,
-//           tokenConfig
+//           tokenConfig()
 //         );
 //       }
 

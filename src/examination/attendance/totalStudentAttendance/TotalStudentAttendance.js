@@ -64,12 +64,12 @@ const TotalStudentAttendance = () => {
   const [ddlSection, setDdlSection] = useState([]);
   const [ddlSubject, setDdlSubject] = useState([]);
 
-  const [programValue, setProgramValue] = useState();
-  const [classId, setClassId] = useState();
-  const [acaYear, setAcaYear] = useState();
-  const [shift, setShift] = useState();
-  const [section, setSection] = useState();
-  const [subject, setSubject] = useState();
+  const [programValue, setProgramValue] = useState("");
+  const [classId, setClassId] = useState("");
+  const [acaYear, setAcaYear] = useState("");
+  const [shift, setShift] = useState("");
+  const [section, setSection] = useState("");
+  const [subject, setSubject] = useState("");
   const [errors, setErrors] = useState({});
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
@@ -162,22 +162,30 @@ const TotalStudentAttendance = () => {
   useEffect(() => {
   
     if (allTotalStudentAttendanceData) {
-      setProgramDdl(
-        allTotalStudentAttendanceData.searchFilterModel.ddlFacultyProgramLink
+      // setProgramDdl(
+      //   allTotalStudentAttendanceData?.searchFilterModel.ddlFacultyProgramLink
+      // );
+      setProgramValue(
+        allTotalStudentAttendanceData?.searchFilterModel.ddlFacultyProgramLink[0].Key
       );
-      setDdlClass(allTotalStudentAttendanceData.searchFilterModel.ddlClass);
+      setDdlClass(allTotalStudentAttendanceData?.searchFilterModel.ddlClass);
+      setClassId(allTotalStudentAttendanceData?.searchFilterModel.ddlClass[0].Key);
       setAcademicYearDdl(
-        allTotalStudentAttendanceData.searchFilterModel.ddlAcademicYear
+        allTotalStudentAttendanceData?.searchFilterModel.ddlAcademicYear
       );
       setDdlShift(
-        allTotalStudentAttendanceData.searchFilterModel.ddlAcademicShift
+        allTotalStudentAttendanceData?.searchFilterModel.ddlAcademicShift
       );
-      setDdlSection(allTotalStudentAttendanceData.searchFilterModel.ddlSection);
+      setShift(
+        allTotalStudentAttendanceData?.searchFilterModel.ddlAcademicShift[0].Key
+      );
+      setDdlSection(allTotalStudentAttendanceData?.searchFilterModel.ddlSection);
+      setSection(allTotalStudentAttendanceData?.searchFilterModel.ddlSection[0].Key);
       setStartDate(
-        allTotalStudentAttendanceData.searchFilterModel.currentDate.slice(0, 10)
+        allTotalStudentAttendanceData?.searchFilterModel.currentDate.slice(0, 10)
       );
       setEndDate(
-        allTotalStudentAttendanceData.searchFilterModel.currentDate.slice(0, 10)
+        allTotalStudentAttendanceData?.searchFilterModel.currentDate.slice(0, 10)
       );
     }
   }, [allTotalStudentAttendanceData, dispatch]);
@@ -276,7 +284,7 @@ const TotalStudentAttendance = () => {
                 options={programDdl ? programDdl : test}
                 errors={errors.programValue}
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={3}>
               <SelectControl
                 name="Classes"
@@ -286,7 +294,7 @@ const TotalStudentAttendance = () => {
                 options={ddlClass ? ddlClass : test}
                 errors={errors.classId}
               />
-            </Grid> */}
+            </Grid>
             <Grid item xs={3}>
               <SelectControl
                 name="Shift"
@@ -309,7 +317,7 @@ const TotalStudentAttendance = () => {
               />
             </Grid>
             <Grid item xs={3}>
-              
+            <div style={{ height: "10px" }}></div>
               <SelectControl
                 name="Sujbect"
                 label="Subject Name"

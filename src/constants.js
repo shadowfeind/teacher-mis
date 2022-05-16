@@ -26,9 +26,9 @@ export const tokenHeader = {
 // };
 
 export const tokenConfig = () => {
-  const user = JSON.parse(sessionStorage.getItem("blueberryToken"));
-
-  if (user && user.AccessToken) {
+  const user = sessionStorage.getItem("blueberrytoken");
+   
+  if (user) {
     // const userSessionCheck = jwt_decode(user.AccessToken);
     // const isExpired = userSessionCheck.exp - moment().unix() < 1;
     // console.log(userSessionCheck.exp);
@@ -44,7 +44,7 @@ export const tokenConfig = () => {
     const tokenReturn = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${user.AccessToken}`,
+        Authorization: `Bearer ${user}`,
       },
     };
     return tokenReturn;
@@ -53,28 +53,18 @@ export const tokenConfig = () => {
   }
 };
 
-// export const tokenConfig = {
-//   headers: {
-//     "Content-Type": "application/json",
-//     Authorization: `Bearer ${USER_SESSION}`,
-//   },
-// };
-
 export const axiosInstance = axios.create({
   baseURL: API_URL,
   // headers: {
   //   "Content-Type": "application/json",
-  //   Authorization: `Bearer ${
-  //     JSON.parse(localStorage.getItem("blueberryToken"))?.AccessToken
-  //   }`,
+  //   Authorization: `Bearer ${userSession}`,
   // },
 });
 
-console.log("this is token from function", userTokenFromStorage?.AccessToken);
-
 axiosInstance.interceptors.request.use(async (req) => {
-  const userSession = JSON.parse(sessionStorage.getItem("blueberryToken"));
-  const user = jwt_decode(userSession?.AccessToken);
+  const userSession = sessionStorage.getItem("blueberrytoken");
+  const userRefreshToken = sessionStorage.getItem("blueberryrefreshtoken");
+  const user = jwt_decode(userSession);
   const isExpired = user.exp - moment().unix() < 1;
   console.log(user.exp);
   console.log(moment.unix(user.exp));
@@ -84,9 +74,8 @@ axiosInstance.interceptors.request.use(async (req) => {
   if (!isExpired) return req;
 
   const dataForRefreshToken = {
-    AccessToken: userSession.AccessToken,
-    RefreshToken: userSession.RefreshToken,
-    // IDHRRole: userSession.IDHRRole,
+    AccessToken: userSession,
+    RefreshToken: userRefreshToken,
   };
 
   const JSONdata = JSON.stringify(dataForRefreshToken);
@@ -102,9 +91,8 @@ axiosInstance.interceptors.request.use(async (req) => {
     );
     console.log(data);
 
-    // data.IDHRRole = userSession.IDHRRole;
-
-    sessionStorage.setItem("blueberryToken", JSON.stringify(data));
+    sessionStorage.setItem("blueberrytoken", data.AccessToken);
+    sessionStorage.setItem("blueberryrefreshtoken", data.RefreshToken);
     req.headers.Authorization = `Bearer ${data.AccessToken}`;
   } catch (error) {
     console.log(

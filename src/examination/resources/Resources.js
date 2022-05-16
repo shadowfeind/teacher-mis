@@ -402,7 +402,7 @@ const Resources = () => {
                 errors={errors.classId}
               />
             </Grid> */}
-            <Grid item xs={3}>
+            {/* <Grid item xs={3}>
               <SelectControl
                 name="Shift"
                 label="Shift"
@@ -421,7 +421,7 @@ const Resources = () => {
                 options={ddlSection ? ddlSection : test}
                 errors={errors.section}
               />
-            </Grid>
+            </Grid> */}
 
             <Grid item xs={3}>
               <Button
