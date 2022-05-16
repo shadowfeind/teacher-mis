@@ -1,5 +1,5 @@
-import axios from "axios";
-import { API_URL, tokenConfig } from "../../constants";
+
+import { API_URL, axiosInstance, tokenConfig } from "../../constants";
 import {
   DOWNLOAD_OLD_QUESTIONS_FAIL,
   DOWNLOAD_OLD_QUESTIONS_REQUEST,
@@ -19,9 +19,9 @@ export const getAllOldQuestionsTeacherAction = () => async (dispatch) => {
   try {
     dispatch({ type: GET_ALL_OLD_QUESTIONS_TEACHER_REQUEST });
 
-    const { data } = await axios.get(
+    const { data } = await axiosInstance.get(
       `${API_URL}/api/OldQuestionTeacher/GetAllOldQuestion`,
-      tokenConfig
+      tokenConfig()
     );
 
     dispatch({
@@ -40,9 +40,9 @@ export const getSubjectOldQuestionsAction = (classId) => async (dispatch) => {
     try {
       dispatch({ type: GET_SUBJECT_OF_OLD_QUESTIONS_REQUEST });
   
-      const { data } = await axios.get(
+      const { data } = await axiosInstance.get(
         `${API_URL}/api/OldQuestionTeacher/GetSubjectByIDLevel?level=${classId}`,
-        tokenConfig
+        tokenConfig()
       );
   
       dispatch({
@@ -62,9 +62,9 @@ export const getListOldQuestionsTeacherAction = (classId, subject) => async (dis
     try {
       dispatch({ type: GET_LIST_OLD_QUESTIONS_TEACHER_REQUEST });
   
-      const { data } = await axios.get(
+      const { data } = await axiosInstance.get(
         `${API_URL}/api/OldQuestionTeacher/GetListOldQuestion?level=${classId}&idAcademicSubject=${subject}`,
-        tokenConfig
+        tokenConfig()
       );
   
       dispatch({

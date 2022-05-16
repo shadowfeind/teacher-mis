@@ -1,5 +1,5 @@
-import axios from "axios";
-import { API_URL, tokenConfig } from "../../../constants";
+
+import { API_URL, axiosInstance, tokenConfig } from "../../../constants";
 import {
   GET_ALL_TEACHER_NOTIFICATION_TEACHER_FAIL,
   GET_ALL_TEACHER_NOTIFICATION_TEACHER_REQUEST,
@@ -13,9 +13,9 @@ export const getAllNotificationTeacherAction = () => async (dispatch) => {
   try {
     dispatch({ type: GET_ALL_TEACHER_NOTIFICATION_TEACHER_REQUEST });
 
-    const { data } = await axios.get(
+    const { data } = await axiosInstance.get(
       `${API_URL}/api/TeacherInboxNotification/GetAllTeacherInboxNotification`,
-      tokenConfig
+      tokenConfig()
     );
 
     dispatch({
@@ -35,9 +35,9 @@ export const getListNotificationTeacherAction =
     try {
       dispatch({ type: GET_LIST_TEACHER_NOTIFICATION_TEACHER_REQUEST });
 
-      const { data } = await axios.get(
+      const { data } = await axiosInstance.get(
         `${API_URL}/api/TeacherInboxNotification/GetListTeacherInboxNotification`,
-        tokenConfig
+        tokenConfig()
       );
 
       dispatch({
