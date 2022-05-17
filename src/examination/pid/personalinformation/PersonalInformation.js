@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import './Profile.css'
 import {
   Button,
   InputAdornment,
@@ -71,7 +72,8 @@ position: relative;`
 const Image = styled.img`
 height:200px;
 width:200px;
-border-radius:50%
+border-radius:50%;
+position:relative;
 `
 
 const User = styled.div`
@@ -92,12 +94,12 @@ const Upload = styled.button`
 position:absolute;
 float:right;
 height:30px;
-margin-top:135px;
-right:0%;
 padding:2px;
 border-radius:50%;
 border:0px;
 cursor:pointer;
+top: 43%;
+    left: 61%;
 `
 const Line = styled.div`
 width:90%;
@@ -106,7 +108,7 @@ justify-content:center;
 background:#253053;
 margin: auto;`
 
-const About = styled.div`\
+const About = styled.div`
 height:400px;
 border-radius:10px;
 background:#5a85bd45;
@@ -197,38 +199,49 @@ const PersonalInformation = () => {
   }, [dispatch, getAllPersonalInformation]);
 
   return (
- 
+    <div>
     <CustomContainer>
-    <MainContainer>
-    <h1 style={{textAlign: "center"}}>Account Details</h1>
-    <Line></Line>
-    <br/>
-    {/* <Box></Box> */}
-    <Image src={`${API_URL}${headerContent.FullPath}`} /><br/>
-    <br/>
-    {/* <Upload><CameraEnhanceIcon style={{'width':"30px"}}/></Upload> */}
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Button variant="outlined"
-    // style={{float: 'bottom'}}
-     color="default"
-        className={classes.button}>Edit Profile</Button><br/>&nbsp;
-    <User><H2>Suresh Class One </H2></User>
-    <User>suresh@gmail.com</User><br/>
-  <About style={{'width':"40%"}}><User><H2>About</H2></User><br/>
-  <Center>
-            <LocationOnIcon />&nbsp; <span>Lives at </span> &nbsp; Baneshwor, Kathmandu
-          </Center>
-          <Center>
-            <DraftsIcon />&nbsp; <span>Email at </span> &nbsp;suresh@gmail.com
-          </Center>
-          <Center>
-            <MobileScreenShareIcon />&nbsp; <span>Call at </span> &nbsp;9812345678
-          </Center>
-          <Center>
-            <PermIdentityIcon />&nbsp; <span>Main Guardian Name </span> &nbsp;Suresh M. Sanu
-          </Center>
-          <Center>
-            <ContactPhoneIcon /> &nbsp;<span>Guardian Contact </span> &nbsp;9812345678
-          </Center></About>
+    
+    
+    <h1 id="profile">My Profile</h1>
+    <div id="container">
+            <div class="content-img">
+            <Image src={`${API_URL}${headerContent?.FullPath}`} />
+    <Upload><CameraEnhanceIcon style={{'width':"30px"}}/></Upload>
+    <button id="btn-edit">Edit Profile</button>
+            </div>
+        <form id="content">
+        <div id="leftContent">
+            <div class="names">
+                <div id="fname" class="sideBy"><label for="fname">First Name</label><br /><input type="text" name="fname" value={headerContent.FullName} disabled /></div>
+                <div id="lname" class="sideBy"><label for="lname">Last Name</label><br /><input type="text" name="lname" /></div>
+            </div>
+            <div class="password"><label for="password">Password</label><br /><input type="text" name="password" />
+            <div><button class="btn">CHANGE PASSWORD</button></div></div>
+            <div class="email"><label for="email">Email</label><br /><input type="text" name="email"/></div>
+            <div class="phone"><label for="phone">Phone</label><br /><input type="text" name="phone"/></div>
+            <div class="address"><label for="address">Address</label><br /><input type="text" name="address"/></div>
+            <div class="nation"><label for="nation">Nation</label><br /><input type="text" name="nation"/></div>
+        </div>
+        <div id="rightContent">
+            <div class="names">
+                <div id="gender" class="sideBy"><label for="gender">Gender</label><br /><input type="text" name="gender"/></div>
+                <div id="language" class="sideBy"><label for="language">Language</label><br />
+               <input type="text" name="language"/>
+                </div>
+            </div>
+            <div class="dob"><label for="dob">Date of Birth</label><br /><input type="text" name="dob"/></div>
+            <div class="names">
+                <div id="test" class="sideBy"><label for="test">Test</label><br /><input type="text" name="test"/></div>
+                <div id="test" class="sideBy"><label for="test">Test</label><br /><input type="text" name="test"/></div>
+            </div>
+            <div class="names">
+                <div id="test" class="sideBy"><label for="test">Test</label><br /><input type="text" name="test"/></div>
+               <div id="test" class="sideBy"><label for="test">Test</label><br /><input type="text" name="test"/></div>
+            </div>
+        </div>
+            </form>
+    </div>
 
 
       {/* <Button
@@ -259,9 +272,10 @@ const PersonalInformation = () => {
         />
       </Popup>
       <Notification notify={notify} setNotify={setNotify} /> */}
-      </MainContainer>
+      
     </CustomContainer>
     
+    </div>
     
   );
 };
