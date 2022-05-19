@@ -34,8 +34,10 @@ const useStyles = makeStyles((theme) => ({
 
   const tableHeader = [
     { id: "FullName", label: "Sender Name" },
-    { id: "Messages", label: "Messages" },
+    { id: "MessagesHeading", label: "Messages Heading" },
+    { id: "MessagesDescription", label: "Messages Description" },
     { id: "PostedDate", label: "Posted Date" },
+    { id: "IsActive", label: "IsActive" },
   ];
 
   const ClassNotification = () => {
@@ -104,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
           dispatch(getListNotificationTeacherAction());
         }
         if (listClassNotificationTeacher) {
-          setTableData(listClassNotificationTeacher.teacherNotificationModelLst);
+          setTableData(listClassNotificationTeacher.teacherNotificationInboxLst);
         }
       }, [dispatch, listClassNotificationTeacher]);
 
