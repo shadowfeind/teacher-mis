@@ -142,7 +142,7 @@ const SideMenu = () => {
       <NavLink to={"/resources"} activeStyle={isActive}>
         <Typography variant="h6">
           <BookIcon fontSize="small" />
-          &nbsp;&nbsp;&nbsp; Reading Material
+          &nbsp;&nbsp;&nbsp; E-Material
         </Typography>
       </NavLink>
       <NavLink to={"/class-schedule"} activeStyle={isActive}>
@@ -203,7 +203,7 @@ const SideMenu = () => {
         <Typography variant="h6">
           {" "}
           <ReportProblemIcon fontSize="small" />
-          &nbsp;&nbsp;&nbsp; Leave Request
+          &nbsp;&nbsp;&nbsp; Leave Management
         </Typography>
       </NavLink>
       <NavLink to={"/video-conference"} activeStyle={isActive}>
