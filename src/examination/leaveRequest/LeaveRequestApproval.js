@@ -73,7 +73,7 @@ const tableHeader = [
   { id: "leaveDescription", label: "Leave Description" },
   { id: "fromDate_toDate", label: "FromDate to ToDate" },
   { id: "status", label: "Status" },
-  { id: "actions", label: "All", disableSorting: true },
+  { id: "actions", label: "Actions", disableSorting: true },
 ];
 
 const LeaveRequestApproval = () => {

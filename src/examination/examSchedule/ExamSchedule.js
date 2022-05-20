@@ -55,7 +55,7 @@ const tableHeader = [
   { id: "FullMarkPractical", label: "FullMarks(PT/UT)" },
   { id: "PassMark", label: "PassMark" },
   { id: "SubjectOrder", label: "Subject Order" },
-  { id: "Actions", label: "All", disableSorting: true },
+  { id: "Actions", label: "Actions", disableSorting: true },
 ];
 
 const ExamSchedule = () => {
