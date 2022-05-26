@@ -1,4 +1,3 @@
-
 import { API_URL, axiosInstance, tokenConfig } from "../../../constants";
 import {
   GET_ALL_PERSONALINFORMATION_FAIL,
@@ -17,7 +16,7 @@ export const getAllPersonalInformationAction = () => async (dispatch) => {
     dispatch({ type: GET_ALL_PERSONALINFORMATION_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/PID_PersonalInformation/GetAllPIDPersonalInformation?searchKey=1`,
+      `/api/PID_PersonalInformation/GetAllPIDPersonalInformation?searchKey=1`,
       tokenConfig()
     );
 
@@ -25,7 +24,9 @@ export const getAllPersonalInformationAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_ALL_PERSONALINFORMATION_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };
@@ -35,7 +36,7 @@ export const getSinglePersonalInformationAction = () => async (dispatch) => {
     dispatch({ type: GET_SINGLE_PERSONALINFORMATION_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/PID_PersonalInformation/GetSingleEdit?searchKey=1`,
+      `/api/PID_PersonalInformation/GetSingleEdit?searchKey=1`,
       tokenConfig()
     );
 
@@ -43,7 +44,9 @@ export const getSinglePersonalInformationAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_SINGLE_PERSONALINFORMATION_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };
@@ -62,7 +65,7 @@ export const updateSinglePersonalInformationAction =
       // };
 
       const { data } = await axiosInstance.put(
-        `${API_URL}/api/PID_PersonalInformation/Put`,
+        `/api/PID_PersonalInformation/Put`,
         jsonData,
         tokenConfig()
       );
@@ -74,7 +77,9 @@ export const updateSinglePersonalInformationAction =
     } catch (error) {
       dispatch({
         type: UPDATE_SINGLE_PERSONALINFORMATION_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };

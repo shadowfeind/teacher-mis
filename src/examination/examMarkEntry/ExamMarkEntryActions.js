@@ -1,5 +1,4 @@
-
-import { API_URL, axiosInstance, tokenConfig} from "../../constants";
+import { API_URL, axiosInstance, tokenConfig } from "../../constants";
 import {
   GET_ALL_ACADEMIC_STUDENT_EXAMDATA_FAIL,
   GET_ALL_ACADEMIC_STUDENT_EXAMDATA_REQUEST,
@@ -23,7 +22,7 @@ export const getAllAcademicStudentExamdataAction = () => async (dispatch) => {
     dispatch({ type: GET_ALL_ACADEMIC_STUDENT_EXAMDATA_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/AcademicStudentExamData/GetAllAcademicStudentExamData
+      `/api/AcademicStudentExamData/GetAllAcademicStudentExamData
     `,
       tokenConfig()
     );
@@ -35,7 +34,9 @@ export const getAllAcademicStudentExamdataAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_ALL_ACADEMIC_STUDENT_EXAMDATA_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };
@@ -45,7 +46,7 @@ export const getEventAction = (year, program, classId) => async (dispatch) => {
     dispatch({ type: GET_EVENT_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/AcademicExamSchedule/GetActiveAcademicYearCalendar?idAcademicYear=${year}&idFacultyProgramLink=${program}&level=${classId}`,
+      `/api/AcademicExamSchedule/GetActiveAcademicYearCalendar?idAcademicYear=${year}&idFacultyProgramLink=${program}&level=${classId}`,
       tokenConfig()
     );
 
@@ -56,7 +57,9 @@ export const getEventAction = (year, program, classId) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_EVENT_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };
@@ -67,7 +70,7 @@ export const getEventScheduleAction =
       dispatch({ type: GET_EXAM_SCHEDULE_HEADER_REQUEST });
 
       const { data } = await axiosInstance.get(
-        `${API_URL}/api/GetActiveExamScheduleListForExamMarkEntry/${year}/${program}/${classId}/${section}/${event}/2
+        `/api/GetActiveExamScheduleListForExamMarkEntry/${year}/${program}/${classId}/${section}/${event}/2
     `,
         tokenConfig()
       );
@@ -79,7 +82,9 @@ export const getEventScheduleAction =
     } catch (error) {
       dispatch({
         type: GET_EXAM_SCHEDULE_HEADER_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };
@@ -91,7 +96,7 @@ export const getExamEntrySearchDataAction =
       dispatch({ type: GET_ALL_EXAM_ENTRY_SEARCHDATA_REQUEST });
 
       const { data } = await axiosInstance.get(
-        `${API_URL}/api/GetLstAcademicStudentExamData/${year}/${program}/${classId}/${section}/${shift}/${event}/${schedule}/1
+        `/api/GetLstAcademicStudentExamData/${year}/${program}/${classId}/${section}/${shift}/${event}/${schedule}/1
     `,
         tokenConfig()
       );
@@ -103,7 +108,9 @@ export const getExamEntrySearchDataAction =
     } catch (error) {
       dispatch({
         type: GET_ALL_EXAM_ENTRY_SEARCHDATA_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };
@@ -115,7 +122,7 @@ export const getExamEntryBulkAction =
       dispatch({ type: GET_ALL_EXAM_ENTRY_BULK_REQUEST });
 
       const { data } = await axiosInstance.get(
-        `${API_URL}/api/GetBulk/${year}/${program}/${classId}/${section}/${shift}/${event}/${schedule}/1
+        `/api/GetBulk/${year}/${program}/${classId}/${section}/${shift}/${event}/${schedule}/1
     `,
         tokenConfig()
       );
@@ -127,7 +134,9 @@ export const getExamEntryBulkAction =
     } catch (error) {
       dispatch({
         type: GET_ALL_EXAM_ENTRY_BULK_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };

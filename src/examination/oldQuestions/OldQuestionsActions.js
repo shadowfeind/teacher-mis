@@ -1,4 +1,3 @@
-
 import { API_URL, axiosInstance, tokenConfig } from "../../constants";
 import {
   DOWNLOAD_OLD_QUESTIONS_FAIL,
@@ -20,7 +19,7 @@ export const getAllOldQuestionsTeacherAction = () => async (dispatch) => {
     dispatch({ type: GET_ALL_OLD_QUESTIONS_TEACHER_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/OldQuestionTeacher/GetAllOldQuestion`,
+      `/api/OldQuestionTeacher/GetAllOldQuestion`,
       tokenConfig()
     );
 
@@ -31,42 +30,47 @@ export const getAllOldQuestionsTeacherAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_ALL_OLD_QUESTIONS_TEACHER_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };
 
 export const getSubjectOldQuestionsAction = (classId) => async (dispatch) => {
-    try {
-      dispatch({ type: GET_SUBJECT_OF_OLD_QUESTIONS_REQUEST });
-  
-      const { data } = await axiosInstance.get(
-        `${API_URL}/api/OldQuestionTeacher/GetSubjectByIDLevel?level=${classId}`,
-        tokenConfig()
-      );
-  
-      dispatch({
-        type: GET_SUBJECT_OF_OLD_QUESTIONS_SUCCESS,
-        payload: data,
-        query: { classId },
-      });
-    } catch (error) {
-      dispatch({
-        type: GET_SUBJECT_OF_OLD_QUESTIONS_FAIL,
-        payload: error.message ? error.message : error.Message,
-      });
-    }
-  };
+  try {
+    dispatch({ type: GET_SUBJECT_OF_OLD_QUESTIONS_REQUEST });
 
-export const getListOldQuestionsTeacherAction = (classId, subject) => async (dispatch) => {
+    const { data } = await axiosInstance.get(
+      `/api/OldQuestionTeacher/GetSubjectByIDLevel?level=${classId}`,
+      tokenConfig()
+    );
+
+    dispatch({
+      type: GET_SUBJECT_OF_OLD_QUESTIONS_SUCCESS,
+      payload: data,
+      query: { classId },
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_SUBJECT_OF_OLD_QUESTIONS_FAIL,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
+    });
+  }
+};
+
+export const getListOldQuestionsTeacherAction =
+  (classId, subject) => async (dispatch) => {
     try {
       dispatch({ type: GET_LIST_OLD_QUESTIONS_TEACHER_REQUEST });
-  
+
       const { data } = await axiosInstance.get(
-        `${API_URL}/api/OldQuestionTeacher/GetListOldQuestion?level=${classId}&idAcademicSubject=${subject}`,
+        `/api/OldQuestionTeacher/GetListOldQuestion?level=${classId}&idAcademicSubject=${subject}`,
         tokenConfig()
       );
-  
+
       dispatch({
         type: GET_LIST_OLD_QUESTIONS_TEACHER_SUCCESS,
         payload: data,
@@ -74,25 +78,29 @@ export const getListOldQuestionsTeacherAction = (classId, subject) => async (dis
     } catch (error) {
       dispatch({
         type: GET_LIST_OLD_QUESTIONS_TEACHER_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };
-  
-  export const downloadOldQuestionsAction = (id) => async (dispatch) => {
-    try {
-      dispatch({ type: DOWNLOAD_OLD_QUESTIONS_REQUEST });
-  
-      const test = `${API_URL}/api/OldQuestionTeacher/DownloadOldQuestion/${id}`;
-  
-      window.open(test, "_blank");
-      dispatch({
-        type: DOWNLOAD_OLD_QUESTIONS_SUCCESS,
-      });
-    } catch (error) {
-      dispatch({
-        type: DOWNLOAD_OLD_QUESTIONS_FAIL,
-        payload: error.message ? error.message : error.Message,
-      });
-    }
-  };
+
+export const downloadOldQuestionsAction = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: DOWNLOAD_OLD_QUESTIONS_REQUEST });
+
+    const test = `/api/OldQuestionTeacher/DownloadOldQuestion/${id}`;
+
+    window.open(test, "_blank");
+    dispatch({
+      type: DOWNLOAD_OLD_QUESTIONS_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: DOWNLOAD_OLD_QUESTIONS_FAIL,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
+    });
+  }
+};

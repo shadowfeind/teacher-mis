@@ -1,4 +1,3 @@
-
 import { API_URL, axiosInstance, tokenConfig } from "../../constants";
 
 import {
@@ -27,7 +26,7 @@ export const getAllExamDivisionAction = () => async (dispatch) => {
   try {
     dispatch({ type: GET_ALL_EXAM_DIVISION_REQUEST });
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/AcademicExamDivision/GetAllExamDivision`,
+      `/api/AcademicExamDivision/GetAllExamDivision`,
       tokenConfig()
     );
 
@@ -48,7 +47,7 @@ export const getSingleExamDivisionAction = () => async (dispatch) => {
     dispatch({ type: GET_SINGLE_EXAM_DIVISION_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/GetToCreateAcademicExamDivision/6/singleGetToCreate`,
+      `/api/GetToCreateAcademicExamDivision/6/singleGetToCreate`,
       tokenConfig()
     );
 
@@ -77,7 +76,7 @@ export const createExamDivisionAction = (examDivision) => async (dispatch) => {
     // };
 
     const { data } = await axiosInstance.post(
-      `${API_URL}/api/AcademicExamDivision/PostAcademicExamDivision`,
+      `/api/AcademicExamDivision/PostAcademicExamDivision`,
       jsonData,
       tokenConfig()
     );
@@ -100,7 +99,7 @@ export const getSingleExamDivisionEditAction =
       dispatch({ type: GET_SINGLE_EXAM_DIVISION_EDIT_REQUEST });
 
       const { data } = await axiosInstance.get(
-        `${API_URL}/api/GetToEditSingleAcademicExamDivision/${IDAcademicExamDivision}/${idFacultyProgramLink}/singleEdit`,
+        `/api/GetToEditSingleAcademicExamDivision/${IDAcademicExamDivision}/${idFacultyProgramLink}/singleEdit`,
         tokenConfig()
       );
 
@@ -130,7 +129,7 @@ export const updateSingleExamDivisionAction =
       // };
 
       const { data } = await axiosInstance.put(
-        ` ${API_URL}/api/AcademicExamDivision/PutAcademicExamDivision`,
+        ` /api/AcademicExamDivision/PutAcademicExamDivision`,
         jsonData,
         tokenConfig()
       );

@@ -1,4 +1,3 @@
-
 import { API_URL, axiosInstance, tokenConfig } from "../../../constants";
 import {
   GET_ALL_PG_CLASS_SCHEDULE_FAIL,
@@ -20,7 +19,7 @@ export const getAllPgClassScheuleAction = () => async (dispatch) => {
     dispatch({ type: GET_ALL_PG_CLASS_SCHEDULE_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/ClassSchedulePG/GetAllClassSchedulePG`,
+      `/api/ClassSchedulePG/GetAllClassSchedulePG`,
       tokenConfig()
     );
 
@@ -31,7 +30,9 @@ export const getAllPgClassScheuleAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_ALL_PG_CLASS_SCHEDULE_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };
@@ -41,7 +42,7 @@ export const getListClassScheuleAction = (id) => async (dispatch) => {
     dispatch({ type: GET_LIST_CLASS_SCHEDULE_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/ClassSchedulePG/GetListClassSchedulePG/${id}?searchKey=1`,
+      `/api/ClassSchedulePG/GetListClassSchedulePG/${id}?searchKey=1`,
       tokenConfig()
     );
 
@@ -52,69 +53,9 @@ export const getListClassScheuleAction = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_LIST_CLASS_SCHEDULE_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };
-
-// export const getEditClassScheuleAction = (id, company) => async (dispatch) => {
-//   try {
-//     dispatch({ type: GET_EDIT_CLASS_SCHEDULE_REQUEST });
-
-//     const { data } = await axios.get(
-//       `${API_URL}/api/ClassSchedulePG/GetSingleEditClassSchedulePG/${id}?company=${company}&searchKey=1`,
-//       tokenConfig()
-//     );
-
-//     dispatch({
-//       type: GET_EDIT_CLASS_SCHEDULE_SUCCESS,
-//       payload: data,
-//     });
-//   } catch (error) {
-//     dispatch({
-//       type: GET_EDIT_CLASS_SCHEDULE_FAIL,
-//       payload: error.message ? error.message : error.Message,
-//     });
-//   }
-// };
-
-// export const putClassScheduleAction =
-//   (schedule, image, searchFilterModel) => async (dispatch) => {
-//     try {
-//       dispatch({ type: PUT_CLASS_SCHEDULE_REQUEST });
-
-//       let formData = new FormData();
-//       formData.append("ImageUploaded", image);
-
-//       const { data } = await axios.post(
-//         `${API_URL}/api/ClassSchedulePG/FileUpload`,
-//         formData,
-//         tokenConfig()
-//       );
-
-//       if (data) {
-//         const newData = { ...schedule, DocumentName: data };
-//         const jsonData = JSON.stringify({
-//           dbModel: newData,
-//           searchFilterModel,
-//         });
-//         console.log(jsonData);
-
-//         await axios.put(
-//           `${API_URL}/api/ClassSchedulePG/PutClassSchedulePG`,
-//           jsonData,
-//           tokenConfig()
-//         );
-//       }
-
-//       dispatch({
-//         type: PUT_CLASS_SCHEDULE_SUCCESS,
-//         payload: data,
-//       });
-//     } catch (error) {
-//       dispatch({
-//         type: PUT_CLASS_SCHEDULE_FAIL,
-//         payload: error.message ? error.message : error.Message,
-//       });
-//     }
-//   };

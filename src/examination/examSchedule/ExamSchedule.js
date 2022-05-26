@@ -116,7 +116,7 @@ const ExamSchedule = () => {
     (state) => state.getEvent
   );
 
-  const { examScheduleList,loading } = useSelector(
+  const { examScheduleList, loading } = useSelector(
     (state) => state.getExamScheduleList
   );
 
@@ -262,20 +262,20 @@ const ExamSchedule = () => {
           <LoadingComp />
         ) : (
           <>
-        {examScheduleList && (
-          <TableContainer className={classes.table}>
-            <TblHead />
+            {examScheduleList && (
+              <TableContainer className={classes.table}>
+                <TblHead />
 
-            <TableBody>
-              {tableDataAfterPagingAndSorting().map((item) => (
-                <ExamScheduleTableCollapse item={item} key={item.$id} />
-              ))}
-            </TableBody>
-          </TableContainer>
-        )}
+                <TableBody>
+                  {tableDataAfterPagingAndSorting().map((item) => (
+                    <ExamScheduleTableCollapse item={item} key={item.$id} />
+                  ))}
+                </TableBody>
+              </TableContainer>
+            )}
 
-        {examScheduleList && <TblPagination />}
-        </>
+            {examScheduleList && <TblPagination />}
+          </>
         )}
       </CustomContainer>
       <Popup

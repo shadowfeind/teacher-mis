@@ -1,4 +1,3 @@
-
 import { API_URL, axiosInstance, tokenConfig } from "../../constants";
 import {
   DOWNLOAD_RESOURCES_FAIL,
@@ -29,7 +28,7 @@ export const getAllInitialResourcesDataAction = () => async (dispatch) => {
     dispatch({ type: GET_ALL_RESOURCES_INITIAL_DATA_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/CourseDeliveryPlanTeacher/GetAllCourseDeliveryPlan`,
+      `/api/CourseDeliveryPlanTeacher/GetAllCourseDeliveryPlan`,
       tokenConfig()
     );
 
@@ -40,7 +39,9 @@ export const getAllInitialResourcesDataAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_ALL_RESOURCES_INITIAL_DATA_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };
@@ -51,7 +52,7 @@ export const getAllInitialDataFromSubjectAction =
       dispatch({ type: GET_ALL_INITIAL_DATA_FROM_SUBJECT_REQUEST });
 
       const { data } = await axiosInstance.get(
-        `${API_URL}/api/CourseDeliveryPlanTeacher/GetAttendanceForAcademicYear?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
+        `/api/CourseDeliveryPlanTeacher/GetAttendanceForAcademicYear?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
         tokenConfig()
       );
 
@@ -62,7 +63,9 @@ export const getAllInitialDataFromSubjectAction =
     } catch (error) {
       dispatch({
         type: GET_ALL_INITIAL_DATA_FROM_SUBJECT_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };
@@ -73,27 +76,27 @@ export const getAllOtherOptionsForResourcesSelectAction =
       dispatch({ type: GET_ALL_OTHER_OPTIONS_FOR_RESOURCES_SELECT_REQUEST });
 
       const year = await axiosInstance.get(
-        `${API_URL}/api/CourseDeliveryPlanTeacher/GetAttendanceForAcademicYear?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
+        `/api/CourseDeliveryPlanTeacher/GetAttendanceForAcademicYear?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
         tokenConfig()
       );
 
       const program = await axiosInstance.get(
-        `${API_URL}/api/CourseDeliveryPlanTeacher/GetCurseDeliveryPlanForFacultyProgram?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
+        `/api/CourseDeliveryPlanTeacher/GetCurseDeliveryPlanForFacultyProgram?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
         tokenConfig()
       );
 
       const classId = await axiosInstance.get(
-        `${API_URL}/api/CourseDeliveryPlanTeacher/GetCurseDeliveryPlanForLevel?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
+        `/api/CourseDeliveryPlanTeacher/GetCurseDeliveryPlanForLevel?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
         tokenConfig()
       );
 
       const section = await axiosInstance.get(
-        `${API_URL}/api/CourseDeliveryPlanTeacher/GetCurseDeliveryPlanForSection?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
+        `/api/CourseDeliveryPlanTeacher/GetCurseDeliveryPlanForSection?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
         tokenConfig()
       );
 
       const shift = await axiosInstance.get(
-        `${API_URL}/api/CourseDeliveryPlanTeacher/GetCurseDeliveryPlanForShift?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
+        `/api/CourseDeliveryPlanTeacher/GetCurseDeliveryPlanForShift?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
         tokenConfig()
       );
 
@@ -112,7 +115,9 @@ export const getAllOtherOptionsForResourcesSelectAction =
     } catch (error) {
       dispatch({
         type: GET_ALL_OTHER_OPTIONS_FOR_RESOURCES_SELECT_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };
@@ -123,7 +128,7 @@ export const getAllResourcesListAction =
       dispatch({ type: GET_ALL_RESOURCES_LIST_REQUEST });
 
       const { data } = await axiosInstance.get(
-        `${API_URL}/api/CourseDeliveryPlanTeacher/GetListCourseDeliveryPlan?idAcademicFacultySubjectLink=${subject}&idAcademicYear=${year}&idFacultyProgramLink=${program}&level=${classId}&section=${section}&idShift=${shift}`,
+        `/api/CourseDeliveryPlanTeacher/GetListCourseDeliveryPlan?idAcademicFacultySubjectLink=${subject}&idAcademicYear=${year}&idFacultyProgramLink=${program}&level=${classId}&section=${section}&idShift=${shift}`,
         tokenConfig()
       );
 
@@ -134,7 +139,9 @@ export const getAllResourcesListAction =
     } catch (error) {
       dispatch({
         type: GET_ALL_RESOURCES_LIST_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };
@@ -145,7 +152,7 @@ export const getCreateResourceAction =
       dispatch({ type: GET_CREATE_RESOURCES_REQUEST });
 
       const { data } = await axiosInstance.get(
-        `${API_URL}/api/CourseDeliveryPlanTeacher/GetSingleCreateCourseDeliveryPlan?idAcademicFacultySubjectLink=${subject}&idAcademicYear=${year}&idFacultyProgramLink=${program}&level=${classId}&section=${section}&idShift=${shift}`,
+        `/api/CourseDeliveryPlanTeacher/GetSingleCreateCourseDeliveryPlan?idAcademicFacultySubjectLink=${subject}&idAcademicYear=${year}&idFacultyProgramLink=${program}&level=${classId}&section=${section}&idShift=${shift}`,
         tokenConfig()
       );
 
@@ -156,7 +163,9 @@ export const getCreateResourceAction =
     } catch (error) {
       dispatch({
         type: GET_CREATE_RESOURCES_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };
@@ -169,7 +178,7 @@ export const postResourceAction =
       let formData = new FormData();
       formData.append("ImageUploaded", image);
       const { data } = await axiosInstance.post(
-        `${API_URL}/api/CourseDeliveryPlanTeacher/FileUpload`,
+        `/api/CourseDeliveryPlanTeacher/FileUpload`,
         formData,
         tokenConfig()
       );
@@ -202,7 +211,7 @@ export const postResourceAction =
         console.log(jsonData);
 
         await axiosInstance.post(
-          `${API_URL}/api/CourseDeliveryPlanTeacher/Post`,
+          `/api/CourseDeliveryPlanTeacher/Post`,
           jsonData,
           tokenConfig()
         );
@@ -215,26 +224,29 @@ export const postResourceAction =
     } catch (error) {
       dispatch({
         type: POST_RESOURCES_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };
 
-  export const downloadResourceAction = (id) => async (dispatch) => {
-    try {
-      dispatch({ type: DOWNLOAD_RESOURCES_REQUEST });
-  
-      const test = `${API_URL}/api/CourseDeliveryPlanTeacher/DownloadDoc/${id}`;
-  
-      window.open(test, "_blank");
-      dispatch({
-        type: DOWNLOAD_RESOURCES_SUCCESS,
-        
-      });
-    } catch (error) {
-      dispatch({
-        type: DOWNLOAD_RESOURCES_FAIL,
-        payload: error.message ? error.message : error.Message,
-      });
-    }
-  };
+export const downloadResourceAction = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: DOWNLOAD_RESOURCES_REQUEST });
+
+    const test = `/api/CourseDeliveryPlanTeacher/DownloadDoc/${id}`;
+
+    window.open(test, "_blank");
+    dispatch({
+      type: DOWNLOAD_RESOURCES_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: DOWNLOAD_RESOURCES_FAIL,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
+    });
+  }
+};

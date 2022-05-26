@@ -130,7 +130,7 @@ const TotalStudentAttendance = () => {
   const {
     listTotalStudentAttendanceData,
     loading,
-    success:listTotalStudentAttendanceDataSuccess,
+    success: listTotalStudentAttendanceDataSuccess,
     error: listTotalStudentAttendanceDataError,
   } = useSelector((state) => state.getListTotalStudentAttendance);
 
@@ -160,16 +160,18 @@ const TotalStudentAttendance = () => {
   }
 
   useEffect(() => {
-  
     if (allTotalStudentAttendanceData) {
       // setProgramDdl(
       //   allTotalStudentAttendanceData?.searchFilterModel.ddlFacultyProgramLink
       // );
       setProgramValue(
-        allTotalStudentAttendanceData?.searchFilterModel.ddlFacultyProgramLink[0].Key
+        allTotalStudentAttendanceData?.searchFilterModel
+          .ddlFacultyProgramLink[0].Key
       );
       setDdlClass(allTotalStudentAttendanceData?.searchFilterModel.ddlClass);
-      setClassId(allTotalStudentAttendanceData?.searchFilterModel.ddlClass[0].Key);
+      setClassId(
+        allTotalStudentAttendanceData?.searchFilterModel.ddlClass[0].Key
+      );
       setAcademicYearDdl(
         allTotalStudentAttendanceData?.searchFilterModel.ddlAcademicYear
       );
@@ -179,21 +181,31 @@ const TotalStudentAttendance = () => {
       setShift(
         allTotalStudentAttendanceData?.searchFilterModel.ddlAcademicShift[0].Key
       );
-      setDdlSection(allTotalStudentAttendanceData?.searchFilterModel.ddlSection);
-      setSection(allTotalStudentAttendanceData?.searchFilterModel.ddlSection[0].Key);
+      setDdlSection(
+        allTotalStudentAttendanceData?.searchFilterModel.ddlSection
+      );
+      setSection(
+        allTotalStudentAttendanceData?.searchFilterModel.ddlSection[0].Key
+      );
       setStartDate(
-        allTotalStudentAttendanceData?.searchFilterModel.currentDate.slice(0, 10)
+        allTotalStudentAttendanceData?.searchFilterModel.currentDate.slice(
+          0,
+          10
+        )
       );
       setEndDate(
-        allTotalStudentAttendanceData?.searchFilterModel.currentDate.slice(0, 10)
+        allTotalStudentAttendanceData?.searchFilterModel.currentDate.slice(
+          0,
+          10
+        )
       );
     }
   }, [allTotalStudentAttendanceData, dispatch]);
 
-  useEffect(()=>{
-    dispatch({type:GET_LIST_TOTAL_STUDENT_ATTENDANCE_RESET})
+  useEffect(() => {
+    dispatch({ type: GET_LIST_TOTAL_STUDENT_ATTENDANCE_RESET });
     dispatch(getAllTotalStudentAttendanceAction());
-  },[])
+  }, []);
 
   useEffect(() => {
     if (subjectOptions) {
@@ -204,7 +216,7 @@ const TotalStudentAttendance = () => {
   useEffect(() => {
     if (listTotalStudentAttendanceData) {
       setTableData(
-        listTotalStudentAttendanceData.dbStudentClassAttendanceModelLst
+        listTotalStudentAttendanceData.dbModelTotalStudentAttendanceCountLst
       );
     }
   }, [listTotalStudentAttendanceData]);
@@ -306,7 +318,6 @@ const TotalStudentAttendance = () => {
               />
             </Grid>
             <Grid item xs={3}>
-             
               <SelectControl
                 name="Section"
                 label="Section"
@@ -317,7 +328,7 @@ const TotalStudentAttendance = () => {
               />
             </Grid>
             <Grid item xs={3}>
-            <div style={{ height: "10px" }}></div>
+              <div style={{ height: "10px" }}></div>
               <SelectControl
                 name="Sujbect"
                 label="Subject Name"
@@ -337,7 +348,7 @@ const TotalStudentAttendance = () => {
                   inputVariant="outlined"
                   format="dd-MM-yyyy"
                   name="StartDate"
-                  label="Start Year"
+                  label="Start Date"
                   value={startDate}
                   onChange={(e) => {
                     const newDate = new Date(e);
@@ -355,7 +366,7 @@ const TotalStudentAttendance = () => {
                   inputVariant="outlined"
                   format="dd-MM-yyyy"
                   name="EndDate"
-                  label="End Year"
+                  label="End Date"
                   value={endDate}
                   onChange={(e) => {
                     const newDate = new Date(e);
@@ -365,7 +376,7 @@ const TotalStudentAttendance = () => {
               </MuiPickersUtilsProvider>
             </Grid>
             <Grid item xs={3}>
-            <div style={{ height: "10px" }}></div>
+              <div style={{ height: "10px" }}></div>
               <Button
                 variant="contained"
                 color="primary"
@@ -380,7 +391,7 @@ const TotalStudentAttendance = () => {
           </Grid>
         </Toolbar>
         <div style={{ height: "10px" }}></div>
-        <Toolbar>        
+        <Toolbar>
           <InputControl
             className={classes.searchInput}
             label="Search Student"
@@ -398,26 +409,26 @@ const TotalStudentAttendance = () => {
           <LoadingComp />
         ) : (
           <>
-        {listTotalStudentAttendanceData && (
-          <TableContainer className={classes.table}>
-            <TblHead />
+            {listTotalStudentAttendanceData && (
+              <TableContainer className={classes.table}>
+                <TblHead />
 
-            <TableBody>
-              {tableDataAfterPagingAndSorting().map((item) => (
-                <TotalStudentAttendanceTableCollapse
-                  item={item}
-                  key={item.$id}
-                  attendance={
-                    listTotalStudentAttendanceData &&
-                    listTotalStudentAttendanceData.dbModelTotalStudentAttendanceCountLst
-                  }
-                />
-              ))}
-            </TableBody>
-          </TableContainer>
-        )}
-        {listTotalStudentAttendanceData && <TblPagination />}
-        </>
+                <TableBody>
+                  {tableDataAfterPagingAndSorting().map((item) => (
+                    <TotalStudentAttendanceTableCollapse
+                      item={item}
+                      key={item.$id}
+                      attendance={
+                        listTotalStudentAttendanceData &&
+                        listTotalStudentAttendanceData.dbModelTotalStudentAttendanceCountLst
+                      }
+                    />
+                  ))}
+                </TableBody>
+              </TableContainer>
+            )}
+            {listTotalStudentAttendanceData && <TblPagination />}
+          </>
         )}
       </CustomContainer>
       <Notification notify={notify} setNotify={setNotify} />

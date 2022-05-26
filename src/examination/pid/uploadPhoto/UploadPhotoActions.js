@@ -1,4 +1,3 @@
-
 import { API_URL, axiosInstance, tokenConfig } from "../../../constants";
 
 import {
@@ -15,7 +14,7 @@ export const getAllUploadPhotoAction = () => async (dispatch) => {
     dispatch({ type: GET_ALL_UPLOADPHOTO_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/PID_PhotoUpload/GetSingleToEditPhoto`,
+      `/api/PID_PhotoUpload/GetSingleToEditPhoto`,
       tokenConfig()
     );
 
@@ -26,7 +25,9 @@ export const getAllUploadPhotoAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_ALL_UPLOADPHOTO_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };
@@ -39,7 +40,7 @@ export const putUploadPhotoAction = (image, dbData) => async (dispatch) => {
     formData.append("ImageUploaded", image);
 
     const { data } = await axiosInstance.post(
-      `${API_URL}/api/PID_PhotoUpload/FileUpload`,
+      `/api/PID_PhotoUpload/FileUpload`,
       formData,
       tokenConfig()
     );
@@ -54,7 +55,7 @@ export const putUploadPhotoAction = (image, dbData) => async (dispatch) => {
       });
       console.log(jsonData);
       await axiosInstance.put(
-        `${API_URL}/api/PID_PhotoUpload/PutPhoto`,
+        `/api/PID_PhotoUpload/PutPhoto`,
         jsonData,
         tokenConfig()
       );
@@ -66,7 +67,9 @@ export const putUploadPhotoAction = (image, dbData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: UPLOADPHOTO_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };

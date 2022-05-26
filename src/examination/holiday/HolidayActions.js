@@ -1,4 +1,3 @@
-
 import { API_URL, axiosInstance, tokenConfig } from "../../constants";
 import {
   GET_ALL_HOLIDAY_FAIL,
@@ -11,7 +10,7 @@ export const getAllHolidayAction = () => async (dispatch) => {
     dispatch({ type: GET_ALL_HOLIDAY_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/Att_HRHoliday/GetAtt_HRHoliday`,
+      `/api/Att_HRHoliday/GetAtt_HRHoliday`,
       tokenConfig()
     );
 
@@ -19,7 +18,9 @@ export const getAllHolidayAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_ALL_HOLIDAY_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };

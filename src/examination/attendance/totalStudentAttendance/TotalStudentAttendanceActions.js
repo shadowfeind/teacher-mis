@@ -1,4 +1,3 @@
-
 import { API_URL, axiosInstance, tokenConfig } from "../../../constants";
 import {
   GET_ALL_TOTAL_STUDENT_ATTENDANCE_FAIL,
@@ -14,7 +13,7 @@ export const getAllTotalStudentAttendanceAction = () => async (dispatch) => {
     dispatch({ type: GET_ALL_TOTAL_STUDENT_ATTENDANCE_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/TotalStudentAttendance/GetAllTotalStudentAttendance`,
+      `/api/TotalStudentAttendance/GetAllTotalStudentAttendance`,
       tokenConfig()
     );
 
@@ -25,7 +24,9 @@ export const getAllTotalStudentAttendanceAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_ALL_TOTAL_STUDENT_ATTENDANCE_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };
@@ -37,7 +38,7 @@ export const getListTotalStudentAttendanceAction =
       dispatch({ type: GET_LIST_TOTAL_STUDENT_ATTENDANCE_REQUEST });
 
       const { data } = await axiosInstance.get(
-        `${API_URL}/api/TotalStudentAttendance/GetListTotalStudentAttendance?startDate=${startDate}&endDate=${endDate}&idAcademicYear=${year}&idFacultyProgramLink=${program}&level=${classId}&idSubject=${subject}&section=${section}&idShift=${shift}&searchKey=1`,
+        `/api/TotalStudentAttendance/GetListTotalStudentAttendance?startDate=${startDate}&endDate=${endDate}&idAcademicYear=${year}&idFacultyProgramLink=${program}&level=${classId}&idSubject=${subject}&section=${section}&idShift=${shift}&searchKey=1`,
         tokenConfig()
       );
 
@@ -48,7 +49,9 @@ export const getListTotalStudentAttendanceAction =
     } catch (error) {
       dispatch({
         type: GET_LIST_TOTAL_STUDENT_ATTENDANCE_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };

@@ -17,8 +17,16 @@ import { useDispatch, useSelector } from "react-redux";
 import Notification from "../../components/Notification";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import SelectControl from "../../components/controls/SelectControl";
-import { DOWNLOAD_OLD_QUESTIONS_RESET, GET_ALL_OLD_QUESTIONS_TEACHER_RESET, GET_LIST_OLD_QUESTIONS_TEACHER_RESET } from "./OldQuestionsConstants";
-import { getAllOldQuestionsTeacherAction, getListOldQuestionsTeacherAction, getSubjectOldQuestionsAction } from "./OldQuestionsActions";
+import {
+  DOWNLOAD_OLD_QUESTIONS_RESET,
+  GET_ALL_OLD_QUESTIONS_TEACHER_RESET,
+  GET_LIST_OLD_QUESTIONS_TEACHER_RESET,
+} from "./OldQuestionsConstants";
+import {
+  getAllOldQuestionsTeacherAction,
+  getListOldQuestionsTeacherAction,
+  getSubjectOldQuestionsAction,
+} from "./OldQuestionsActions";
 import OldQuestionsTeacherTableCollapse from "./OldQuestionsTableCollapse";
 
 const useStyles = makeStyles((theme) => ({
@@ -38,7 +46,7 @@ const tableHeader = [
   { id: "PostedBy", label: "Posted By" },
   { id: "PostedDate", label: "Posted Date" },
   { id: "IsActive", label: "IsActive" },
-  { id: "actions", label: "Donload", disableSorting: true },
+  { id: "actions", label: "Download", disableSorting: true },
 ];
 
 const OldQuestions = () => {
@@ -96,7 +104,7 @@ const OldQuestions = () => {
     (state) => state.getSubjectOldQuestions
   );
 
-  const { listOldQuestionsTeacher,loading } = useSelector(
+  const { listOldQuestionsTeacher, loading } = useSelector(
     (state) => state.getListOldQuestionsTeacher
   );
 
@@ -146,10 +154,10 @@ const OldQuestions = () => {
     }
   }, [dispatch, oldQuestionsTeacher]);
 
-  useEffect(()=>{
-    dispatch({type:GET_LIST_OLD_QUESTIONS_TEACHER_RESET});
+  useEffect(() => {
+    dispatch({ type: GET_LIST_OLD_QUESTIONS_TEACHER_RESET });
     dispatch(getAllOldQuestionsTeacherAction());
-  },[])
+  }, []);
 
   useEffect(() => {
     if (listOldQuestionsTeacher) {
@@ -182,7 +190,7 @@ const OldQuestions = () => {
     setClassId(value);
     dispatch(getSubjectOldQuestionsAction(value));
   };
-  return  (
+  return (
     <>
       <CustomContainer>
         <Toolbar>
@@ -192,7 +200,7 @@ const OldQuestions = () => {
                 name="classes"
                 label="Class"
                 onChange={(e) => handleClassIdChange(e.target.value)}
-                options={ ddlClass }
+                options={ddlClass}
                 value={classId}
                 errors={errors.classId}
               />
@@ -203,7 +211,7 @@ const OldQuestions = () => {
                 label="Subject"
                 value={facultySubject}
                 onChange={(e) => setFacultySubject(e.target.value)}
-                options={ddlFacultySubject }
+                options={ddlFacultySubject}
                 errors={errors.facultySubject}
               />
             </Grid>
@@ -241,22 +249,22 @@ const OldQuestions = () => {
           <LoadingComp />
         ) : (
           <>
-        {listOldQuestionsTeacher && (
-          <TableContainer className={classes.table}>
-            <TblHead />
+            {listOldQuestionsTeacher && (
+              <TableContainer className={classes.table}>
+                <TblHead />
 
-            <TableBody>
-            {tableDataAfterPagingAndSorting().map((item) => (
-                <OldQuestionsTeacherTableCollapse
-                  item={item}
-                  key={item.$id}
-                  />
+                <TableBody>
+                  {tableDataAfterPagingAndSorting().map((item) => (
+                    <OldQuestionsTeacherTableCollapse
+                      item={item}
+                      key={item.$id}
+                    />
                   ))}
-                  </TableBody>
-          </TableContainer>
-        )}
-        {listOldQuestionsTeacher && <TblPagination />}
-        </>
+                </TableBody>
+              </TableContainer>
+            )}
+            {listOldQuestionsTeacher && <TblPagination />}
+          </>
         )}
       </CustomContainer>
       <Notification notify={notify} setNotify={setNotify} />
