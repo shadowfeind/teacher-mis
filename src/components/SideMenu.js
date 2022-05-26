@@ -43,6 +43,7 @@ const useStyles = makeStyles({
       backgroundColor: "rgba(255, 255, 255, 0.3)",
       textDecoration: "none",
     },
+    "& a": { textDecoration: "none" },
     "& a:hover": { textDecoration: "none" },
   },
 });
