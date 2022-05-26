@@ -1,11 +1,10 @@
-
 import { API_URL, axiosInstance, tokenConfig } from "../../../constants";
 import {
   GET_ACTIVE_SUBJECT_FAIL,
   GET_ACTIVE_SUBJECT_REQUEST,
-    GET_ACTIVE_SUBJECT_SUCCESS,
-    GET_ALL_EXAM_MARK_APPROVAL_SEARCHDATA_FAIL,
-    GET_ALL_EXAM_MARK_APPROVAL_SEARCHDATA_REQUEST,
+  GET_ACTIVE_SUBJECT_SUCCESS,
+  GET_ALL_EXAM_MARK_APPROVAL_SEARCHDATA_FAIL,
+  GET_ALL_EXAM_MARK_APPROVAL_SEARCHDATA_REQUEST,
   GET_ALL_EXAM_MARK_APPROVAL_SEARCHDATA_SUCCESS,
   GET_ALL_OTHER_OPTIONS_FOR_SELECT_FAIL,
   GET_ALL_OTHER_OPTIONS_FOR_SELECT_REQUEST,
@@ -32,7 +31,7 @@ export const getInitialExamMarkApprovalDataAction = () => async (dispatch) => {
     dispatch({ type: GET_EXAM_MARK_APPROVAL_INITIAL_DATA_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/ApproveAcademicStudentExamDataTeacher/GetAllApproveAcademicStudentExamDataTeacher?searchKey=1
+      `/api/ApproveAcademicStudentExamDataTeacher/GetAllApproveAcademicStudentExamDataTeacher?searchKey=1
         `,
       tokenConfig()
     );
@@ -44,7 +43,9 @@ export const getInitialExamMarkApprovalDataAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_EXAM_MARK_APPROVAL_INITIAL_DATA_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };
@@ -55,7 +56,7 @@ export const getExamMarkApprovalScheduleHeaderAction =
       dispatch({ type: GET_EXAM_MARK_APPROVAL_SCHEULE_HEADER_REQUEST });
 
       const { data } = await axiosInstance.get(
-        `${API_URL}/api/ApproveAcademicStudentExamDataTeacher/GetActiveExamScheduleListForExamMarkEntry?idAcademicYear=${year}&idFacultyProgramLink=${program}&level=${classId}&section=${section}&idAcademicYearCalendar=${event}&roleID=1`,
+        `/api/ApproveAcademicStudentExamDataTeacher/GetActiveExamScheduleListForExamMarkEntry?idAcademicYear=${year}&idFacultyProgramLink=${program}&level=${classId}&section=${section}&idAcademicYearCalendar=${event}&roleID=1`,
         tokenConfig()
       );
 
@@ -66,19 +67,21 @@ export const getExamMarkApprovalScheduleHeaderAction =
     } catch (error) {
       dispatch({
         type: GET_EXAM_MARK_APPROVAL_SCHEULE_HEADER_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };
 
-  export const getExamMarkApprovalSearchDataAction =
+export const getExamMarkApprovalSearchDataAction =
   (year, program, classId, section, shift, event, schedule) =>
   async (dispatch) => {
     try {
       dispatch({ type: GET_ALL_EXAM_MARK_APPROVAL_SEARCHDATA_REQUEST });
 
       const { data } = await axiosInstance.get(
-        `${API_URL}/api/ApproveAcademicStudentExamDataTeacher/GetListApproveAcademicStudentExamDataTeacher?idAcademicYear=${year}&idFacultyProgramLink=${program}&level=${classId}&section=${section}&idShift=${shift}&idAcademicYearCalendar=${event}&idAcademicFacultySubjectLink=${schedule}&searchKey=1`,
+        `/api/ApproveAcademicStudentExamDataTeacher/GetListApproveAcademicStudentExamDataTeacher?idAcademicYear=${year}&idFacultyProgramLink=${program}&level=${classId}&section=${section}&idShift=${shift}&idAcademicYearCalendar=${event}&idAcademicFacultySubjectLink=${schedule}&searchKey=1`,
         tokenConfig()
       );
 
@@ -89,19 +92,21 @@ export const getExamMarkApprovalScheduleHeaderAction =
     } catch (error) {
       dispatch({
         type: GET_ALL_EXAM_MARK_APPROVAL_SEARCHDATA_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };
 
-  export const getBulkExamMarkApprovalSearchDataAction =
+export const getBulkExamMarkApprovalSearchDataAction =
   (year, program, classId, section, shift, event, schedule) =>
   async (dispatch) => {
     try {
       dispatch({ type: GET_BULK_EXAM_MARK_APPROVAL_REQUEST });
 
       const { data } = await axiosInstance.get(
-        `${API_URL}/api/ApproveAcademicStudentExamDataTeacher/GetBulkApproveAcademicStudentExamDataTeacher?idAcademicYear=${year}&idFacultyProgramLink=${program}&level=${classId}&section=${section}&idShift=${shift}&idAcademicYearCalendar=${event}&idAcademicFacultySubjectLink=${schedule}&searchKey=1`,
+        `/api/ApproveAcademicStudentExamDataTeacher/GetBulkApproveAcademicStudentExamDataTeacher?idAcademicYear=${year}&idFacultyProgramLink=${program}&level=${classId}&section=${section}&idShift=${shift}&idAcademicYearCalendar=${event}&idAcademicFacultySubjectLink=${schedule}&searchKey=1`,
         tokenConfig()
       );
 
@@ -112,12 +117,14 @@ export const getExamMarkApprovalScheduleHeaderAction =
     } catch (error) {
       dispatch({
         type: GET_BULK_EXAM_MARK_APPROVAL_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };
 
-  export const postBulkExamMarkApprovalAction =
+export const postBulkExamMarkApprovalAction =
   (students, search) => async (dispatch) => {
     try {
       dispatch({ type: POST_BULK_EXAM_MARK_APPROVAL_REQUEST });
@@ -134,7 +141,7 @@ export const getExamMarkApprovalScheduleHeaderAction =
       // };
 
       await axiosInstance.post(
-        `${API_URL}/api/ApproveAcademicStudentExamDataTeacher/PostApproveAcademicStudentExamData`,
+        `/api/ApproveAcademicStudentExamDataTeacher/PostApproveAcademicStudentExamData`,
         jsonData,
         tokenConfig()
       );
@@ -143,43 +150,45 @@ export const getExamMarkApprovalScheduleHeaderAction =
     } catch (error) {
       dispatch({
         type: POST_BULK_EXAM_MARK_APPROVAL_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };
 
-  export const getAllOtherOptionsForSelectTeacherAction =
+export const getAllOtherOptionsForSelectTeacherAction =
   (id, subject) => async (dispatch) => {
     try {
       dispatch({ type: GET_ALL_OTHER_OPTIONS_FOR_SELECT_TEACHER_REQUEST });
 
       const year = await axiosInstance.get(
-        `${API_URL}/api/ApproveAcademicStudentExamDataTeacher/ActionForAcademicYear?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
+        `/api/ApproveAcademicStudentExamDataTeacher/ActionForAcademicYear?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
         tokenConfig()
       );
 
       const program = await axiosInstance.get(
-        `${API_URL}/api/ApproveAcademicStudentExamDataTeacher/ActionForForFacultyProgram?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
+        `/api/ApproveAcademicStudentExamDataTeacher/ActionForForFacultyProgram?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
         tokenConfig()
       );
 
       const classId = await axiosInstance.get(
-        `${API_URL}/api/ApproveAcademicStudentExamDataTeacher/ActionForForLevel?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
+        `/api/ApproveAcademicStudentExamDataTeacher/ActionForForLevel?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
         tokenConfig()
       );
 
       const section = await axiosInstance.get(
-        `${API_URL}/api/ApproveAcademicStudentExamDataTeacher/ActionForForSection?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
+        `/api/ApproveAcademicStudentExamDataTeacher/ActionForForSection?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
         tokenConfig()
       );
 
       const shift = await axiosInstance.get(
-        `${API_URL}/api/ApproveAcademicStudentExamDataTeacher/ActionForForShift?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
+        `/api/ApproveAcademicStudentExamDataTeacher/ActionForForShift?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
         tokenConfig()
       );
 
       const event = await axiosInstance.get(
-        `${API_URL}/api/ApproveAcademicStudentExamDataTeacher/GetActiveAcademicYearCalendar?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
+        `/api/ApproveAcademicStudentExamDataTeacher/GetActiveAcademicYearCalendar?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
         tokenConfig()
       );
 
@@ -199,30 +208,33 @@ export const getExamMarkApprovalScheduleHeaderAction =
     } catch (error) {
       dispatch({
         type: GET_ALL_OTHER_OPTIONS_FOR_SELECT_TEACHER_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };
 
-  // export const getActiveSubjectAction =
-  // (subject, id) => async (dispatch) => {
-  //   try {
-  //     dispatch({ type: GET_ACTIVE_SUBJECT_REQUEST });
+// export const getActiveSubjectAction =
+// (subject, id) => async (dispatch) => {
+//   try {
+//     dispatch({ type: GET_ACTIVE_SUBJECT_REQUEST });
 
-  //     const { data } = await axiosInstance.get(
-  //       `${API_URL}/api/ApproveAcademicStudentExamDataTeacher/GetActiveAcademicYearCalendar?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
-  //       tokenConfig()
-  //     );
+//     const { data } = await axiosInstance.get(
+//       `/api/ApproveAcademicStudentExamDataTeacher/GetActiveAcademicYearCalendar?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
+//       tokenConfig()
+//     );
 
-  //     dispatch({
-  //       type: GET_ACTIVE_SUBJECT_SUCCESS,
-  //       payload: data,
-  //     });
-  //   } catch (error) {
-  //     dispatch({
-  //       type: GET_ACTIVE_SUBJECT_FAIL,
-  //       payload: error.message ? error.message : error.Message,
-  //     });
-  //   }
-  // };
-
+//     dispatch({
+//       type: GET_ACTIVE_SUBJECT_SUCCESS,
+//       payload: data,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: GET_ACTIVE_SUBJECT_FAIL,
+//       payload: error?.response?.data?.Message
+// ? error?.response?.data?.Message
+// : error?.message,
+//     });
+//   }
+// };

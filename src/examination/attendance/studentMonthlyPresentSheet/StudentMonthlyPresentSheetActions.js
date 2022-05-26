@@ -1,5 +1,10 @@
 import axios from "axios";
-import { API_URL, axiosInstance, tokenConfig, tokenHeader } from "../../../constants";
+import {
+  API_URL,
+  axiosInstance,
+  tokenConfig,
+  tokenHeader,
+} from "../../../constants";
 import {
   GET_ALL_OTHER_OPTIONS_FOR_SELECT_FAIL,
   GET_ALL_OTHER_OPTIONS_FOR_SELECT_REQUEST,
@@ -32,7 +37,7 @@ export const getAllStudentPresentSheetDataAction = () => async (dispatch) => {
     dispatch({ type: GET_ALL_STUDEN_MONTHLY_PRESENT_SHEET_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/StudentPresentSheetTeacher/GetAllStudentPresentSheet`,
+      `/api/StudentPresentSheetTeacher/GetAllStudentPresentSheet`,
       tokenConfig()
     );
 
@@ -43,7 +48,9 @@ export const getAllStudentPresentSheetDataAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_ALL_STUDEN_MONTHLY_PRESENT_SHEET_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };
@@ -54,27 +61,27 @@ export const getAllOtherOptionsForSelectAction =
       dispatch({ type: GET_ALL_OTHER_OPTIONS_FOR_SELECT_REQUEST });
 
       const year = await axiosInstance.get(
-        `${API_URL}/api/StudentPresentSheetTeacher/GetAttendanceForAcademicYear?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
+        `/api/StudentPresentSheetTeacher/GetAttendanceForAcademicYear?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
         tokenConfig()
       );
 
       const program = await axiosInstance.get(
-        `${API_URL}/api/StudentPresentSheetTeacher/GetCurseDeliveryPlanForFacultyProgram?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
+        `/api/StudentPresentSheetTeacher/GetCurseDeliveryPlanForFacultyProgram?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
         tokenConfig()
       );
 
       const classId = await axiosInstance.get(
-        `${API_URL}/api/StudentPresentSheetTeacher/GetCurseDeliveryPlanForLevel?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
+        `/api/StudentPresentSheetTeacher/GetCurseDeliveryPlanForLevel?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
         tokenConfig()
       );
 
       const section = await axiosInstance.get(
-        `${API_URL}/api/StudentPresentSheetTeacher/GetCurseDeliveryPlanForSection?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
+        `/api/StudentPresentSheetTeacher/GetCurseDeliveryPlanForSection?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
         tokenConfig()
       );
 
       const shift = await axiosInstance.get(
-        `${API_URL}/api/StudentPresentSheetTeacher/GetCurseDeliveryPlanForShift?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
+        `/api/StudentPresentSheetTeacher/GetCurseDeliveryPlanForShift?idAcademicFacultySubjectLink=${subject}&idTeacher=${id}`,
         tokenConfig()
       );
 
@@ -93,7 +100,9 @@ export const getAllOtherOptionsForSelectAction =
     } catch (error) {
       dispatch({
         type: GET_ALL_OTHER_OPTIONS_FOR_SELECT_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };
@@ -105,7 +114,7 @@ export const getSubjectOptionsForSelectAction =
       dispatch({ type: GET_SUBJECT_OPTIONS_FOR_SELECT_REQUEST });
 
       const { data } = await axiosInstance.get(
-        `${API_URL}/api/StudentPresentSheet/GetPopulateSubjectByLevel?idAcademicYear=${year}&idFacultyProgramLink=${program}&level=${classId}`,
+        `/api/StudentPresentSheet/GetPopulateSubjectByLevel?idAcademicYear=${year}&idFacultyProgramLink=${program}&level=${classId}`,
         tokenConfig()
       );
 
@@ -116,7 +125,9 @@ export const getSubjectOptionsForSelectAction =
     } catch (error) {
       dispatch({
         type: GET_SUBJECT_OPTIONS_FOR_SELECT_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };
@@ -127,7 +138,7 @@ export const getEnglishDateAction = (year, month) => async (dispatch) => {
     dispatch({ type: GET_ENGLISH_DATE_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/StudentPresentSheet/GetEngDate?year=${year}&month=${month}`,
+      `/api/StudentPresentSheet/GetEngDate?year=${year}&month=${month}`,
       tokenConfig()
     );
 
@@ -138,7 +149,9 @@ export const getEnglishDateAction = (year, month) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_ENGLISH_DATE_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };
@@ -160,7 +173,7 @@ export const getListStudentPresentAction =
       dispatch({ type: GET_LIST_STUDENT_PRESENT_REQUEST });
 
       const { data } = await axiosInstance.get(
-        `${API_URL}/api/StudentPresentSheetTeacher/GetListStudentPresentSheet?currentDate=${currentDate}&npYear=${npYear}&npMonth=${npMonth}&idAcademicYear=${year}&idFacultyProgramLink=${program}&level=${classId}&idAcademicFacultySubjectLink=${subject}&section=${section}&idShift=${shift}&searchKey=1`,
+        `/api/StudentPresentSheetTeacher/GetListStudentPresentSheet?currentDate=${currentDate}&npYear=${npYear}&npMonth=${npMonth}&idAcademicYear=${year}&idFacultyProgramLink=${program}&level=${classId}&idAcademicFacultySubjectLink=${subject}&section=${section}&idShift=${shift}&searchKey=1`,
         tokenConfig()
       );
 
@@ -171,7 +184,9 @@ export const getListStudentPresentAction =
     } catch (error) {
       dispatch({
         type: GET_LIST_STUDENT_PRESENT_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };
@@ -193,7 +208,7 @@ export const getListForUpdateStudentPresentAction =
       dispatch({ type: GET_LIST_FOR_UPDATE_STUDENT_PRESENT_REQUEST });
 
       const { data } = await axiosInstance.get(
-        `${API_URL}/api/StudentPresentSheetTeacher/GetSingleToCreateStudentPresentSheet?currentDate=${currentDate}&npYear=${npYear}&npMonth=${npMonth}&idAcademicYear=${year}&idFacultyProgramLink=${program}&level=${classId}&idAcademicFacultySubjectLink=${subject}&section=${section}&idShift=${shift}&searchKey=1`,
+        `/api/StudentPresentSheetTeacher/GetSingleToCreateStudentPresentSheet?currentDate=${currentDate}&npYear=${npYear}&npMonth=${npMonth}&idAcademicYear=${year}&idFacultyProgramLink=${program}&level=${classId}&idAcademicFacultySubjectLink=${subject}&section=${section}&idShift=${shift}&searchKey=1`,
         tokenConfig()
       );
 
@@ -204,7 +219,9 @@ export const getListForUpdateStudentPresentAction =
     } catch (error) {
       dispatch({
         type: GET_LIST_FOR_UPDATE_STUDENT_PRESENT_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };
@@ -215,7 +232,7 @@ export const getListForPresentStudentAction =
       dispatch({ type: GET_LIST_FOR_PRESENT_STUDENT_REQUEST });
 
       const { data } = await axiosInstance.get(
-        `${API_URL}/api/StudentPresentSheet/GetPresentOrAbsent?currentDate=${currentDate}&idStudentFacultyLevel=${program}&IdSubject=${subject}`,
+        `/api/StudentPresentSheet/GetPresentOrAbsent?currentDate=${currentDate}&idStudentFacultyLevel=${program}&IdSubject=${subject}`,
         tokenConfig()
       );
 
@@ -226,7 +243,9 @@ export const getListForPresentStudentAction =
     } catch (error) {
       dispatch({
         type: GET_LIST_FOR_PRESENT_STUDENT_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };
@@ -265,7 +284,7 @@ export const postStudentPresentListAction =
       });
 
       const { data } = await axiosInstance.post(
-        `${API_URL}/api/StudentPresentSheetTeacher/PostStudentPresentSheet`,
+        `/api/StudentPresentSheetTeacher/PostStudentPresentSheet`,
         jsonData,
         tokenConfig()
       );
@@ -274,7 +293,9 @@ export const postStudentPresentListAction =
     } catch (error) {
       dispatch({
         type: POST_LIST_STUDENT_PRESENT_FAIL,
-        payload: error.message ? error.message : error.Message,
+        payload: error?.response?.data?.Message
+          ? error?.response?.data?.Message
+          : error?.message,
       });
     }
   };

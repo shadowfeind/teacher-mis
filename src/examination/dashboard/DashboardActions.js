@@ -1,4 +1,3 @@
-
 import {
   GET_HEADER_CONTENT_FAIL,
   GET_HEADER_CONTENT_REQUEST,
@@ -7,14 +6,14 @@ import {
   GET_TEACHER_DASHBOARD_REQUEST,
   GET_TEACHER_DASHBOARD_SUCCESS,
 } from "./DashboardConstants";
-import { API_URL, axiosInstance, tokenConfig} from "../../constants";
+import { API_URL, axiosInstance, tokenConfig } from "../../constants";
 
 export const getHeaderContentAction = () => async (dispatch) => {
   try {
     dispatch({ type: GET_HEADER_CONTENT_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/Home/GetHeaderContent
+      `/api/Home/GetHeaderContent
       `,
       tokenConfig()
     );
@@ -23,7 +22,9 @@ export const getHeaderContentAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_HEADER_CONTENT_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };
@@ -33,7 +34,7 @@ export const getDashboardContentAction = () => async (dispatch) => {
     dispatch({ type: GET_TEACHER_DASHBOARD_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/TeacherDashboard/GetAllTeacherDashboard`,
+      `/api/TeacherDashboard/GetAllTeacherDashboard`,
       tokenConfig()
     );
 
@@ -41,7 +42,9 @@ export const getDashboardContentAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_TEACHER_DASHBOARD_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };

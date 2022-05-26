@@ -21,7 +21,7 @@ export const getAllTeacherAnnouncementAction = () => async (dispatch) => {
     dispatch({ type: GET_ALL_ANNOUNCEMENT_TEACHER_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/Announcement/GetAllAnnouncement
+      `/api/Announcement/GetAllAnnouncement
         `,
       tokenConfig()
     );
@@ -30,7 +30,9 @@ export const getAllTeacherAnnouncementAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_ALL_ANNOUNCEMENT_TEACHER_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };
@@ -40,7 +42,7 @@ export const getListTeacherAnnouncementAction = (date) => async (dispatch) => {
     dispatch({ type: GET_LIST_ANNOUNCEMENT_TEACHER_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/Announcement/GetListAnnouncement?createdDate=${date}`,
+      `/api/Announcement/GetListAnnouncement?createdDate=${date}`,
       tokenConfig()
     );
 
@@ -48,7 +50,9 @@ export const getListTeacherAnnouncementAction = (date) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_LIST_ANNOUNCEMENT_TEACHER_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };
@@ -58,7 +62,7 @@ export const getFCMForTeacherAnnouncementAction = () => async (dispatch) => {
     dispatch({ type: ANNOUNCEMENT_TEACHER_FCM_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/Announcement/GetSingleCreateAnnouncement`,
+      `/api/Announcement/GetSingleCreateAnnouncement`,
       tokenConfig()
     );
 
@@ -66,7 +70,9 @@ export const getFCMForTeacherAnnouncementAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: ANNOUNCEMENT_TEACHER_FCM_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };

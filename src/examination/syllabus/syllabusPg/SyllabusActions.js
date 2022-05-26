@@ -1,4 +1,3 @@
-
 import { API_URL, axiosInstance, tokenConfig } from "../../../constants";
 import {
   GET_ALL_SYLLABUS_FAIL,
@@ -14,7 +13,7 @@ export const getAllSyllabusAction = () => async (dispatch) => {
     dispatch({ type: GET_ALL_SYLLABUS_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/SyllabusTeacher/GetAllSyllabus`,
+      `/api/SyllabusTeacher/GetAllSyllabus`,
       tokenConfig()
     );
 
@@ -25,7 +24,9 @@ export const getAllSyllabusAction = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_ALL_SYLLABUS_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };
@@ -35,7 +36,7 @@ export const getListSyllabusAction = (id) => async (dispatch) => {
     dispatch({ type: GET_LIST_SYLLABUS_REQUEST });
 
     const { data } = await axiosInstance.get(
-      `${API_URL}/api/SyllabusTeacher/GetListSyllabus/${id}?searchKey=1`,
+      `/api/SyllabusTeacher/GetListSyllabus/${id}?searchKey=1`,
       tokenConfig()
     );
 
@@ -46,7 +47,9 @@ export const getListSyllabusAction = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_LIST_SYLLABUS_FAIL,
-      payload: error.message ? error.message : error.Message,
+      payload: error?.response?.data?.Message
+        ? error?.response?.data?.Message
+        : error?.message,
     });
   }
 };
