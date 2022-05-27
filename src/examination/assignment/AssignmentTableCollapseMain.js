@@ -19,13 +19,15 @@ const useStyles = makeStyles({
   },
 });
 
-const AssignmentTableCollapseMain = ({ item, setOpenPopup3 }) => {
+const AssignmentTableCollapseMain = ({ item, shift, setOpenPopup3 }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const handleEdit = (id) => {
     dispatch(getSingleToEditTeacherAssignmentAction(id));
     setOpenPopup3(true);
   };
+
+  const shiftName = shift?.filter((s) => s.Key === item.IDAcademicShift);
   const downloadHandler = (id) => {
     dispatch(downloadAssignmentAction(id));
   };
@@ -38,7 +40,7 @@ const AssignmentTableCollapseMain = ({ item, setOpenPopup3 }) => {
       <TableRow>
         <TableCell>{item.FullName}</TableCell>
         <TableCell>{item.RollNo}</TableCell>
-        <TableCell>{item.Shift}</TableCell>
+        <TableCell>{shiftName?.length > 0 && shiftName[0].Value}</TableCell>
         <TableCell>{item.AssignmentName}</TableCell>
         <TableCell>{item.AssignmentDate?.slice(0, 10)}</TableCell>
         <TableCell>{item.DueDate?.slice(0, 10)}</TableCell>
@@ -61,7 +63,7 @@ const AssignmentTableCollapseMain = ({ item, setOpenPopup3 }) => {
           {item.DocumentSubmitted !== null && (
             <Button
               variant="outlined"
-              color= "primary"
+              color="primary"
               className={classes.button}
               onClick={() => downloadSubmittedHandler(item.IDAssignment)}
             >
@@ -69,7 +71,7 @@ const AssignmentTableCollapseMain = ({ item, setOpenPopup3 }) => {
             </Button>
           )}
         </TableCell>
-      
+
         <TableCell>
           <Button
             variant="contained"

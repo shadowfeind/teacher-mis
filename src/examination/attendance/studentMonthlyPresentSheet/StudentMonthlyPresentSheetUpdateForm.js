@@ -19,7 +19,7 @@ import { postStudentPresentListAction } from "./StudentMonthlyPresentSheetAction
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.common.grey,
+    backgroundColor: "#4f81bd",
     color: theme.palette.common.black,
   },
   body: {
@@ -100,7 +100,7 @@ const StudentMonthlyPresentSheetUpdateForm = ({ students, setOpenPopup }) => {
               <StyledTableCell>Email</StyledTableCell>
 
               <StyledTableCell align="right">
-                <label>Select All</label>
+                <label>All</label>
                 <Checkbox checked={checked} onChange={handleAllSelectChange} />
               </StyledTableCell>
             </TableRow>
