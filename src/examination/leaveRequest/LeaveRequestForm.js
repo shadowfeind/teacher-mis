@@ -68,7 +68,9 @@ const LeaveRequestForm = ({
           )
         );
       } else {
-        dispatch(putLeaveRequestAction(values, image,leaveRequestEdit.SchoolShortName));
+        dispatch(
+          putLeaveRequestAction(values, image, leaveRequestEdit.SchoolShortName)
+        );
         setOpenPopUp(false);
       }
     }
@@ -86,7 +88,10 @@ const LeaveRequestForm = ({
 
   useEffect(() => {
     if (leaveRequestCreate) {
-      setValues({ ...leaveRequestCreate.dbModel });
+      setValues({
+        ...leaveRequestCreate.dbModel,
+        ReceiverID: leaveRequestCreate?.ddlTeacher[0]?.Key,
+      });
     }
   }, [leaveRequestCreate]);
 
@@ -95,7 +100,6 @@ const LeaveRequestForm = ({
       setValues({ ...leaveRequestEdit.dbModel });
     }
   }, [leaveRequestEdit]);
-
 
   const gender = [{ Key: "", Value: "" }];
 

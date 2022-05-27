@@ -19,7 +19,6 @@ import DatePickerControl from "../../components/controls/DatePickerControl";
 import { postTeacherAssignmentAction } from "./AssignmentActions";
 import { API_URL } from "../../constants";
 
-
 const initialFormValues = {
   IDAssignment: 0,
   IDHREmployee: 0,
@@ -58,7 +57,7 @@ const initialFormValues = {
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.common.grey,
+    backgroundColor: "#4f81bd",
     color: theme.palette.common.black,
   },
   body: {
@@ -185,11 +184,11 @@ const AssignmentForm = ({ students, formDatas, setOpenPopup }) => {
           <TableHead>
             <TableRow>
               <StyledTableCell>Roll No. </StyledTableCell>
-              <StyledTableCell>University Registration No</StyledTableCell>
-              <StyledTableCell>Full Name</StyledTableCell>
-              <StyledTableCell>Academic Shift</StyledTableCell>
+              <StyledTableCell>Student Name</StyledTableCell>
+              <StyledTableCell>Mobile No.</StyledTableCell>
+              <StyledTableCell>Email ID.</StyledTableCell>
               <StyledTableCell style={{ textAlign: "right" }}>
-                <label>Select All</label>
+                <label>All</label>
                 <Checkbox
                   checked={checked}
                   onChange={(e) => handleAllChecked(e.target.checked)}
@@ -262,15 +261,13 @@ const AssignmentForm = ({ students, formDatas, setOpenPopup }) => {
               type="file"
               errors={errors.image}
             />
-             <img
-            src={
-              imgSrc
-                ? imgSrc
-                : formDatas && `${API_URL}${formDatas.FullPath}`
-            }
-            height={200}
-            width={200}
-          />
+            <img
+              src={
+                imgSrc ? imgSrc : formDatas && `${API_URL}${formDatas.FullPath}`
+              }
+              height={200}
+              width={200}
+            />
           </Grid>
           <Grid item xs={6}>
             <InputControl

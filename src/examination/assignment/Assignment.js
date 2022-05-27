@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const tableHeader = [
-  { id: "FullName", label: "Full Name" },
+  { id: "FullName", label: "Student Name" },
   { id: "RollNo", label: "Roll No" },
   { id: "Shift", label: "Shift" },
   { id: "AssignmentName", label: "Assignment Name" },
@@ -607,6 +607,7 @@ const Assignment = () => {
                       key={item.$id}
                       item={item}
                       setOpenPopup3={setOpenPopup3}
+                      shift={getListTeacherAssignment?.ddlShift}
                     />
                   ))}
                 </TableBody>
