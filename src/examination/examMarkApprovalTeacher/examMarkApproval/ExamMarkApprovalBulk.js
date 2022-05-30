@@ -99,9 +99,11 @@ const ExamMarkApprovalBulk = ({
               <StyledTableCell align="center">
                 Mark Obtained(TH)
               </StyledTableCell>
-              <StyledTableCell align="center">
-                Mark Obtained(PT)
-              </StyledTableCell>
+              {bulk && bulk?.length > 0 && bulk[0].FullMarkPractical !== 0 && (
+                <StyledTableCell align="center">
+                  Mark Obtained(PT)
+                </StyledTableCell>
+              )}
               <StyledTableCell align="center">Status</StyledTableCell>
               <StyledTableCell align="center">Full Mark</StyledTableCell>
               <StyledTableCell align="center">Full Mark(PT)</StyledTableCell>
@@ -140,28 +142,30 @@ const ExamMarkApprovalBulk = ({
                       }
                     />
                   </StyledTableCell>
-                  <StyledTableCell align="right">
-                    <TextField
-                      id={`practical_${subject.IDHREmployee}`}
-                      value={subject.ObtainedMarkPractical}
-                      name="ObtainedMarkPractical"
-                      onKeyDown={(e) =>
-                        symbolsArr.includes(e.key) && e.preventDefault()
-                      }
-                      type="number"
-                      label="Obtained Practical Mark"
-                      variant="outlined"
-                      inputProps={{ tabIndex: "2" }}
-                      onChange={(e) =>
-                        onChangeHandler(
-                          subject,
-                          e.target.value,
-                          e.target.name,
-                          index
-                        )
-                      }
-                    />
-                  </StyledTableCell>
+                  {subject.FullMarkPractical !== 0 && (
+                    <StyledTableCell align="right">
+                      <TextField
+                        id={`practical_${subject.IDHREmployee}`}
+                        value={subject.ObtainedMarkPractical}
+                        name="ObtainedMarkPractical"
+                        onKeyDown={(e) =>
+                          symbolsArr.includes(e.key) && e.preventDefault()
+                        }
+                        type="number"
+                        label="Obtained Practical Mark"
+                        variant="outlined"
+                        inputProps={{ tabIndex: "2" }}
+                        onChange={(e) =>
+                          onChangeHandler(
+                            subject,
+                            e.target.value,
+                            e.target.name,
+                            index
+                          )
+                        }
+                      />
+                    </StyledTableCell>
+                  )}
                   <StyledTableCell align="right">
                     <FormControl
                       variant="filled"
@@ -193,11 +197,13 @@ const ExamMarkApprovalBulk = ({
                       </Select>
                     </FormControl>
                   </StyledTableCell>
-                  <StyledTableCell align="right">
+                  <StyledTableCell align="center  ">
                     {subject.FullMark}
                   </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {subject.FullMarkPractical}
+                  <StyledTableCell align="center">
+                    {subject.FullMarkPractical === 0
+                      ? ""
+                      : subject.FullMarkPractical}
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
