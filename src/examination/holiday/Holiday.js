@@ -62,7 +62,12 @@ const Holiday = () => {
     tableDataAfterPagingAndSorting,
   } = useCustomTable(tableData, tableHeader, filterFn);
 
-  const { holiday, error, loading } = useSelector((state) => state.holiday);
+  const {
+    holiday,
+    error,
+    loading,
+    loading: table,
+  } = useSelector((state) => state.holiday);
 
   if (error) {
     setNotify({
@@ -121,16 +126,22 @@ const Holiday = () => {
         <Grid item xs={6}>
           <Card className={classes.cardStyle}>
             <h4 style={{ textAlign: "center" }}>All Events</h4>
-            <TableContainer className={classes.table}>
-              <TblHead />
+            {table ? (
+              <LoadingComp />
+            ) : (
+              <>
+                <TableContainer className={classes.table}>
+                  <TblHead />
 
-              <TableBody>
-                {tableDataAfterPagingAndSorting().map((item) => (
-                  <HolidayTableCollapse item={item} key={item.$id} />
-                ))}
-              </TableBody>
-            </TableContainer>
-            <TblPagination />
+                  <TableBody>
+                    {tableDataAfterPagingAndSorting().map((item) => (
+                      <HolidayTableCollapse item={item} key={item.$id} />
+                    ))}
+                  </TableBody>
+                </TableContainer>
+                <TblPagination />
+              </>
+            )}
           </Card>
         </Grid>
       </Grid>
