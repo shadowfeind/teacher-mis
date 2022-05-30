@@ -75,7 +75,7 @@ const ExamDivision = () => {
 
   const dispatch = useDispatch();
 
-  const { examDivision,loading, error } = useSelector(
+  const { examDivision, loading, error } = useSelector(
     (state) => state.getAllExamDivision
   );
   // const { examDivision: singleExamDivision, error: singleExamDivisionError } = useSelector((state) => state.getSingleExamDivision);
@@ -156,13 +156,14 @@ const ExamDivision = () => {
   // const deleteCollegeHandler = () => {};
 
   useEffect(() => {
-    if (!examDivision) {
-      dispatch(getAllExamDivisionAction());
-    }
     if (examDivision) {
       setTableData(examDivision.dbModelLst);
     }
   }, [dispatch, examDivision]);
+
+  useEffect(() => {
+    dispatch(getAllExamDivisionAction());
+  }, []);
 
   const {
     TableContainer,
@@ -211,22 +212,22 @@ const ExamDivision = () => {
           <LoadingComp />
         ) : (
           <>
-        <TableContainer className={classes.table}>
-          <TblHead />
+            <TableContainer className={classes.table}>
+              <TblHead />
 
-          <TableBody>
-            {tableDataAfterPagingAndSorting().map((item) => (
-              <ExamDivisionTableCollapse
-                key={item.$id}
-                item={item}
-                // updateCollegeHandler={updateCollegeHandler}
-                // deleteCollegeHandler={deleteCollegeHandler}
-              />
-            ))}
-          </TableBody>
-        </TableContainer>
-        <TblPagination />
-        </>
+              <TableBody>
+                {tableDataAfterPagingAndSorting().map((item) => (
+                  <ExamDivisionTableCollapse
+                    key={item.$id}
+                    item={item}
+                    // updateCollegeHandler={updateCollegeHandler}
+                    // deleteCollegeHandler={deleteCollegeHandler}
+                  />
+                ))}
+              </TableBody>
+            </TableContainer>
+            <TblPagination />
+          </>
         )}
       </CustomContainer>
       <Notification notify={notify} setNotify={setNotify} />

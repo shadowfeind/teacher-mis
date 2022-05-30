@@ -235,7 +235,7 @@ export const downloadResourceAction = (id) => async (dispatch) => {
   try {
     dispatch({ type: DOWNLOAD_RESOURCES_REQUEST });
 
-    const test = `/api/CourseDeliveryPlanTeacher/DownloadDoc/${id}`;
+    const test = `${API_URL}/api/CourseDeliveryPlanTeacher/DownloadDoc/${id}`;
 
     window.open(test, "_blank");
     dispatch({

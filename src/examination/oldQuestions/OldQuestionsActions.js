@@ -89,7 +89,7 @@ export const downloadOldQuestionsAction = (id) => async (dispatch) => {
   try {
     dispatch({ type: DOWNLOAD_OLD_QUESTIONS_REQUEST });
 
-    const test = `/api/OldQuestionTeacher/DownloadOldQuestion/${id}`;
+    const test = `${API_URL}/api/OldQuestionTeacher/DownloadOldQuestion/${id}`;
 
     window.open(test, "_blank");
     dispatch({

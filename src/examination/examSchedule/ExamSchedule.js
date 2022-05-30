@@ -135,9 +135,6 @@ const ExamSchedule = () => {
   }
 
   useEffect(() => {
-    if (!examScheduleInitialData) {
-      dispatch(getAllExamScheduleInitialDataAction());
-    }
     if (examScheduleInitialData) {
       setProgramDdl(
         examScheduleInitialData.searchFilterModel.ddlFacultyProgramLink
@@ -148,6 +145,10 @@ const ExamSchedule = () => {
       );
     }
   }, [examScheduleInitialData, dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllExamScheduleInitialDataAction());
+  }, []);
 
   useEffect(() => {
     if (examScheduleList) {

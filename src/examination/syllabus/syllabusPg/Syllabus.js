@@ -55,13 +55,14 @@ const Syllabus = () => {
   }
 
   useEffect(() => {
-    if (!allSyllabus) {
-      dispatch(getAllSyllabusAction());
-    }
     if (allSyllabus) {
       dispatch(getListSyllabusAction(allSyllabus.dbModelLst[0].Id));
     }
   }, [allSyllabus]);
+
+  useEffect(() => {
+    dispatch(getAllSyllabusAction());
+  }, []);
 
   useEffect(() => {
     if (listSyllabus) {

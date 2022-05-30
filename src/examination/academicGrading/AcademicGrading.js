@@ -73,7 +73,7 @@ const AcademicGrading = () => {
 
   const dispatch = useDispatch();
 
-  const { academicGrading,loading, error } = useSelector(
+  const { academicGrading, loading, error } = useSelector(
     (state) => state.academicGrading
   );
 
@@ -161,13 +161,14 @@ const AcademicGrading = () => {
   // const deleteCollegeHandler = (IDFacultyGradingSystem) => {};
 
   useEffect(() => {
-    if (!academicGrading) {
-      dispatch(getAllAcademicGradingAction());
-    }
     if (academicGrading) {
       setTableData(academicGrading.dbModelLst);
     }
   }, [dispatch, academicGrading]);
+
+  useEffect(() => {
+    dispatch(getAllAcademicGradingAction());
+  }, []);
 
   const {
     TableContainer,
@@ -216,22 +217,22 @@ const AcademicGrading = () => {
           <LoadingComp />
         ) : (
           <>
-        <TableContainer className={classes.table}>
-          <TblHead />
+            <TableContainer className={classes.table}>
+              <TblHead />
 
-          <TableBody>
-            {tableDataAfterPagingAndSorting().map((item) => (
-              <AcademicGradingTableCollapse
-                key={item.$id}
-                item={item}
-                // updateCollegeHandler={updateCollegeHandler}
-                // deleteCollegeHandler={deleteCollegeHandler}
-              />
-            ))}
-          </TableBody>
-        </TableContainer>
-        <TblPagination />
-        </>
+              <TableBody>
+                {tableDataAfterPagingAndSorting().map((item) => (
+                  <AcademicGradingTableCollapse
+                    key={item.$id}
+                    item={item}
+                    // updateCollegeHandler={updateCollegeHandler}
+                    // deleteCollegeHandler={deleteCollegeHandler}
+                  />
+                ))}
+              </TableBody>
+            </TableContainer>
+            <TblPagination />
+          </>
         )}
       </CustomContainer>
       <Notification notify={notify} setNotify={setNotify} />

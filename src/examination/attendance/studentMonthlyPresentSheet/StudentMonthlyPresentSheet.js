@@ -500,7 +500,7 @@ const StudentMonthlyPresentSheet = () => {
       <Popup
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
-        title="Bulk Edit"
+        title="Class Attendance"
       >
         {loadingUpdate ? (
           <LoadingComp />

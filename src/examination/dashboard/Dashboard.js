@@ -44,10 +44,8 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    if (!dashboardContent) {
-      dispatch(getDashboardContentAction());
-    }
-  }, [dispatch, dashboardContent]);
+    dispatch(getDashboardContentAction());
+  }, []);
   const localizer = momentLocalizer(moment);
 
   return (

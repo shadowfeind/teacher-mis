@@ -64,7 +64,6 @@ const tableHeader = [
   { id: "FullMarkPractical", label: "Full Marks(PR/UT)" },
   { id: "ObtainedMark", label: "ObtainedMark(TH)" },
   { id: "ObtainedMarkPractical", label: "ObtainedMark(PR/UT)" },
-  { id: "Division", label: "Division" },
   { id: "UpdatedOn", label: "Updated On" },
   { id: "Status", label: "Status" },
 ];

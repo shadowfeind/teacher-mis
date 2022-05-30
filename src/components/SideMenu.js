@@ -98,59 +98,11 @@ const SideMenu = () => {
           &nbsp;&nbsp;&nbsp; DashBoard
         </Typography>
       </NavLink>
-      <NavLink to={"/academic-grading"} activeStyle={isActive}>
-        <Typography variant="h6">
-          {" "}
-          <TrendingUpIcon fontSize="small" />
-          &nbsp;&nbsp;&nbsp; Academic Grading
-        </Typography>
-      </NavLink>
-      <NavLink to={"/exam-division"} activeStyle={isActive}>
-        <Typography variant="h6">
-          {" "}
-          <DvrRoundedIcon fontSize="small" />
-          &nbsp;&nbsp;&nbsp; Exam Division
-        </Typography>
-      </NavLink>
-      {/* <NavLink to={"/exam-schedule"} activeStyle={isActive}>
-        <Typography variant="h6">
-          {" "}
-          <PeopleOutline fontSize="small" />
-          &nbsp;&nbsp;&nbsp; Exam Schedule
-        </Typography>
-      </NavLink> */}
 
       <NavLink to={"/attendance"} activeStyle={isActive}>
         <Typography variant="h6">
           <HowToRegRoundedIcon fontSize="small" />
           &nbsp;&nbsp;&nbsp; Attendance
-        </Typography>
-      </NavLink>
-      <NavLink to={"/pid"} activeStyle={isActive}>
-        <Typography variant="h6">
-          {" "}
-          <AccountCircleIcon fontSize="small" />
-          &nbsp;&nbsp;&nbsp; User Profile
-        </Typography>
-      </NavLink>
-      {/* <NavLink to={"/quick-links"} activeStyle={isActive}>
-        <Typography variant="h6">
-          {" "}
-          <Face fontSize="small" />
-          &nbsp;&nbsp;&nbsp; Quick Links
-        </Typography>
-      </NavLink> */}
-      <NavLink to={"/resources"} activeStyle={isActive}>
-        <Typography variant="h6">
-          <BookIcon fontSize="small" />
-          &nbsp;&nbsp;&nbsp; E-Material
-        </Typography>
-      </NavLink>
-      <NavLink to={"/class-schedule"} activeStyle={isActive}>
-        <Typography variant="h6">
-          {" "}
-          <CalendarTodayIcon fontSize="small" />
-          &nbsp;&nbsp;&nbsp; Class Routine
         </Typography>
       </NavLink>
       <NavLink to={"/assignment"} activeStyle={isActive}>
@@ -166,24 +118,52 @@ const SideMenu = () => {
           &nbsp;&nbsp;&nbsp; Exam Mark Entry / Update
         </Typography>
       </NavLink>
+      {/* <NavLink to={"/exam-schedule"} activeStyle={isActive}>
+        <Typography variant="h6">
+          {" "}
+          <SystemUpdateAltIcon fontSize="small" />
+          &nbsp;&nbsp;&nbsp; Exam Schedule
+        </Typography>
+      </NavLink> */}
+      {/* <NavLink to={"/pid"} activeStyle={isActive}>
+        <Typography variant="h6">
+          {" "}
+          <AccountCircleIcon fontSize="small" />
+          &nbsp;&nbsp;&nbsp; User Profile
+        </Typography>
+      </NavLink> */}
+      {/* <NavLink to={"/quick-links"} activeStyle={isActive}>
+        <Typography variant="h6">
+          {" "}
+          <Face fontSize="small" />
+          &nbsp;&nbsp;&nbsp; Quick Links
+        </Typography>
+      </NavLink> */}
+      <NavLink to={"/class-schedule"} activeStyle={isActive}>
+        <Typography variant="h6">
+          {" "}
+          <CalendarTodayIcon fontSize="small" />
+          &nbsp;&nbsp;&nbsp; Class Routine
+        </Typography>
+      </NavLink>
       <NavLink to={"/syllabus"} activeStyle={isActive}>
         <Typography variant="h6">
           <DescriptionIcon fontSize="small" />
           &nbsp;&nbsp;&nbsp; Syllabus
         </Typography>
       </NavLink>
+      <NavLink to={"/resources"} activeStyle={isActive}>
+        <Typography variant="h6">
+          <BookIcon fontSize="small" />
+          &nbsp;&nbsp;&nbsp; E-Material
+        </Typography>
+      </NavLink>
+
       <NavLink to={"/old-questions"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
           <MenuBookIcon fontSize="small" />
           &nbsp;&nbsp;&nbsp; Old Questions
-        </Typography>
-      </NavLink>
-      <NavLink to={"/notification"} activeStyle={isActive}>
-        <Typography variant="h6">
-          {" "}
-          <NotificationsIcon fontSize="small" />
-          &nbsp;&nbsp;&nbsp; Notification
         </Typography>
       </NavLink>
       <NavLink to={"/announcement"} activeStyle={isActive}>
@@ -193,6 +173,22 @@ const SideMenu = () => {
           &nbsp;&nbsp;&nbsp; Announcement
         </Typography>
       </NavLink>
+      <NavLink to={"/notification"} activeStyle={isActive}>
+        <Typography variant="h6">
+          {" "}
+          <NotificationsIcon fontSize="small" />
+          &nbsp;&nbsp;&nbsp; Notification
+        </Typography>
+      </NavLink>
+
+      <NavLink to={"/leave-request"} activeStyle={isActive}>
+        <Typography variant="h6">
+          {" "}
+          <ReportProblemIcon fontSize="small" />
+          &nbsp;&nbsp;&nbsp; Leave Management
+        </Typography>
+      </NavLink>
+
       <NavLink to={"/academic-calendar"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
@@ -200,11 +196,19 @@ const SideMenu = () => {
           &nbsp;&nbsp;&nbsp; Academic Calendar
         </Typography>
       </NavLink>
-      <NavLink to={"/leave-request"} activeStyle={isActive}>
+
+      <NavLink to={"/academic-grading"} activeStyle={isActive}>
         <Typography variant="h6">
           {" "}
-          <ReportProblemIcon fontSize="small" />
-          &nbsp;&nbsp;&nbsp; Leave Management
+          <TrendingUpIcon fontSize="small" />
+          &nbsp;&nbsp;&nbsp; Academic Grading
+        </Typography>
+      </NavLink>
+      <NavLink to={"/exam-division"} activeStyle={isActive}>
+        <Typography variant="h6">
+          {" "}
+          <DvrRoundedIcon fontSize="small" />
+          &nbsp;&nbsp;&nbsp; Exam Division
         </Typography>
       </NavLink>
       <NavLink to={"/video-conference"} activeStyle={isActive}>
