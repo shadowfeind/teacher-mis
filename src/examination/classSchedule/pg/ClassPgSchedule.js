@@ -55,7 +55,7 @@ const ClassPgSchedule = () => {
     });
     dispatch({ type: GET_ALL_PG_CLASS_SCHEDULE_RESET });
   }
-  
+
   if (allClassScheduleListError) {
     setNotify({
       isOpen: true,
@@ -66,13 +66,14 @@ const ClassPgSchedule = () => {
   }
 
   useEffect(() => {
-    if (!pgClassSchedule) {
-      dispatch(getAllPgClassScheuleAction());
-    }
     if (pgClassSchedule) {
       dispatch(getListClassScheuleAction(pgClassSchedule.dbModelLst[0].Id));
     }
   }, [pgClassSchedule]);
+
+  useEffect(() => {
+    dispatch(getAllPgClassScheuleAction());
+  }, []);
 
   useEffect(() => {
     if (allClassScheduleList) {

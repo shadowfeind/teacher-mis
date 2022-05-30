@@ -203,7 +203,6 @@ const AssignmentEditForm = ({
             />
             <InputControl
               name="ImageUploaded"
-              label="Select File"
               onChange={(e) => handleImage(e)}
               type="file"
             />

@@ -110,13 +110,14 @@ const ClassNotification = () => {
 
   useEffect(() => {
     dispatch({ type: "GET_LINK", payload: "/notification" });
-    if (!listClassNotificationTeacher) {
-      dispatch(getListNotificationTeacherAction());
-    }
     if (listClassNotificationTeacher) {
       setTableData(listClassNotificationTeacher.teacherNotificationInboxLst);
     }
   }, [dispatch, listClassNotificationTeacher]);
+
+  useEffect(() => {
+    dispatch(getListNotificationTeacherAction());
+  }, []);
 
   const {
     TableContainer,

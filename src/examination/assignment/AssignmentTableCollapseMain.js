@@ -60,16 +60,17 @@ const AssignmentTableCollapseMain = ({ item, shift, setOpenPopup3 }) => {
         </TableCell>
         <TableCell>
           {" "}
-          {item.DocumentSubmitted !== null && (
-            <Button
-              variant="outlined"
-              color="primary"
-              className={classes.button}
-              onClick={() => downloadSubmittedHandler(item.IDAssignment)}
-            >
-              <CloudDownloadIcon style={{ fontSize: 12 }} />
-            </Button>
-          )}
+          {item.DocumentSubmitted !== null &&
+            item.DocumentSubmitted !== "/Upload/TeacherAssignment/" && (
+              <Button
+                variant="outlined"
+                color="primary"
+                className={classes.button}
+                onClick={() => downloadSubmittedHandler(item.IDAssignment)}
+              >
+                <CloudDownloadIcon style={{ fontSize: 12 }} />
+              </Button>
+            )}
         </TableCell>
 
         <TableCell>
