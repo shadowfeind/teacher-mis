@@ -179,7 +179,7 @@ const ExamDivision = () => {
           return item;
         } else {
           return item.filter((x) =>
-            x.Division.toLowerCase().includes(e.target.value)
+            x.Division.toLowerCase().includes(e.target.value?.toLowerCase())
           );
         }
       },
@@ -197,7 +197,7 @@ const ExamDivision = () => {
         <Toolbar>
           <InputControl
             className={classes.searchInput}
-            label="Search Exam Division"
+            label="Search Exam Division by Division"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">

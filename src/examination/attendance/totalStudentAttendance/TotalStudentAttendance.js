@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 
 const tableHeader = [
   { id: "Total", label: "Total Attendance" },
-  { id: "FullName", label: "FullName" },
+  { id: "FullName", label: "Student Name" },
   { id: "RollNo", label: "RollNo" },
   { id: "MobileNumber", label: "Mobile Number" },
   { id: "EmailID", label: "Email ID" },
@@ -109,7 +109,7 @@ const TotalStudentAttendance = () => {
           return item;
         } else {
           return item.filter((x) =>
-            x.PositionHead.toLowerCase().includes(e.target.value)
+            x.FullName.toLowerCase().includes(e.target.value?.toLowerCase())
           );
         }
       },
@@ -426,7 +426,7 @@ const TotalStudentAttendance = () => {
         <Toolbar>
           <InputControl
             className={classes.searchInput}
-            label="Search Student"
+            label="Search Student by Student Name"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">

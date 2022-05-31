@@ -102,7 +102,7 @@ const ExamSchedule = () => {
           return item;
         } else {
           return item.filter((x) =>
-            x.EventName.toLowerCase().includes(e.target.value)
+            x.EventName.toLowerCase().includes(e.target.value?.toLowerCase())
           );
         }
       },
