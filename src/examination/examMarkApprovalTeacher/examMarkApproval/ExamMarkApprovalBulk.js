@@ -47,8 +47,17 @@ const ExamMarkApprovalBulk = ({
   setOpenPopup,
 }) => {
   const [bulk, setBulk] = useState([]);
+  const [errors, setErrors] = useState({});
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  const validate = () => {
+    let temp = {};
+    temp.submit = bulk?.length <= 0 ? "Cannot Submit When Data is Empty!" : "";
+
+    setErrors({ ...temp });
+    return Object.values(temp).every((x) => x === "");
+  };
 
   const onChangeHandler = (subject, value, name, index) => {
     let showValue =
@@ -72,7 +81,9 @@ const ExamMarkApprovalBulk = ({
   };
 
   const formCheckSubmitHandler = () => {
-    dispatch(postBulkExamMarkApprovalAction(bulk, search));
+    if (validate()) {
+      dispatch(postBulkExamMarkApprovalAction(bulk, search));
+    }
   };
 
   useEffect(() => {
@@ -99,11 +110,14 @@ const ExamMarkApprovalBulk = ({
               <StyledTableCell align="center">
                 Mark Obtained(TH)
               </StyledTableCell>
-              {bulk && bulk?.length > 0 && bulk[0].FullMarkPractical !== 0 && (
-                <StyledTableCell align="center">
-                  Mark Obtained(PT)
-                </StyledTableCell>
-              )}
+              {bulk &&
+                bulk?.length > 0 &&
+                bulk[0].FullMarkPractical !== 0 &&
+                bulk[0].FullMarkPractical !== null && (
+                  <StyledTableCell align="center">
+                    Mark Obtained(PT)
+                  </StyledTableCell>
+                )}
               <StyledTableCell align="center">Status</StyledTableCell>
               <StyledTableCell align="center">Full Mark</StyledTableCell>
               <StyledTableCell align="center">Full Mark(PT)</StyledTableCell>
@@ -142,30 +156,31 @@ const ExamMarkApprovalBulk = ({
                       }
                     />
                   </StyledTableCell>
-                  {subject.FullMarkPractical !== 0 && (
-                    <StyledTableCell align="right">
-                      <TextField
-                        id={`practical_${subject.IDHREmployee}`}
-                        value={subject.ObtainedMarkPractical}
-                        name="ObtainedMarkPractical"
-                        onKeyDown={(e) =>
-                          symbolsArr.includes(e.key) && e.preventDefault()
-                        }
-                        type="number"
-                        label="Obtained Practical Mark"
-                        variant="outlined"
-                        inputProps={{ tabIndex: "2" }}
-                        onChange={(e) =>
-                          onChangeHandler(
-                            subject,
-                            e.target.value,
-                            e.target.name,
-                            index
-                          )
-                        }
-                      />
-                    </StyledTableCell>
-                  )}
+                  {subject.FullMarkPractical !== 0 &&
+                    subject.FullMarkPractical !== null && (
+                      <StyledTableCell align="right">
+                        <TextField
+                          id={`practical_${subject.IDHREmployee}`}
+                          value={subject.ObtainedMarkPractical}
+                          name="ObtainedMarkPractical"
+                          onKeyDown={(e) =>
+                            symbolsArr.includes(e.key) && e.preventDefault()
+                          }
+                          type="number"
+                          label="Obtained Practical Mark"
+                          variant="outlined"
+                          inputProps={{ tabIndex: "2" }}
+                          onChange={(e) =>
+                            onChangeHandler(
+                              subject,
+                              e.target.value,
+                              e.target.name,
+                              index
+                            )
+                          }
+                        />
+                      </StyledTableCell>
+                    )}
                   <StyledTableCell align="right">
                     <FormControl
                       variant="filled"
@@ -210,6 +225,23 @@ const ExamMarkApprovalBulk = ({
           </TableBody>
         </Table>
       </TableContainer>
+      {bulk?.length <= 0 && (
+        <div>
+          <h3 style={{ color: "red", textAlign: "center" }}>No Data Found</h3>
+        </div>
+      )}
+      {errors.submit && (
+        <div
+          style={{
+            textAlign: "center",
+            color: "red",
+            fontSize: "12px",
+            paddingTop: "8px",
+          }}
+        >
+          {errors.submit}
+        </div>
+      )}
       <div
         style={{
           display: "flex",

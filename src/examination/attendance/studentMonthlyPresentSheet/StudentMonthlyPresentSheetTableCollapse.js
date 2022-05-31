@@ -128,7 +128,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C1 == "P"
                           ? "green"
                           : s.C1 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -142,7 +142,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C2 == "P"
                           ? "green"
                           : s.C2 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -156,7 +156,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C3 == "P"
                           ? "green"
                           : s.C3 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -170,7 +170,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C4 == "P"
                           ? "green"
                           : s.C4 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -184,7 +184,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C5 == "P"
                           ? "green"
                           : s.C5 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -198,7 +198,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C6 == "P"
                           ? "green"
                           : s.C6 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -212,7 +212,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C7 == "P"
                           ? "green"
                           : s.C7 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -226,7 +226,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C8 == "P"
                           ? "green"
                           : s.C8 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -240,7 +240,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C9 == "P"
                           ? "green"
                           : s.C9 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -254,7 +254,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C10 == "P"
                           ? "green"
                           : s.C10 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -268,7 +268,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C11 == "P"
                           ? "green"
                           : s.C11 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -282,7 +282,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C12 == "P"
                           ? "green"
                           : s.C12 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -296,7 +296,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C13 == "P"
                           ? "green"
                           : s.C13 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -310,7 +310,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C14 == "P"
                           ? "green"
                           : s.C14 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -324,7 +324,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C15 == "P"
                           ? "green"
                           : s.C15 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -338,7 +338,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C16 == "P"
                           ? "green"
                           : s.C16 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -352,7 +352,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C17 == "P"
                           ? "green"
                           : s.C17 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -366,7 +366,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C18 == "P"
                           ? "green"
                           : s.C18 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -380,7 +380,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C19 == "P"
                           ? "green"
                           : s.C19 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -394,7 +394,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C20 == "P"
                           ? "green"
                           : s.C20 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -408,7 +408,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C21 == "P"
                           ? "green"
                           : s.C21 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -422,7 +422,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C22 == "P"
                           ? "green"
                           : s.C22 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -436,7 +436,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C23 == "P"
                           ? "green"
                           : s.C23 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -450,7 +450,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C24 == "P"
                           ? "green"
                           : s.C24 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -464,7 +464,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C25 == "P"
                           ? "green"
                           : s.C25 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -478,7 +478,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C26 == "P"
                           ? "green"
                           : s.C26 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -492,7 +492,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C27 == "P"
                           ? "green"
                           : s.C27 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -506,7 +506,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C28 == "P"
                           ? "green"
                           : s.C28 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -520,7 +520,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C29 == "P"
                           ? "green"
                           : s.C29 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -534,7 +534,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C30 == "P"
                           ? "green"
                           : s.C30 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
@@ -548,7 +548,7 @@ const StudentMonthlyPresentSheetTableCollapse = ({ students }) => {
                           : s.C31 == "P"
                           ? "green"
                           : s.C31 == "H"
-                          ? "blue"
+                          ? "skyblue"
                           : "white",
                     }}
                   >
