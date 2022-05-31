@@ -191,6 +191,7 @@ const AssignmentForm = ({ students, formDatas, setOpenPopup }) => {
                 <label>All</label>
                 <Checkbox
                   checked={checked}
+                  color="primary"
                   onChange={(e) => handleAllChecked(e.target.checked)}
                 />
               </StyledTableCell>
@@ -227,6 +228,7 @@ const AssignmentForm = ({ students, formDatas, setOpenPopup }) => {
                             ? true
                             : false
                         }
+                        color="primary"
                         onChange={(e) => handleChecked(e.target.checked, s)}
                       />
                     </StyledTableCell>
