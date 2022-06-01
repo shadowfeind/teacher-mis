@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 
 const tableHeader = [
   { id: "Total", label: "Total Attendance" },
-  { id: "FullName", label: "FullName" },
+  { id: "FullName", label: "Student Name" },
   { id: "RollNo", label: "RollNo" },
   { id: "MobileNumber", label: "Mobile Number" },
   { id: "EmailID", label: "Email ID" },
@@ -109,7 +109,7 @@ const TotalStudentAttendance = () => {
           return item;
         } else {
           return item.filter((x) =>
-            x.PositionHead.toLowerCase().includes(e.target.value)
+            x.FullName.toLowerCase().includes(e.target.value?.toLowerCase())
           );
         }
       },
@@ -207,11 +207,11 @@ const TotalStudentAttendance = () => {
     dispatch(getAllTotalStudentAttendanceAction());
   }, []);
 
-  useEffect(() => {
-    if (subjectOptions) {
-      setDdlSubject(subjectOptions);
-    }
-  }, [subjectOptions]);
+  // useEffect(() => {
+  //   if (subjectOptions) {
+  //     setDdlSubject(subjectOptions);
+  //   }
+  // }, [subjectOptions]);
 
   useEffect(() => {
     if (listTotalStudentAttendanceData) {
@@ -256,13 +256,8 @@ const TotalStudentAttendance = () => {
     if ((programValue, classId)) {
       dispatch(getSubjectOptionsForSelectAction(value, programValue, classId));
     }
-  };
-
-  const handleProgramChange = (value) => {
-    setProgramValue(value);
-    if ((acaYear, classId)) {
-      dispatch(getSubjectOptionsForSelectAction(acaYear, value, classId));
-    }
+    setDdlSubject([]);
+    setSubject("");
   };
 
   const handleClassIdChange = (value) => {
@@ -270,7 +265,44 @@ const TotalStudentAttendance = () => {
     if ((acaYear, programValue)) {
       dispatch(getSubjectOptionsForSelectAction(acaYear, programValue, value));
     }
+    setDdlSubject([]);
+    setSubject("");
   };
+
+  const handleShiftChange = (value) => {
+    setShift(value);
+    if ((acaYear, programValue, classId)) {
+      dispatch(
+        getSubjectOptionsForSelectAction(acaYear, programValue, classId, value)
+      );
+    }
+    setDdlSubject([]);
+    setSubject("");
+  };
+
+  const handleSectionChange = (value) => {
+    setSection(value);
+    if ((acaYear, programValue, classId, shift)) {
+      dispatch(
+        getSubjectOptionsForSelectAction(
+          acaYear,
+          programValue,
+          classId,
+          shift,
+          value
+        )
+      );
+    }
+    setDdlSubject([]);
+    setSubject("");
+  };
+
+  useEffect(() => {
+    if (subjectOptions) {
+      setDdlSubject(subjectOptions);
+      setSubject(subjectOptions[0]?.Key);
+    }
+  }, [subjectOptions]);
 
   return (
     <>
@@ -312,7 +344,7 @@ const TotalStudentAttendance = () => {
                 name="Shift"
                 label="Shift"
                 value={shift}
-                onChange={(e) => setShift(e.target.value)}
+                onChange={(e) => handleShiftChange(e.target.value)}
                 options={ddlShift ? ddlShift : test}
                 errors={errors.shift}
               />
@@ -322,7 +354,7 @@ const TotalStudentAttendance = () => {
                 name="Section"
                 label="Section"
                 value={section}
-                onChange={(e) => setSection(e.target.value)}
+                onChange={(e) => handleSectionChange(e.target.value)}
                 options={ddlSection ? ddlSection : test}
                 errors={errors.section}
               />
@@ -394,7 +426,7 @@ const TotalStudentAttendance = () => {
         <Toolbar>
           <InputControl
             className={classes.searchInput}
-            label="Search Student"
+            label="Search Student by Student Name"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">

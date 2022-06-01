@@ -89,7 +89,9 @@ const OldQuestions = () => {
           return item;
         } else {
           return item.filter((x) =>
-            x.OldQuestionName.toLowerCase().includes(e.target.value)
+            x.OldQuestionName.toLowerCase().includes(
+              e.target.value?.toLowerCase()
+            )
           );
         }
       },
@@ -234,7 +236,7 @@ const OldQuestions = () => {
         <Toolbar>
           <InputControl
             className={classes.searchInput}
-            label="Search Old Questions"
+            label="Search Old Questions by Name"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">

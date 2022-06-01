@@ -133,7 +133,7 @@ const ClassNotification = () => {
           return item;
         } else {
           return item.filter((x) =>
-            x.FullName.toLowerCase().includes(e.target.value)
+            x.FullName.toLowerCase().includes(e.target.value?.toLowerCase())
           );
         }
       },
@@ -152,7 +152,7 @@ const ClassNotification = () => {
         <Toolbar>
           <InputControl
             className={classes.searchInput}
-            label="Search Teacher Notification"
+            label="Search Teacher Notification by Name"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">

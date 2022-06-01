@@ -454,7 +454,7 @@ const StudentMonthlyPresentSheet = () => {
                   inputVariant="outlined"
                   format="dd-MM-yyyy"
                   name="CurrentYear"
-                  label="Current Year"
+                  label="Current Date"
                   value={date}
                   onChange={(e) => {
                     const newDate = new Date(e);

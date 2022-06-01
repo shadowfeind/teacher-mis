@@ -184,7 +184,7 @@ const AcademicGrading = () => {
           return item;
         } else {
           return item.filter((x) =>
-            x.LetterGrade.toLowerCase().includes(e.target.value)
+            x.LetterGrade.toLowerCase().includes(e.target.value?.toLowerCase())
           );
         }
       },
@@ -202,7 +202,7 @@ const AcademicGrading = () => {
         <Toolbar>
           <InputControl
             className={classes.searchInput}
-            label="Search Academic Grading"
+            label="Search Academic Grading by LetterGrade"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">

@@ -58,7 +58,6 @@ const tableHeader = [
   { id: "Created_On", label: "Effective From" },
   { id: "IsActive", label: "IsActive" },
   { id: "File", label: "Download", disableSorting: true },
-  
 ];
 
 const Resources = () => {
@@ -114,7 +113,7 @@ const Resources = () => {
           return item;
         } else {
           return item.filter((x) =>
-            x.CourseName.toLowerCase().includes(e.target.value)
+            x.CourseName.toLowerCase().includes(e.target.value?.toLowerCase())
           );
         }
       },
@@ -126,9 +125,11 @@ const Resources = () => {
   const { allInitialData, error: allInitialDataError } = useSelector(
     (state) => state.getAllInitialResourcesData
   );
-  const { allResources,loading, error: allResourcesError } = useSelector(
-    (state) => state.getAllResourcesList
-  );
+  const {
+    allResources,
+    loading,
+    error: allResourcesError,
+  } = useSelector((state) => state.getAllResourcesList);
   const { allOtherResourcesOptions, error: allOtherResourcesOptionsError } =
     useSelector((state) => state.getAllOtherOptionsForResourcesSelect);
 
@@ -139,17 +140,16 @@ const Resources = () => {
     useSelector((state) => state.postResource);
 
   const {
-      success: downloadResourcesSuccess,
-      file: downloadFile,
-      error: downloadResourcesError,
-    } = useSelector((state) => state.downloadResource);
+    success: downloadResourcesSuccess,
+    file: downloadFile,
+    error: downloadResourcesError,
+  } = useSelector((state) => state.downloadResource);
 
-
-    if(downloadFile){
-      var blob = new Blob([downloadFile]);
-      var url = window.URL.createObjectURL(blob);
-      window.open(url,"_blank");
-    }
+  if (downloadFile) {
+    var blob = new Blob([downloadFile]);
+    var url = window.URL.createObjectURL(blob);
+    window.open(url, "_blank");
+  }
 
   if (allInitialDataError) {
     setNotify({
@@ -160,13 +160,13 @@ const Resources = () => {
     dispatch({ type: GET_ALL_RESOURCES_INITIAL_DATA_RESET });
   }
 
-  if(downloadResourcesError){
+  if (downloadResourcesError) {
     setNotify({
       isOpen: true,
       message: downloadResourcesError,
       type: "error",
     });
-    dispatch({type: DOWNLOAD_RESOURCES_RESET});
+    dispatch({ type: DOWNLOAD_RESOURCES_RESET });
   }
   // if (allResourcesError) {
   //   setNotify({
@@ -242,10 +242,10 @@ const Resources = () => {
     }
   }, [allInitialData, dispatch]);
 
-  useEffect(()=>{
-    dispatch({type:GET_ALL_RESOURCES_LIST_RESET})
+  useEffect(() => {
+    dispatch({ type: GET_ALL_RESOURCES_LIST_RESET });
     dispatch(getAllInitialResourcesDataAction());
-  },[])
+  }, []);
 
   useEffect(() => {
     if (allResources) {
@@ -450,7 +450,7 @@ const Resources = () => {
         <Toolbar>
           <InputControl
             className={classes.searchInput}
-            label="Search Student"
+            label="Search E-Materials by Resources Name"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -465,19 +465,19 @@ const Resources = () => {
           <LoadingComp />
         ) : (
           <>
-        {allResources && (
-          <TableContainer className={classes.table}>
-            <TblHead />
+            {allResources && (
+              <TableContainer className={classes.table}>
+                <TblHead />
 
-            <TableBody>
-              {tableDataAfterPagingAndSorting().map((item) => (
-                <ResourcesTableCollapse item={item} key={item.$id} />
-              ))}
-            </TableBody>
-          </TableContainer>
-        )}
-        {allResources && <TblPagination />}
-        </>
+                <TableBody>
+                  {tableDataAfterPagingAndSorting().map((item) => (
+                    <ResourcesTableCollapse item={item} key={item.$id} />
+                  ))}
+                </TableBody>
+              </TableContainer>
+            )}
+            {allResources && <TblPagination />}
+          </>
         )}
       </CustomContainer>
       <Popup
