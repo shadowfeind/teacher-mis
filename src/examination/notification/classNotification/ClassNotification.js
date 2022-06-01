@@ -133,7 +133,7 @@ const ClassNotification = () => {
           return item;
         } else {
           return item.filter((x) =>
-            x.FullName.toLowerCase().includes(e.target.value?.toLowerCase())
+            x.FirstName.toLowerCase().includes(e.target.value?.toLowerCase())
           );
         }
       },
