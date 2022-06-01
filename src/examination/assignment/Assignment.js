@@ -620,7 +620,7 @@ const Assignment = () => {
       <Popup
         openPopup={openPopup}
         setOpenPopup={setOpenPopup}
-        title="Create Assignment"
+        title="Create Assignment/Homeworks"
       >
         {loadingEdit ? (
           <LoadingComp />

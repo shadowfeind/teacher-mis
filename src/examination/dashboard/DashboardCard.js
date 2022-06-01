@@ -94,9 +94,11 @@ export const DashboardCard = ({ subject, subCount }) => {
 
             <h5 style={{ position: "relative" }}>
               Assignment{" "}
-              <span className={classes.badge}>
-                {currentSubCount && currentSubCount?.totalAssignmentcount}
-              </span>
+              {currentSubCount?.totalAssignmentcount > 0 && (
+                <span className={classes.badge}>
+                  {currentSubCount && currentSubCount?.totalAssignmentcount}
+                </span>
+              )}
             </h5>
           </IconButton>
         </Link>
@@ -109,7 +111,7 @@ export const DashboardCard = ({ subject, subCount }) => {
         </Link>
         <IconButton aria-label="share">
           <NotificationsActiveIcon style={{ fontSize: "16px" }} />
-          <h5></h5>
+          <h5>Notification</h5>
         </IconButton>
       </CardActions>
     </Card>
