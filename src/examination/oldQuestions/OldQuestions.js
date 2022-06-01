@@ -170,6 +170,7 @@ const OldQuestions = () => {
   useEffect(() => {
     if (subjectOldQuestions) {
       setDdlFacultySubject([...subjectOldQuestions]);
+      setFacultySubject(subjectOldQuestions[0]?.Key);
     }
   }, [subjectOldQuestions]);
 
@@ -191,6 +192,8 @@ const OldQuestions = () => {
   const handleClassIdChange = (value) => {
     setClassId(value);
     dispatch(getSubjectOldQuestionsAction(value));
+    setFacultySubject("");
+    setDdlFacultySubject([]);
   };
   return (
     <>

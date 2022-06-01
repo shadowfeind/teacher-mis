@@ -119,7 +119,7 @@ const ExamMarkApproval = () => {
           return item;
         } else {
           return item.filter((x) =>
-            x.FullName.toLowerCase().includes(e.target.value?.toLowerCase())
+            x.FullName?.toLowerCase().includes(e.target.value?.toLowerCase())
           );
         }
       },

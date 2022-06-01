@@ -58,10 +58,8 @@ const SideMenu = () => {
   );
 
   useEffect(() => {
-    if (!headerContent) {
-      dispatch(getHeaderContentAction());
-    }
-  }, [headerContent, dispatch]);
+    dispatch(getHeaderContentAction());
+  }, []);
   // if (headerContentError) {
   //   dispatch({ type: GET_HEADER_CONTENT_RESET });
   //   setNotify({
