@@ -55,6 +55,7 @@ const AssignmentEditForm = ({
   setOpenPop3,
   assignmentImage,
 }) => {
+  const [active, setActive] = useState(false);
   const [image, setImage] = useState(null);
   const [imgSrc, setImgSrc] = useState(null);
 
@@ -106,6 +107,7 @@ const AssignmentEditForm = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
+      setActive(true);
       dispatch(putSingleToEditTeacherAssignmentAction(image, values));
     }
   };
@@ -238,9 +240,10 @@ const AssignmentEditForm = ({
             variant="contained"
             color="primary"
             type="submit"
+            disabled={active}
             style={{ margin: "10px 0 0 10px" }}
           >
-            SUBMIT
+            {active ? "PROCESSING" : "SUBMIT"}
           </Button>
         </div>
       </Form>

@@ -34,6 +34,7 @@ const LeaveRequestForm = ({
   setOpenPopUp,
 }) => {
   const dispatch = useDispatch();
+  const [active, setActive] = useState(false);
   const [image, setImage] = useState("");
   const [imgSrc, setImgSrc] = useState("");
 
@@ -59,6 +60,7 @@ const LeaveRequestForm = ({
     e.preventDefault();
 
     if (validate()) {
+      setActive(true);
       if (values.IDLeaveRequest === 0) {
         dispatch(
           postLeaveRequestAction(
@@ -221,9 +223,10 @@ const LeaveRequestForm = ({
           variant="contained"
           color="primary"
           type="submit"
+          disabled={active}
           style={{ margin: "10px 0 0 10px" }}
         >
-          SUBMIT
+          {active ? "PROCESSING" : "SUBMIT"}
         </Button>
       </div>
     </Form>

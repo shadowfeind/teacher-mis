@@ -80,6 +80,7 @@ const useStyles = makeStyles({
 
 const AssignmentForm = ({ students, formDatas, setOpenPopup }) => {
   const [checked, setChecked] = useState(false);
+  const [active, setActive] = useState(false);
   const [image, setImage] = useState(null);
   const [imgSrc, setImgSrc] = useState(null);
   const [lstStudents, setLstStudents] = useState([]);
@@ -170,8 +171,9 @@ const AssignmentForm = ({ students, formDatas, setOpenPopup }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(selectedStudents);
+
     if (validate()) {
+      setActive(true);
       dispatch(postTeacherAssignmentAction(image, values, selectedStudents));
     }
   };
@@ -320,9 +322,10 @@ const AssignmentForm = ({ students, formDatas, setOpenPopup }) => {
             variant="contained"
             color="primary"
             type="submit"
+            disabled={active}
             style={{ margin: "10px 0 0 10px" }}
           >
-            SUBMIT
+            {active ? "PROCESSING" : "SUBMIT"}
           </Button>
         </div>
       </Form>

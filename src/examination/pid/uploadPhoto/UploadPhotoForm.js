@@ -9,6 +9,7 @@ import {
 } from "./UploadPhotoActions";
 
 const UploadPhotoForm = ({ uploadPhoto }) => {
+  const [active, setActive] = useState(false);
   const [image, setImage] = useState(null);
   const [imgSrc, setImgSrc] = useState(null);
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const UploadPhotoForm = ({ uploadPhoto }) => {
 
   const handleUploadImage = () => {
     if (uploadPhoto) {
+      setActive(true);
       dispatch(putUploadPhotoAction(image, uploadPhoto.dbModel));
     } else {
       console.log("failed");
@@ -61,9 +63,10 @@ const UploadPhotoForm = ({ uploadPhoto }) => {
           variant="contained"
           color="primary"
           onClick={handleUploadImage}
+          disabled={active}
           style={{ margin: "10px 0 0 10px" }}
         >
-          UPLOAD
+          {active ? "PROCESSING" : "UPLOAD"}
         </Button>
       </div>
     </>

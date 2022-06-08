@@ -47,6 +47,7 @@ const ExamMarkApprovalBulk = ({
   setOpenPopup,
 }) => {
   const [bulk, setBulk] = useState([]);
+  const [active, setActive] = useState(false);
   const [errors, setErrors] = useState({});
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -82,6 +83,7 @@ const ExamMarkApprovalBulk = ({
 
   const formCheckSubmitHandler = () => {
     if (validate()) {
+      setActive(true);
       dispatch(postBulkExamMarkApprovalAction(bulk, search));
     }
   };
@@ -263,10 +265,11 @@ const ExamMarkApprovalBulk = ({
           variant="contained"
           color="primary"
           type="submit"
+          disabled={active}
           style={{ margin: "10px 0 0 10px" }}
           onClick={formCheckSubmitHandler}
         >
-          SUBMIT
+          {active ? "PROCESSING" : "SUBMIT"}
         </Button>
       </div>
     </>
