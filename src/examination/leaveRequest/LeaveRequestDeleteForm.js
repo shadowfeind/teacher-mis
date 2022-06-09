@@ -26,6 +26,7 @@ const initialFormValues = {
 
 const LeaveRequestDeleteForm = ({ leaveRequestDelete, setOpenPopup }) => {
   const dispatch = useDispatch();
+  const [active, setActive] = useState(false);
   const [image, setImage] = useState("");
   const [imgSrc, setImgSrc] = useState("");
 
@@ -34,6 +35,7 @@ const LeaveRequestDeleteForm = ({ leaveRequestDelete, setOpenPopup }) => {
 
   const handleDelete = (e) => {
     e.preventDefault();
+    setActive(true);
     dispatch(deleteLeaveRequestAction(values));
   };
 
@@ -139,9 +141,10 @@ const LeaveRequestDeleteForm = ({ leaveRequestDelete, setOpenPopup }) => {
           variant="contained"
           color="primary"
           type="submit"
+          disabled={active}
           style={{ margin: "10px 0 0 10px" }}
         >
-          DELETE
+          {active ? "PROCESSING" : "DELETE"}
         </Button>
       </div>
     </Form>

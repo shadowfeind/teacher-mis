@@ -70,11 +70,12 @@ const UploadPhoto = () => {
   }
 
   useEffect(() => {
-    dispatch({ type: "GET_LINK", payload: "/" });
-    if (!allUploadPhoto) {
-      dispatch(getAllUploadPhotoAction());
-    }
-  }, [dispatch, allUploadPhoto]);
+    dispatch({ type: "GET_LINK", payload: "/pid" });
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllUploadPhotoAction());
+  }, []);
 
   return (
     <CustomContainer>

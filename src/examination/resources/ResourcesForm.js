@@ -26,6 +26,7 @@ const initialFormValues = {
 };
 
 const ResourcesForm = ({ setOpenPopup, searchFilterModel, dbModel }) => {
+  const [active, setActive] = useState(false);
   const [image, setImage] = useState(null);
   const [imgSrc, setImgSrc] = useState(null);
 
@@ -66,6 +67,7 @@ const ResourcesForm = ({ setOpenPopup, searchFilterModel, dbModel }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
+      setActive(true);
       dispatch(postResourceAction(image, values, searchFilterModel, dbModel));
     }
   };
@@ -127,9 +129,10 @@ const ResourcesForm = ({ setOpenPopup, searchFilterModel, dbModel }) => {
           variant="contained"
           color="primary"
           type="submit"
+          disabled={active}
           style={{ margin: "10px 0 0 10px" }}
         >
-          SUBMIT
+          {active ? "PROCESSING" : "SUBMIT"}
         </Button>
       </div>
     </Form>

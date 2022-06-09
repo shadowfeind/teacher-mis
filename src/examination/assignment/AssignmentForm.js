@@ -13,6 +13,7 @@ import {
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import { useDispatch } from "react-redux";
+import { symbolsArrPhone } from "../helpers/excludeSymbol";
 import InputControl from "../../components/controls/InputControl";
 import { useForm, Form } from "../../customHooks/useForm";
 import DatePickerControl from "../../components/controls/DatePickerControl";
@@ -80,6 +81,7 @@ const useStyles = makeStyles({
 
 const AssignmentForm = ({ students, formDatas, setOpenPopup }) => {
   const [checked, setChecked] = useState(false);
+  const [active, setActive] = useState(false);
   const [image, setImage] = useState(null);
   const [imgSrc, setImgSrc] = useState(null);
   const [lstStudents, setLstStudents] = useState([]);
@@ -170,8 +172,9 @@ const AssignmentForm = ({ students, formDatas, setOpenPopup }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(selectedStudents);
+
     if (validate()) {
+      setActive(true);
       dispatch(postTeacherAssignmentAction(image, values, selectedStudents));
     }
   };
@@ -276,7 +279,7 @@ const AssignmentForm = ({ students, formDatas, setOpenPopup }) => {
               name="TotalMark"
               label="Full Marks*"
               onKeyDown={(e) =>
-                symbolsArr.includes(e.key) && e.preventDefault()
+                symbolsArrPhone.includes(e.key) && e.preventDefault()
               }
               type="number"
               value={values.TotalMark}
@@ -320,9 +323,10 @@ const AssignmentForm = ({ students, formDatas, setOpenPopup }) => {
             variant="contained"
             color="primary"
             type="submit"
+            disabled={active}
             style={{ margin: "10px 0 0 10px" }}
           >
-            SUBMIT
+            {active ? "PROCESSING" : "SUBMIT"}
           </Button>
         </div>
       </Form>
