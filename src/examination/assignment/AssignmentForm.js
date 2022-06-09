@@ -13,6 +13,7 @@ import {
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import { useDispatch } from "react-redux";
+import { symbolsArrPhone } from "../helpers/excludeSymbol";
 import InputControl from "../../components/controls/InputControl";
 import { useForm, Form } from "../../customHooks/useForm";
 import DatePickerControl from "../../components/controls/DatePickerControl";
@@ -278,7 +279,7 @@ const AssignmentForm = ({ students, formDatas, setOpenPopup }) => {
               name="TotalMark"
               label="Full Marks*"
               onKeyDown={(e) =>
-                symbolsArr.includes(e.key) && e.preventDefault()
+                symbolsArrPhone.includes(e.key) && e.preventDefault()
               }
               type="number"
               value={values.TotalMark}
