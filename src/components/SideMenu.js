@@ -32,6 +32,7 @@ const useStyles = makeStyles({
     width: "15%",
     backgroundColor: "#253053",
     position: "fixed",
+    overflow: "auto",
     "& h6": {
       fontSize: "13px",
       padding: "13px 13px 13px 20px",
