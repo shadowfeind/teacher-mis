@@ -114,8 +114,8 @@ const StudentMonthlyPresentSheetUpdateForm = ({ students, setOpenPopup }) => {
           <TableBody>
             {stuAttendance &&
               stuAttendance
-                .sort((a, b) => a.RollNo - b.RollNo)
-                .map((s) => (
+                ?.sort((a, b) => a.RollNo - b.RollNo)
+                ?.map((s) => (
                   <StyledTableRow key={s.IDHREmployee}>
                     <StyledTableCell component="th" scope="row">
                       {s.RollNo}

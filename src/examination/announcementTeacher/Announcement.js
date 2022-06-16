@@ -151,7 +151,9 @@ const Announcement = () => {
           return item;
         } else {
           return item.filter((x) =>
-            x.NewsHeading.toLowerCase().includes(e.target.value?.toLowerCase())
+            x.NewsHeading?.toLowerCase()?.includes(
+              e.target.value?.toLowerCase()
+            )
           );
         }
       },
@@ -190,7 +192,7 @@ const Announcement = () => {
                 value={date}
                 onChange={(e) => {
                   const newDate = new Date(e);
-                  setDate(newDate.toLocaleDateString().slice(0, 10));
+                  setDate(newDate?.toLocaleDateString()?.slice(0, 10));
                 }}
               />
             </MuiPickersUtilsProvider>
@@ -214,7 +216,7 @@ const Announcement = () => {
               <TblHead />
 
               <TableBody>
-                {tableDataAfterPagingAndSorting().map((item) => (
+                {tableDataAfterPagingAndSorting()?.map((item) => (
                   <AnnouncementTableCollapse item={item} key={item.$id} />
                 ))}
               </TableBody>

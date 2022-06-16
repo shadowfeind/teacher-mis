@@ -232,7 +232,7 @@ const StudentMonthlyPresentSheet = () => {
         allStudentMonthlyPresentSheetData.searchFilterModel.ddlnpYear
       );
       setDate(
-        allStudentMonthlyPresentSheetData.searchFilterModel.currentDate.slice(
+        allStudentMonthlyPresentSheetData.searchFilterModel.currentDate?.slice(
           0,
           10
         )
@@ -333,19 +333,25 @@ const StudentMonthlyPresentSheet = () => {
   useEffect(() => {
     if (allOtherOptions) {
       setAcaYear(
-        allOtherOptions.year.length > 0 ? allOtherOptions.year[0].Key : ""
+        allOtherOptions.year.length > 0 ? allOtherOptions.year[0]?.Key : ""
       );
       setProgramValue(
-        allOtherOptions.program.length > 0 ? allOtherOptions.program[0].Key : ""
+        allOtherOptions.program.length > 0
+          ? allOtherOptions.program[0]?.Key
+          : ""
       );
       setClassId(
-        allOtherOptions.classId.length > 0 ? allOtherOptions.classId[0].Key : ""
+        allOtherOptions.classId.length > 0
+          ? allOtherOptions.classId[0]?.Key
+          : ""
       );
       setSection(
-        allOtherOptions.section.length > 0 ? allOtherOptions.section[0].Key : ""
+        allOtherOptions.section.length > 0
+          ? allOtherOptions.section[0]?.Key
+          : ""
       );
       setShift(
-        allOtherOptions.shift.length > 0 ? allOtherOptions.shift[0].Key : ""
+        allOtherOptions.shift.length > 0 ? allOtherOptions.shift[0]?.Key : ""
       );
     }
   }, [allOtherOptions]);
@@ -458,7 +464,7 @@ const StudentMonthlyPresentSheet = () => {
                   value={date}
                   onChange={(e) => {
                     const newDate = new Date(e);
-                    setDate(newDate.toLocaleDateString().slice(0, 10));
+                    setDate(newDate.toLocaleDateString()?.slice(0, 10));
                   }}
                 />
               </MuiPickersUtilsProvider>

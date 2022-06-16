@@ -225,7 +225,6 @@ const OldQuestions = () => {
               <Button
                 variant="contained"
                 color="primary"
-                type="submit"
                 style={{ margin: "10px 0 0 10px" }}
                 onClick={listSearchHandler}
                 type="submit"

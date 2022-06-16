@@ -83,7 +83,7 @@ const SideMenu = () => {
         <Grid item style={{ alignSelf: "center" }}>
           {headerContent && (
             <img
-              src={`${API_URL}${headerContent.FullPathSchoolLogo}`}
+              src={`${API_URL}${headerContent?.FullPathSchoolLogo}`}
               height="50px"
             />
           )}

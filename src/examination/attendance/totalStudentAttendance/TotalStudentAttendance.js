@@ -170,7 +170,7 @@ const TotalStudentAttendance = () => {
       );
       setDdlClass(allTotalStudentAttendanceData?.searchFilterModel.ddlClass);
       setClassId(
-        allTotalStudentAttendanceData?.searchFilterModel.ddlClass[0].Key
+        allTotalStudentAttendanceData?.searchFilterModel.ddlClass[0]?.Key
       );
       setAcademicYearDdl(
         allTotalStudentAttendanceData?.searchFilterModel.ddlAcademicYear
@@ -179,22 +179,23 @@ const TotalStudentAttendance = () => {
         allTotalStudentAttendanceData?.searchFilterModel.ddlAcademicShift
       );
       setShift(
-        allTotalStudentAttendanceData?.searchFilterModel.ddlAcademicShift[0].Key
+        allTotalStudentAttendanceData?.searchFilterModel.ddlAcademicShift[0]
+          ?.Key
       );
       setDdlSection(
         allTotalStudentAttendanceData?.searchFilterModel.ddlSection
       );
       setSection(
-        allTotalStudentAttendanceData?.searchFilterModel.ddlSection[0].Key
+        allTotalStudentAttendanceData?.searchFilterModel.ddlSection[0]?.Key
       );
       setStartDate(
-        allTotalStudentAttendanceData?.searchFilterModel.currentDate.slice(
+        allTotalStudentAttendanceData?.searchFilterModel.currentDate?.slice(
           0,
           10
         )
       );
       setEndDate(
-        allTotalStudentAttendanceData?.searchFilterModel.currentDate.slice(
+        allTotalStudentAttendanceData?.searchFilterModel.currentDate?.slice(
           0,
           10
         )
@@ -384,7 +385,7 @@ const TotalStudentAttendance = () => {
                   value={startDate}
                   onChange={(e) => {
                     const newDate = new Date(e);
-                    setStartDate(newDate.toLocaleDateString().slice(0, 10));
+                    setStartDate(newDate.toLocaleDateString()?.slice(0, 10));
                   }}
                 />
               </MuiPickersUtilsProvider>
@@ -402,7 +403,7 @@ const TotalStudentAttendance = () => {
                   value={endDate}
                   onChange={(e) => {
                     const newDate = new Date(e);
-                    setEndDate(newDate.toLocaleDateString().slice(0, 10));
+                    setEndDate(newDate.toLocaleDateString()?.slice(0, 10));
                   }}
                 />
               </MuiPickersUtilsProvider>

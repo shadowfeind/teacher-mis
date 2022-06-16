@@ -106,7 +106,7 @@ const Assignment = () => {
           return item;
         } else {
           return item.filter((x) =>
-            x.FullName.toLowerCase().includes(e.target.value)
+            x.FullName?.toLowerCase()?.includes(e.target.value)
           );
         }
       },
@@ -334,14 +334,14 @@ const Assignment = () => {
         );
         setDdlSection(allAssignmentTeacherData.searchFilterModel.ddlSection);
         setDate(
-          allAssignmentTeacherData.searchFilterModel.StartDate.slice(0, 10)
+          allAssignmentTeacherData.searchFilterModel.StartDate?.slice(0, 10)
         );
       });
       if (subjectIdFromDashboard) {
         setSubject(subjectIdFromDashboard);
         dispatch(
           getAllOtherOptionsForSelectAction(
-            allAssignmentTeacherData.modelDb.IDHREmployee,
+            allAssignmentTeacherData?.modelDb?.IDHREmployee,
             subjectIdFromDashboard
           )
         );
@@ -357,7 +357,7 @@ const Assignment = () => {
   useEffect(() => {
     if (getListTeacherAssignment) {
       setTableData([
-        ...getListTeacherAssignment.dbTeacherAssignmentLstBySection,
+        ...getListTeacherAssignment?.dbTeacherAssignmentLstBySection,
       ]);
     }
   }, [getListTeacherAssignment]);
@@ -434,7 +434,7 @@ const Assignment = () => {
     setSubject(value);
     dispatch(
       getAllOtherOptionsForSelectAction(
-        allAssignmentTeacherData.modelDb.IDHREmployee,
+        allAssignmentTeacherData?.modelDb?.IDHREmployee,
         value
       )
     );
@@ -443,35 +443,41 @@ const Assignment = () => {
   useEffect(() => {
     if (allOtherOptions) {
       setAcaYear(
-        allOtherOptions.year.length > 0 ? allOtherOptions.year[0].Key : ""
+        allOtherOptions.year.length > 0 ? allOtherOptions.year[0]?.Key : ""
       );
       setProgramValue(
-        allOtherOptions.program.length > 0 ? allOtherOptions.program[0].Key : ""
+        allOtherOptions.program.length > 0
+          ? allOtherOptions.program[0]?.Key
+          : ""
       );
       setClassId(
-        allOtherOptions.classId.length > 0 ? allOtherOptions.classId[0].Key : ""
+        allOtherOptions.classId.length > 0
+          ? allOtherOptions.classId[0]?.Key
+          : ""
       );
       setSection(
-        allOtherOptions.section.length > 0 ? allOtherOptions.section[0].Key : ""
+        allOtherOptions.section.length > 0
+          ? allOtherOptions.section[0]?.Key
+          : ""
       );
       setShift(
-        allOtherOptions.shift.length > 0 ? allOtherOptions.shift[0].Key : ""
+        allOtherOptions.shift.length > 0 ? allOtherOptions.shift[0]?.Key : ""
       );
 
       dispatch(
         getListAssignmentTeacherAction(
-          allOtherOptions.year.length > 0 ? allOtherOptions.year[0].Key : "",
+          allOtherOptions.year.length > 0 ? allOtherOptions.year[0]?.Key : "",
           allOtherOptions.program.length > 0
-            ? allOtherOptions.program[0].Key
+            ? allOtherOptions.program[0]?.Key
             : "",
           allOtherOptions.classId.length > 0
-            ? allOtherOptions.classId[0].Key
+            ? allOtherOptions.classId[0]?.Key
             : "",
           subject,
           allOtherOptions.section.length > 0
-            ? allOtherOptions.section[0].Key
+            ? allOtherOptions.section[0]?.Key
             : "",
-          allOtherOptions.shift.length > 0 ? allOtherOptions.shift[0].Key : "",
+          allOtherOptions.shift.length > 0 ? allOtherOptions.shift[0]?.Key : "",
           date
         )
       );
