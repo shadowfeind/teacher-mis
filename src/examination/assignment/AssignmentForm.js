@@ -104,8 +104,6 @@ const AssignmentForm = ({ students, formDatas, setOpenPopup }) => {
 
     temp.TotalMark = !fieldValues.TotalMark ? "This feild is required" : "";
 
-    temp.image = !image ? "This feild is required" : "";
-
     temp.DueDate =
       fieldValues.DueDate == null || fieldValues.DueDate == ""
         ? "This feild is required"
@@ -203,8 +201,8 @@ const AssignmentForm = ({ students, formDatas, setOpenPopup }) => {
           <TableBody>
             {lstStudents &&
               lstStudents
-                .sort((a, b) => a.RollNo - b.RollNo)
-                .map((s) => (
+                ?.sort((a, b) => a.RollNo - b.RollNo)
+                ?.map((s) => (
                   <StyledTableRow key={s.IDHREmployee}>
                     <StyledTableCell component="th" scope="row">
                       {s.RollNo}
@@ -264,7 +262,6 @@ const AssignmentForm = ({ students, formDatas, setOpenPopup }) => {
               // value={values.ClassLocation}
               onChange={(e) => handleImage(e)}
               type="file"
-              errors={errors.image}
             />
             <img
               src={
