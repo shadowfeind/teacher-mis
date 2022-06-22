@@ -72,6 +72,7 @@ const tableHeader = [
   { id: "ObtainedMarks", label: "Obtained Marks" },
   { id: "DocumentName", label: "Assignment" },
   { id: "DocumentSubmitted", label: "Submitted Files" },
+  { id: "DocumentName", label: "Submitted" },
   { id: "Actions", label: "Actions", disableSorting: true },
 ];
 
@@ -269,14 +270,7 @@ const Assignment = () => {
     });
     dispatch({ type: GET_ALL_ASSIGNMENT_TEACHER_RESET });
   }
-  // if (getListTeacherAssignmentError) {
-  //   setNotify({
-  //     isOpen: true,
-  //     message: getListTeacherAssignmentError,
-  //     type: "error",
-  //   });
-  //   dispatch({ type: GET_LIST_TEACHER_ASSIGNMENT_RESET });
-  // }
+
   if (postTeacherAssignmentError) {
     setNotify({
       isOpen: true,
@@ -509,47 +503,7 @@ const Assignment = () => {
                 errors={errors.acaYear}
               />
             </Grid>
-            {/* <Grid item xs={3}>
-              <SelectControl
-                name="Program/Faculty"
-                label="Program/Faculty"
-                value={programValue}
-                onChange={(e) => setProgramValue(e.target.value)}
-                options={programDdl ? programDdl : test}
-                errors={errors.programValue}
-              />
-            </Grid>
-            <Grid item xs={3}>
-              <SelectControl
-                name="Classes"
-                label="Class"
-                value={classId}
-                onChange={(e) => setClassId(e.target.value)}
-                options={ddlClass ? ddlClass : test}
-                errors={errors.classId}
-              />
-            </Grid> */}
 
-            {/* <Grid item xs={3}>
-              <SelectControl
-                name="Section"
-                label="Section"
-                value={section}
-                onChange={(e) => setSection(e.target.value)}
-                options={ddlSection ? ddlSection : test}
-                errors={errors.section}
-              />
-            </Grid>
-            <Grid item xs={3}>
-              <SelectControl
-                name="Shift"
-                label="Shift"
-                value={shift}
-                onChange={(e) => setShift(e.target.value)}
-                options={ddlShift ? ddlShift : test}
-                errors={errors.shift}
-              />
-            </Grid> */}
             <Grid item xs={3}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker

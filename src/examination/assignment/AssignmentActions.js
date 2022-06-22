@@ -191,22 +191,24 @@ export const postTeacherAssignmentAction =
   (image, assignment, students) => async (dispatch) => {
     try {
       dispatch({ type: POST_TEACHER_ASSIGNMENT_REQUEST });
+      let documentName;
 
-      let formData = new FormData();
-      formData.append("ImageUploaded", image);
+      if (image) {
+        let formData = new FormData();
+        formData.append("ImageUploaded", image);
 
-      console.log(assignment);
+        const { data: documentsName } = await axiosInstance.post(
+          `/api/TeacherAssignment/FileUpload`,
+          formData,
+          tokenConfig()
+        );
+        documentName = documentsName || "";
+      }
 
-      const { data } = await axiosInstance.post(
-        `/api/TeacherAssignment/FileUpload`,
-        formData,
-        tokenConfig()
-      );
-
-      if (data) {
+      if (documentName) {
         const newData = {
           ...assignment,
-          DocumentName: data,
+          DocumentName: documentName,
         };
         const jsonData = JSON.stringify({
           dbTeacherAssignmentModel: newData,
@@ -218,11 +220,21 @@ export const postTeacherAssignmentAction =
           jsonData,
           tokenConfig()
         );
+      } else {
+        const jsonData = JSON.stringify({
+          dbTeacherAssignmentModel: assignment,
+          dbModelLstForStudentSection: students,
+        });
+        console.log("without image", jsonData);
+        await axiosInstance.post(
+          `/api/TeacherAssignment/Post`,
+          jsonData,
+          tokenConfig()
+        );
       }
 
       dispatch({
         type: POST_TEACHER_ASSIGNMENT_SUCCESS,
-        payload: data,
       });
     } catch (error) {
       dispatch({
