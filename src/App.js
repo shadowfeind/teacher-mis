@@ -9,6 +9,7 @@ import {
   ThemeProvider,
 } from "@material-ui/core";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import LoadingComp from "./components/LoadingComp";
 
 const Holiday = lazy(() => import("./examination/holiday/Holiday"));
 const PageNotFound = lazy(() =>
@@ -80,7 +81,7 @@ const App = () => {
         <SideMenu />
         <div className={classes.appMain}>
           <Header />
-          <Suspense fallback={<div></div>}>
+          <Suspense fallback={<LoadingComp />}>
             <Switch>
               <Route path={"/exam-division"} component={ExamDivision} />
               <Route path={"/exam-schedule"} component={ExamSchedule} />

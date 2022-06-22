@@ -32,6 +32,7 @@ const useStyles = makeStyles({
     width: "15%",
     backgroundColor: "#253053",
     position: "fixed",
+    overflow: "auto",
     "& h6": {
       fontSize: "13px",
       padding: "13px 13px 13px 20px",
@@ -82,7 +83,7 @@ const SideMenu = () => {
         <Grid item style={{ alignSelf: "center" }}>
           {headerContent && (
             <img
-              src={`${API_URL}${headerContent.FullPathSchoolLogo}`}
+              src={`${API_URL}${headerContent?.FullPathSchoolLogo}`}
               height="50px"
             />
           )}

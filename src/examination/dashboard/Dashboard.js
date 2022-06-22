@@ -53,17 +53,19 @@ const Dashboard = () => {
       <div className={classes.dashboardContainer}>
         <Grid container>
           {dashboardContent &&
-            dashboardContent.searchFilterModel.ddlSubjectForTeacher.map((s) => (
-              <Grid key={s.id} item xs={3} className={classes.gridStyle}>
-                <DashboardCard
-                  subject={s}
-                  subCount={
-                    dashboardContent.searchFilterModel
-                      .totalAssignmentByTeacherAccordingToSubject
-                  }
-                />
-              </Grid>
-            ))}
+            dashboardContent.searchFilterModel.ddlSubjectForTeacher?.map(
+              (s) => (
+                <Grid key={s.id} item xs={3} className={classes.gridStyle}>
+                  <DashboardCard
+                    subject={s}
+                    subCount={
+                      dashboardContent.searchFilterModel
+                        ?.totalAssignmentByTeacherAccordingToSubject
+                    }
+                  />
+                </Grid>
+              )
+            )}
         </Grid>
       </div>
       <Notification notify={notify} setNotify={setNotify} />
