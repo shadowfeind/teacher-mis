@@ -281,7 +281,7 @@ const StudentMonthlyPresentSheet = () => {
           shift,
           nepYear,
           nepMonth,
-          date
+          JSON.stringify(date).slice(1, 11)
         )
       );
     }
@@ -291,7 +291,7 @@ const StudentMonthlyPresentSheet = () => {
     if (validate()) {
       dispatch(
         getListForUpdateStudentPresentAction(
-          date,
+          JSON.stringify(date).slice(1, 11),
           nepYear,
           nepMonth,
           acaYear,
@@ -302,7 +302,13 @@ const StudentMonthlyPresentSheet = () => {
           shift
         )
       );
-      dispatch(getListForPresentStudentAction(date, programValue, subject));
+      dispatch(
+        getListForPresentStudentAction(
+          JSON.stringify(date).slice(1, 11),
+          programValue,
+          subject
+        )
+      );
       setOpenPopup(true);
     }
   };
@@ -310,13 +316,13 @@ const StudentMonthlyPresentSheet = () => {
   const nepMonthHandler = (value) => {
     setNepMonth(value);
     if (nepYear) {
-      dispatch(getEnglishDateAction(value, nepYear));
+      dispatch(getEnglishDateAction(nepYear, value));
     }
   };
   const nepYearHandler = (value) => {
     setNepYear(value);
     if (nepMonth) {
-      dispatch(getEnglishDateAction(nepMonth, value));
+      dispatch(getEnglishDateAction(value, nepMonth));
     }
   };
 
@@ -355,6 +361,12 @@ const StudentMonthlyPresentSheet = () => {
       );
     }
   }, [allOtherOptions]);
+
+  useEffect(() => {
+    if (engDate) {
+      setDate(engDate?.Key);
+    }
+  }, [engDate]);
 
   useEffect(() => {
     if (getListForUpdateStudentPresentSuccess) {
@@ -463,8 +475,8 @@ const StudentMonthlyPresentSheet = () => {
                   label="Current Date"
                   value={date}
                   onChange={(e) => {
-                    const newDate = new Date(e);
-                    setDate(newDate.toLocaleDateString()?.slice(0, 10));
+                    // const newDate = new Date(e);
+                    setDate(e);
                   }}
                 />
               </MuiPickersUtilsProvider>
@@ -498,6 +510,10 @@ const StudentMonthlyPresentSheet = () => {
             {getListStudentPresent && (
               <StudentMonthlyPresentSheetTableCollapse
                 students={getListStudentPresent && getListStudentPresent}
+                fromDate={
+                  getListStudentPresent &&
+                  getListStudentPresent.searchFilterModel.fromDate
+                }
               />
             )}
           </>

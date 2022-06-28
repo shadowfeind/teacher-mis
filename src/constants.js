@@ -5,7 +5,8 @@ import moment from "moment";
 // export const API_URL = "http://103.90.86.151:100";
 // export const API_URL = "http://192.168.1.85:88";
 
-export const API_URL = "https://divinelight.vidyacube.com/";
+// export const API_URL = "https://divinelight.vidyacube.com";
+export const API_URL = "https://mis.vidyacube.com";
 // export const API_URL = "http://localhost:4995";
 
 export const USER_SESSION = sessionStorage.getItem("blueberrytoken");

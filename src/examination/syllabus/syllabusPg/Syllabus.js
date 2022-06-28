@@ -56,7 +56,7 @@ const Syllabus = () => {
 
   useEffect(() => {
     if (allSyllabus) {
-      dispatch(getListSyllabusAction(allSyllabus.dbModelLst[0].Id));
+      dispatch(getListSyllabusAction(allSyllabus.dbModelLst[0]?.Id));
     }
   }, [allSyllabus]);
 
