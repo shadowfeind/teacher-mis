@@ -213,6 +213,17 @@ const StudentMonthlyPresentSheet = () => {
       setDdlSubject(
         allStudentMonthlyPresentSheetData.searchFilterModel.ddlSubjectForTeacher
       );
+      setSubject(
+        allStudentMonthlyPresentSheetData.searchFilterModel
+          .ddlSubjectForTeacher[0].Key
+      );
+      dispatch(
+        getAllOtherOptionsForSelectAction(
+          allStudentMonthlyPresentSheetData.modelDb.IDHREmployee,
+          allStudentMonthlyPresentSheetData.searchFilterModel
+            .ddlSubjectForTeacher[0].Key
+        )
+      );
       setDdlClass(
         allStudentMonthlyPresentSheetData.searchFilterModel.ddlLevelPrimitive
       );

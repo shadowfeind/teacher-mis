@@ -109,7 +109,7 @@ const ClassNotification = () => {
   }
 
   useEffect(() => {
-    dispatch({ type: "GET_LINK", payload: "/notification" });
+    // dispatch({ type: "GET_LINK", payload: "/notification" });
     if (listClassNotificationTeacher) {
       setTableData(listClassNotificationTeacher.teacherNotificationInboxLst);
     }
@@ -140,11 +140,11 @@ const ClassNotification = () => {
     });
   };
 
-  const listSearchHandler = () => {
-    if (validate()) {
-      dispatch(getListNotificationTeacherAction());
-    }
-  };
+  // const listSearchHandler = () => {
+  //   if (validate()) {
+  //     dispatch(getListNotificationTeacherAction());
+  //   }
+  // };
 
   return (
     <>

@@ -314,6 +314,17 @@ const Assignment = () => {
         setDdlSubject(
           allAssignmentTeacherData.searchFilterModel.ddlSubjectForTeacher
         );
+        setSubject(
+          allAssignmentTeacherData.searchFilterModel.ddlSubjectForTeacher[0]
+            ?.Key
+        );
+        dispatch(
+          getAllOtherOptionsForSelectAction(
+            allAssignmentTeacherData?.modelDb?.IDHREmployee,
+            allAssignmentTeacherData.searchFilterModel.ddlSubjectForTeacher[0]
+              ?.Key
+          )
+        );
         setProgramDdl(
           allAssignmentTeacherData.searchFilterModel.ddlFacultyProgramLink
         );
@@ -323,6 +334,9 @@ const Assignment = () => {
         setAcademicYearDdl(
           allAssignmentTeacherData.searchFilterModel.ddlAcademicYear
         );
+        // setAcaYear(
+        //   allAssignmentTeacherData.searchFilterModel.ddlAcademicYear[0].Key
+        // );
         setDdlShift(
           allAssignmentTeacherData.searchFilterModel.ddlAcademicShift
         );

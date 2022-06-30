@@ -223,11 +223,9 @@ const ExamMarkApproval = () => {
 
   useEffect(() => {
     if (examMarkApprovalInitialDatas) {
-      unstable_batchedUpdates(() => {
-        setDdlSchedule(
-          examMarkApprovalInitialDatas.searchFilterModel.ddlSubjectForTeacher
-        );
-      });
+      setDdlSchedule(
+        examMarkApprovalInitialDatas.searchFilterModel.ddlSubjectForTeacher
+      );
     }
   }, [examMarkApprovalInitialDatas, dispatch]);
 

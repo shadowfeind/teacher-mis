@@ -222,20 +222,28 @@ const Resources = () => {
 
   useEffect(() => {
     if (allInitialData) {
-      unstable_batchedUpdates(() => {
-        setDdlSubject(allInitialData.searchFilterModel.ddlSubjectForTeacher);
-        setDdlClass(allInitialData.searchFilterModel.ddlLevelPrimitive);
-        setAcademicYearDdl(allInitialData.searchFilterModel.ddlAcademicYear);
-        setDdlShift(allInitialData.searchFilterModel.ddlAcademicShift);
-        setDdlSection(allInitialData.searchFilterModel.ddlSection);
-        setProgramDdl(allInitialData.searchFilterModel.ddlFacultyProgramLink);
-      });
+      setDdlSubject(allInitialData.searchFilterModel.ddlSubjectForTeacher);
+      setDdlClass(allInitialData.searchFilterModel.ddlLevelPrimitive);
+      setAcademicYearDdl(allInitialData.searchFilterModel.ddlAcademicYear);
+      setDdlShift(allInitialData.searchFilterModel.ddlAcademicShift);
+      setDdlSection(allInitialData.searchFilterModel.ddlSection);
+      setProgramDdl(allInitialData.searchFilterModel.ddlFacultyProgramLink);
       if (subjectIdFromDashboard) {
         setSubject(subjectIdFromDashboard);
         dispatch(
           getAllOtherOptionsForResourcesSelectAction(
             allInitialData.modelDb.IDHREmployee,
             subjectIdFromDashboard
+          )
+        );
+      } else {
+        setSubject(
+          allInitialData.searchFilterModel.ddlSubjectForTeacher[0]?.Key
+        );
+        dispatch(
+          getAllOtherOptionsForResourcesSelectAction(
+            allInitialData.modelDb.IDHREmployee,
+            allInitialData.searchFilterModel.ddlSubjectForTeacher[0]?.Key
           )
         );
       }

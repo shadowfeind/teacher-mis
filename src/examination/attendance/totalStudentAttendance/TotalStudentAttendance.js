@@ -175,6 +175,9 @@ const TotalStudentAttendance = () => {
       setAcademicYearDdl(
         allTotalStudentAttendanceData?.searchFilterModel.ddlAcademicYear
       );
+      setAcaYear(
+        allTotalStudentAttendanceData?.searchFilterModel.ddlAcademicYear[0]?.Key
+      );
       setDdlShift(
         allTotalStudentAttendanceData?.searchFilterModel.ddlAcademicShift
       );
@@ -198,6 +201,15 @@ const TotalStudentAttendance = () => {
         allTotalStudentAttendanceData?.searchFilterModel.currentDate?.slice(
           0,
           10
+        )
+      );
+      dispatch(
+        getSubjectOptionsForSelectAction(
+          allTotalStudentAttendanceData?.searchFilterModel.ddlAcademicYear[0]
+            ?.Key,
+          allTotalStudentAttendanceData?.searchFilterModel
+            .ddlFacultyProgramLink[0].Key,
+          allTotalStudentAttendanceData?.searchFilterModel.ddlClass[0]?.Key
         )
       );
     }
